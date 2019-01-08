@@ -156,6 +156,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // 视图组件
+        \App\Providers\ViewComposerServiceProvider::class,
+
     ],
 
     /*
