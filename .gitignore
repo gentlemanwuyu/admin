@@ -1,0 +1,28 @@
+#env
+.env
+
+#Laravel
+/vendor
+/node_modules
+/storage/framework
+/storage/app
+/storage/logs
+
+#Composer
+composer.phar
+composer.lock
+package-lock.json
+
+#public file
+/public/assets
+/public/storage
+/public/build
+
+#ctag
+.tags_sorted_by_file
+.tags
+
+# phpstorm
+.idea
+
+
