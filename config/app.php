@@ -156,6 +156,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // 模块化
+        \Caffeinated\Modules\ModulesServiceProvider::class,
+
         // 视图组件
         \App\Providers\ViewComposerServiceProvider::class,
 
@@ -205,6 +208,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Module' => Caffeinated\Modules\Facades\Module::class,
     ],
 
 ];
