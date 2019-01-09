@@ -1,10 +1,10 @@
 <?php
-namespace App\Modules\User\Database\Seeds;
+namespace App\Modules\Auth\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class UserDatabaseSeeder extends Seeder
+class AuthDatabaseSeeder extends Seeder
 {
 	/**
 	 * Run the database seeds.
@@ -15,7 +15,7 @@ class UserDatabaseSeeder extends Seeder
 	{
 		Model::unguard();
 
-		// $this->call('App\Modules\User\Database\Seeds\FoobarTableSeeder');
+		// $this->call('App\Modules\Auth\Database\Seeds\FoobarTableSeeder');
 	}
 
 }
