@@ -10,6 +10,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\ViewComposers\TemplateComposer;
+use App\ViewComposers\WildComposer;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -20,7 +21,7 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /**bind order view*/
+        View::composer('*', WildComposer::class);
         View::composer(['layouts.header', 'layouts.footer'], TemplateComposer::class);
     }
 

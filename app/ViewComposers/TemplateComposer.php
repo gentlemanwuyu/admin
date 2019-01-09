@@ -22,30 +22,12 @@ class TemplateComposer
     public function compose(View $view)
     {
         $view_name = $view->name();
+
         if ('layouts.header' == $view_name) {
-            $this->configureHeader($view);
-        }elseif ('layouts.footer' == $view_name) {
-            $this->configureFooter($view);
+            $view->with(['header_config' => $this->template_config['header'],]);
         }
-    }
-
-    /**
-     * header模板数据渲染
-     *
-     * @param $view
-     */
-    private function configureHeader($view)
-    {
-        $view->with(['header_config'=>$this->template_config['header']]);
-    }
-
-    /**
-     * footer模板数据渲染
-     *
-     * @param $view
-     */
-    private function configureFooter($view)
-    {
-        $view->with(['footer_config'=>$this->template_config['footer']]);
+        if ('layouts.footer' == $view_name) {
+            $view->with(['footer_config' => $this->template_config['footer']]);
+        }
     }
 }

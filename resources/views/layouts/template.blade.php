@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{asset('/assets/adminlte/dist/css/skins/_all-skins.min.css')}}">
     <!-- Morris chart -->
     <link rel="stylesheet" href="{{asset('/assets/adminlte/bower_components/morris.js/morris.css')}}">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="{{asset('/assets/adminlte/plugins/iCheck/all.css')}}">
     <!-- jvectormap -->
     <link rel="stylesheet" href="{{asset('/assets/adminlte/bower_components/jvectormap/jquery-jvectormap.css')}}">
     <!-- Date Picker -->
@@ -39,10 +41,12 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- 自定义css样式 -->
+    <link rel="stylesheet" href="{{asset('/assets/css/application.css')}}">
     @yield('css')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-@yield('wrapper')
+@yield('body_content')
 
 <!-- jQuery 3 -->
 <script src="{{asset('/assets/adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>
@@ -75,12 +79,16 @@
 <script src="{{asset('/assets/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->
 <script src="{{asset('/assets/adminlte/bower_components/fastclick/lib/fastclick.js')}}"></script>
+<!-- iCheck -->
+<script src="{{asset('/assets/adminlte/plugins/iCheck/icheck.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('/assets/adminlte/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('/assets/adminlte/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('/assets/adminlte/dist/js/demo.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{asset('/assets/js/application.js')}}"></script>
 @yield('scripts')
 </body>
 </html>

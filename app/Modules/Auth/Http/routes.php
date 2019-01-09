@@ -11,8 +11,6 @@
 |
 */
 
-Route::group(['prefix' => 'auth'], function() {
-	Route::get('/', function() {
-		dd('This is the Auth module index page.');
-	});
-});
+// 登陆页面，不需要中间件
+Route::get('login', ['as'=>'login', 'uses'=>'AuthController@login']);
+Route::post('sign_in', ['as'=>'sign_in', 'uses'=>'AuthController@signIn']);

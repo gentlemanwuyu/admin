@@ -16,4 +16,15 @@ elixir(function(mix) {
     mix.copy('node_modules/admin-lte/bower_components','public/assets/adminlte/bower_components');
     mix.copy('node_modules/admin-lte/plugins','public/assets/adminlte/plugins');
     mix.copy('node_modules/admin-lte/dist','public/assets/adminlte/dist');
+
+    // 拷贝resources文件夹
+    mix.copy('resources/assets/img','public/assets/img');
+    mix.copy('resources/assets/js','public/assets/js');
+    mix.copy('resources/assets/css','public/assets/css');
+
+    // 添加版本管理
+    mix.version([
+        'assets/css/application.css',
+        'assets/js/application.js'
+    ]);
 });

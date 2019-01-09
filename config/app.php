@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'chs',
 
     /*
     |--------------------------------------------------------------------------
@@ -159,6 +159,9 @@ return [
         // 模块化
         \Caffeinated\Modules\ModulesServiceProvider::class,
 
+        // 验证码
+        Mews\Captcha\CaptchaServiceProvider::class,
+
         // 视图组件
         \App\Providers\ViewComposerServiceProvider::class,
 
@@ -209,6 +212,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Module' => Caffeinated\Modules\Facades\Module::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];
