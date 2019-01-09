@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/default', function () {
-    return view('layouts/default');
+Route::get('/demo', function () {
+    return view('layouts/demo');
 });
