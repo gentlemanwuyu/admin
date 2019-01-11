@@ -46,7 +46,7 @@
     @yield('css')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-@yield('body_content')
+@yield('body')
 
 <!-- jQuery 3 -->
 <script src="{{asset('/assets/adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>

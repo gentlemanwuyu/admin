@@ -218,6 +218,36 @@
                     </ul>
                 </li>
                 @endif
+                @if($header_config['language-menu']['show'])
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-language">
+                                @if(App::isLocale('en'))
+                                    English
+                                @else
+                                    简体中文
+                                @endif
+                            </i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">{{trans('template.please_select_language')}}</li>
+                            <li>
+                                <ul class="menu" style="height: auto;">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-flag text-aqua"></i> 简体中文
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-flag-o text-aqua"></i> English
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
                 <!-- User Account: style can be found in dropdown.less -->
                 @if($header_config['user-menu']['show'])
                     <li class="dropdown user user-menu">

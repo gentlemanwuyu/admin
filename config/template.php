@@ -27,6 +27,9 @@ return [
         'tasks-menu' => [
             'show' => true,
         ],
+        'language-menu' => [
+            'show' => true,
+        ],
         'user-menu' => [
             'show' => true,
         ],
