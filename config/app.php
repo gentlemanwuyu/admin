@@ -165,6 +165,9 @@ return [
         // 视图组件
         \App\Providers\ViewComposerServiceProvider::class,
 
+        // Gravatar头像扩展包
+        \Creativeorange\Gravatar\GravatarServiceProvider::class,
+
     ],
 
     /*
@@ -213,6 +216,7 @@ return [
 
         'Module' => Caffeinated\Modules\Facades\Module::class,
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'Gravatar' => \Creativeorange\Gravatar\Facades\Gravatar::class,
     ],
 
 ];
