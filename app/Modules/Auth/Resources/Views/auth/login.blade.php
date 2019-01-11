@@ -5,7 +5,7 @@
         body { background: #d2d6de; }
     </style>
 @endsection
-@section('body_content')
+@section('body')
     <div class="login-box">
         <div class="login-logo">
             <a href="#"><b>Gentleman</b>Admin</a>
