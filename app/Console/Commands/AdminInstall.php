@@ -12,7 +12,7 @@ class AdminInstall extends Command
      *
      * @var string
      */
-    protected $signature = 'admin:install --seed';
+    protected $signature = 'admin:install {--seed}';
 
     /**
      * The console command description.
@@ -70,6 +70,7 @@ class AdminInstall extends Command
     {
         return DB::table('users')->insert([
             'name' => 'admin',
+            'email' => '492444775@qq.com',
             'password' => bcrypt('gentleman'),
             'is_admin' => 1,
         ]);

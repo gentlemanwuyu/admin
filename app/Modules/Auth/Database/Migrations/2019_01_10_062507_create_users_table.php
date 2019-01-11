@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
 			$table->string('name')->default('')->comment('用户名');
 			$table->string('email')->default('')->comment('邮箱地址')->unique();
 			$table->string('password')->default('')->comment('密码');
-			$table->date('birthday')->comment('生日');
+			$table->date('birthday')->nullable()->comment('生日');
 			$table->enum('gender',[0, 1, 2])->default(0)->comment('性别，1为男，2为女');
 			$table->string('telephone', 32)->default('')->comment('电话');
 			$table->rememberToken();
