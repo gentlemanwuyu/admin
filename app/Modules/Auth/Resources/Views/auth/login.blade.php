@@ -12,6 +12,7 @@
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
+            @include('errors.show')
             <form action="{{route('sign_in')}}" method="post">
                 <input name="_token" type="hidden" value="{!! csrf_token() !!}" />
                 <div class="form-group has-feedback">
