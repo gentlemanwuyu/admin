@@ -11,6 +11,9 @@
 |
 */
 
-// 登陆页面，不需要中间件
+// 登陆页面，不需要auth中间件
 Route::get('login', ['as'=>'login', 'uses'=>'AuthController@login']);
 Route::post('sign_in', ['as'=>'sign_in', 'uses'=>'AuthController@signIn']);
+
+// 首页
+Route::get('/', ['middleware' => ['auth'], 'as'=>'index', 'uses'=>'IndexController@index']);
