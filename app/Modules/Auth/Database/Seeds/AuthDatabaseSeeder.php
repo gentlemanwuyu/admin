@@ -14,8 +14,7 @@ class AuthDatabaseSeeder extends Seeder
 	public function run()
 	{
 		Model::unguard();
-
-		// $this->call('App\Modules\Auth\Database\Seeds\FoobarTableSeeder');
+		$this->call(UsersTableSeeder::class);
 	}
 
 }
