@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('wrapper')
+@section('body_content')
     <div class="wrapper">
         <!-- header -->
         @include('layouts.header')
