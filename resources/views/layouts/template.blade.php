@@ -83,6 +83,8 @@
 <script src="{{asset('/assets/adminlte/plugins/iCheck/icheck.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('/assets/adminlte/dist/js/adminlte.min.js')}}"></script>
+<!-- layui -->
+<script src="{{asset('assets/layui-src/dist/layui.all.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('/assets/js/application.js')}}"></script>
 @yield('scripts')

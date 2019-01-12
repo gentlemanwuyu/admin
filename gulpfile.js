@@ -17,6 +17,10 @@ elixir(function(mix) {
     mix.copy('node_modules/admin-lte/plugins','public/assets/adminlte/plugins');
     mix.copy('node_modules/admin-lte/dist','public/assets/adminlte/dist');
 
+    // 拷贝layer插件
+    mix.copy('node_modules/layui-src/src','public/assets/layui-src/src');
+    mix.copy('node_modules/layui-src/dist','public/assets/layui-src/dist');
+
     // 拷贝resources文件夹
     mix.copy('resources/assets/img','public/assets/img');
     mix.copy('resources/assets/js','public/assets/js');
