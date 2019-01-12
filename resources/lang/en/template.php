@@ -8,4 +8,6 @@
 
 return [
     'please_select_language' => 'Please select language',
+    'change_password' => 'Change password',
+    'sign_out' => 'Sign out',
 ];

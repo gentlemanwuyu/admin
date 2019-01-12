@@ -250,43 +250,37 @@
                 @endif
                 <!-- User Account: style can be found in dropdown.less -->
                 @if($header_config['user-menu']['show'])
+                    <?php
+                        if (\Gravatar::exists($user->email)) {
+                            $avatar_url = \Gravatar::get($user->email);
+                        }elseif (1 == $user->gender) {
+                            $avatar_url = asset('assets/img/system/avatar_male.png');
+                        }elseif (2 == $user->gender) {
+                            $avatar_url = asset('assets/img/system/avatar_female.png');
+                        }else {
+                            $avatar_url = asset('assets/img/system/avatar_default.jpg');
+                        }
+                    ?>
                     <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <img src="{{$avatar_url}}" class="user-image" alt="User Image">
+                        <span class="hidden-xs">{{$user->name}}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                            <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
-                            </p>
+                            <img src="{{$avatar_url}}" class="img-circle" alt="User Image">
+                            <p>{{$user->name}}</p>
                         </li>
                         <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-                        </li>
+                        {{--<li class="user-body"></li>--}}
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="#" class="btn btn-default btn-flat">@lang('template.change_password')</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="{{route('auth::auth.sign_out')}}" class="btn btn-default btn-flat">@lang('template.sign_out')</a>
                             </div>
                         </li>
                     </ul>

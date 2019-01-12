@@ -32,4 +32,13 @@ class AuthController extends Controller
         }
     }
 
+    public function signOut()
+    {
+        if (Auth::check()) {
+            Auth::logout();
+        }
+
+        return Redirect::intended('/');
+    }
+
 }

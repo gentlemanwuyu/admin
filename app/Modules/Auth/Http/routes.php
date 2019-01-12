@@ -17,3 +17,16 @@ Route::post('sign_in', ['as'=>'sign_in', 'uses'=>'AuthController@signIn']);
 
 // 首页
 Route::get('/', ['middleware' => ['auth'], 'as'=>'index', 'uses'=>'IndexController@index']);
+
+Route::group(['middleware'=>['auth'], 'prefix'=>'auth', 'as'=>'auth::'], function (){
+    // AuthController
+    Route::group(['prefix'=>'auth', 'as'=>'auth.'], function (){
+        // 退出
+        Route::get('login', ['as'=>'sign_out', 'uses'=>'AuthController@signOut']);
+    });
+
+    // IndexController
+    Route::group(['prefix'=>'index', 'as'=>'index.'], function (){
+
+    });
+});
