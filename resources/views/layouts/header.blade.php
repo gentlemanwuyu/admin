@@ -277,7 +277,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">@lang('template.modify_password')</a>
+                                <a href="{{route('auth::auth.modify_password_page')}}" class="btn btn-default btn-flat">@lang('template.modify_password')</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{route('auth::auth.sign_out')}}" class="btn btn-default btn-flat">@lang('template.sign_out')</a>

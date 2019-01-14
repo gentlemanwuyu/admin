@@ -7,9 +7,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Modules\Auth\Http\Requests\LoginRequest;
+use App\Modules\Auth\Http\Requests\ModifyPasswordRequest;
+use App\Modules\Auth\Services\AuthService;
 
 class AuthController extends Controller
 {
+    /**
+     * @var AuthService
+     */
+    protected $authService;
+
+    public function __construct(AuthService $authService)
+    {
+        $this->authService = $authService;
+    }
 
     public function login()
     {
@@ -28,7 +39,7 @@ class AuthController extends Controller
         if($login){
             return Redirect::intended('/');
         }else{
-            return Redirect::back()->withErrors();
+            return Redirect::back()->withErrors(trans('auth::auth.login_failure'));
         }
     }
 
@@ -39,6 +50,25 @@ class AuthController extends Controller
         }
 
         return Redirect::intended('/');
+    }
+
+    public function modifyPasswordPage()
+    {
+        return view('auth::auth.modify_password');
+    }
+
+    public function modifyPassword(ModifyPasswordRequest $request)
+    {
+        try {
+            $result = $this->authService->modifyPassword($request->get('new_password'), Auth::user()->id);
+            if (!$result) {
+                throw new \Exception(trans('application.database_exception'));
+            }
+
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            return ['status' => 'fail', 'msg' => $e->getMessage()];
+        }
     }
 
 }

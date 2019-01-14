@@ -23,6 +23,12 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'auth', 'as'=>'auth::'], functio
     Route::group(['prefix'=>'auth', 'as'=>'auth.'], function (){
         // 退出
         Route::get('login', ['as'=>'sign_out', 'uses'=>'AuthController@signOut']);
+
+        // 修改密码页面
+        Route::get('modify_password_page', ['as'=>'modify_password_page', 'uses'=>'AuthController@modifyPasswordPage']);
+
+        // 修改密码
+        Route::post('modify_password', ['as'=>'modify_password', 'uses'=>'AuthController@modifyPassword']);
     });
 
     // IndexController

@@ -12,11 +12,24 @@ return [
     'password' => '密码',
     'remember_me' => '记住密码',
     'sign_in' => '登陆',
-
-    // 登陆表单
     'email_required' => '邮箱不能为空',
     'email_format' => '邮箱格式不对',
     'password_required' => '密码不能为空',
     'captcha_required' => '验证码不能为空',
     'captcha_invalid' => '验证码不对',
+    'login_failure' => '账号或密码不正确',
+
+    // 修改密码
+    'modify_password' => '修改密码',
+    'auth_management' => '授权管理',
+    'new_password' => '新密码',
+    'confirm_password' => '确认密码',
+    'type_new_password' => '输入新密码',
+    'type_confirm_password' => '再次输入确认',
+    'confirm' => '确定',
+    'twice_password_different' => '两次输入的密码不一样',
+    'password_alpha_dash' => '密码只能包含字母、数字、破折号以及下划线',
+    'password_max_length' => '密码长度不能超过32个字符',
+    'password_modify_success' => '密码修改成功',
+    'password_modify_fail' => '密码修改失败',
 ];
