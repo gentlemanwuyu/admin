@@ -14,12 +14,14 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <div class="col-xs-2 pull-right">
-                    <div class="input-group input-group-sm">
-                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    <form>
+                        <div class="input-group input-group-sm">
+                            <input type="text" name="search" class="form-control pull-right" value="{{$search or ''}}" placeholder="{{trans('application.search')}}">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="col-xs-6">
                     <div class="btn-group">

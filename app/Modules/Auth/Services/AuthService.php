@@ -11,6 +11,7 @@ namespace App\Modules\Auth\Services;
 use App\Modules\Auth\Repositories\UserRepository;
 use App\Modules\Auth\Criteria\User\MatchIsAdmin;
 use App\Criteria\MatchDeletedAt;
+use App\Modules\Auth\Criteria\User\MatchEmailOrName;
 
 class AuthService
 {
@@ -44,6 +45,9 @@ class AuthService
     {
         $this->userRepository->pushCriteria(new MatchIsAdmin(0));
         $this->userRepository->pushCriteria(new MatchDeletedAt);
+        if ($request->get('search')) {
+            $this->userRepository->pushCriteria(new MatchEmailOrName($request->get('search')));
+        }
 
         return $this->userRepository->paginate();
     }

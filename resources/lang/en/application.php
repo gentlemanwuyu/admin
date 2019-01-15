@@ -7,5 +7,6 @@
  */
 
 return [
+    'search' => 'Search...',
     'database_exception' => 'Database exception',
 ];

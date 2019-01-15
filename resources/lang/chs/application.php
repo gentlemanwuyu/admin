@@ -7,5 +7,6 @@
  */
 
 return [
+    'search' => '搜索...',
     'database_exception' => '数据库异常',
 ];
