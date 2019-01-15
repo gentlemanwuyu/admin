@@ -32,4 +32,19 @@ return [
     'password_max_length' => 'The length of password must less than 32 letters.',
     'password_modify_success' => 'Password modify success.',
     'password_modify_fail' => 'Password modify failed',
+
+    // user list
+    'user_list' => 'User list',
+    'no' => 'No.',
+    'user_name' => 'User name',
+    'telephone' => 'Telephone',
+    'gender' => 'Gender',
+    'created_at' => 'Created time',
+    'action' => 'Action',
+    'unknown' => 'Unknown',
+    'male' => 'Male',
+    'female' => 'Female',
+    'add_user' => 'Add user',
+    'edit_user' => 'Edit user',
+    'delete_user' => 'Delete user',
 ];

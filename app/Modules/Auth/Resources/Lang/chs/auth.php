@@ -32,4 +32,19 @@ return [
     'password_max_length' => '密码长度不能超过32个字符',
     'password_modify_success' => '密码修改成功',
     'password_modify_fail' => '密码修改失败',
+
+    // 用户列表
+    'user_list' => '用户列表',
+    'no' => '序号',
+    'user_name' => '用户名',
+    'telephone' => '电话',
+    'gender' => '性别',
+    'created_at' => '创建时间',
+    'action' => '操作',
+    'unknown' => '未知',
+    'male' => '男',
+    'female' => '女',
+    'add_user' => '添加用户',
+    'edit_user' => '修改用户',
+    'delete_user' => '删除用户',
 ];

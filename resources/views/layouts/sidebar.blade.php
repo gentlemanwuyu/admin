@@ -1,31 +1,62 @@
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <!-- Sidebar user panel -->
-        <div class="user-panel">
-            <div class="pull-left image">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-            </div>
-            <div class="pull-left info">
-                <p>Alexander Pierce</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            </div>
-        </div>
         <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
+        <form class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
             </div>
         </form>
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            @foreach($menus as $menu)
+                @if(isset($menu->treeview) && $menu->treeview)
+                    <li class="treeview @if(isset($menu->is_active) && $menu->is_active) active @endif">
+                        <a href="javascript:;">
+                            <i class="{{$menu->icon}}"></i>
+                            <span>{{trans('template.'.$menu->id)}}</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            @foreach($menu->menus as $submenu)
+                                @if(isset($submenu->treeview) && $submenu->treeview)
+                                    <li class="treeview @if(isset($submenu->is_active) && $submenu->is_active) active @endif">
+                                        <a href="javascript:;">
+                                            <i class="{{$submenu->icon}}"></i>
+                                            <span>{{trans('template.'.$submenu->id)}}</span>
+                                            <span class="pull-right-container">
+                                                <i class="fa fa-angle-left pull-right"></i>
+                                            </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @foreach($submenu->menus as $second_submenu)
+                                                <li @if(isset($second_submenu->is_active) && $second_submenu->is_active) class="active" @endif>
+                                                    <a href="{{$second_submenu->link}}"><i class="{{$second_submenu->icon}}"></i><span>{{trans('template.'.$second_submenu->id)}}</span></a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @else
+                                    <li @if(isset($submenu->is_active) && $submenu->is_active) class="active" @endif><a href="{{$submenu->link}}"><i class="{{$submenu->icon}}"></i>{{trans('template.'.$submenu->id)}}</a></li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </li>
+                @else
+                    <li @if(isset($menu->is_active) && $menu->is_active) class="active" @endif>
+                        <a href="{{$menu->link}}"><i class="{{$menu->icon}}"></i><span>{{trans('template.'.$menu->id)}}</span></a>
+                    </li>
+                @endif
+            @endforeach
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">

@@ -10,4 +10,8 @@ return [
     'please_select_language' => 'Please select language',
     'modify_password' => 'Modify password',
     'sign_out' => 'Sign out',
+
+    // menus translation
+    'auth_management' => 'Authorization management',
+        'user_list' => 'User List',
 ];

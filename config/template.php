@@ -37,6 +37,22 @@ return [
             'show' => true,
         ],
     ],
+    'sidebar' => [
+        'menus' => [
+            // 授权管理
+            [
+                'id' => 'auth_management',
+                'icon' => 'fa fa-lock',
+                'menus' => [
+                    [
+                        'id' => 'user_list',
+                        'icon' => 'fa fa-users',
+                        'link' => '/auth/auth/user_list',
+                    ],
+                ],
+            ],
+        ],
+    ],
     'footer' => [
         'version' => '1.0.0',
         'start_year' => 2018,

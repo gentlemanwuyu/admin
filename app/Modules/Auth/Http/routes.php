@@ -29,6 +29,9 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'auth', 'as'=>'auth::'], functio
 
         // 修改密码
         Route::post('modify_password', ['as'=>'modify_password', 'uses'=>'AuthController@modifyPassword']);
+
+        // 用户列表
+        Route::get('user_list', ['as'=>'user_list', 'uses'=>'AuthController@userList']);
     });
 
     // IndexController

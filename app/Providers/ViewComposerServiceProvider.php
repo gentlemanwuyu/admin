@@ -22,7 +22,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('*', WildComposer::class);
-        View::composer(['layouts.header', 'layouts.footer'], TemplateComposer::class);
+        View::composer(['layouts.header', 'layouts.sidebar', 'layouts.footer'], TemplateComposer::class);
     }
 
     /**

@@ -71,4 +71,11 @@ class AuthController extends Controller
         }
     }
 
+    public function userList(Request $request)
+    {
+        $users = $this->authService->getUserList($request);
+
+        return view('auth::auth.user_list', compact('users'))->with($request->all());
+    }
+
 }
