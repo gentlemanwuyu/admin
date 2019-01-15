@@ -13,6 +13,11 @@
     <section class="content">
         <div class="box box-primary">
             <div class="box-header with-border">
+                <div class="col-xs-6">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" title="{{trans('auth::auth.add_user')}}"><i class="fa fa-user-plus"></i></button>
+                    </div>
+                </div>
                 <div class="col-xs-2 pull-right">
                     <form>
                         <div class="input-group input-group-sm">
@@ -22,11 +27,6 @@
                             </div>
                         </div>
                     </form>
-                </div>
-                <div class="col-xs-6">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary" title="{{trans('auth::auth.add_user')}}"><i class="fa fa-user-plus"></i></button>
-                    </div>
                 </div>
             </div>
             <!-- /.box-header -->
