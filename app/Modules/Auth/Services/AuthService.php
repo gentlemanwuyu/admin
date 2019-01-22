@@ -100,12 +100,18 @@ class AuthService
         }
     }
 
+    /**
+     * 根据条件读取一条用户数据
+     *
+     * @param $criteria
+     * @return mixed
+     */
     public function getUser($criteria)
     {
         if (is_numeric($criteria)) {
             return $this->userRepository->find($criteria);
         }elseif (is_array($criteria)) {
-
+            return $this->userRepository->firstWhere($criteria);
         }
     }
 }
