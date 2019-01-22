@@ -66,6 +66,10 @@
 <!-- jvectormap -->
 <script src="{{asset('/assets/adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
 <script src="{{asset('/assets/adminlte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
+<!-- InputMask -->
+<script src="{{asset('/assets/adminlte/plugins/input-mask/jquery.inputmask.js')}}"></script>
+<script src="{{asset('/assets/adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
+<script src="{{asset('/assets/adminlte/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
 <!-- jQuery Knob Chart -->
 <script src="{{asset('/assets/adminlte/bower_components/jquery-knob/dist/jquery.knob.min.js')}}"></script>
 <!-- daterangepicker -->

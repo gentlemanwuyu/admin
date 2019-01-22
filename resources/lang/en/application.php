@@ -7,6 +7,10 @@
  */
 
 return [
+    'confirm' => 'Confirm',
+    'cancel' => 'Cancel',
+    'yes' => 'Yes',
+    'no' => 'No',
     'search' => 'Search...',
     'database_exception' => 'Database exception',
 ];

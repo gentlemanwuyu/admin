@@ -51,4 +51,61 @@ class AuthService
 
         return $this->userRepository->paginate();
     }
+
+    /**
+     * 创建/修改用户
+     *
+     * @param $request
+     * @return array
+     */
+    public function createOrUpdateUser($request)
+    {
+        try {
+            $data = [
+                'name' => $request->get('name'),
+                'gender' => $request->get('gender'),
+                'telephone' => $request->get('telephone'),
+            ];
+            if ($request->get('birthday')) {
+                $data['birthday'] = $request->get('birthday');
+            }
+            if ($request->has('is_admin')) {
+                $data['is_admin'] = $request->get('is_admin');
+            }
+
+            if ('create' == $request->get('action')) {
+                $data['email'] = $request->get('email');
+                $data['password'] = bcrypt(config('project.default_password') ?: 'admin');
+                $this->userRepository->create($data);
+            }elseif ('update' == $request->get('action')) {
+                $this->userRepository->update($data, $request->get('user_id'));
+            }
+
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+
+    public function deleteUser($request)
+    {
+        try {
+            $user = $this->userRepository->find($request->get('user_id'));
+            $user->delete();
+
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+    public function getUser($criteria)
+    {
+        if (is_numeric($criteria)) {
+            return $this->userRepository->find($criteria);
+        }elseif (is_array($criteria)) {
+
+        }
+    }
 }

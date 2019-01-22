@@ -9,17 +9,13 @@
 namespace App\Modules\Auth\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    use SoftDeletes;
+
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -42,8 +38,8 @@ class User extends Authenticatable
      * @param $value
      * @return string
      */
-    public function getGenderAttribute($value)
+    public function getGenderValueAttribute()
     {
-        return $this->genders[$value] ?? 'unknown';
+        return $this->genders[$this->gender] ?? 'unknown';
     }
 }

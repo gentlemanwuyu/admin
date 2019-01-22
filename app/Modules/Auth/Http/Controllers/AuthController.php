@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Modules\Auth\Http\Requests\LoginRequest;
 use App\Modules\Auth\Http\Requests\ModifyPasswordRequest;
+use App\Modules\Auth\Http\Requests\CreateOrUpdateUserRequest;
 use App\Modules\Auth\Services\AuthService;
 
 class AuthController extends Controller
@@ -76,6 +77,27 @@ class AuthController extends Controller
         $users = $this->authService->getUserList($request);
 
         return view('auth::auth.user_list', compact('users'))->with($request->all());
+    }
+
+    public function createOrUpdateUserPage(Request $request)
+    {
+        $data = [];
+        if ('update' == $request->get('action')) {
+            $user_info = $this->authService->getUser($request->get('user_id'));
+            $data = compact('user_info');
+        }
+
+        return view('auth::auth.create_or_update_user', $data)->with($request->all());
+    }
+
+    public function createOrUpdateUser(CreateOrUpdateUserRequest $request)
+    {
+        return response()->json($this->authService->createOrUpdateUser($request));
+    }
+
+    public function deleteUser(Request $request)
+    {
+        return response()->json($this->authService->deleteUser($request));
     }
 
 }

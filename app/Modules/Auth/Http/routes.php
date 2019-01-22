@@ -32,6 +32,15 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'auth', 'as'=>'auth::'], functio
 
         // 用户列表
         Route::get('user_list', ['as'=>'user_list', 'uses'=>'AuthController@userList']);
+
+        // 添加/修改用户页面
+        Route::get('create_or_update_user_page', ['as'=>'create_or_update_user_page', 'uses'=>'AuthController@createOrUpdateUserPage']);
+
+        // 添加/修改用户
+        Route::post('create_or_update_user', ['as'=>'create_or_update_user', 'uses'=>'AuthController@createOrUpdateUser']);
+
+        // 删除用户
+        Route::post('delete_user', ['as'=>'delete_user', 'uses'=>'AuthController@deleteUser']);
     });
 
     // IndexController

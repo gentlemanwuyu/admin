@@ -39,6 +39,7 @@ return [
     'user_name' => '用户名',
     'telephone' => '电话',
     'gender' => '性别',
+    'birthday' => '生日',
     'created_at' => '创建时间',
     'action' => '操作',
     'unknown' => '未知',
@@ -47,4 +48,18 @@ return [
     'add_user' => '添加用户',
     'edit_user' => '修改用户',
     'delete_user' => '删除用户',
+
+    // 用户添加/修改
+    'is_admin' => '是否管理员',
+    'name_required' => '用户名不能为空',
+    'name_accepted' => '用户名只能包含字母、数字、破折号以及下划线',
+    'name_max' => '用户名不能超过32个字符',
+    'birthday_date_format' => '生日格式不对',
+    'gender_required' => '请选择性别',
+    'telephone_required' => '请填写电话',
+    'user_create_or_update_successful' => '用户添加/修改成功',
+    'user_create_or_update_fail' => '用户添加/修改失败',
+    'user_delete_confirm' => '您确定要删除该用户吗？',
+    'user_delete_successful' => '用户删除成功',
+    'user_delete_fail' => '用户删除失败',
 ];

@@ -17,6 +17,10 @@ function packageValidatorResponseText (text) {
     return message.join('<br>');
 }
 
+// 日期inputmask
+$('.date-mask').inputmask('yyyy-mm-dd', { 'placeholder': 'yyyy-mm-dd' });
+$('.telephone-mask').inputmask({"mask": "99999999999"});
+
 
 // 给所有的ajax请求加上csrf_token
 $.ajaxSetup({
