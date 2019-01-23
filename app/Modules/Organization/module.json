@@ -1,0 +1,8 @@
+{
+	"name": "Organization",
+	"slug": "organization",
+	"namespace": "Organization",
+	"version": "1.0",
+	"description": "This is the description for the Organization module.",
+	"enabled": true
+}
