@@ -156,6 +156,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // repository
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+
         // 模块化
         \Caffeinated\Modules\ModulesServiceProvider::class,
 
