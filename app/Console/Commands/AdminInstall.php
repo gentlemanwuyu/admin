@@ -71,7 +71,7 @@ class AdminInstall extends Command
         return DB::table('users')->insert([
             'name' => 'admin',
             'email' => '492444775@qq.com',
-            'password' => bcrypt('gentleman'),
+            'password' => bcrypt('admin'),
             'is_admin' => 1,
         ]);
     }
