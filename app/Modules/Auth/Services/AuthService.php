@@ -44,7 +44,6 @@ class AuthService
     public function getUserList($request)
     {
         $this->userRepository->pushCriteria(new MatchIsAdmin(0));
-        $this->userRepository->pushCriteria(new MatchDeletedAt);
         if ($request->get('search')) {
             $this->userRepository->pushCriteria(new MatchEmailOrName($request->get('search')));
         }
