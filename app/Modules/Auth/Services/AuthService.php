@@ -91,8 +91,7 @@ class AuthService
     public function deleteUser($request)
     {
         try {
-            $user = $this->userRepository->find($request->get('user_id'));
-            $user->delete();
+            $this->userRepository->delete($request->get('user_id'));
 
             return ['status' => 'success'];
         }catch (\Exception $e) {
