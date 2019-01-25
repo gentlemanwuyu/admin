@@ -63,7 +63,7 @@ class AuthService
         try {
             $data = [
                 'name' => $request->get('name'),
-                'gender' => $request->get('gender'),
+                'gender_id' => $request->get('gender_id'),
                 'telephone' => $request->get('telephone'),
             ];
             if ($request->get('birthday')) {

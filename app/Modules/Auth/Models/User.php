@@ -25,4 +25,26 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * gender字段对应的性别
+     *
+     * @var array
+     */
+    protected $genders = [
+        0 => 'unknown',
+        1 => 'male',
+        2 => 'female',
+    ];
+
+    /**
+     * gender属性访问器
+     *
+     * @param $gender
+     * @return string
+     */
+    public function getGenderAttribute()
+    {
+        return $this->genders[$this->gender_id] ?? 'unknown';
+    }
 }

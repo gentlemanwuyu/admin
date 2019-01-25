@@ -33,10 +33,10 @@
                     <label class="col-xs-2 control-label required">@lang('auth::auth.gender')</label>
                     <div class="col-xs-10">
                         <label>
-                            <input type="radio" name="gender" class="minimal" value="1" @if(isset($user_info) && 1 == $user_info->gender) checked @endif>&nbsp;&nbsp;@lang('auth::auth.male')
+                            <input type="radio" name="gender_id" class="minimal" value="1" @if(isset($user_info) && 1 == $user_info->gender_id) checked @endif>&nbsp;&nbsp;@lang('auth::auth.male')
                         </label>
                         <label style="margin-left: 20px;">
-                            <input type="radio" name="gender" class="minimal" value="2" @if(isset($user_info) && 2 == $user_info->gender) checked @endif>&nbsp;&nbsp;@lang('auth::auth.female')
+                            <input type="radio" name="gender_id" class="minimal" value="2" @if(isset($user_info) && 2 == $user_info->gender_id) checked @endif>&nbsp;&nbsp;@lang('auth::auth.female')
                         </label>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ class CreateOrUpdateUserRequest extends FormRequest
 			'email' => 'required|email',
 			'name' => 'required|alpha_dash|max:32',
 			'birthday' => 'date_format:Y-m-d',
-			'gender' => 'required',
+			'gender_id' => 'required',
 			'telephone' => 'required',
 		];
 
@@ -46,7 +46,7 @@ class CreateOrUpdateUserRequest extends FormRequest
 			'name.alpha_dash' => trans('auth::auth.name_accepted'),
 			'name.max' => trans('auth::auth.name_max'),
 			'birthday.date_format' => trans('auth::auth.birthday_date_format'),
-			'gender.required' => trans('auth::auth.gender_required'),
+			'gender_id.required' => trans('auth::auth.gender_required'),
 			'telephone.required' => trans('auth::auth.telephone_required'),
 		];
 	}

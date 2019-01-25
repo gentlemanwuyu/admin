@@ -3,7 +3,6 @@
     {{trans('auth::auth.user_list')}} | {{$project_name}}
 @endsection
 @section('content')
-    @inject('userPresenter', 'App\Modules\Auth\Presenters\UserPresenter')
     <section class="content-header">
         <h1>@lang('auth::auth.user_list')</h1>
         <ol class="breadcrumb">
@@ -55,7 +54,7 @@
                             <td>{{$user->name or ''}}</td>
                             <td>{{$user->email or ''}}</td>
                             <td>{{$user->telephone or ''}}</td>
-                            <td>{{trans('auth::auth.'.$userPresenter->getGenderValue($user->gender))}}</td>
+                            <td>{{trans('auth::auth.'.$user->gender)}}</td>
                             <td>{{$user->created_at}}</td>
                             <td>
                                 <a href="javascript:;">
