@@ -21,6 +21,10 @@ elixir(function(mix) {
     mix.copy('node_modules/layui-src/src','public/assets/layui-src/src');
     mix.copy('node_modules/layui-src/dist','public/assets/layui-src/dist');
 
+    // 拷贝orgchart插件
+    mix.copy('node_modules/orgchart/src','public/assets/orgchart/src');
+    mix.copy('node_modules/orgchart/dist','public/assets/orgchart/dist');
+
     // 拷贝resources文件夹
     mix.copy('resources/assets/img','public/assets/img');
     mix.copy('resources/assets/js','public/assets/js');

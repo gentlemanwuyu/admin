@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="{{asset('/assets/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{asset('/assets/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
+    <!-- orgchart -->
+    <link rel="stylesheet" href="{{asset('/assets/orgchart/dist/css/jquery.orgchart.min.css')}}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -89,6 +91,8 @@
 <script src="{{asset('/assets/adminlte/dist/js/adminlte.min.js')}}"></script>
 <!-- layui -->
 <script src="{{asset('assets/layui-src/dist/layui.all.js')}}"></script>
+<!-- orgchart -->
+<script src="{{asset('/assets/orgchart/dist/js/jquery.orgchart.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('/assets/js/application.js')}}"></script>
 @yield('scripts')
