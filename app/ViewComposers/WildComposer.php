@@ -24,5 +24,7 @@ class WildComposer
         $view->with([
             'project_name' => $this->project_config['name'] ?: 'Gentleman Admin',
         ]);
+        // 每个模板都带着所有的请求参数
+        $view->with(request()->all());
     }
 }

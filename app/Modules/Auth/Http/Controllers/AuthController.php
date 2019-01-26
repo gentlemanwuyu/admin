@@ -76,7 +76,7 @@ class AuthController extends Controller
     {
         $users = $this->authService->getUserList($request);
 
-        return view('auth::auth.user_list', compact('users'))->with($request->all());
+        return view('auth::auth.user_list', compact('users'));
     }
 
     public function createOrUpdateUserPage(Request $request)
@@ -87,7 +87,7 @@ class AuthController extends Controller
             $data = compact('user_info');
         }
 
-        return view('auth::auth.create_or_update_user', $data)->with($request->all());
+        return view('auth::auth.create_or_update_user', $data);
     }
 
     public function createOrUpdateUser(CreateOrUpdateUserRequest $request)
