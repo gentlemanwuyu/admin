@@ -15,7 +15,7 @@ class OrganizationDatabaseSeeder extends Seeder
 	{
 		Model::unguard();
 
-		// $this->call('App\Modules\Organization\Database\Seeds\FoobarTableSeeder');
+		$this->call(DepartmentsTableSeeder::class);
 	}
 
 }
