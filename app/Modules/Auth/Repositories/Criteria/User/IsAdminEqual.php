@@ -2,16 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: WuYu
- * Date: 2019/1/15
- * Time: 10:55
+ * Date: 2019/1/26
+ * Time: 10:52
  */
 
-namespace App\Modules\Auth\Criteria\User;
+namespace App\Modules\Auth\Repositories\Criteria\User;
 
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
-class MatchIsAdmin implements CriteriaInterface
+class IsAdminEqual implements CriteriaInterface
 {
     public function __construct($is_admin) {
         $this->is_admin = $is_admin;
@@ -30,6 +30,7 @@ class MatchIsAdmin implements CriteriaInterface
         if(isset($this->is_admin)){
             $model = $model->where('is_admin', $this->is_admin);
         }
+
         return $model;
     }
 }

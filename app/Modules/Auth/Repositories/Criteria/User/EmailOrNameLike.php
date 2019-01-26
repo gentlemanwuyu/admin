@@ -2,16 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: WuYu
- * Date: 2019/1/15
- * Time: 14:24
+ * Date: 2019/1/26
+ * Time: 10:53
  */
 
-namespace App\Modules\Auth\Criteria\User;
+namespace App\Modules\Auth\Repositories\Criteria\User;
 
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
-class MatchEmailOrName implements CriteriaInterface
+class EmailOrNameLike implements CriteriaInterface
 {
     public function __construct($search) {
         $this->search = $search;

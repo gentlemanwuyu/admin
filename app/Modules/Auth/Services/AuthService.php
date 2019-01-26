@@ -9,9 +9,8 @@
 namespace App\Modules\Auth\Services;
 
 use App\Modules\Auth\Repositories\UserRepository;
-use App\Modules\Auth\Criteria\User\MatchIsAdmin;
-use App\Criteria\MatchDeletedAt;
-use App\Modules\Auth\Criteria\User\MatchEmailOrName;
+use App\Modules\Auth\Repositories\Criteria\User\IsAdminEqual;
+use App\Modules\Auth\Repositories\Criteria\User\EmailOrNameLike;
 
 class AuthService
 {
@@ -43,9 +42,9 @@ class AuthService
      */
     public function getUserList($request)
     {
-        $this->userRepository->pushCriteria(new MatchIsAdmin(0));
+        $this->userRepository->pushCriteria(new IsAdminEqual(0));
         if ($request->get('search')) {
-            $this->userRepository->pushCriteria(new MatchEmailOrName($request->get('search')));
+            $this->userRepository->pushCriteria(new EmailOrNameLike($request->get('search')));
         }
 
         return $this->userRepository->paginate();
