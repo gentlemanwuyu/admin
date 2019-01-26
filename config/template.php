@@ -51,6 +51,18 @@ return [
                     ],
                 ],
             ],
+            // 组织结构
+            [
+                'id' => 'organization_management',
+                'icon' => 'fa fa-university',
+                'menus' => [
+                    [
+                        'id' => 'department_chart',
+                        'icon' => 'fa fa-cubes',
+                        'link' => '/organization/department/chart',
+                    ],
+                ],
+            ],
         ],
     ],
     'footer' => [

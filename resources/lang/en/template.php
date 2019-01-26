@@ -14,4 +14,6 @@ return [
     // menus translation
     'auth_management' => 'Authorization management',
         'user_list' => 'User List',
+    'organization_management' => 'Organization management',
+        'department_chart' => 'Department structure chart',
 ];

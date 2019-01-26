@@ -11,8 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'organization'], function() {
-	Route::get('/', function() {
-		dd('This is the Organization module index page.');
-	});
+Route::group(['prefix' => 'department', 'as' => 'department.'], function() {
+	// 部门结构图页面
+	Route::get('chart', ['as'=>'chart', 'uses'=>'DepartmentController@chart']);
 });
