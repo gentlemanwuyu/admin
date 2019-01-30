@@ -40,6 +40,7 @@ class AdminInstall extends Command
     {
         $this->execShellWithPrettyPrint("php artisan module:migrate");
         $this->createAdminAccount();
+        $this->createRootDepartment();
         // 是否填充数据
         if ($this->option('seed')) {
             $this->execShellWithPrettyPrint("php artisan module:seed");
@@ -73,6 +74,16 @@ class AdminInstall extends Command
             'email' => '492444775@qq.com',
             'password' => bcrypt('admin'),
             'is_admin' => 1,
+        ]);
+    }
+
+
+    public function createRootDepartment()
+    {
+        return DB::table('departments')->insert([
+            'id' => 1,
+            'name' => config('project.company_name') ?: 'Company',
+            'parent_id' => 0,
         ]);
     }
 }

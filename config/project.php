@@ -10,6 +10,9 @@ return [
     // 项目名称
     'name' => 'Gentleman Admin',
 
+    // 公司名字
+    'company_name' => '深圳市欣汉生科技有限公司',
+
     // 创建用户时的默认密码
     'default_password' => 'admin',
 ];
