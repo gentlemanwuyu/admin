@@ -14,4 +14,13 @@
 Route::group(['prefix' => 'department', 'as' => 'department.'], function() {
 	// 部门结构图页面
 	Route::get('chart', ['as'=>'chart', 'uses'=>'DepartmentController@chart']);
+
+	// 获取部门树
+	Route::get('get_tree', ['as'=>'get_tree', 'uses'=>'DepartmentController@getTree']);
+
+	// 修改部门信息
+	Route::post('update', ['as'=>'update', 'uses'=>'DepartmentController@update']);
+
+	// 删除部门
+	Route::post('delete', ['as'=>'delete', 'uses'=>'DepartmentController@delete']);
 });
