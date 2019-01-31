@@ -26,4 +26,7 @@ Route::group(['prefix' => 'department', 'as' => 'department.'], function() {
 
 	// 删除部门
 	Route::post('delete', ['as'=>'delete', 'uses'=>'DepartmentController@delete']);
+
+	// 拖动部门
+	Route::post('drag', ['as'=>'drag', 'uses'=>'DepartmentController@drag']);
 });

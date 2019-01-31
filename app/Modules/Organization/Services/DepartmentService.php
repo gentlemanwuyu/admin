@@ -80,6 +80,12 @@ class DepartmentService
         return $result;
     }
 
+    /**
+     * 添加子部门
+     *
+     * @param $request
+     * @return array
+     */
     public function add($request)
     {
         try {
@@ -144,6 +150,23 @@ class DepartmentService
             }
 
             $this->departmentRepository->resetCriteria()->delete($department_id);
+
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+    /**
+     * 拖动部门
+     *
+     * @param $request
+     * @return array
+     */
+    public function drag($request)
+    {
+        try {
+            $this->departmentRepository->update(['parent_id' => $request->get('parent_id')], $request->get('department_id'));
 
             return ['status' => 'success'];
         }catch (\Exception $e) {

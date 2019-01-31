@@ -55,7 +55,7 @@
                 success: function (data) {
                     layer.close(load_index);
                     if ('success' == data.status) {
-                        $('#chart-container').orgchart({
+                        var oc = $('#chart-container').orgchart({
                             'data' : data.content,
                             'nodeID': 'id',
                             'draggable': true,
@@ -66,6 +66,36 @@
                                 node_html += '</div>';
                                 $node.html(node_html);
                             }
+                        });
+
+                        // 节点拖动
+                        oc.$chart.on('nodedrop.orgchart', function(event, extraParams) {
+                            var dragged_department_id = $(extraParams.draggedNode).attr('id');
+                            var new_parent_id = $(extraParams.dropZone).attr('id');
+                            var load_index = layer.load();
+                            $.ajax({
+                                method: "post",
+                                url: "{{route('organization::department.drag')}}",
+                                data: {
+                                    department_id: dragged_department_id,
+                                    parent_id: new_parent_id
+                                },
+                                success: function (data) {
+                                    layer.close(load_index);
+                                    if ('success' == data.status) {
+                                        layer.msg("{{trans('organization::department.drag_department_successful')}}", {icon:1});
+                                        parent.location.reload();
+                                    } else {
+                                        layer.msg("{{trans('organization::department.drag_department_failed')}}:"+data.msg, {icon:2});
+                                        return false;
+                                    }
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    layer.close(load_index);
+                                    layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                    return false;
+                                }
+                            });
                         });
 
                         // 节点右键菜单

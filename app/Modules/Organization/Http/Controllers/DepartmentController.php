@@ -39,4 +39,9 @@ class DepartmentController extends Controller
     {
         return response()->json($this->departmentService->delete($request->get('department_id')));
     }
+
+    public function drag(Request $request)
+    {
+        return response()->json($this->departmentService->drag($request));
+    }
 }
