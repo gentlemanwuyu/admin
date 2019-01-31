@@ -9,8 +9,9 @@
 return [
     'confirm' => 'Confirm',
     'cancel' => 'Cancel',
-    'update' => 'update',
-    'delete' => 'delete',
+    'add' => 'Add',
+    'update' => 'Update',
+    'delete' => 'Delete',
     'yes' => 'Yes',
     'no' => 'No',
     'search' => 'Search...',

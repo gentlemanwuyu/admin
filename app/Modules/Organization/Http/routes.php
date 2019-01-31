@@ -18,6 +18,9 @@ Route::group(['prefix' => 'department', 'as' => 'department.'], function() {
 	// 获取部门树
 	Route::get('get_tree', ['as'=>'get_tree', 'uses'=>'DepartmentController@getTree']);
 
+	// 添加子部门
+	Route::post('add', ['as'=>'add', 'uses'=>'DepartmentController@add']);
+
 	// 修改部门信息
 	Route::post('update', ['as'=>'update', 'uses'=>'DepartmentController@update']);
 

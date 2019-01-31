@@ -80,6 +80,31 @@ class DepartmentService
         return $result;
     }
 
+    public function add($request)
+    {
+        try {
+            $parent_department = $this->departmentRepository->find($request->get('parent_id'));
+            if (!$parent_department) {
+                throw new \Exception(trans('organization::department.invalid_parent_department'));
+            }
+
+            $this->departmentRepository->create([
+                'name' => $request->get('department_name'),
+                'parent_id' => $request->get('parent_id'),
+            ]);
+
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+    /**
+     * 修改部门名称
+     *
+     * @param $request
+     * @return array
+     */
     public function update($request)
     {
         try {

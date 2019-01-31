@@ -25,6 +25,11 @@ class DepartmentController extends Controller
         return response()->json($this->departmentService->getTree());
     }
 
+    public function add(Request $request)
+    {
+        return response()->json($this->departmentService->add($request));
+    }
+
     public function update(Request $request)
     {
         return response()->json($this->departmentService->update($request));

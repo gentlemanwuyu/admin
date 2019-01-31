@@ -72,11 +72,46 @@
                         $.contextMenu({
                             selector: '.node',
                             items: {
+                                'add': {name: "{{trans('application.add')}}", callback: function(key, opt){
+                                    var parent_id = $(this).attr('id');
+                                    layer.prompt({
+                                        value: '',
+                                        maxlength: 64,
+                                        title: "{{trans('organization::department.add_sub_department')}}"
+                                    }, function (value, prompt_index, elem) {
+                                        var load_index = layer.load();
+                                        $.ajax({
+                                            method: "post",
+                                            url: "{{route('organization::department.add')}}",
+                                            data: {
+                                                parent_id: parent_id,
+                                                department_name: value
+                                            },
+                                            success: function (data) {
+                                                layer.close(load_index);
+                                                if ('success' == data.status) {
+                                                    layer.close(prompt_index);
+                                                    layer.msg("{{trans('organization::department.update_department_successful')}}", {icon:1});
+                                                    parent.location.reload();
+                                                } else {
+                                                    layer.msg("{{trans('organization::department.update_department_failed')}}:"+data.msg, {icon:2});
+                                                    return false;
+                                                }
+                                            },
+                                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                                layer.close(load_index);
+                                                layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                                return false;
+                                            }
+                                        });
+                                    });
+                                }},
                                 'update': {name: "{{trans('application.update')}}", callback: function(key, opt){
                                     var department_id = $(this).attr('id');
                                     var origin_value = $(this).find('.node-content').html();
                                     layer.prompt({
                                         value: origin_value,
+                                        maxlength: 64,
                                         title: "{{trans('organization::department.update_department_name')}}"
                                     }, function (value, prompt_index, elem) {
                                         var load_index = layer.load();

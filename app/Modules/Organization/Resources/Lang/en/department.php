@@ -23,4 +23,6 @@ return [
     'update_department_name' => 'Update department name',
     'update_department_successful' => 'Department update successful',
     'update_department_failed' => 'Department update failed',
+    'add_sub_department' => 'Add sub department',
+    'invalid_parent_department' => 'Invalid parent department.',
 ];

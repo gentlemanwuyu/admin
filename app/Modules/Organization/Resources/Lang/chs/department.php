@@ -23,4 +23,6 @@ return [
     'update_department_name' => '修改部门名称',
     'update_department_successful' => '修改部门名称成功',
     'update_department_failed' => '修改部门名称失败',
+    'add_sub_department' => '添加子部门',
+    'invalid_parent_department' => '无效的上级部门',
 ];
