@@ -19,6 +19,7 @@ return [
     'delete_department_confirm' => '您确定要删除该部门吗',
     'delete_department_successful' => '删除部门成功',
     'delete_department_failed' => '删除部门失败',
+    'update_department_name' => '修改部门名称',
     'update_department_successful' => '修改部门名称成功',
     'update_department_failed' => '修改部门名称失败',
 ];

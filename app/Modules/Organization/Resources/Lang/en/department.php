@@ -19,6 +19,7 @@ return [
     'delete_department_confirm' => 'Are you sure to delete this department?',
     'delete_department_successful' => 'Department delete successful',
     'delete_department_failed' => 'Department delete failed',
+    'update_department_name' => 'Update department name',
     'update_department_successful' => 'Department update successful',
     'update_department_failed' => 'Department update failed',
 ];
