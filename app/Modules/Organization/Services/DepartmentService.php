@@ -106,6 +106,12 @@ class DepartmentService
     public function delete($department_id)
     {
         try {
+            // 根部门不可以被删除
+            $department = $this->departmentRepository->find($department_id);
+            if (isset($department->parent_id) && 0 == $department->parent_id) {
+                throw new \Exception(trans('organization::department.root_department_cannot_delete'));
+            }
+
             // 判断该部门下是否还有子部门
             $children = $this->departmentRepository->pushCriteria(new ParentIdEqual($department_id))->get();
             if (!$children->isEmpty()) {

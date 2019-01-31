@@ -17,6 +17,7 @@ return [
     'department_name_cannot_empty' => 'Department name can\'t be empty.',
     'department_name_exists' => 'This department name already exists',
     'delete_department_confirm' => 'Are you sure to delete this department?',
+    'root_department_cannot_delete' => 'The root department can not be deleted.',
     'delete_department_successful' => 'Department delete successful',
     'delete_department_failed' => 'Department delete failed',
     'update_department_name' => 'Update department name',
