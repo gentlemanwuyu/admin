@@ -10,13 +10,14 @@
         .orgchart { background: #fff; }
         .node-content {
             height: 28px;
-            padding-top: 3px;
-            padding-bottom: 3px;
+            padding: 3px 10px;
             font-size: 16px;
             border: 1px solid rgba(217, 83, 79, 0.8);
             border-radius: 4px;
         }
-        .node {
+        .orgchart .node {
+            width: auto;
+            min-width: 130px;
             position: relative;
         }
         .node i {
@@ -67,10 +68,13 @@
                             'draggable': true,
                             'createNode': function($node, data) {
                                 var node_html = '';
-                                node_html += '<div class="node-content" contenteditable="true" data-origin_value="' + data.name + '">';
+                                node_html += '<div class="node-content" contenteditable="false" data-origin_value="' + data.name + '">';
                                 node_html += data.name;
                                 node_html += '</div>';
-                                node_html += '<i class="fa fa-close" style="display: none"></i>';
+                                // 根节点不能显示删除按钮
+                                if (1 != data.id) {
+                                    node_html += '<i class="fa fa-close" style="display: none"></i>';
+                                }
                                 $node.html(node_html);
                             }
                         });
