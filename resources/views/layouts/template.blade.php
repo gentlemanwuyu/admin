@@ -33,6 +33,8 @@
     <link rel="stylesheet" href="{{asset('/assets/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
     <!-- orgchart -->
     <link rel="stylesheet" href="{{asset('/assets/orgchart/dist/css/jquery.orgchart.min.css')}}">
+    <!-- jquery-contextmenu -->
+    <link rel="stylesheet" href="{{asset('/assets/jquery-contextmenu/dist/jquery.contextMenu.min.css')}}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -93,6 +95,9 @@
 <script src="{{asset('assets/layui-src/dist/layui.all.js')}}"></script>
 <!-- orgchart -->
 <script src="{{asset('/assets/orgchart/dist/js/jquery.orgchart.min.js')}}"></script>
+<!-- jquery-contextmenu -->
+<script src="{{asset('/assets/jquery-contextmenu/dist/jquery.contextMenu.min.js')}}"></script>
+<script src="{{asset('/assets/jquery-contextmenu/dist/jquery.ui.position.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('/assets/js/application.js')}}"></script>
 @yield('scripts')
