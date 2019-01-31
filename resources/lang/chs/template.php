@@ -18,4 +18,5 @@ return [
         'user_list' => '用户列表',
     'organization_management' => '组织管理',
         'department_chart' => '部门结构图',
+        'position_management' => '职位管理',
 ];

@@ -58,8 +58,13 @@ return [
                 'menus' => [
                     [
                         'id' => 'department_chart',
-                        'icon' => 'fa fa-cubes',
+                        'icon' => 'fa fa-sitemap',
                         'link' => '/organization/department/chart',
+                    ],
+                    [
+                        'id' => 'position_management',
+                        'icon' => 'fa fa-cubes',
+                        'link' => '/organization/position/index',
                     ],
                 ],
             ],

@@ -11,6 +11,7 @@
 |
 */
 
+// Department控制器
 Route::group(['prefix' => 'department', 'as' => 'department.'], function() {
 	// 部门结构图页面
 	Route::get('chart', ['as'=>'chart', 'uses'=>'DepartmentController@chart']);
@@ -29,4 +30,10 @@ Route::group(['prefix' => 'department', 'as' => 'department.'], function() {
 
 	// 拖动部门
 	Route::post('drag', ['as'=>'drag', 'uses'=>'DepartmentController@drag']);
+});
+
+// Position控制器
+Route::group(['prefix' => 'position', 'as' => 'position.'], function() {
+	// 职位管理页面
+	Route::get('index', ['as'=>'index', 'uses'=>'PositionController@index']);
 });

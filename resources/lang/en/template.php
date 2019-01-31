@@ -16,4 +16,5 @@ return [
         'user_list' => 'User List',
     'organization_management' => 'Organization management',
         'department_chart' => 'Department structure chart',
+        'position_management' => 'Position management',
 ];
