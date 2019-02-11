@@ -11,7 +11,8 @@
         "mews/captcha": "^2.1",
         "caffeinated/modules": "^2.0",
         "prettus/l5-repository": "^2.6",
-        "creativeorange/gravatar": "~1.0"
+        "creativeorange/gravatar": "~1.0",
+        "zizaco/entrust": "^1.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

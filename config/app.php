@@ -171,6 +171,8 @@ return [
         // Gravatar头像扩展包
         \Creativeorange\Gravatar\GravatarServiceProvider::class,
 
+        // Entrust权限控制包
+        Zizaco\Entrust\EntrustServiceProvider::class,
     ],
 
     /*
@@ -220,6 +222,7 @@ return [
         'Module' => Caffeinated\Modules\Facades\Module::class,
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
         'Gravatar' => \Creativeorange\Gravatar\Facades\Gravatar::class,
+        'Entrust' => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];
