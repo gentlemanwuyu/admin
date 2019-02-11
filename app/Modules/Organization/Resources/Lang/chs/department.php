@@ -7,9 +7,6 @@
  */
 
 return [
-    'organization_management' => '组织管理',
-    'department_chart' => '部门结构图',
-
     'get_department_failed' => '读取部门信息失败',
     'can_not_delete_department' => [
         'have_child' => '该部门还有下属部门，不能删除',

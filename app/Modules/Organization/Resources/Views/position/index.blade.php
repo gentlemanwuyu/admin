@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('title')
-    {{trans('organization::department.department_chart')}} | {{$project_name}}
+    {{trans('template.position_management')}} | {{$project_name}}
 @endsection
 @section('css')
     <style>
@@ -9,10 +9,10 @@
 @endsection
 @section('content')
     <section class="content-header">
-        <h1>@lang('organization::position.position_management')</h1>
+        <h1>@lang('template.position_management')</h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-lock"></i>@lang('organization::department.organization_management')</a></li>
-            <li class="active">@lang('organization::position.position_management')</li>
+            <li><a href="#"><i class="fa fa-lock"></i>@lang('template.organization_management')</a></li>
+            <li class="active">@lang('template.position_management')</li>
         </ol>
     </section>
     <section class="content">

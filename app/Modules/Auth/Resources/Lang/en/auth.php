@@ -21,7 +21,6 @@ return [
 
     // modify password
     'modify_password' => 'Modify password',
-    'auth_management' => 'Authorization management',
     'new_password' => 'New password',
     'confirm_password' => 'Confirm password',
     'type_new_password' => 'Type new password',
@@ -34,7 +33,6 @@ return [
     'password_modify_fail' => 'Password modify failed',
 
     // user list
-    'user_list' => 'User list',
     'no' => 'No.',
     'user_name' => 'User name',
     'telephone' => 'Telephone',

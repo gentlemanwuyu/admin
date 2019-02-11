@@ -21,7 +21,6 @@ return [
 
     // 修改密码
     'modify_password' => '修改密码',
-    'auth_management' => '授权管理',
     'new_password' => '新密码',
     'confirm_password' => '确认密码',
     'type_new_password' => '输入新密码',
@@ -34,7 +33,6 @@ return [
     'password_modify_fail' => '密码修改失败',
 
     // 用户列表
-    'user_list' => '用户列表',
     'no' => '序号',
     'user_name' => '用户名',
     'telephone' => '电话',

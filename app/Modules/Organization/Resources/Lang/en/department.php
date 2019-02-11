@@ -7,9 +7,6 @@
  */
 
 return [
-    'organization_management' => 'Organization management',
-    'department_chart' => 'Department structure chart',
-
     'get_department_failed' => 'Failed to read infomation of department',
     'can_not_delete_department' => [
         'have_child' => 'Can\'t delete this department because it has sub department',

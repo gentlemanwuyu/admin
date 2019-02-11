@@ -7,5 +7,5 @@
  */
 
 return [
-    'position_management' => 'Position management',
+
 ];

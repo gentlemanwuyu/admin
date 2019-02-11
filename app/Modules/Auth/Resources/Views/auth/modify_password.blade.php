@@ -13,7 +13,7 @@
     <section class="content-header">
         <h1>@lang('auth::auth.modify_password')</h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-lock"></i>@lang('auth::auth.auth_management')</a></li>
+            <li><a href="#"><i class="fa fa-lock"></i>@lang('template.auth_management')</a></li>
             <li class="active">@lang('auth::auth.modify_password')</li>
         </ol>
     </section>
