@@ -1,0 +1,8 @@
+{
+	"name": "Entrust",
+	"slug": "entrust",
+	"namespace": "Entrust",
+	"version": "1.0",
+	"description": "This is the description for the Entrust module.",
+	"enabled": true
+}
