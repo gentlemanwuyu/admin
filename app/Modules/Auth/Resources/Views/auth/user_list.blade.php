@@ -33,13 +33,13 @@
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
-                        <th>@lang('auth::auth.no')</th>
+                        <th>@lang('application.index_number')</th>
                         <th>@lang('auth::auth.user_name')</th>
                         <th>@lang('auth::auth.email')</th>
                         <th>@lang('auth::auth.telephone')</th>
                         <th>@lang('auth::auth.gender')</th>
-                        <th>@lang('auth::auth.created_at')</th>
-                        <th>@lang('auth::auth.action')</th>
+                        <th>@lang('application.created_at')</th>
+                        <th>@lang('application.action')</th>
                     </thead>
                     <?php
                         if (!isset($page) || $page <= 0) {

@@ -33,13 +33,10 @@ return [
     'password_modify_fail' => '密码修改失败',
 
     // 用户列表
-    'no' => '序号',
     'user_name' => '用户名',
     'telephone' => '电话',
     'gender' => '性别',
     'birthday' => '生日',
-    'created_at' => '创建时间',
-    'action' => '操作',
     'unknown' => '未知',
     'male' => '男',
     'female' => '女',
