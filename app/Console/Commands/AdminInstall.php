@@ -78,7 +78,11 @@ class AdminInstall extends Command
         ]);
     }
 
-
+    /**
+     * 创建根部门
+     *
+     * @return mixed
+     */
     public function createRootDepartment()
     {
         return DB::table('departments')->insert([
