@@ -11,8 +11,17 @@
 |
 */
 
-Route::group(['prefix' => 'entrust'], function() {
-	Route::get('/', function() {
-		dd('This is the Entrust module index page.');
-	});
+// permission控制器
+Route::group(['prefix' => 'permission', 'as' => 'permission.'], function() {
+	// 权限列表
+	Route::get('list', ['as'=>'list', 'uses'=>'PermissionController@getList']);
+
+	// 创建/修改页面
+	Route::get('create_or_update_page', ['as'=>'create_or_update_page', 'uses'=>'PermissionController@createOrUpdatePage']);
+
+	// 创建/修改权限
+	Route::post('create_or_update', ['as'=>'create_or_update', 'uses'=>'PermissionController@createOrUpdate']);
+
+	// 删除权限
+	Route::post('delete', ['as'=>'delete', 'uses'=>'PermissionController@delete']);
 });

@@ -1,13 +1,13 @@
 @extends('layouts.default')
 @section('title')
-    {{trans('auth::auth.user_list')}} | {{$project_name}}
+    {{trans('template.user_list')}} | {{$project_name}}
 @endsection
 @section('content')
     <section class="content-header">
-        <h1>@lang('auth::auth.user_list')</h1>
+        <h1>@lang('template.user_list')</h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-lock"></i>@lang('auth::auth.auth_management')</a></li>
-            <li class="active">@lang('auth::auth.user_list')</li>
+            <li><a href="#"><i class="fa fa-lock"></i>@lang('template.auth_management')</a></li>
+            <li class="active">@lang('template.user_list')</li>
         </ol>
     </section>
     <section class="content">

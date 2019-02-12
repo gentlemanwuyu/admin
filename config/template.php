@@ -49,6 +49,16 @@ return [
                         'icon' => 'fa fa-users',
                         'link' => '/auth/auth/user_list',
                     ],
+                    [
+                        'id' => 'role_list',
+                        'icon' => 'fa fa-object-group',
+                        'link' => '/entrust/role/list',
+                    ],
+                    [
+                        'id' => 'permission_list',
+                        'icon' => 'fa fa-street-view',
+                        'link' => '/entrust/permission/list',
+                    ],
                 ],
             ],
             // 组织结构

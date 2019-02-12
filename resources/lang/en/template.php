@@ -13,7 +13,9 @@ return [
 
     // menus translation
     'auth_management' => 'Authorization management',
-        'user_list' => 'User List',
+        'user_list' => 'User list',
+        'role_list' => 'Role list',
+        'permission_list' => 'Permission list',
     'organization_management' => 'Organization management',
         'department_chart' => 'Department structure chart',
         'position_management' => 'Position management',

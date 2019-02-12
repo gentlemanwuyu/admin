@@ -41,6 +41,7 @@ class EntrustSetupTables extends Migration
             $table->string('name')->unique();
             $table->string('display_name')->nullable();
             $table->string('description')->nullable();
+            $table->enum('type_id',[0, 1, 2])->default(0)->comment('权限类型，1为menu，2为action');
             $table->timestamps();
         });
 
