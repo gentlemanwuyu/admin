@@ -13,9 +13,6 @@ use App\Modules\Auth\Services\AuthService;
 
 class AuthController extends Controller
 {
-    /**
-     * @var AuthService
-     */
     protected $authService;
 
     public function __construct(AuthService $authService)

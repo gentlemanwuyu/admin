@@ -85,7 +85,12 @@ class AuthService
         }
     }
 
-
+    /**
+     * 刪除用戶
+     *
+     * @param $request
+     * @return array
+     */
     public function deleteUser($request)
     {
         try {
