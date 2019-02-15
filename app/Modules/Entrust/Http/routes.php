@@ -25,3 +25,9 @@ Route::group(['prefix' => 'permission', 'as' => 'permission.'], function() {
 	// 删除权限
 	Route::post('delete', ['as'=>'delete', 'uses'=>'PermissionController@delete']);
 });
+
+// role控制器
+Route::group(['prefix' => 'role', 'as' => 'role.'], function() {
+	// 权限列表
+	Route::get('list', ['as'=>'list', 'uses'=>'RoleController@getList']);
+});
