@@ -11,21 +11,21 @@ namespace App\Modules\Entrust\Console;
 use Illuminate\Console\Command;
 use App\Modules\Entrust\Models\Permission;
 
-class InitializePermission extends Command
+class InitializeEntrust extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'entrust:initialize_permission';
+    protected $signature = 'entrust:initialize';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Initialize permissions table data';
+    protected $description = 'Initialize data of several tables that are related to entrust';
 
     /**
      * Create a new command instance.
@@ -44,8 +44,18 @@ class InitializePermission extends Command
      */
     public function handle()
     {
+        $this->permissionsSeeder();
+    }
+
+    /**
+     * permissions表填充数据
+     */
+    public function permissionsSeeder()
+    {
         /**
+         * --------------------------------------------------
          * Menu权限
+         * --------------------------------------------------
          */
         // 用户列表
         Permission::create([
@@ -72,6 +82,12 @@ class InitializePermission extends Command
             'type_id' => 1,
         ]);
 
+
+        /**
+         * --------------------------------------------------
+         * action权限
+         * --------------------------------------------------
+         */
         // 添加用户
         Permission::create([
             'name' => 'add_user',

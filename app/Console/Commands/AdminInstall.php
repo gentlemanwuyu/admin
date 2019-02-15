@@ -41,7 +41,7 @@ class AdminInstall extends Command
         $this->execShellWithPrettyPrint("php artisan module:migrate");
         $this->createAdminAccount();
         $this->createRootDepartment();
-        $this->execShellWithPrettyPrint("php artisan entrust:initialize_permission");
+        $this->execShellWithPrettyPrint("php artisan entrust:initialize");
         // 是否填充数据
         if ($this->option('seed')) {
             $this->execShellWithPrettyPrint("php artisan module:seed");
