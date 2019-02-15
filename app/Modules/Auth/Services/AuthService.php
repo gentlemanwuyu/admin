@@ -108,7 +108,7 @@ class AuthService
         if (is_numeric($criteria)) {
             return $this->userRepository->find($criteria);
         }elseif (is_array($criteria)) {
-            return $this->userRepository->firstWhere($criteria);
+            return $this->userRepository->findWhere($criteria)->first();
         }
     }
 }

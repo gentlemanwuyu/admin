@@ -12,26 +12,6 @@ namespace App\Traits;
 
 Trait RepositoryTrait
 {
-    /**
-     * 根据条件取出一条记录
-     *
-     * @param array $where
-     * @param array $columns
-     * @return mixed
-     */
-    public function firstWhere(array $where, $columns = ['*'])
-    {
-        $this->applyCriteria();
-        $this->applyScope();
-
-        $this->applyConditions($where);
-
-        $model = $this->model->first($columns);
-        $this->resetModel();
-
-        return $this->parserResult($model);
-    }
-
     public function __call($method, $parameters)
     {
         return call_user_func_array([$this->model, $method], $parameters);

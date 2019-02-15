@@ -30,7 +30,7 @@ class DepartmentService
     public function getTree()
     {
         try {
-            $root_deparment = $this->departmentRepository->firstWhere(['parent_id' => 0]);
+            $root_deparment = $this->departmentRepository->findWhere(['parent_id' => 0])->first();
 
             if (!$root_deparment) {
                 return ['status' => 'success', 'content'=>null];

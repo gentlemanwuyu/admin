@@ -73,7 +73,7 @@ class PermissionService
         if (is_numeric($criteria)) {
             return $this->permissionRepository->find($criteria);
         }elseif (is_array($criteria)) {
-            return $this->permissionRepository->firstWhere($criteria);
+            return $this->permissionRepository->findWhere($criteria)->first();
         }
     }
 
