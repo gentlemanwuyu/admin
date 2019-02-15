@@ -10,6 +10,7 @@ namespace App\Modules\Entrust\Console;
 
 use Illuminate\Console\Command;
 use App\Modules\Entrust\Models\Permission;
+use App\Modules\Entrust\Models\Role;
 
 class InitializeEntrust extends Command
 {
@@ -45,6 +46,7 @@ class InitializeEntrust extends Command
     public function handle()
     {
         $this->permissionsSeeder();
+        $this->rolesSeeder();
     }
 
     /**
@@ -149,6 +151,28 @@ class InitializeEntrust extends Command
             'name' => 'drag_department',
             'display_name' => 'Drag department',
             'type_id' => 2,
+        ]);
+    }
+
+    /**
+     * roles表填充数据
+     */
+    public function rolesSeeder()
+    {
+        // 用户管理者
+        Role::create([
+            'name' => 'user_manager',
+            'display_name' => 'User manager',
+        ]);
+        // 权限管理者
+        Role::create([
+            'name' => 'entrust_manager',
+            'display_name' => 'Entrust manager',
+        ]);
+        // 部门管理者
+        Role::create([
+            'name' => 'department_manager',
+            'display_name' => 'Department manager',
         ]);
     }
 }
