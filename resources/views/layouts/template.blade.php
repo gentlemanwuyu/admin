@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{asset('/assets/adminlte/bower_components/font-awesome/css/font-awesome.min.css')}}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{asset('/assets/adminlte/bower_components/Ionicons/css/ionicons.min.css')}}">
+    <!-- select2 -->
+    <link rel="stylesheet" href="{{asset('/assets/adminlte/bower_components/select2/dist/css/select2.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('/assets/adminlte/dist/css/AdminLTE.min.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -81,6 +83,8 @@
 <script src="{{asset('/assets/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 <!-- datepicker -->
 <script src="{{asset('/assets/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+<!-- select2 -->
+<script src="{{asset('/assets/adminlte/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{asset('/assets/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 <!-- Slimscroll -->

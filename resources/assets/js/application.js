@@ -17,6 +17,9 @@ function packageValidatorResponseText (text) {
     return message.join('<br>');
 }
 
+// select2
+$('.select2').select2();
+
 // 日期inputmask
 $('.date-mask').inputmask('yyyy-mm-dd', { 'placeholder': 'yyyy-mm-dd' });
 $('.telephone-mask').inputmask({"mask": "99999999999"});
