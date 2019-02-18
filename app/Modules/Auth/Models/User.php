@@ -62,6 +62,6 @@ class User extends Authenticatable
      */
     public function can($permission, $requireAll = false)
     {
-        return !config('project.check_entrust') || $this->entrust_can($permission, $requireAll);
+        return !config('project.check_entrust') || 1 == $this->is_admin || $this->entrust_can($permission, $requireAll);
     }
 }
