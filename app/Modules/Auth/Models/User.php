@@ -17,6 +17,7 @@ class User extends Authenticatable
     use SoftDeletes, EntrustUserTrait{
         // 用SoftDeletes的restore方法替换掉EntrustUserTrait中的restore方法
         SoftDeletes::restore insteadof EntrustUserTrait;
+        EntrustUserTrait::can as entrust_can;
     }
 
     protected $guarded = [];
@@ -50,5 +51,17 @@ class User extends Authenticatable
     public function getGenderAttribute()
     {
         return $this->genders[$this->gender_id] ?? 'unknown';
+    }
+
+    /**
+     * 重写can方法
+     *
+     * @param string $permission
+     * @param bool $requireAll
+     * @return bool
+     */
+    public function can($permission, $requireAll = false)
+    {
+        return !config('project.check_entrust') || $this->entrust_can($permission, $requireAll);
     }
 }

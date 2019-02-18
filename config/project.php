@@ -15,4 +15,7 @@ return [
 
     // 创建用户时的默认密码
     'default_password' => 'admin',
+
+    // 是否检查权限
+    'check_entrust' => env('CHECK_ENTRUST') ? true : false,
 ];
