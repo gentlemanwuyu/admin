@@ -30,4 +30,12 @@ Route::group(['prefix' => 'permission', 'as' => 'permission.'], function() {
 Route::group(['prefix' => 'role', 'as' => 'role.'], function() {
 	// 权限列表
 	Route::get('list', ['as'=>'list', 'uses'=>'RoleController@getList']);
+	// 创建/修改页面
+	Route::get('create_or_update_page', ['as'=>'create_or_update_page', 'uses'=>'RoleController@createOrUpdatePage']);
+
+	// 创建/修改角色
+	Route::post('create_or_update', ['as'=>'create_or_update', 'uses'=>'RoleController@createOrUpdate']);
+
+	// 删除角色
+	Route::post('delete', ['as'=>'delete', 'uses'=>'RoleController@delete']);
 });

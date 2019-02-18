@@ -20,6 +20,13 @@ class PermissionService
         $this->permissionRepository = $permissionRepository;
     }
 
+    /**
+     * 权限列表
+     *
+     * @param $request
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
     public function getList($request)
     {
         $this->permissionRepository->pushCriteria(new NameOrDisplayNameOrDescriptionLike($request->get('search')));
@@ -27,6 +34,21 @@ class PermissionService
         return $this->permissionRepository->paginate();
     }
 
+    /**
+     * 读取所有权限
+     *
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->permissionRepository->all();
+    }
+
+    /**
+     * 获取所有权限类型
+     *
+     * @return mixed
+     */
     public function getPermissionTypes()
     {
         return $this->permissionRepository->getTypes();

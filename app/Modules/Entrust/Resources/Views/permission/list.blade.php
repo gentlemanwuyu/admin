@@ -48,11 +48,11 @@
                     <th>@lang('application.action')</th>
                     </thead>
                     <?php
-                    if (!isset($page) || $page <= 0) {
-                        $page = 1;
-                    }
-                    $page_size = $permissions->perPage() ?: 0;
-                    $i = ($page - 1) * $page_size + 1;
+                        if (!isset($page) || $page <= 0) {
+                            $page = 1;
+                        }
+                        $page_size = $permissions->perPage() ?: 0;
+                        $i = ($page - 1) * $page_size + 1;
                     ?>
                     @foreach($permissions as $permission)
                         <tr data-id="{{$permission->id}}">
