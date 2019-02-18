@@ -10,10 +10,14 @@ namespace App\Modules\Auth\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
-    use SoftDeletes;
+    use SoftDeletes, EntrustUserTrait{
+        // 用SoftDeletes的restore方法替换掉EntrustUserTrait中的restore方法
+        SoftDeletes::restore insteadof EntrustUserTrait;
+    }
 
     protected $guarded = [];
 

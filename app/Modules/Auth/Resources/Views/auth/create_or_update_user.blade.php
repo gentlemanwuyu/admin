@@ -57,6 +57,21 @@
                         </label>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">@lang('auth::auth.role')</label>
+                    <div class="col-xs-10">
+                        <?php
+                            if (isset($user_info)) {
+                                $user_role = array_column($user_info->roles->toArray(), 'id');
+                            }
+                        ?>
+                        <select name="roles[]" class="form-control select2" multiple="multiple" data-placeholder="{{trans('auth::auth.please_select_role')}}">
+                            @foreach($roles as $role)
+                                <option value="{{$role->id}}" @if(isset($user_info) && in_array($role->id, $user_role)) selected @endif>{{$role->display_name or ''}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

@@ -9,16 +9,19 @@
 namespace App\Modules\Auth\Services;
 
 use App\Modules\Auth\Repositories\UserRepository;
+use App\Modules\Entrust\Repositories\RoleRepository;
 use App\Modules\Auth\Repositories\Criteria\User\IsAdminEqual;
 use App\Modules\Auth\Repositories\Criteria\User\EmailOrNameLike;
 
 class AuthService
 {
     protected $userRepository;
+    protected $roleRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository)
     {
         $this->userRepository = $userRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     /**
@@ -74,10 +77,11 @@ class AuthService
             if ('create' == $request->get('action')) {
                 $data['email'] = $request->get('email');
                 $data['password'] = bcrypt(config('project.default_password') ?: 'admin');
-                $this->userRepository->create($data);
+                $user = $this->userRepository->create($data);
             }elseif ('update' == $request->get('action')) {
-                $this->userRepository->update($data, $request->get('user_id'));
+                $user = $this->userRepository->update($data, $request->get('user_id'));
             }
+            $user->roles()->sync($request->get('roles'));
 
             return ['status' => 'success'];
         }catch (\Exception $e) {
@@ -115,5 +119,15 @@ class AuthService
         }elseif (is_array($criteria)) {
             return $this->userRepository->findWhere($criteria)->first();
         }
+    }
+
+    /**
+     * 读取所有角色
+     *
+     * @return mixed
+     */
+    public function getRoles()
+    {
+        return $this->roleRepository->all();
     }
 }

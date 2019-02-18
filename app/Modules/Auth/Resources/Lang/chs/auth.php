@@ -46,6 +46,8 @@ return [
 
     // 用户添加/修改
     'is_admin' => '是否管理员',
+    'role' => '角色',
+    'please_select_role' => '请选择角色',
     'name_required' => '用户名不能为空',
     'name_accepted' => '用户名只能包含字母、数字、破折号以及下划线',
     'name_max' => '用户名不能超过32个字符',

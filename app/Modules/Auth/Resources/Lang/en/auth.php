@@ -49,6 +49,8 @@ return [
 
     // Add/update user
     'is_admin' => 'Is admin',
+    'role' => 'Role',
+    'please_select_role' => 'Please select role',
     'name_required' => 'User name can\'t be empty',
     'name_accepted' => 'User name may only contain letters, numbers, and dashes.',
     'name_max' => 'The length of user name must less than 32 letters.',
