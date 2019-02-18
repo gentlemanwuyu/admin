@@ -18,10 +18,13 @@ class TemplateComposer
 
     protected $url_path;
 
+    protected $user;
+
     public function __construct()
     {
         $this->template_config = config('template');
         $this->url_path = Request::path();
+        $this->user = Auth::user();
     }
 
     public function compose(View $view)
@@ -31,7 +34,7 @@ class TemplateComposer
         if ('layouts.header' == $view_name) {
             $view->with([
                 'header_config' => $this->template_config['header'],
-                'user' => Auth::user(),
+                'user' => $this->user,
             ]);
         }
         if ('layouts.sidebar' == $view_name) {
