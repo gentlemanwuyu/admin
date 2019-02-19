@@ -39,10 +39,10 @@
             <div class="col-xs-8 col-xs-offset-2">
                 <div class="panel panel-default">
                     <div class="error404-wrap">
-                        <h3>找不到你要的页面</h3>
-                        <p><strong class="second">3</strong>秒后带你回到首页</p>
+                        <h3>@lang('template.not_find_page')</h3>
+                        <p>@lang('template.take_back_to_homepage.left')<strong class="second">3</strong>@lang('template.take_back_to_homepage.right')</p>
                         <p class="contact-txt">
-                            联系管理员<a href="mailto:492444775@qq.com">492444775@qq.com</a>
+                            @lang('template.contact_admin')<a href="mailto:492444775@qq.com">492444775@qq.com</a>
                         </p>
                     </div>
 

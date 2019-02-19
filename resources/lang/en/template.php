@@ -11,6 +11,14 @@ return [
     'modify_password' => 'Modify password',
     'sign_out' => 'Sign out',
 
+    'not_find_page' => 'Can\'t find the page you want',
+    'no_permission_visit' => 'No permission to  visit this page',
+    'take_back_to_homepage' => [
+        'left' => 'Take you back to the homepage after',
+        'right' => 'seconds',
+    ],
+    'contact_admin' => 'Contact administrator',
+
     // menus translation
     'auth_management' => 'Authorization management',
         'user_list' => 'User list',
