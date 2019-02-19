@@ -49,6 +49,10 @@
     <script>
         $(function() {
             var load_index = layer.load();
+            var draggable = false;
+            @permission('drag_department')
+                draggable = true;
+            @endpermission
             // ajax请求结构图数据
             $.ajax({
                 url: "{{route('organization::department.get_tree')}}",
@@ -58,7 +62,7 @@
                         var oc = $('#chart-container').orgchart({
                             'data' : data.content,
                             'nodeID': 'id',
-                            'draggable': true,
+                            'draggable': draggable,
                             'createNode': function($node, data) {
                                 var node_html = '';
                                 node_html += '<div class="node-content" data-origin_value="' + data.name + '">';
@@ -69,74 +73,82 @@
                         });
 
                         // 节点拖动
-                        oc.$chart.on('nodedrop.orgchart', function(event, extraParams) {
-                            var dragged_department_id = $(extraParams.draggedNode).attr('id');
-                            var new_parent_id = $(extraParams.dropZone).attr('id');
-                            var load_index = layer.load();
-                            $.ajax({
-                                method: "post",
-                                url: "{{route('organization::department.drag')}}",
-                                data: {
-                                    department_id: dragged_department_id,
-                                    parent_id: new_parent_id
-                                },
-                                success: function (data) {
-                                    layer.close(load_index);
-                                    if ('success' == data.status) {
-                                        layer.msg("{{trans('organization::department.drag_department_successful')}}", {icon:1});
-                                        parent.location.reload();
-                                    } else {
-                                        layer.msg("{{trans('organization::department.drag_department_failed')}}:"+data.msg, {icon:2});
+                        @permission('drag_department')
+                            oc.$chart.on('nodedrop.orgchart', function(event, extraParams) {
+                                var dragged_department_id = $(extraParams.draggedNode).attr('id');
+                                var new_parent_id = $(extraParams.dropZone).attr('id');
+                                var load_index = layer.load();
+                                $.ajax({
+                                    method: "post",
+                                    url: "{{route('organization::department.drag')}}",
+                                    data: {
+                                        department_id: dragged_department_id,
+                                        parent_id: new_parent_id
+                                    },
+                                    success: function (data) {
+                                        layer.close(load_index);
+                                        if ('success' == data.status) {
+                                            layer.msg("{{trans('organization::department.drag_department_successful')}}", {icon:1});
+                                            parent.location.reload();
+                                        } else {
+                                            layer.msg("{{trans('organization::department.drag_department_failed')}}:"+data.msg, {icon:2});
+                                            return false;
+                                        }
+                                    },
+                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                        layer.close(load_index);
+                                        layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
                                         return false;
                                     }
-                                },
-                                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                    layer.close(load_index);
-                                    layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
-                                    return false;
-                                }
+                                });
                             });
-                        });
+                        @endpermission
 
-                        // 节点右键菜单
-                        $.contextMenu({
-                            selector: '.node',
-                            items: {
-                                'add': {name: "{{trans('application.add')}}", callback: function(key, opt){
-                                    var parent_id = $(this).attr('id');
-                                    layer.prompt({
-                                        value: '',
-                                        maxlength: 64,
-                                        title: "{{trans('organization::department.add_sub_department')}}"
-                                    }, function (value, prompt_index, elem) {
-                                        var load_index = layer.load();
-                                        $.ajax({
-                                            method: "post",
-                                            url: "{{route('organization::department.add')}}",
-                                            data: {
-                                                parent_id: parent_id,
-                                                department_name: value
-                                            },
-                                            success: function (data) {
-                                                layer.close(load_index);
-                                                if ('success' == data.status) {
-                                                    layer.close(prompt_index);
-                                                    layer.msg("{{trans('organization::department.update_department_successful')}}", {icon:1});
-                                                    parent.location.reload();
-                                                } else {
-                                                    layer.msg("{{trans('organization::department.update_department_failed')}}:"+data.msg, {icon:2});
+                        var items = {};
+                        @permission('add_department')
+                            items.add = {
+                                name: "{{trans('application.add')}}",
+                            callback: function(key, opt){
+                                        var parent_id = $(this).attr('id');
+                                        layer.prompt({
+                                            value: '',
+                                            maxlength: 64,
+                                            title: "{{trans('organization::department.add_sub_department')}}"
+                                        }, function (value, prompt_index, elem) {
+                                            var load_index = layer.load();
+                                            $.ajax({
+                                                method: "post",
+                                                url: "{{route('organization::department.add')}}",
+                                                data: {
+                                                    parent_id: parent_id,
+                                                    department_name: value
+                                                },
+                                                success: function (data) {
+                                                    layer.close(load_index);
+                                                    if ('success' == data.status) {
+                                                        layer.close(prompt_index);
+                                                        layer.msg("{{trans('organization::department.add_sub_department_successful')}}", {icon:1});
+                                                        parent.location.reload();
+                                                    } else {
+                                                        layer.msg("{{trans('organization::department.add_sub_department_failed')}}:"+data.msg, {icon:2});
+                                                        return false;
+                                                    }
+                                                },
+                                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                                    layer.close(load_index);
+                                                    layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
                                                     return false;
                                                 }
-                                            },
-                                            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                layer.close(load_index);
-                                                layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
-                                                return false;
-                                            }
+                                            });
                                         });
-                                    });
-                                }},
-                                'update': {name: "{{trans('application.update')}}", callback: function(key, opt){
+                                    }
+                            };
+                        @endpermission
+
+                        @permission('edit_department')
+                            items.update = {
+                                name: "{{trans('application.update')}}",
+                            callback: function(key, opt){
                                     var department_id = $(this).attr('id');
                                     var origin_value = $(this).find('.node-content').html();
                                     layer.prompt({
@@ -170,8 +182,13 @@
                                             }
                                         });
                                     });
-                                }},
-                                'delete': {name: "{{trans('application.delete')}}", callback: function(key, opt){
+                                }
+                            };
+                        @endpermission
+                        @permission('delete_department')
+                            items.delete = {
+                                name: "{{trans('application.delete')}}",
+                                callback: function(key, opt){
                                     var department_id = $(this).attr('id');
                                     layer.confirm("{{trans('organization::department.delete_department_confirm')}}", {icon: 3, title:"{{trans('application.confirm')}}"}, function (confirm_index) {
                                         layer.close(confirm_index);
@@ -199,8 +216,14 @@
                                             }
                                         });
                                     });
-                                }}
-                            }
+                                }
+                            };
+                        @endpermission
+
+                        // 节点右键菜单
+                        $.contextMenu({
+                            selector: '.node',
+                            items: items
                         });
                     } else {
                         layer.msg("{{trans('organization::department.get_department_failed')}}:"+data.msg, {icon:2});

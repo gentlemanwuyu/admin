@@ -21,6 +21,8 @@ return [
     'update_department_successful' => '修改部门名称成功',
     'update_department_failed' => '修改部门名称失败',
     'add_sub_department' => '添加子部门',
+    'add_sub_department_successful' => '添加子部门成功',
+    'add_sub_department_failed' => '添加子部门失败',
     'invalid_parent_department' => '无效的上级部门',
     'drag_department_successful' => '拖动部门成功',
     'drag_department_failed' => '拖动部门失败',

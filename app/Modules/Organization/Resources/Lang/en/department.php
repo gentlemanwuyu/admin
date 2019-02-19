@@ -21,6 +21,8 @@ return [
     'update_department_successful' => 'Department update successful',
     'update_department_failed' => 'Department update failed',
     'add_sub_department' => 'Add sub department',
+    'add_sub_department_successful' => 'Add sub department successful',
+    'add_sub_department_failed' => 'Add sub department failed',
     'invalid_parent_department' => 'Invalid parent department.',
     'drag_department_successful' => 'Drag department successful',
     'drag_department_failed' => 'Drag department failed',
