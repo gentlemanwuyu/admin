@@ -47,38 +47,77 @@ class TemplateComposer
         }
     }
 
+    /**
+     * 处理菜单
+     *
+     * @param $menus
+     * @return mixed
+     */
     public function handleMenus($menus)
     {
         $menus = json_decode(json_encode($menus));  // 转化成对象
-        foreach ($menus as $menu) {
-            $this->handleMenu($menu);
+        foreach ($menus as $key => $menu) {
+            if (isset($menu->menus)) {
+                $menu->treeview = true;
+                $menu = $this->handleTreeview($menu);
+            }else {
+                $menu = $this->handleLink($menu);
+            }
+            if (!$menu) {
+                unset($menus[$key]);
+            }
         }
 
         return $menus;
     }
 
     /**
-     * 处理一个菜单
+     * 处理链接型菜单
      *
      * @param $menu
-     * @return bool 返回该菜单是否要展开
+     * @return mixed bool|object
      */
-    public function handleMenu($menu)
+    public function handleLink($menu)
     {
-        $is_active = false;
-
-        if (isset($menu->menus)) {
-            $menu->treeview = true;
-            foreach ($menu->menus as $submenu) {
-                $result = $this->handleMenu($submenu);
-                if ($result) {
-                    $is_active = $menu->is_active = true;
-                }
-            }
-        }elseif (isset($menu->link) && '/' != $this->url_path && trim($menu->link, '/') == $this->url_path) {
-            $is_active = $menu->is_active = true;
+        // 没有权限直接返回false
+        if (!$this->user->can($menu->id)) {
+            return false;
+        }
+        if (isset($menu->link) && '/' != $this->url_path && trim($menu->link, '/') == $this->url_path) {
+            $menu->is_active = true;
         }
 
-        return $is_active;
+        return $menu;
+    }
+
+    /**
+     * 处理treeview型菜单
+     *
+     * @param $menu
+     * @return null
+     */
+    public function handleTreeview($menu)
+    {
+        foreach ($menu->menus as $sub_key => $sub_menu) {
+            if (isset($sub_menu->menus)) {
+                $sub_menu->treeview = true;
+                $sub_menu = $this->handleTreeview($sub_menu);
+            }else {
+                $sub_menu = $this->handleLink($sub_menu);
+            }
+            // 子菜单没有权限
+            if (!$sub_menu) {
+                unset($menu->menus[$sub_key]);
+            }
+            // 如果子菜单active，则父菜单展开
+            if (!empty($sub_menu->is_active)) {
+                $menu->is_active = true;
+            }
+        }
+        if (empty($menu->menus)) {
+            return null;
+        }
+
+        return $menu;
     }
 }
