@@ -19,9 +19,11 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <div class="col-xs-6">
-                    <div class="btn-group">
-                        <button id="add_permission" type="button" class="btn btn-primary" title="{{trans('entrust::permission.add_permission')}}"><i class="fa fa-street-view"></i></button>
-                    </div>
+                    @permission('add_permission')
+                        <div class="btn-group">
+                            <button id="add_permission" type="button" class="btn btn-primary" title="{{trans('entrust::permission.add_permission')}}"><i class="fa fa-street-view"></i></button>
+                        </div>
+                    @endpermission
                 </div>
                 <div class="col-xs-2 pull-right">
                     <form>
@@ -64,12 +66,16 @@
                             <td>{{$permission->created_at}}</td>
                             <td>{{$permission->updated_at}}</td>
                             <td>
-                                <a href="javascript:;">
-                                    <i class="fa fa-edit edit_permission" title="{{trans('entrust::permission.edit_permission')}}"></i>
-                                </a>
-                                <a href="javascript:;">
-                                    <i class="fa fa-trash delete_permission" title="{{trans('entrust::permission.delete_permission')}}"></i>
-                                </a>
+                                @permission('edit_permission')
+                                    <a href="javascript:;">
+                                        <i class="fa fa-edit edit_permission" title="{{trans('entrust::permission.edit_permission')}}"></i>
+                                    </a>
+                                @endpermission
+                                @permission('delete_permission')
+                                    <a href="javascript:;">
+                                        <i class="fa fa-trash delete_permission" title="{{trans('entrust::permission.delete_permission')}}"></i>
+                                    </a>
+                                @endpermission
                             </td>
                         </tr>
                     @endforeach

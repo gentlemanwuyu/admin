@@ -46,17 +46,19 @@
                         <input type="text" name="telephone" class="form-control telephone-mask" value="{{$user_info->telephone or ''}}">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-xs-2 control-label">@lang('auth::auth.is_admin')</label>
-                    <div class="col-xs-10">
-                        <label>
-                            <input type="radio" name="is_admin" class="minimal" value="1" @if(isset($user_info) && 1 == $user_info->is_admin) checked @endif>&nbsp;&nbsp;@lang('application.yes')
-                        </label>
-                        <label style="margin-left: 20px;">
-                            <input type="radio" name="is_admin" class="minimal" value="0" @if(isset($user_info) && 0 == $user_info->is_admin) checked @endif>&nbsp;&nbsp;@lang('application.no')
-                        </label>
+                @if(Auth::user()->is_admin)
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">@lang('auth::auth.is_admin')</label>
+                        <div class="col-xs-10">
+                            <label>
+                                <input type="radio" name="is_admin" class="minimal" value="1" @if(isset($user_info) && 1 == $user_info->is_admin) checked @endif>&nbsp;&nbsp;@lang('application.yes')
+                            </label>
+                            <label style="margin-left: 20px;">
+                                <input type="radio" name="is_admin" class="minimal" value="0" @if(isset($user_info) && 0 == $user_info->is_admin) checked @endif>&nbsp;&nbsp;@lang('application.no')
+                            </label>
+                        </div>
                     </div>
-                </div>
+                @endif
                 <div class="form-group">
                     <label class="col-xs-2 control-label">@lang('auth::auth.role')</label>
                     <div class="col-xs-10">

@@ -19,9 +19,11 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <div class="col-xs-6">
-                    <div class="btn-group">
-                        <button id="add_role" type="button" class="btn btn-primary" title="{{trans('entrust::permission.add_role')}}"><i class="fa fa-object-group"></i></button>
-                    </div>
+                    @permission('add_role')
+                        <div class="btn-group">
+                            <button id="add_role" type="button" class="btn btn-primary" title="{{trans('entrust::permission.add_role')}}"><i class="fa fa-object-group"></i></button>
+                        </div>
+                    @endpermission
                 </div>
                 <div class="col-xs-2 pull-right">
                     <form>
@@ -62,12 +64,16 @@
                             <td>{{$role->created_at}}</td>
                             <td>{{$role->updated_at}}</td>
                             <td>
-                                <a href="javascript:;">
-                                    <i class="fa fa-edit edit_role" title="{{trans('entrust::role.edit_role')}}"></i>
-                                </a>
-                                <a href="javascript:;">
-                                    <i class="fa fa-trash delete_role" title="{{trans('entrust::role.delete_role')}}"></i>
-                                </a>
+                                @permission('edit_role')
+                                    <a href="javascript:;">
+                                        <i class="fa fa-edit edit_role" title="{{trans('entrust::role.edit_role')}}"></i>
+                                    </a>
+                                @endpermission
+                                @permission('delete_role')
+                                    <a href="javascript:;">
+                                        <i class="fa fa-trash delete_role" title="{{trans('entrust::role.delete_role')}}"></i>
+                                    </a>
+                                @endpermission
                             </td>
                         </tr>
                     @endforeach
