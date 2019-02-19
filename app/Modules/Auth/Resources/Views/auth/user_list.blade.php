@@ -14,9 +14,11 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <div class="col-xs-6">
-                    <div class="btn-group">
-                        <button id="add_user" type="button" class="btn btn-primary" title="{{trans('auth::auth.add_user')}}"><i class="fa fa-user-plus"></i></button>
-                    </div>
+                    @permission('add_user')
+                        <div class="btn-group">
+                            <button id="add_user" type="button" class="btn btn-primary" title="{{trans('auth::auth.add_user')}}"><i class="fa fa-user-plus"></i></button>
+                        </div>
+                    @endpermission
                 </div>
                 <div class="col-xs-2 pull-right">
                     <form>
@@ -57,12 +59,16 @@
                             <td>{{trans('auth::auth.'.$user->gender)}}</td>
                             <td>{{$user->created_at}}</td>
                             <td>
-                                <a href="javascript:;">
-                                    <i class="fa fa-edit edit_user" title="{{trans('auth::auth.edit_user')}}"></i>
-                                </a>
-                                <a href="javascript:;">
-                                    <i class="fa fa-trash delete_user" title="{{trans('auth::auth.delete_user')}}"></i>
-                                </a>
+                                @permission('edit_user')
+                                    <a href="javascript:;">
+                                        <i class="fa fa-edit edit_user" title="{{trans('auth::auth.edit_user')}}"></i>
+                                    </a>
+                                @endpermission
+                                @permission('delete_user')
+                                    <a href="javascript:;">
+                                        <i class="fa fa-trash delete_user" title="{{trans('auth::auth.delete_user')}}"></i>
+                                    </a>
+                                @endpermission
                             </td>
                         </tr>
                     @endforeach
