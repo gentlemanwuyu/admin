@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('title')
-    404 Not Found | {{$project_name}}
+    403 Forbidden | {{$project_name}}
 @endsection
 @section('css')
     <style>
