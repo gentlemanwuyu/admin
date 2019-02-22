@@ -30,7 +30,7 @@ class DepartmentService
     public function getTree()
     {
         try {
-            $tree = $this->departmentRepository->getTree();
+            $tree = $this->departmentRepository->getTree(['id', 'name']);
 
             return ['status' => 'success', 'content'=>$tree];
         }catch (\Exception $e) {

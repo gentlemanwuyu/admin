@@ -25,17 +25,18 @@ class DepartmentRepository extends BaseRepository
     /**
      * 获取部门结构树
      *
+     * @param array $fields
      * @return mixed null|object
      */
-    public function getTree()
+    public function getTree($fields = ['*'])
     {
         // 根部门
-        $root = $this->findByField('parent_id', 0)->first();
+        $root = $this->findByField('parent_id', 0, $fields)->first();
         if (!$root) {
             return null;
         }
 
-        $root->children =  $this->recursiveGetSubDepartments($root->id);
+        $root->children =  $this->recursiveGetSubDepartments($root->id, $fields);
 
         return $root;
     }
