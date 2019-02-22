@@ -22,8 +22,42 @@ class DepartmentRepository extends BaseRepository
         return Department::class;
     }
 
-    public function getSubDepartment($parent_id, $fields=['*'])
+    /**
+     * 获取部门结构树
+     *
+     * @return mixed null|object
+     */
+    public function getTree()
     {
-        return $this->resetCriteria()->pushCriteria(new ParentIdEqual($parent_id))->get($fields);
+        // 根部门
+        $root = $this->findByField('parent_id', 0)->first();
+        if (!$root) {
+            return null;
+        }
+
+        $root->children =  $this->recursiveGetSubDepartments($root->id);
+
+        return $root;
+    }
+
+    /**
+     * 递归读取下属部门
+     *
+     * @param $parent_id
+     * @param array $fields
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
+    public function recursiveGetSubDepartments($parent_id, $fields = ['*'])
+    {
+        $subs = $this->resetCriteria()->pushCriteria(new ParentIdEqual($parent_id))->get($fields);
+        foreach ($subs as $sub) {
+            $children = $this->recursiveGetSubDepartments($sub->id, $fields);
+            if ($children) {
+                $sub->children = $children;
+            }
+        }
+
+        return $subs->all();
     }
 }

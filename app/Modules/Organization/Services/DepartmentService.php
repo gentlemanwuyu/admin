@@ -30,54 +30,12 @@ class DepartmentService
     public function getTree()
     {
         try {
-            $root_deparment = $this->departmentRepository->findWhere(['parent_id' => 0])->first();
+            $tree = $this->departmentRepository->getTree();
 
-            if (!$root_deparment) {
-                return ['status' => 'success', 'content'=>null];
-            }
-
-            $result = new \stdClass;
-            $result->id = $root_deparment->id;
-            $result->name = $root_deparment->name;
-            $result->title = $root_deparment->name;
-            $children = $this->getSubDepartments($root_deparment->id);
-            if ($children) {
-                $result->children = $children;
-            }
-
-            return ['status' => 'success', 'content'=>$result];
+            return ['status' => 'success', 'content'=>$tree];
         }catch (\Exception $e) {
             return ['status' => 'fail', 'msg'=>$e->getMessage()];
         }
-    }
-
-    /**
-     * 递归地读取子部门
-     *
-     * @param $parent_id
-     * @return array|null
-     */
-    public function getSubDepartments($parent_id)
-    {
-        if (!$parent_id) {
-            return null;
-        }
-        $result = [];
-        $sub_departments = $this->departmentRepository->getSubDepartment($parent_id);
-
-        foreach ($sub_departments as  $department) {
-            $item = new \stdClass;
-            $item->id = $department->id;
-            $item->name = $department->name;
-            $item->title = $department->name;
-            $children = $this->getSubDepartments($department->id);
-            if ($children) {
-                $item->children = $children;
-            }
-            $result[] = $item;
-        }
-
-        return $result;
     }
 
     /**
