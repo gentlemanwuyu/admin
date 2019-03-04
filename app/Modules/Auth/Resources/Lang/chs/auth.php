@@ -46,6 +46,9 @@ return [
 
     // 用户添加/修改
     'is_admin' => '是否管理员',
+    'department' => '部门',
+    'please_select_department' => '请选择部门',
+    'is_leader' => '是否领导',
     'role' => '角色',
     'please_select_role' => '请选择角色',
     'name_required' => '用户名不能为空',

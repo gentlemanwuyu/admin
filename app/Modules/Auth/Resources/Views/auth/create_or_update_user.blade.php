@@ -46,15 +46,43 @@
                         <input type="text" name="telephone" class="form-control telephone-mask" value="{{$user_info->telephone or ''}}">
                     </div>
                 </div>
+                <div class="form-group"
+                     @if(isset($user_info) && 1 == $user_info->is_admin)
+                        style="display: none;"
+                     @endif
+                >
+                    <label class="col-xs-2 control-label required">@lang('auth::auth.department')</label>
+                    <div class="col-xs-8">
+                        <select name="department_id" class="form-control select2">
+                            <option value="">@lang('auth::auth.please_select_department')</option>
+                            @foreach($departments as $department)
+                                <option value="{{$department->id}}" @if(isset($user_info) && $department->id == $user_info->department_id) selected @endif>{{$department->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-xs-2"
+                         @if(!isset($user_info) || !$user_info->department_id)
+                            style="display: none;"
+                         @endif
+                    >
+                        <label style="margin-top: 7px;">
+                            <input type="checkbox" class="minimal" name="is_leader" value="1" @if(isset($user_info) && 1 == $user_info->is_leader) checked @endif>&nbsp;&nbsp;@lang('auth::auth.is_leader')
+                        </label>
+                    </div>
+                </div>
                 @if(Auth::user()->is_admin)
-                    <div class="form-group">
+                    <div class="form-group"
+                         @if(isset($user_info) && $user_info->department_id)
+                            style="display: none;"
+                         @endif
+                    >
                         <label class="col-xs-2 control-label">@lang('auth::auth.is_admin')</label>
                         <div class="col-xs-10">
                             <label>
                                 <input type="radio" name="is_admin" class="minimal" value="1" @if(isset($user_info) && 1 == $user_info->is_admin) checked @endif>&nbsp;&nbsp;@lang('application.yes')
                             </label>
                             <label style="margin-left: 20px;">
-                                <input type="radio" name="is_admin" class="minimal" value="0" @if(isset($user_info) && 0 == $user_info->is_admin) checked @endif>&nbsp;&nbsp;@lang('application.no')
+                                <input type="radio" name="is_admin" class="minimal" value="0" @if('create' == $action || isset($user_info) && 0 == $user_info->is_admin) checked @endif>&nbsp;&nbsp;@lang('application.no')
                             </label>
                         </div>
                     </div>
@@ -77,4 +105,35 @@
             </form>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(function () {
+            // 部门/是否管理员二选一
+            var is_admin = "{{Auth::user()->is_admin}}";
+            $('select[name=department_id]').on('change', function () {
+                if (this.value) {
+                    $('input:checkbox[name=is_leader]').parents('div.col-xs-2').show();
+                    if ('1' == is_admin) {
+                        $('input[name=is_admin]').parents('div.form-group').hide();
+                    }
+                }else {
+                    $('input:checkbox[name=is_leader]').parents('div.col-xs-2').hide();
+                    if ('1' == is_admin) {
+                        $('input[name=is_admin]').parents('div.form-group').show();
+                    }
+                }
+            });
+
+            if ('1' == is_admin) {
+                $('input:radio[name=is_admin]').on('ifChecked', function () {
+                    if ('0' == this.value) {
+                        $('select[name=department_id]').parents('div.form-group').show();
+                    }else {
+                        $('select[name=department_id]').parents('div.form-group').hide();
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

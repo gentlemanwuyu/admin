@@ -71,11 +71,6 @@ return [
                         'icon' => 'fa fa-sitemap',
                         'link' => '/organization/department/chart',
                     ],
-                    [
-                        'id' => 'position_management',
-                        'icon' => 'fa fa-cubes',
-                        'link' => '/organization/position/index',
-                    ],
                 ],
             ],
         ],

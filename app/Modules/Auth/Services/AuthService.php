@@ -10,6 +10,7 @@ namespace App\Modules\Auth\Services;
 
 use App\Modules\Auth\Repositories\UserRepository;
 use App\Modules\Entrust\Repositories\RoleRepository;
+use App\Modules\Organization\Repositories\DepartmentRepository;
 use App\Modules\Auth\Repositories\Criteria\User\IsAdminEqual;
 use App\Modules\Auth\Repositories\Criteria\User\EmailOrNameLike;
 
@@ -17,11 +18,13 @@ class AuthService
 {
     protected $userRepository;
     protected $roleRepository;
+    protected $departmentRepository;
 
-    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository)
+    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository, DepartmentRepository $departmentRepository)
     {
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
+        $this->departmentRepository = $departmentRepository;
     }
 
     /**
@@ -70,8 +73,18 @@ class AuthService
             if ($request->get('birthday')) {
                 $data['birthday'] = $request->get('birthday');
             }
-            if ($request->has('is_admin')) {
+
+            $roles = $request->get('roles', []);
+            if ($request->get('is_admin')) {
                 $data['is_admin'] = $request->get('is_admin');
+                $data['department_id'] = 0;
+                $data['is_leader'] = 0;
+                $roles = [];
+            }else {
+                $data['department_id'] = $request->get('department_id');
+                if ($request->has('is_leader')) {
+                    $data['is_leader'] = $request->get('is_leader');
+                }
             }
 
             if ('create' == $request->get('action')) {
@@ -81,7 +94,7 @@ class AuthService
             }elseif ('update' == $request->get('action')) {
                 $user = $this->userRepository->update($data, $request->get('user_id'));
             }
-            $user->roles()->sync($request->get('roles'));
+            $user->roles()->sync($roles);
 
             return ['status' => 'success'];
         }catch (\Exception $e) {
@@ -129,5 +142,15 @@ class AuthService
     public function getRoles()
     {
         return $this->roleRepository->all();
+    }
+
+    /**
+     * 读取部门树
+     *
+     * @return mixed
+     */
+    public function getDepartments()
+    {
+        return $this->departmentRepository->getDepartmentsExceptRoot();
     }
 }

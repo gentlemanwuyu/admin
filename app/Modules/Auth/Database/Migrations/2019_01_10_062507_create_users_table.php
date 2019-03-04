@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
 			$table->date('birthday')->nullable()->comment('生日');
 			$table->enum('gender_id',[0, 1, 2])->default(0)->comment('性别，1为男，2为女');
 			$table->string('telephone', 32)->default('')->comment('电话');
+			$table->integer('department_id')->default(0)->comment('部门ID');
+			$table->enum('is_leader',[0, 1])->default(0)->comment('是否领导，0为否，1为是');
 			$table->rememberToken();
 			$table->enum('is_admin',[0, 1])->default(0)->comment('是否为管理员账号');
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('创建时间');

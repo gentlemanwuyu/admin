@@ -49,6 +49,9 @@ return [
 
     // Add/update user
     'is_admin' => 'Is admin',
+    'department' => 'Department',
+    'please_select_department' => 'Please select department',
+    'is_leader' => 'Is leader',
     'role' => 'Role',
     'please_select_role' => 'Please select role',
     'name_required' => 'User name can\'t be empty',

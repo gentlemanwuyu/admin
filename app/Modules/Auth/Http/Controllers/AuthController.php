@@ -79,7 +79,8 @@ class AuthController extends Controller
     public function createOrUpdateUserPage(Request $request)
     {
         $roles = $this->authService->getRoles();
-        $data = compact('roles');
+        $departments = $this->authService->getDepartments();
+        $data = compact('roles', 'departments');
         if ('update' == $request->get('action')) {
             $user_info = $this->authService->getUser($request->get('user_id'));
             $data = array_merge($data, compact('user_info'));

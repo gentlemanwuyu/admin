@@ -12,6 +12,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use App\Modules\Organization\Models\Department;
 use App\Traits\RepositoryTrait;
 use App\Modules\Organization\Repositories\Criteria\Department\ParentIdEqual;
+use App\Modules\Organization\Repositories\Criteria\Department\ParentIdNotEqual;
 
 class DepartmentRepository extends BaseRepository
 {
@@ -60,5 +61,10 @@ class DepartmentRepository extends BaseRepository
         }
 
         return $subs->all();
+    }
+
+    public function getDepartmentsExceptRoot()
+    {
+        return $this->resetCriteria()->pushCriteria(new ParentIdNotEqual(0))->get();
     }
 }

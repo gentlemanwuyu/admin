@@ -18,7 +18,13 @@ class CreateOrUpdateUserRequest extends FormRequest
 			'birthday' => 'date_format:Y-m-d',
 			'gender_id' => 'required',
 			'telephone' => 'required',
+			'department_id' => 'required',
 		];
+
+		// 添加管理员不需要验证部门
+		if ($this->get('is_admin')) {
+			unset($rules['department_id']);
+		}
 
 		if ('update' == $this->get('action')) {
 			unset($rules['email']);
@@ -48,6 +54,7 @@ class CreateOrUpdateUserRequest extends FormRequest
 			'birthday.date_format' => trans('auth::auth.birthday_date_format'),
 			'gender_id.required' => trans('auth::auth.gender_required'),
 			'telephone.required' => trans('auth::auth.telephone_required'),
+			'department_id.required' => trans('auth::auth.please_select_department'),
 		];
 	}
 }
