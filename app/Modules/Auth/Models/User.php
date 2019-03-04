@@ -11,6 +11,7 @@ namespace App\Modules\Auth\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
+use App\Modules\Organization\Models\Department;
 
 class User extends Authenticatable
 {
@@ -51,6 +52,11 @@ class User extends Authenticatable
     public function getGenderAttribute()
     {
         return $this->genders[$this->gender_id] ?? 'unknown';
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 
     /**

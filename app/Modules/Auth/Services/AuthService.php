@@ -8,6 +8,7 @@
 
 namespace App\Modules\Auth\Services;
 
+use Illuminate\Support\Facades\Auth;
 use App\Modules\Auth\Repositories\UserRepository;
 use App\Modules\Entrust\Repositories\RoleRepository;
 use App\Modules\Organization\Repositories\DepartmentRepository;
@@ -20,11 +21,14 @@ class AuthService
     protected $roleRepository;
     protected $departmentRepository;
 
+    protected $user;
+
     public function __construct(UserRepository $userRepository, RoleRepository $roleRepository, DepartmentRepository $departmentRepository)
     {
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
         $this->departmentRepository = $departmentRepository;
+        $this->user = Auth::user();
     }
 
     /**
@@ -48,7 +52,9 @@ class AuthService
      */
     public function getUserList($request)
     {
-        $this->userRepository->pushCriteria(new IsAdminEqual(0));
+        if (!$this->user->is_admin) {
+            $this->userRepository->pushCriteria(new IsAdminEqual(0));
+        }
         if ($request->get('search')) {
             $this->userRepository->pushCriteria(new EmailOrNameLike($request->get('search')));
         }

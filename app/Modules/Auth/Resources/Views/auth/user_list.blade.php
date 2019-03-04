@@ -11,6 +11,7 @@
         </ol>
     </section>
     <section class="content">
+        @inject('userPresenter', \App\Modules\Auth\Presenters\UserPresenter)
         <div class="box box-primary">
             <div class="box-header with-border">
                 <div class="col-xs-6">
@@ -38,6 +39,10 @@
                         <th>@lang('application.index_number')</th>
                         <th>@lang('auth::auth.user_name')</th>
                         <th>@lang('auth::auth.email')</th>
+                        <th>@lang('auth::auth.department')</th>
+                        @if(\Auth::user()->is_admin)
+                            <th>@lang('auth::auth.is_admin')</th>
+                        @endif
                         <th>@lang('auth::auth.telephone')</th>
                         <th>@lang('auth::auth.gender')</th>
                         <th>@lang('application.created_at')</th>
@@ -55,6 +60,10 @@
                             <td>{{$i++}}</td>
                             <td>{{$user->name or ''}}</td>
                             <td>{{$user->email or ''}}</td>
+                            <td>{{$user->department->name or ''}}</td>
+                            @if(\Auth::user()->is_admin)
+                                <td>{{trans('application.'.$userPresenter->displayIsAdmin($user->is_admin))}}</td>
+                            @endif
                             <td>{{$user->telephone or ''}}</td>
                             <td>{{trans('auth::auth.'.$user->gender)}}</td>
                             <td>{{$user->created_at}}</td>
