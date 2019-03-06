@@ -28,6 +28,9 @@ elixir(function(mix) {
     // 拷贝jquery-contextmenu
     mix.copy('node_modules/jquery-contextmenu/dist','public/assets/jquery-contextmenu/dist');
 
+    // 拷贝jstree插件
+    mix.copy('node_modules/jstree/dist','public/assets/jstree/dist');
+
     // 拷贝resources文件夹
     mix.copy('resources/assets/img','public/assets/img');
     mix.copy('resources/assets/js','public/assets/js');
