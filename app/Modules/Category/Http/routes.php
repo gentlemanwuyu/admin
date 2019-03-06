@@ -11,8 +11,8 @@
 |
 */
 
-Route::group(['prefix' => 'category'], function() {
-	Route::get('/', function() {
-		dd('This is the Category module index page.');
-	});
+// Category控制器
+Route::group(['prefix' => 'category', 'as' => 'category.'], function() {
+	// 产品分类树
+	Route::get('product_category_tree', ['as'=>'product_category_tree', 'uses'=>'CategoryController@productCategoryTree']);
 });
