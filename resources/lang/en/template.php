@@ -27,4 +27,7 @@ return [
     'organization_management' => 'Organization management',
         'department_chart' => 'Department structure chart',
         'position_management' => 'Position management',
+    'category_management' => 'Category management',
+        'product_category' => 'Product category',
+        'goods_category' => 'Goods category',
 ];

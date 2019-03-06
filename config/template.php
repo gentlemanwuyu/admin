@@ -73,6 +73,23 @@ return [
                     ],
                 ],
             ],
+            // 分类管理
+            [
+                'id' => 'category_management',
+                'icon' => 'fa fa-tree',
+                'menus' => [
+                    [
+                        'id' => 'product_category',
+                        'icon' => 'fa fa-share-alt',
+                        'link' => '/category/category/product_category_tree',
+                    ],
+                    [
+                        'id' => 'goods_category',
+                        'icon' => 'fa fa-share-alt',
+                        'link' => '/category/category/goods_category_tree',
+                    ],
+                ],
+            ],
         ],
     ],
     'footer' => [
