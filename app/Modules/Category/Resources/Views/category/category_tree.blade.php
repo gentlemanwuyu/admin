@@ -1,13 +1,13 @@
 @extends('layouts.default')
 @section('title')
-    {{trans('template.product_category')}} | {{$project_name}}
+    {{trans('template.'.$type.'_category')}} | {{$project_name}}
 @endsection
 @section('content')
     <section class="content-header">
-        <h1>@lang('template.product_category')</h1>
+        <h1>@lang('template.'.$type.'_category')</h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-lock"></i>@lang('template.category_management')</a></li>
-            <li class="active">@lang('template.product_category')</li>
+            <li class="active">@lang('template.'.$type.'_category')</li>
         </ol>
     </section>
     <section class="content">
@@ -33,12 +33,12 @@
             <div class="box-body table-responsive">
                 <div id="category_tree">
                     <ul>
-                        @foreach($product_categories as $product_category)
-                            <li id="{{$product_category->id}}" data-jstree='{"opened": true}' data-level="1">
-                                {{$product_category->name}}
-                                @if(isset($product_category->children) && $product_category->children)
+                        @foreach($categories as $category)
+                            <li id="{{$category->id}}" data-jstree='{"opened": true}' data-level="1">
+                                {{$category->name}}
+                                @if(isset($category->children) && $category->children)
                                     <ul>
-                                        @foreach($product_category->children as $son)
+                                        @foreach($category->children as $son)
                                             <li id="{{$son->id}}" data-jstree='{"opened": true}' data-level="2">
                                                 {{$son->name}}
                                                 @if(isset($son->children) && $son->children)
@@ -69,6 +69,8 @@
 @section('scripts')
     <script>
         $(function () {
+            var type = "{{$type}}";
+
             $('#category_tree').jstree({
                 "plugins": ["contextmenu", "search", "types", "unique"],
                 "types": {
@@ -119,7 +121,7 @@
                                                 }
                                             });
                                         },
-                                        content: "{{route('category::category.create_or_update_category_page')}}?action=create&type=product&parent_id=" + category_id
+                                        content: "{{route('category::category.create_or_update_category_page')}}?action=create&type=" + type + "&parent_id=" + category_id
                                     });
                                 }
                             },
@@ -162,7 +164,7 @@
                                                 }
                                             });
                                         },
-                                        content: "{{route('category::category.create_or_update_category_page')}}?action=update&type=product&category_id=" + category_id
+                                        content: "{{route('category::category.create_or_update_category_page')}}?action=update&type=" + type + "&category_id=" + category_id
                                     });
                                 }
                             },
@@ -176,7 +178,7 @@
                                         $.ajax({
                                             method: "post",
                                             url: "{{route('category::category.delete_category')}}",
-                                            data: {category_id: category_id, type: "product"},
+                                            data: {category_id: category_id, type: type},
                                             success: function (data) {
                                                 layer.close(load_index);
                                                 if ('success' == data.status) {
@@ -249,7 +251,7 @@
                             }
                         });
                     },
-                    content: "{{route('category::category.create_or_update_category_page')}}?action=create&type=product"
+                    content: "{{route('category::category.create_or_update_category_page')}}?action=create&type=" + type
                 });
             });
         });

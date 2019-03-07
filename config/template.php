@@ -81,12 +81,12 @@ return [
                     [
                         'id' => 'product_category',
                         'icon' => 'fa fa-share-alt',
-                        'link' => '/category/category/product_category_tree',
+                        'link' => '/category/category/category_tree/product',
                     ],
                     [
                         'id' => 'goods_category',
                         'icon' => 'fa fa-share-alt',
-                        'link' => '/category/category/goods_category_tree',
+                        'link' => '/category/category/category_tree/goods',
                     ],
                 ],
             ],

@@ -16,20 +16,18 @@ class CategoryController extends Controller
         $this->categoryService = $categoryService;
 	}
 
-    public function productCategoryTree()
+    public function categoryTree($type)
     {
-        $product_categories = $this->categoryService->getProductCategoryTree();
+        $categories = $this->categoryService->getCategoryTree($type);
 
-        return view('category::category.product_category_tree', compact('product_categories'));
+        return view('category::category.category_tree', compact('type', 'categories'));
     }
 
     public function createOrUpdateCategoryPage(Request $request)
     {
         $data = [];
         if ('update' == $request->get('action')) {
-            if ('product' == $request->get('type')) {
-                $category_info = $this->categoryService->getProductCategory($request->get('category_id'));
-            }
+            $category_info = $this->categoryService->getCategory($request->get('category_id'), $request->get('type'));
 
             $data = array_merge($data, compact('category_info'));
         }

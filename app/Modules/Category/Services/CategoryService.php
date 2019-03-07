@@ -10,24 +10,37 @@ namespace App\Modules\Category\Services;
 
 use App\Modules\Category\Repositories\Criteria\Category\ParentIdEqual;
 use App\Modules\Category\Repositories\ProductCategoryRepository;
+use App\Modules\Category\Repositories\GoodsCategoryRepository;
 
 class CategoryService
 {
     protected $productCategoryRepository;
+    protected $goodsCategoryRepository;
 
-    public function __construct(ProductCategoryRepository $productCategoryRepository)
+    public function __construct(ProductCategoryRepository $productCategoryRepository, GoodsCategoryRepository $goodsCategoryRepository)
     {
         $this->productCategoryRepository = $productCategoryRepository;
+        $this->goodsCategoryRepository = $goodsCategoryRepository;
+    }
+
+    public function getRepository($type)
+    {
+        if ('product' == $type) {
+            return $this->productCategoryRepository;
+        }elseif ('goods') {
+            return $this->goodsCategoryRepository;
+        }
     }
 
     /**
-     * 获取产品分类树
+     * 获取分类树
      *
+     * @param $type
      * @return mixed
      */
-    public function getProductCategoryTree()
+    public function getCategoryTree($type)
     {
-        return $this->productCategoryRepository->getSubCategories(0);
+        return $this->getRepository($type)->getSubCategories(0);
     }
 
     /**
@@ -49,12 +62,12 @@ class CategoryService
                 $data['parent_id'] = $request->get('parent_id', 0);
             }
 
-            $categoryRepository = 'product' == $request->get('type') ? $this->productCategoryRepository : null;
+            $repository = $this->getRepository($request->get('type'));
 
             if ('create' == $request->get('action')) {
-                $categoryRepository->create($data);
+                $repository->create($data);
             }elseif ('update' == $request->get('action')) {
-                $categoryRepository->update($data, $request->get('category_id'));
+                $repository->update($data, $request->get('category_id'));
             }
 
             return ['status' => 'success'];
@@ -64,14 +77,15 @@ class CategoryService
     }
 
     /**
-     * 读取产品分类信息
+     * 读取分类信息
      *
      * @param $category_id
+     * @param string $type
      * @return mixed
      */
-    public function getProductCategory($category_id)
+    public function getCategory($category_id, $type = 'product')
     {
-        return $this->productCategoryRepository->find($category_id);
+        return $this->getRepository($type)->find($category_id);
     }
 
     /**
@@ -88,9 +102,7 @@ class CategoryService
                 throw new \Exception(trans('category::category.category_can_not_delete_because_sub_category'));
             }
 
-            $categoryRepository = 'product' == $request->get('type') ? $this->productCategoryRepository : null;
-
-            $categoryRepository->resetCriteria()->delete($request->get('category_id'));
+            $this->getRepository($request->get('type'))->resetCriteria()->delete($request->get('category_id'));
 
             return ['status' => 'success'];
         }catch (\Exception $e) {
@@ -110,11 +122,9 @@ class CategoryService
     {
         $result = true;
 
-        if ('product' == $type) {
-            $sub_categories = $this->productCategoryRepository->resetCriteria()->pushCriteria(new ParentIdEqual($category_id))->get();
-            if (!$sub_categories->isEmpty()) {
-                $result = false;
-            }
+        $sub_categories = $this->getRepository($type)->resetCriteria()->pushCriteria(new ParentIdEqual($category_id))->get();
+        if (!$sub_categories->isEmpty()) {
+            $result = false;
         }
 
         return $result;
