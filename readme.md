@@ -4,9 +4,9 @@
 
 ## 功能模块
 - (Auth)用户认证 —— 注册、登录、退出；
-- (Structure)企业结构 —— 部门、职位；
-- (Permission)权限 —— 菜单、操作；
-- (Finance)财务；
+- (Organization)企业结构 —— 部门；
+- (Entrust)权限 —— permission、role；
+- (Category)分类 —— 产品分类、商品分类；
 
 ## 运行环境要求
 - Nginx 1.12
