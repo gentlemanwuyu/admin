@@ -47,18 +47,18 @@ class ProductCategoriesTableSeeder extends Seeder
             'parent_id' => $level_switch->id,
         ]);
         ProductCategory::create([
-            'name' => 'PP卧式液位开关',
-            'display_name' => 'PP卧式液位开关',
+            'name' => 'PP立式液位开关',
+            'display_name' => 'PP立式液位开关',
             'parent_id' => $vertical_switch->id,
         ]);
         ProductCategory::create([
-            'name' => 'PVDF卧式液位开关',
-            'display_name' => 'PVDF卧式液位开关',
+            'name' => 'PVDF立式液位开关',
+            'display_name' => 'PVDF立式液位开关',
             'parent_id' => $vertical_switch->id,
         ]);
         ProductCategory::create([
-            'name' => '304卧式液位开关',
-            'display_name' => '304卧式液位开关',
+            'name' => '304立式液位开关',
+            'display_name' => '304立式液位开关',
             'parent_id' => $vertical_switch->id,
         ]);
 
