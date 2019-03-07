@@ -6,7 +6,7 @@
  * Time: 17:40
  */
 
-namespace App\Modules\Category\Repositories\Criteria\ProductCategory;
+namespace App\Modules\Category\Repositories\Criteria\Category;
 
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;

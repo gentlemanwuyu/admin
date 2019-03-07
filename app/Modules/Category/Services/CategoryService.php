@@ -8,7 +8,7 @@
 
 namespace App\Modules\Category\Services;
 
-use App\Modules\Category\Repositories\Criteria\ProductCategory\ParentIdEqual;
+use App\Modules\Category\Repositories\Criteria\Category\ParentIdEqual;
 use App\Modules\Category\Repositories\ProductCategoryRepository;
 
 class CategoryService

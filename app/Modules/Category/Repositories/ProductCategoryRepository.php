@@ -11,7 +11,7 @@ namespace App\Modules\Category\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use App\Modules\Category\Models\ProductCategory;
 use App\Traits\RepositoryTrait;
-use App\Modules\Category\Repositories\Criteria\ProductCategory\ParentIdEqual;
+use App\Modules\Category\Repositories\Criteria\Category\ParentIdEqual;
 
 class ProductCategoryRepository extends BaseRepository
 {
