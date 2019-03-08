@@ -90,6 +90,18 @@ return [
                     ],
                 ],
             ],
+            // 产品管理
+            [
+                'id' => 'product_management',
+                'icon' => 'fa fa-cubes',
+                'menus' => [
+                    [
+                        'id' => 'product_list',
+                        'icon' => 'fa fa-cube',
+                        'link' => '/product/product/list',
+                    ],
+                ],
+            ],
         ],
     ],
     'footer' => [

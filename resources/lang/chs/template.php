@@ -32,4 +32,6 @@ return [
     'category_management' => '分类管理',
         'product_category' => '产品分类',
         'goods_category' => '商品分类',
+    'product_management' => '产品管理',
+        'product_list' => '产品列表',
 ];
