@@ -6,7 +6,7 @@
     <section class="content-header">
         <h1>@lang('template.'.$type.'_category')</h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-lock"></i>@lang('template.category_management')</a></li>
+            <li><a href="#"><i class="fa fa-tree"></i>@lang('template.category_management')</a></li>
             <li class="active">@lang('template.'.$type.'_category')</li>
         </ol>
     </section>

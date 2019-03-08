@@ -25,7 +25,7 @@
     <section class="content-header">
         <h1>@lang('template.department_chart')</h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-lock"></i>@lang('template.organization_management')</a></li>
+            <li><a href="#"><i class="fa fa-university"></i>@lang('template.organization_management')</a></li>
             <li class="active">@lang('template.department_chart')</li>
         </ol>
     </section>
