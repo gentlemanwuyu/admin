@@ -11,8 +11,8 @@
 |
 */
 
-Route::group(['prefix' => 'product'], function() {
-	Route::get('/', function() {
-		dd('This is the Product module index page.');
-	});
+// Product控制器
+Route::group(['prefix' => 'product', 'as' => 'product.'], function() {
+	// 产品列表
+	Route::get('list', ['as'=>'list', 'uses'=>'ProductController@getList']);
 });
