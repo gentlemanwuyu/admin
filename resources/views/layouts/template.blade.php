@@ -39,6 +39,8 @@
     <link rel="stylesheet" href="{{asset('/assets/jstree/dist/themes/default/style.min.css')}}">
     <!-- jquery-contextmenu -->
     <link rel="stylesheet" href="{{asset('/assets/jquery-contextmenu/dist/jquery.contextMenu.min.css')}}">
+    <!-- bootstrap-fileinput -->
+    <link rel="stylesheet" href="{{asset('/assets/bootstrap-fileinput/css/fileinput.min.css')}}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -106,6 +108,8 @@
 <!-- jquery-contextmenu -->
 <script src="{{asset('/assets/jquery-contextmenu/dist/jquery.contextMenu.min.js')}}"></script>
 <script src="{{asset('/assets/jquery-contextmenu/dist/jquery.ui.position.min.js')}}"></script>
+<!-- bootstrap-fileinput -->
+<script src="{{asset('/assets/bootstrap-fileinput/js/fileinput.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('/assets/js/application.js')}}"></script>
 @yield('scripts')

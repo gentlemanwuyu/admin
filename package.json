@@ -12,6 +12,7 @@
     "layui-src": "^2.4.5",
     "orgchart": "^2.1.2",
     "jquery-contextmenu": "^2.8.0",
-    "jstree": "^3.3.7"
+    "jstree": "^3.3.7",
+    "bootstrap-fileinput": "^4.5.2"
   }
 }

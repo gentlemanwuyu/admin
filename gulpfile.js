@@ -31,6 +31,10 @@ elixir(function(mix) {
     // 拷贝jstree插件
     mix.copy('node_modules/jstree/dist','public/assets/jstree/dist');
 
+    // 拷贝bootstrap-fileinput插件
+    mix.copy('node_modules/bootstrap-fileinput/css','public/assets/bootstrap-fileinput/css');
+    mix.copy('node_modules/bootstrap-fileinput/js','public/assets/bootstrap-fileinput/js');
+
     // 拷贝resources文件夹
     mix.copy('resources/assets/img','public/assets/img');
     mix.copy('resources/assets/js','public/assets/js');

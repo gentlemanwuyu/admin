@@ -24,6 +24,13 @@ $('.select2').select2();
 $('.date-mask').inputmask('yyyy-mm-dd', { 'placeholder': 'yyyy-mm-dd' });
 $('.telephone-mask').inputmask({"mask": "99999999999"});
 
+// fileinput配置
+$('.fileinput').fileinput({
+    showPreview: false,
+    removeLabel: '',
+    uploadLabel: '',
+    browseLabel: ''
+});
 
 // 给所有的ajax请求加上csrf_token
 $.ajaxSetup({
