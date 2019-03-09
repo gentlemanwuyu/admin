@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="{{asset('/assets/jquery-contextmenu/dist/jquery.contextMenu.min.css')}}">
     <!-- bootstrap-fileinput -->
     <link rel="stylesheet" href="{{asset('/assets/bootstrap-fileinput/css/fileinput.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/assets/bootstrap-fileinput/css/fileinput-rtl.min.css')}}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

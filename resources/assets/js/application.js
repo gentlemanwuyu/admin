@@ -27,6 +27,7 @@ $('.telephone-mask').inputmask({"mask": "99999999999"});
 // fileinput配置
 $('.fileinput').fileinput({
     showPreview: false,
+    rtl: true,
     removeLabel: '',
     uploadLabel: '',
     browseLabel: ''
