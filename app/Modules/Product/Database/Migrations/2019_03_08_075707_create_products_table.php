@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
 			$table->string('code')->default('')->comment('产品编号');
 			$table->string('name')->default('')->comment('产品名称');
 			$table->text('description')->default('')->comment('产品描述');
+			$table->text('image_link')->default('')->comment('图片链接');
 			$table->integer('category_id')->default(0)->comment('分类ID');
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('创建时间');
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))->comment('最后更新时间');
