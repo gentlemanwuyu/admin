@@ -136,8 +136,7 @@
                             <th>@lang('application.index_number')</th>
                             <th class="required">@lang('product::product.sku_code')</th>
                             <th>@lang('product::product.weight')</th>
-                            <th class="required">@lang('product::product.base_price')</th>
-                            <th>@lang('product::product.msrp')</th>
+                            <th class="required">@lang('product::product.cost_price')</th>
                             <th>外径</th>
                             <th>内孔</th>
                             <th>长度</th>
@@ -152,9 +151,6 @@
                                     <input type="text" class="form-control">
                                     <span class="input-group-addon">g</span>
                                 </div>
-                            </td>
-                            <td>
-                                <input type="text" name="" class="form-control">
                             </td>
                             <td>
                                 <input type="text" name="" class="form-control">
@@ -192,9 +188,6 @@
                             <td>
                                 <input type="text" name="" class="form-control">
                             </td>
-                            <td>
-                                <input type="text" name="" class="form-control">
-                            </td>
                         </tr>
                         <tr>
                             <td>3</td>
@@ -219,9 +212,6 @@
                             <td>
                                 <input type="text" name="" class="form-control">
                             </td>
-                            <td>
-                                <input type="text" name="" class="form-control">
-                            </td>
                         </tr>
                         <tr>
                             <td>4</td>
@@ -233,9 +223,6 @@
                                     <input type="text" class="form-control">
                                     <span class="input-group-addon">g</span>
                                 </div>
-                            </td>
-                            <td>
-                                <input type="text" name="" class="form-control">
                             </td>
                             <td>
                                 <input type="text" name="" class="form-control">

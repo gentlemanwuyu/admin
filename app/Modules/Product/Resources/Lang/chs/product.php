@@ -20,7 +20,6 @@ return [
     'sku_list' => 'Sku列表',
     'sku_code' => 'Sku编码',
     'weight' => '重量',
-    'base_price' => '基本价',
-    'msrp' => '吊牌价',
+    'cost_price' => '成本价',
     'add_sku' => '添加sku',
 ];

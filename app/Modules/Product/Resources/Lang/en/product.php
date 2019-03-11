@@ -20,7 +20,6 @@ return [
     'sku_list' => 'Sku list',
     'sku_code' => 'Sku code',
     'weight' => 'Weight',
-    'base_price' => 'Base price',
-    'msrp' => 'MSRP',
+    'cost_price' => 'Cost price',
     'add_sku' => 'Add sku',
 ];
