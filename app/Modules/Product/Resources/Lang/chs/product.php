@@ -22,4 +22,7 @@ return [
     'weight' => '重量',
     'cost_price' => '成本价',
     'add_sku' => '添加sku',
+
+    'edit_product' => '编辑产品',
+    'delete_product' => '删除产品',
 ];

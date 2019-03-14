@@ -22,6 +22,7 @@ return [
     'database_exception' => '数据库异常',
     'index_number' => '序号',
     'name' => '名称',
+    'image' => '图片',
     'description' => '描述',
     'created_at' => '创建时间',
     'updated_at' => '最后更新时间',

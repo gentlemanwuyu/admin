@@ -2,6 +2,19 @@
 @section('title')
     {{trans('template.product_list')}} | {{$project_name}}
 @endsection
+@section('css')
+    <style>
+        td {
+            vertical-align: middle!important;
+        }
+        td.sku_list {
+            padding: 0!important;
+        }
+        .sku_list>table {
+            margin: 0;
+        }
+    </style>
+@endsection
 @section('content')
     <section class="content-header">
         <h1>@lang('template.product_list')</h1>
@@ -31,11 +44,79 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <th>@lang('application.index_number')</th>
+                    <th>@lang('application.image')</th>
+                    <th>@lang('product::product.product_code')</th>
+                    <th>@lang('product::product.product_name')</th>
+                    <th>@lang('product::product.category')</th>
+                    <th>@lang('product::product.sku_list')</th>
+                    <th>@lang('application.action')</th>
+                    </thead>
+                    <?php
+                        if (!isset($page) || $page <= 0) {
+                            $page = 1;
+                        }
+                        $page_size = $products->perPage() ?: 0;
+                        $i = ($page - 1) * $page_size + 1;
+                    ?>
+                    @foreach($products as $product)
+                        <tr data-id="{{$product->id}}">
+                            <td>{{$i++}}</td>
+                            <td><img src="{{$product->image_link}}" alt=""></td>
+                            <td>{{$product->code or ''}}</td>
+                            <td>{{$product->name or ''}}</td>
+                            <td>{{$product->category->name or ''}}</td>
+                            <td class="sku_list">
+                                @if(!$product->skus->isEmpty())
+                                    <table class="table table-bordered">
+                                        <tr style="background: #3c8dbc; color: white;">
+                                            <td>@lang('product::product.sku_code')</td>
+                                            <td>@lang('product::product.weight')</td>
+                                            <td>@lang('product::product.cost_price')</td>
+                                            @if(!$product->attributes->isEmpty())
+                                                @foreach($product->attributes as $attribute)
+                                                    <td>{{$attribute->name}}</td>
+                                                @endforeach
+                                            @endif
+                                        </tr>
+                                        @foreach($product->skus as $sku)
+                                            <tr>
+                                                <td>{{$sku->code or ''}}</td>
+                                                <td>{{$sku->weight or ''}}</td>
+                                                <td>{{$sku->cost_price or ''}}</td>
+                                                @if(!$product->attributes->isEmpty())
+                                                    @foreach($product->attributes as $attribute)
+                                                        <td>
+                                                            @foreach($sku->attributeValues as $attributeValue)
+                                                                @if($attributeValue->attribute_id == $attribute->id)
+                                                                    {{$attributeValue->value or ''}}
+                                                                @endif
+                                                            @endforeach
+                                                        </td>
+                                                    @endforeach
+                                                @endif
+                                            </tr>
+                                        @endforeach
+                                    </table>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="javascript:;">
+                                    <i class="fa fa-edit edit_product" title="{{trans('product::product.edit_product')}}"></i>
+                                </a>
+                                <a href="javascript:;">
+                                    <i class="fa fa-trash delete_product" title="{{trans('product::product.delete_product')}}"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-
+                {{$products->links()}}
             </div>
         </div>
     </section>
@@ -43,6 +124,7 @@
 @section('scripts')
     <script>
         $(function () {
+            // 添加产品
             $('#add_product').on('click', function () {
                 layer.open({
                     type: 2,
@@ -80,6 +162,47 @@
                         });
                     },
                     content: "{{route('product::product.create_or_update_product_page')}}?action=create"
+                });
+            });
+
+            // 编辑产品
+            $('.edit_product').on('click', function () {
+                layer.open({
+                    type: 2,
+                    area: ['80%', '80%'],
+                    fix: false,
+                    skin: 'layui-layer-rim',
+                    maxmin: true,
+                    shade: 0.5,
+                    anim: 4,
+                    title: "{{trans('product::product.edit_product')}}",
+                    btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
+                    yes: function (index) {
+                        var data = $(layer.getChildFrame('body',index)).find('form').serialize();
+                        var load_index = layer.load();
+                        $.ajax({
+                            method: "post",
+                            url: "{{route('category::category.create_or_update_category')}}",
+                            data: data,
+                            success: function (data) {
+                                layer.close(load_index);
+                                if ('success' == data.status) {
+                                    layer.close(index);
+                                    layer.msg("{{trans('category::category.category_create_or_update_successful')}}", {icon:1});
+                                    parent.location.reload();
+                                } else {
+                                    layer.msg("{{trans('category::category.category_create_or_update_fail')}}:"+data.msg, {icon:2});
+                                    return false;
+                                }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                layer.close(load_index);
+                                layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                return false;
+                            }
+                        });
+                    },
+                    content: "{{route('product::product.create_or_update_product_page')}}?action=update"
                 });
             });
         });

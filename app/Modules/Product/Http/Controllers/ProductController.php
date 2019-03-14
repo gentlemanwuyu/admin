@@ -20,7 +20,9 @@ class ProductController extends Controller
 
     public function getList()
     {
-        return view('product::product.list');
+        $products = $this->productService->getProductList();
+
+        return view('product::product.list', compact('products'));
     }
 
     public function createOrUpdateProductPage()

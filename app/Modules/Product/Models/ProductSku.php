@@ -16,4 +16,14 @@ class ProductSku extends Model
     use SoftDeletes;
 
     protected $guarded = [];
+
+    /**
+     * 关联product_sku_attribute_values表
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attributeValues()
+    {
+        return $this->hasMany(ProductSkuAttributeValue::class, 'sku_id');
+    }
 }

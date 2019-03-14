@@ -22,6 +22,7 @@ return [
     'database_exception' => 'Database exception',
     'index_number' => 'No.',
     'name' => 'Name',
+    'image' => 'Image',
     'description' => 'Description',
     'created_at' => 'Created at',
     'updated_at' => 'Updated at',
