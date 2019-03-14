@@ -22,4 +22,9 @@ return [
     'weight' => 'Weight',
     'cost_price' => 'Cost price',
     'add_sku' => 'Add sku',
+    'image_upload_failed' => 'Image upload failed',
+    'required_square_image' => 'Please upload a square picture',
+
+    'edit_product' => 'Edit product',
+    'delete_product' => 'Delete product',
 ];

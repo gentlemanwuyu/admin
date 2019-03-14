@@ -22,6 +22,8 @@ return [
     'weight' => '重量',
     'cost_price' => '成本价',
     'add_sku' => '添加sku',
+    'image_upload_failed' => '图片上传失败',
+    'required_square_image' => '请上传正方形图片',
 
     'edit_product' => '编辑产品',
     'delete_product' => '删除产品',

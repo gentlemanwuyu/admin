@@ -2,16 +2,17 @@
 @section('css')
     <style>
         img {
-            width: auto;
-            height: 200px;
+            width: 200px;
+            height: auto;
         }
         .img_container {
             width: 212px;
-            /*height: 212px;*/
+            height: 212px;
             border: 1px solid #3c8dbc;
             padding: 5px;
             border-radius: 3px;
-            display: inline-block;
+            display: table-cell;
+            vertical-align: middle;
         }
     </style>
 @endsection
@@ -30,12 +31,12 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-2" style="text-align: center">
+                            <input type="hidden" name="image_link">
                             <div class="img_container">
-                                {{--<img src="/assets/img/system/none.jpg" alt="">--}}
-                                <img src="https://www.gravatar.com/avatar/e7f04fb1d406bc12f3d8bece06e59d11.jpg?s=80&d=mm&r=g" alt="">
+                                <img src="{{$product_info->image_link or asset('/assets/img/system/none.jpg')}}">
                             </div>
                             <div class="form-group" style="margin-top: 15px;">
-                                <input type="file">
+                                <input type="file" name="file">
                             </div>
                         </div>
                         <div class="col-xs-4 col-xs-offset-1">
@@ -263,9 +264,13 @@
             });
             $('input:file').on('fileuploaded', function (event, data, previewId, index) {
                 layer.close(upload_layer_index);
-                var response = data.response;
-                $('img').attr('src', response);
                 $('div.kv-upload-progress').hide();
+                if ('success' == data.response.status) {
+                    $('img').attr('src', data.response.content);
+                    $('input[name=image_link]').val(data.response.content);
+                }else {
+                    layer.msg("{{trans('product::product.image_upload_failed')}}:"+data.response.msg, {icon:2});
+                }
             });
         });
     </script>

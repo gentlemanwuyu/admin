@@ -32,8 +32,8 @@ class ProductController extends Controller
         return view('product::product.create_or_update_product', compact('categories'));
     }
 
-    public function upload()
+    public function upload(Request $request)
     {
-        return response()->json('https://www.gravatar.com/avatar/e7f04fb1d406bc12f3d8bece06e59d11.jpg?s=80&d=mm&r=g');
+        return response()->json($this->productService->uploadImageLink($request));
     }
 }
