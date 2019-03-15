@@ -24,6 +24,8 @@ return [
     'add_sku' => '添加sku',
     'image_upload_failed' => '图片上传失败',
     'required_square_image' => '请上传正方形图片',
+    'delete_attribute' => '删除属性',
+    'delete_sku' => '删除Sku',
 
     'edit_product' => '编辑产品',
     'delete_product' => '删除产品',

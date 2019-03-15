@@ -24,6 +24,8 @@ return [
     'add_sku' => 'Add sku',
     'image_upload_failed' => 'Image upload failed',
     'required_square_image' => 'Please upload a square picture',
+    'delete_attribute' => 'Delete attribute',
+    'delete_sku' => 'Delete sku',
 
     'edit_product' => 'Edit product',
     'delete_product' => 'Delete product',
