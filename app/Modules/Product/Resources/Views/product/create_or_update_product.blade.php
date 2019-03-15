@@ -251,6 +251,16 @@
                     checkboxClass: 'icheckbox_minimal-blue'
                 });
 
+                // is_required事件
+                $('.product_attribute_tr input:checkbox').on('ifChecked', function () {
+                    var attribute_flag = $(this).parents('.product_attribute_tr').attr('data-attribute_flag');
+                    $('.sku_list_title').find('th.' + attribute_flag).addClass('required');
+                });
+                $('.product_attribute_tr input:checkbox').on('ifUnchecked', function () {
+                    var attribute_flag = $(this).parents('.product_attribute_tr').attr('data-attribute_flag');
+                    $('.sku_list_title').find('th.' + attribute_flag).removeClass('required');
+                });
+
                 // sku列表添加相应的行
                 $('.sku_list_title>tr').append('<th class="' + attribute_flag + '"></th>');
                 $('.sku_list_tr').each(function () {
