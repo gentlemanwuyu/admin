@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-xs-3 control-label required">@lang('application.description')</label>
+                                <label class="col-xs-3 control-label">@lang('application.description')</label>
                                 <div class="col-xs-9">
                                     <textarea class="form-control" name="description" rows="3"></textarea>
                                 </div>
@@ -225,19 +225,19 @@
                 var sku_flag = Date.now();
                 var html = '';
                 html += '<tr class="sku_list_tr" data-sku_flag="' + sku_flag + '">';
-                html += '<td><input type="text" name="" class="form-control"></td>';    // sku编码
+                html += '<td><input type="text" name="skus[' + sku_flag + '][code]" class="form-control"></td>';    // sku编码
                 // 重量
                 html += '<td>';
                 html += '<div class="input-group">';
-                html += '<input type="text" class="form-control">';
+                html += '<input type="text" name="skus[' + sku_flag + '][weight]" class="form-control">';
                 html += '<span class="input-group-addon">g</span>';
                 html += '</div>';
                 html += '</td>';
-                html += '<td><input type="text" name="" class="form-control"></td>'; // 成本价
+                html += '<td><input type="text" name="skus[' + sku_flag + '][cost_price]" class="form-control"></td>'; // 成本价
                 // 自定义属性
                 $('#product_attributes_table').children('tbody').children('tr').each(function () {
                     var attribute_flag = $(this).attr('data-attribute_flag');
-                    html += '<td class="' + attribute_flag + '"><input type="text" name="" class="form-control"></td>';
+                    html += '<td class="' + attribute_flag + '"><input type="text" name="skus[' + sku_flag + '][attributes][' + attribute_flag + ']" class="form-control"></td>';
                 });
                 html += '</tr>';
 

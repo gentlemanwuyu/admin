@@ -29,4 +29,7 @@ return [
 
     'edit_product' => 'Edit product',
     'delete_product' => 'Delete product',
+
+    'product_create_or_update_successful' => 'Create/update product successful',
+    'product_create_or_update_fail' => 'Create/update product failed',
 ];

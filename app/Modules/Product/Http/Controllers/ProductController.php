@@ -32,6 +32,11 @@ class ProductController extends Controller
         return view('product::product.create_or_update_product', compact('categories'));
     }
 
+    public function createOrUpdateProduct(Request $request)
+    {
+        return response()->json($this->productService->createOrUpdateProduct($request));
+    }
+
     public function upload(Request $request)
     {
         return response()->json($this->productService->uploadImageLink($request));

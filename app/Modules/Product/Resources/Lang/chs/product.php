@@ -29,4 +29,7 @@ return [
 
     'edit_product' => '编辑产品',
     'delete_product' => '删除产品',
+
+    'product_create_or_update_successful' => '添加/修改产品成功',
+    'product_create_or_update_fail' => '添加/修改产品失败',
 ];

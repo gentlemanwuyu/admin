@@ -64,7 +64,7 @@
                     @foreach($products as $product)
                         <tr data-id="{{$product->id}}">
                             <td>{{$i++}}</td>
-                            <td><img src="{{$product->image_link}}" alt=""></td>
+                            <td><img src="{{$product->image_link}}" alt="" style="max-width: 100px;height: auto;"></td>
                             <td>{{$product->code or ''}}</td>
                             <td>{{$product->name or ''}}</td>
                             <td>{{$product->category->name or ''}}</td>
@@ -141,16 +141,16 @@
                         var load_index = layer.load();
                         $.ajax({
                             method: "post",
-                            url: "{{route('category::category.create_or_update_category')}}",
+                            url: "{{route('product::product.create_or_update_product')}}",
                             data: data,
                             success: function (data) {
                                 layer.close(load_index);
                                 if ('success' == data.status) {
                                     layer.close(index);
-                                    layer.msg("{{trans('category::category.category_create_or_update_successful')}}", {icon:1});
+                                    layer.msg("{{trans('product::product.product_create_or_update_successful')}}", {icon:1});
                                     parent.location.reload();
                                 } else {
-                                    layer.msg("{{trans('category::category.category_create_or_update_fail')}}:"+data.msg, {icon:2});
+                                    layer.msg("{{trans('product::product.product_create_or_update_fail')}}:"+data.msg, {icon:2});
                                     return false;
                                 }
                             },
