@@ -25,11 +25,17 @@ class ProductController extends Controller
         return view('product::product.list', compact('products'));
     }
 
-    public function createOrUpdateProductPage()
+    public function createOrUpdateProductPage(Request $request)
     {
         $categories = $this->categoryService->getCategoryTree('product');
+        $data = compact('categories');
 
-        return view('product::product.create_or_update_product', compact('categories'));
+        if ('update' == $request->get('action')) {
+            $product_info = $this->productService->getProduct($request->get('product_id'));
+            $data = array_merge($data, compact('product_info'));
+        }
+
+        return view('product::product.create_or_update_product', $data);
     }
 
     public function createOrUpdateProduct(Request $request)

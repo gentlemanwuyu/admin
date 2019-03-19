@@ -31,9 +31,9 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-2" style="text-align: center">
-                            <input type="hidden" name="image_link">
+                            <input type="hidden" name="image_link" value="{{$product_info->image_link or ''}}">
                             <div class="img_container">
-                                <img src="{{$product_info->image_link or asset('/assets/img/system/none.jpg')}}">
+                                <img src="{{$product_info->image_link or ''}}" onerror="this.src='{{asset('/assets/img/system/none.jpg')}}';this.onerror=null;">
                             </div>
                             <div class="form-group" style="margin-top: 15px;">
                                 <input type="file" name="file">
@@ -43,19 +43,19 @@
                             <div class="form-group">
                                 <label class="col-xs-3 control-label required">@lang('product::product.product_code')</label>
                                 <div class="col-xs-9">
-                                    <input type="text" name="code" class="form-control" value="">
+                                    <input type="text" name="code" class="form-control" value="{{$product_info->code or ''}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-3 control-label required">@lang('product::product.product_name')</label>
                                 <div class="col-xs-9">
-                                    <input type="text" name="name" class="form-control" value="">
+                                    <input type="text" name="name" class="form-control" value="{{$product_info->name or ''}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">@lang('application.description')</label>
                                 <div class="col-xs-9">
-                                    <textarea class="form-control" name="description" rows="3"></textarea>
+                                    <textarea class="form-control" name="description" rows="3">{{$product_info->description or ''}}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -64,13 +64,19 @@
                                     <select name="category_id" class="form-control select2">
                                         <option value="">@lang('product::product.please_select_category')</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->display_name}}</option>
+                                            <option value="{{$category->id}}" @if(isset($product_info) && $product_info->category_id == $category->id) selected @endif>
+                                                {{$category->display_name}}
+                                            </option>
                                             @if(isset($category->children) && $category->children)
                                                 @foreach($category->children as $son)
-                                                    <option value="{{$son->id}}">{{str_repeat('&nbsp;', 4)}}{{$son->display_name}}</option>
+                                                    <option value="{{$son->id}}" @if(isset($product_info) && $product_info->category_id == $son->id) selected @endif>
+                                                        {{str_repeat('&nbsp;', 4)}}{{$son->display_name}}
+                                                    </option>
                                                     @if(isset($son->children) && $son->children)
                                                         @foreach($son->children as $grandson)
-                                                            <option value="{{$grandson->id}}">{{str_repeat('&nbsp;', 8)}}{{$grandson->display_name}}</option>
+                                                            <option value="{{$grandson->id}}" @if(isset($product_info) && $product_info->category_id == $grandson->id) selected @endif>
+                                                                {{str_repeat('&nbsp;', 8)}}{{$grandson->display_name}}
+                                                            </option>
                                                         @endforeach
                                                     @endif
                                                 @endforeach
@@ -100,7 +106,14 @@
                             <th>@lang('product::product.is_required')</th>
                             </thead>
                             <tbody>
-
+                                @if('update' == $action)
+                                    @foreach($product_info->attributes as $product_attribute)
+                                        <tr data-attribute_flag="{{$product_attribute->id}}" class="product_attribute_tr">
+                                            <td><input type="text" name="product_attributes[{{$product_attribute->id}}][name]" class="form-control attribute_input" value="{{$product_attribute->name or ''}}"></td>
+                                            <td><input type="checkbox" class="minimal" name="product_attributes[{{$product_attribute->id}}][is_required]" value="1" @if(1 == $product_attribute->is_required) checked @endif></td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -124,9 +137,40 @@
                             <th class="required">@lang('product::product.sku_code')</th>
                             <th>@lang('product::product.weight')</th>
                             <th class="required">@lang('product::product.cost_price')</th>
+                            @if('update' == $action)
+                                @foreach($product_info->attributes as $product_attribute)
+                                    <th class="{{$product_attribute->id}} @if(1 == $product_attribute->is_required) required @endif">
+                                        {{$product_attribute->name}}
+                                    </th>
+                                @endforeach
+                            @endif
                         </thead>
                         <tbody>
-
+                        @if('update' == $action)
+                            @foreach($product_info->skus as $product_sku)
+                                <tr class="sku_list_tr" data-sku_flag="{{$product_sku->id}}">
+                                    <td><input type="text" name="skus[{{$product_sku->id}}][code]" class="form-control" value="{{$product_sku->code or ''}}"></td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" name="skus[{{$product_sku->id}}][weight]" class="form-control" value="{{$product_sku->weight or ''}}">
+                                            <span class="input-group-addon">g</span>
+                                        </div>
+                                    </td>
+                                    <td><input type="text" name="skus[{{$product_sku->id}}][cost_price]" class="form-control" value="{{$product_sku->cost_price or ''}}"></td>
+                                    @foreach($product_info->attributes as $product_attribute)
+                                        <td class="{{$product_attribute->id}}">
+                                            <input type="text" name="skus[{{$product_sku->id}}][attributes][{{$product_attribute->id}}]" class="form-control"
+                                                @foreach($product_sku->attributeValues as $attribute_value)
+                                                    @if($product_attribute->id == $attribute_value->attribute_id)
+                                                        value="{{$attribute_value->value}}"
+                                                    @endif
+                                                @endforeach
+                                            >
+                                        </td>
+                                    @endforeach
+                                </tr>
+                            @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>

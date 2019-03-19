@@ -167,6 +167,7 @@
 
             // 编辑产品
             $('.edit_product').on('click', function () {
+                var product_id = $(this).parents('tr').attr('data-id');
                 layer.open({
                     type: 2,
                     area: ['80%', '80%'],
@@ -202,7 +203,7 @@
                             }
                         });
                     },
-                    content: "{{route('product::product.create_or_update_product_page')}}?action=update"
+                    content: "{{route('product::product.create_or_update_product_page')}}?action=update&product_id=" + product_id
                 });
             });
         });
