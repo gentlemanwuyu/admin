@@ -16,6 +16,7 @@ class CreateProductAttributesTable extends Migration
 			$table->increments('id');
 			$table->integer('product_id')->default(0)->comment('产品ID');
 			$table->string('name')->default('')->comment('属性名');
+			$table->enum('is_required',[0, 1])->default(0)->comment('是否必填，0为否，1为是');
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('创建时间');
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))->comment('最后更新时间');
 
