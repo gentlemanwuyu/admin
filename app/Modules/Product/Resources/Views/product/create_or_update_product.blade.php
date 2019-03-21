@@ -31,7 +31,11 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-2" style="text-align: center">
+                            <input type="hidden" name="action" value="{{$action or 'create'}}">
                             <input type="hidden" name="image_link" value="{{$product_info->image_link or ''}}">
+                            @if('update' == $action)
+                                <input type="hidden" name="product_id" value="{{$product_id}}">
+                            @endif
                             <div class="img_container">
                                 <img src="{{$product_info->image_link or ''}}" onerror="this.src='{{asset('/assets/img/system/none.jpg')}}';this.onerror=null;">
                             </div>

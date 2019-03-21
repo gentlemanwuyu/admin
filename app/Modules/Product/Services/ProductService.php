@@ -49,48 +49,99 @@ class ProductService
                 'category_id' => $request->get('category_id'),
                 'image_link' => $request->get('image_link'),
             ];
-            $product = $this->productRepository->create($base_data);
+            // 写入/更新产品数据
+            if ('update' == $request->get('action')) {
+                $product = $this->productRepository->update($base_data, $request->get('product_id'));
+            }else {
+                $product = $this->productRepository->create($base_data);
+            }
             if (!$product) {
                 throw new \Exception('Create product failed.');
             }
 
+            // 同步产品属性
             $product_attributes = [];
-            if ($request->get('product_attributes')) {
-                foreach ($request->get('product_attributes') as $index => $i_product_attribute) {
-                    $product_attribute = $this->productAttributeRepository->create([
+            // 表单发送过来的产品属性
+            $i_product_attributes = $request->get('product_attributes');
+            // 产品原本的属性
+            $ori_product_attributes = $this->productAttributeRepository->findByField('product_id', $product->id)->toArray();
+            $ori_product_attribute_ids = array_column($ori_product_attributes, 'id');
+            $new_product_attribute_ids = [];
+            if ($i_product_attributes) {
+                foreach ($i_product_attributes as $index => $i_product_attribute) {
+                    $data = [
                         'product_id' => $product->id,
                         'name' => $i_product_attribute['name'],
                         'is_required' => isset($i_product_attribute['is_required']) ? $i_product_attribute['is_required'] : 0,
-                    ]);
+                    ];
+                    if ($this->productAttributeRepository->findByField('id', $index)->isEmpty()) {
+                        $product_attribute = $this->productAttributeRepository->create($data);
+                    }else {
+                        $product_attribute = $this->productAttributeRepository->update($data, $index);
+                    }
                     if (!$product_attribute) {
                         throw new \Exception('Create product attribute failed.');
                     }
+                    $new_product_attribute_ids[] = $product_attribute->id;
                     $product_attributes[$index] = $product_attribute;
                 }
             }
 
+            // 删除产品属性的差集
+            $diff_product_attribute_ids = array_diff($ori_product_attribute_ids, $new_product_attribute_ids);
+            $this->productAttributeRepository->destroy($diff_product_attribute_ids);
+
+            $ori_product_sku_ids = array_column($this->productSkuRepository->findByField('product_id', $product->id)->toArray(), 'id');
+            $new_product_sku_ids = [];
             if ($request->get('skus')) {
-                foreach ($request->get('skus') as $i_sku) {
-                    $sku = $this->productSkuRepository->create([
-                        'product_id' => $product->id,
-                        'code' => $i_sku['code'],
-                        'weight' => $i_sku['weight'],
-                        'cost_price' => $i_sku['cost_price'],
-                    ]);
+                foreach ($request->get('skus') as $index => $i_sku) {
+                    if ($this->productSkuRepository->findByField('id', $index)->isEmpty()) {
+                        $sku = $this->productSkuRepository->create([
+                            'product_id' => $product->id,
+                            'code' => $i_sku['code'],
+                            'weight' => $i_sku['weight'],
+                            'cost_price' => $i_sku['cost_price'],
+                        ]);
+                    }else {
+                        $sku = $this->productSkuRepository->update([
+                            'code' => $i_sku['code'],
+                            'weight' => $i_sku['weight'],
+                            'cost_price' => $i_sku['cost_price'],
+                        ], $index);
+                    }
                     if (!$sku) {
                         throw new \Exception('Create product sku failed.');
                     }
+                    $new_product_sku_ids[] = $sku->id;
+                    $diff_product_sku_ids = array_diff($ori_product_sku_ids, $new_product_sku_ids);
+                    $this->productSkuRepository->destroy($diff_product_sku_ids);
 
                     if ($i_sku['attributes']) {
                         foreach ($i_sku['attributes'] as $index => $value) {
-                            $this->productSkuAttributeValueRepository->create([
-                                'product_id' => $product->id,
+                            $sku_attribute_value = $this->productSkuAttributeValueRepository->findWhere([
                                 'sku_id' => $sku->id,
-                                'attribute_id' => $product_attributes[$index]->id,
-                                'value' => $value,
-                            ]);
+                                'attribute_id' => $index,
+                            ])->first();
+                            if (!$sku_attribute_value) {
+                                $this->productSkuAttributeValueRepository->create([
+                                    'product_id' => $product->id,
+                                    'sku_id' => $sku->id,
+                                    'attribute_id' => $product_attributes[$index]->id,
+                                    'value' => $value,
+                                ]);
+                            }else {
+                                $this->productSkuAttributeValueRepository->update([
+                                    'value' => $value,
+                                ], $sku_attribute_value->id);
+                            }
                         }
                     }
+
+                    // 删除无关的属性值
+                    $deleted_sku_values = $this->productSkuAttributeValueRepository->findWhereIn('sku_id', $diff_product_sku_ids)->toArray();
+                    $deleted_attribute_values = $this->productSkuAttributeValueRepository->findWhereIn('sku_id', $diff_product_attribute_ids)->toArray();
+                    $delete_value_ids = array_merge(array_column($deleted_sku_values, 'id'), array_column($deleted_attribute_values, 'id'));
+                    $this->productSkuAttributeValueRepository->destroy($delete_value_ids);
                 }
             }
 
