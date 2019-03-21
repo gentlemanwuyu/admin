@@ -38,6 +38,12 @@ class ProductService
         return $this->productRepository->paginate();
     }
 
+    /**
+     * 写入/修改产品数据
+     *
+     * @param $request
+     * @return array
+     */
     public function createOrUpdateProduct($request)
     {
         try {
@@ -113,8 +119,6 @@ class ProductService
                         throw new \Exception('Create product sku failed.');
                     }
                     $new_product_sku_ids[] = $sku->id;
-                    $diff_product_sku_ids = array_diff($ori_product_sku_ids, $new_product_sku_ids);
-                    $this->productSkuRepository->destroy($diff_product_sku_ids);
 
                     if ($i_sku['attributes']) {
                         foreach ($i_sku['attributes'] as $index => $value) {
@@ -136,14 +140,19 @@ class ProductService
                             }
                         }
                     }
-
-                    // 删除无关的属性值
-                    $deleted_sku_values = $this->productSkuAttributeValueRepository->findWhereIn('sku_id', $diff_product_sku_ids)->toArray();
-                    $deleted_attribute_values = $this->productSkuAttributeValueRepository->findWhereIn('sku_id', $diff_product_attribute_ids)->toArray();
-                    $delete_value_ids = array_merge(array_column($deleted_sku_values, 'id'), array_column($deleted_attribute_values, 'id'));
-                    $this->productSkuAttributeValueRepository->destroy($delete_value_ids);
                 }
             }
+
+            $diff_product_sku_ids = array_diff($ori_product_sku_ids, $new_product_sku_ids);
+            $this->productSkuRepository->destroy($diff_product_sku_ids);
+
+
+
+            // 删除无关的属性值
+            $deleted_sku_values = $this->productSkuAttributeValueRepository->findWhereIn('sku_id', $diff_product_sku_ids)->toArray();
+            $deleted_attribute_values = $this->productSkuAttributeValueRepository->findWhereIn('attribute_id', $diff_product_attribute_ids)->toArray();
+            $delete_value_ids = array_merge(array_column($deleted_sku_values, 'id'), array_column($deleted_attribute_values, 'id'));
+            $this->productSkuAttributeValueRepository->destroy($delete_value_ids);
 
             DB::commit();
             return ['status' => 'success'];
