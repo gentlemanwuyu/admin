@@ -330,6 +330,22 @@
                     }
                 }
             });
+            // is_required事件
+            $('.product_attribute_tr input:checkbox').on('ifChecked', function () {
+                var attribute_flag = $(this).parents('.product_attribute_tr').attr('data-attribute_flag');
+                $('.sku_list_title').find('th.' + attribute_flag).addClass('required');
+            });
+            $('.product_attribute_tr input:checkbox').on('ifUnchecked', function () {
+                var attribute_flag = $(this).parents('.product_attribute_tr').attr('data-attribute_flag');
+                $('.sku_list_title').find('th.' + attribute_flag).removeClass('required');
+            });
+
+            // 绑定事件
+            $('.attribute_input').on('keyup', function () {
+                var attribute_name = $(this).val();
+                var attribute_flag = $(this).parents('tr').attr('data-attribute_flag');
+                $('.sku_list_title>tr>th.' + attribute_flag).html(attribute_name);
+            });
         });
     </script>
 @endsection
