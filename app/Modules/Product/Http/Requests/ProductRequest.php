@@ -58,10 +58,10 @@ class ProductRequest extends FormRequest
                 if (isset($data['product_attributes'])) {
                     foreach ($data['product_attributes'] as $index => $value) {
                         $key = 'skus.'.$sku_index.'.attributes.'.$index;
-                        $rules[$key] = 'max';
+                        $rules[$key] = 'max:32';
                         $this->custom_messages[$key.'.max'] = trans('product::product.sku_attribute_value_max');
                         if (isset($value['is_required'])) {
-                            $rules[$key] = 'required|max';
+                            $rules[$key] = 'required|max:32';
                             $this->custom_messages[$key.'.required'] = sprintf(trans('product::product.sku_attribute_value_required'), $value['name']);
                         }
                     }
