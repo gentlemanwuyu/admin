@@ -53,4 +53,6 @@ return [
     'product_delete_confirm' => '您确定要删除该产品吗？',
     'product_delete_successful' => '删除产品成功',
     'product_delete_fail' => '删除产品失败',
+
+    'product_detail' => '产品详情',
 ];

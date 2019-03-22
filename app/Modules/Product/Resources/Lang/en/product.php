@@ -53,4 +53,6 @@ return [
     'product_delete_confirm' => 'Are you sure to delete this product?',
     'product_delete_successful' => 'Delete product successful',
     'product_delete_fail' => 'Delete product failed',
+
+    'product_detail' => 'Product detail',
 ];

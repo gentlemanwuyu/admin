@@ -53,4 +53,11 @@ class ProductController extends Controller
     {
         return response()->json($this->productService->deleteProduct($request));
     }
+
+    public function productDetail($id)
+    {
+        $product_info = $this->productService->getProduct($id);
+
+        return view('product::product.detail', compact('product_info'));
+    }
 }
