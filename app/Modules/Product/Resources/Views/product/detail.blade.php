@@ -83,7 +83,7 @@
                                 <td>{{$product_sku->cost_price or ''}}</td>
                                 @foreach($product_info->attributes as $product_attribute)
                                     <?php
-                                        $value = '';
+                                        $value = '--';
                                         foreach ($product_sku->attributeValues as $attribute_value) {
                                             if ($product_attribute->id == $attribute_value->attribute_id) {
                                                 $value = $attribute_value->value;
