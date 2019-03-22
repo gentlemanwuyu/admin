@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Modules\Product\Services\ProductService;
 use App\Modules\Category\Services\CategoryService;
+use App\Modules\Product\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -38,7 +39,7 @@ class ProductController extends Controller
         return view('product::product.create_or_update_product', $data);
     }
 
-    public function createOrUpdateProduct(Request $request)
+    public function createOrUpdateProduct(ProductRequest $request)
     {
         return response()->json($this->productService->createOrUpdateProduct($request));
     }

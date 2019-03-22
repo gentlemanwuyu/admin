@@ -32,4 +32,21 @@ return [
 
     'product_create_or_update_successful' => 'Create/update product successful',
     'product_create_or_update_fail' => 'Create/update product failed',
+
+    'code_required' => 'Product code can\'t be empty',
+    'code_accepted' => 'Product code may only contain letters, numbers, and dashes.',
+    'code_max' => 'The length of product code must less than 32 letters.',
+    'name_required' => 'Product name can\'t be empty',
+    'name_max' => 'Product name may only contain letters, numbers, and dashes.',
+    'attribute_name_required' => 'Attribute name can\'t be empty',
+    'attribute_name_max' => 'The length of attribute name must less than 32 letters.',
+    'skus_required' => 'Each product need at least one sku.',
+    'sku_code_required' => 'Sku code can\'t be empty',
+    'sku_code_accepted' => 'Sku code may only contain letters, numbers, and dashes.',
+    'sku_code_max' => 'The length of sku code must less than 32 letters.',
+    'sku_weight_numeric' => 'The weight of sku must be numeric',
+    'sku_cost_price_required' => 'The cost-price of sku can\'t be empty',
+    'sku_cost_price_numeric' => 'The cost-price of sku must be numeric',
+    'sku_attribute_value_max' => 'The length of sku-attribute must less than 32 letters.',
+    'sku_attribute_value_required' => 'The value of sku attribute(%s) can\'t be empty',
 ];
