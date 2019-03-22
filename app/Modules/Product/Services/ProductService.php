@@ -12,6 +12,7 @@ use App\Modules\Product\Repositories\ProductRepository;
 use App\Modules\Product\Repositories\ProductSkuRepository;
 use App\Modules\Product\Repositories\ProductAttributeRepository;
 use App\Modules\Product\Repositories\ProductSkuAttributeValueRepository;
+use App\Modules\Product\Repositories\Criteria\Product\CodeOrNameLike;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
@@ -33,8 +34,10 @@ class ProductService
         $this->productSkuAttributeValueRepository = $productSkuAttributeValueRepository;
     }
 
-    public function getProductList()
+    public function getProductList($request)
     {
+        $this->productRepository->pushCriteria(new CodeOrNameLike($request->get('search')));
+
         return $this->productRepository->paginate();
     }
 
