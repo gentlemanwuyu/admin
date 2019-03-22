@@ -67,14 +67,11 @@ class ProductService
 
             // 同步产品属性
             $product_attributes = [];
-            // 表单发送过来的产品属性
-            $i_product_attributes = $request->get('product_attributes');
             // 产品原本的属性
-            $ori_product_attributes = $this->productAttributeRepository->findByField('product_id', $product->id)->toArray();
-            $ori_product_attribute_ids = array_column($ori_product_attributes, 'id');
+            $ori_product_attribute_ids = array_column($this->productAttributeRepository->findByField('product_id', $product->id)->toArray(), 'id');
             $new_product_attribute_ids = [];
-            if ($i_product_attributes) {
-                foreach ($i_product_attributes as $index => $i_product_attribute) {
+            if ($request->get('product_attributes')) {
+                foreach ($request->get('product_attributes') as $index => $i_product_attribute) {
                     $data = [
                         'product_id' => $product->id,
                         'name' => $i_product_attribute['name'],
@@ -145,8 +142,6 @@ class ProductService
 
             $diff_product_sku_ids = array_diff($ori_product_sku_ids, $new_product_sku_ids);
             $this->productSkuRepository->destroy($diff_product_sku_ids);
-
-
 
             // 删除无关的属性值
             $deleted_sku_values = $this->productSkuAttributeValueRepository->findWhereIn('sku_id', $diff_product_sku_ids)->toArray();
