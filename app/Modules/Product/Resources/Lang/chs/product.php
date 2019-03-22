@@ -49,4 +49,8 @@ return [
     'sku_cost_price_numeric' => 'Sku成本价必须是数字',
     'sku_attribute_value_max' => 'Sku属性不能超过32个字符',
     'sku_attribute_value_required' => 'Sku属性%s的取值不能为空',
+
+    'product_delete_confirm' => '您确定要删除该产品吗？',
+    'product_delete_successful' => '删除产品成功',
+    'product_delete_fail' => '删除产品失败',
 ];

@@ -197,4 +197,33 @@ class ProductService
             return ['status' => 'fail', 'msg'=>$e->getMessage()];
         }
     }
+
+    /**
+     * 删除产品
+     *
+     * @param $request
+     * @return array
+     */
+    public function deleteProduct($request)
+    {
+        try {
+            DB::beginTransaction();
+            $this->productRepository->delete($request->get('product_id'));
+            $this->productAttributeRepository->deleteWhere([
+                'product_id' => $request->get('product_id'),
+            ]);
+            $this->productSkuRepository->deleteWhere([
+                'product_id' => $request->get('product_id'),
+            ]);
+            $this->productSkuAttributeValueRepository->deleteWhere([
+                'product_id' => $request->get('product_id'),
+            ]);
+
+            DB::commit();
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
 }

@@ -48,4 +48,9 @@ class ProductController extends Controller
     {
         return response()->json($this->productService->uploadImageLink($request));
     }
+
+    public function deleteProduct(Request $request)
+    {
+        return response()->json($this->productService->deleteProduct($request));
+    }
 }

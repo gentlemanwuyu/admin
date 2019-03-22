@@ -49,4 +49,8 @@ return [
     'sku_cost_price_numeric' => 'The cost-price of sku must be numeric',
     'sku_attribute_value_max' => 'The length of sku-attribute must less than 32 letters.',
     'sku_attribute_value_required' => 'The value of sku attribute(%s) can\'t be empty',
+
+    'product_delete_confirm' => 'Are you sure to delete this product?',
+    'product_delete_successful' => 'Delete product successful',
+    'product_delete_fail' => 'Delete product failed',
 ];

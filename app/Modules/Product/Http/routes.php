@@ -19,9 +19,12 @@ Route::group(['prefix' => 'product', 'as' => 'product.'], function() {
 	// 产品列表
 	Route::get('create_or_update_product_page', ['as'=>'create_or_update_product_page', 'uses'=>'ProductController@createOrUpdateProductPage']);
 
-	// 添加/修改分类
+	// 添加/修改产品
 	Route::post('create_or_update_product', ['as'=>'create_or_update_product', 'uses'=>'ProductController@createOrUpdateProduct']);
 
 	// 图片上传
 	Route::post('upload', ['as'=>'upload', 'uses'=>'ProductController@upload']);
+
+	// 删除
+	Route::post('delete_product', ['as'=>'delete_product', 'uses'=>'ProductController@deleteProduct']);
 });
