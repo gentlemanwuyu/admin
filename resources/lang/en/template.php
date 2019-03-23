@@ -32,4 +32,6 @@ return [
         'goods_category' => 'Goods category',
     'product_management' => 'Product management',
         'product_list' => 'Product list',
+    'goods_management' => 'Goods management',
+        'goods_list' => 'Goods list',
 ];

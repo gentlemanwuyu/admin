@@ -102,6 +102,18 @@ return [
                     ],
                 ],
             ],
+            // 商品管理
+            [
+                'id' => 'goods_management',
+                'icon' => 'fa fa-cubes',
+                'menus' => [
+                    [
+                        'id' => 'goods_list',
+                        'icon' => 'fa fa-cube',
+                        'link' => '/goods/goods/list',
+                    ],
+                ],
+            ],
         ],
     ],
     'footer' => [
