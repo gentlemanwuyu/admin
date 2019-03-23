@@ -17,7 +17,7 @@ class ProductRequest extends FormRequest
      *
      * @var array
      */
-    protected $custom_messages;
+    protected $custom_messages = [];
 
     /**
      * Get the validation rules that apply to the request.
