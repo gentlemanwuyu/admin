@@ -46,3 +46,33 @@ $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
     checkboxClass: 'icheckbox_flat-green',
     radioClass   : 'iradio_flat-green'
 });
+
+// iCheck的全选/全不选事件绑定
+$('.my-check-all').each(function () {
+    var check_all_checkbox = this;
+    var class_name = $(this).attr('data-check_class');
+
+    $(check_all_checkbox).on('ifClicked', function () {
+        $('.' + class_name).iCheck(!this.checked ? 'check' : 'uncheck');
+    });
+
+    $('.' + class_name).on('ifChanged', function () {
+        var all_checked = true;
+        $('.' + class_name).each(function () {
+            if (!this.checked) {
+                all_checked = false;
+            }
+        });
+
+        $(check_all_checkbox).iCheck(all_checked ? 'check' : 'uncheck');
+    });
+
+    var all_checked = true;
+    $('.' + class_name).each(function () {
+        if (!this.checked) {
+            all_checked = false;
+        }
+    });
+
+    $(check_all_checkbox).iCheck(all_checked ? 'check' : 'uncheck');
+});
