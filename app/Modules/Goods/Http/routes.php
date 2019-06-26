@@ -17,7 +17,7 @@ Route::group(['prefix' => 'goods', 'as' => 'goods.'], function() {
 	Route::get('list', ['as'=>'list', 'uses'=>'GoodsController@getList']);
 
 	// 选择产品
-	Route::get('choose_product', ['as'=>'choose_product', 'uses'=>'GoodsController@chooseProduct']);
+	Route::get('choose_product_page', ['as'=>'choose_product_page', 'uses'=>'GoodsController@chooseProductPage']);
 
 	// 添加/修改单品页面
 	Route::get('create_or_update_single_page', ['as'=>'create_or_update_single_page', 'uses'=>'GoodsController@createOrUpdateSinglePage']);
