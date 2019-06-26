@@ -161,17 +161,6 @@ class ProductService
     }
 
     /**
-     * 读取产品信息
-     *
-     * @param $product_id
-     * @return mixed
-     */
-    public function getProduct($product_id)
-    {
-        return $this->productRepository->find($product_id);
-    }
-
-    /**
      * 上传图片链接
      *
      * @param $request

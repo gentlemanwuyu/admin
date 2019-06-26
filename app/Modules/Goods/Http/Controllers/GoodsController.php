@@ -4,6 +4,7 @@ namespace App\Modules\Goods\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Modules\Product\Repositories\ProductRepository;
 use App\Modules\Goods\Services\GoodsService;
 use App\Modules\Product\Services\ProductService;
 use App\Modules\Category\Services\CategoryService;
@@ -11,12 +12,17 @@ use App\Modules\Goods\Http\Requests\SingleRequest;
 
 class GoodsController extends Controller
 {
+    protected $productRepository;
     protected $goodsService;
     protected $productService;
     protected $categoryService;
 
-    public function __construct(GoodsService $goodsService, ProductService $productService, CategoryService $categoryService)
+    public function __construct(ProductRepository $productRepository,
+                                GoodsService $goodsService,
+                                ProductService $productService,
+                                CategoryService $categoryService)
     {
+        $this->productRepository = $productRepository;
         $this->goodsService = $goodsService;
         $this->productService = $productService;
         $this->categoryService = $categoryService;
@@ -37,7 +43,7 @@ class GoodsController extends Controller
     public function createOrUpdateSinglePage(Request $request)
     {
         $categories = $this->categoryService->getCategoryTree('goods');
-        $product_info = $this->productService->getProduct($request->get('product_id'));
+        $product_info = $this->productRepository->find($request->get('product_id'));
 
         return view('goods::goods.create_or_update_single', compact('product_info', 'categories'));
     }

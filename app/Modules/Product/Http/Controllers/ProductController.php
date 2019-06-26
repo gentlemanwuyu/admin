@@ -4,17 +4,20 @@ namespace App\Modules\Product\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Modules\Product\Repositories\ProductRepository;
 use App\Modules\Product\Services\ProductService;
 use App\Modules\Category\Services\CategoryService;
 use App\Modules\Product\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
+    protected $productRepository;
     protected $productService;
     protected $categoryService;
 
-    public function __construct(ProductService $productService, CategoryService $categoryService)
+    public function __construct(ProductRepository $productRepository, ProductService $productService, CategoryService $categoryService)
     {
+        $this->productRepository = $productRepository;
         $this->productService = $productService;
         $this->categoryService = $categoryService;
 	}
@@ -32,7 +35,7 @@ class ProductController extends Controller
         $data = compact('categories');
 
         if ('update' == $request->get('action')) {
-            $product_info = $this->productService->getProduct($request->get('product_id'));
+            $product_info = $this->productRepository->find($request->get('product_id'));
             $data = array_merge($data, compact('product_info'));
         }
 
@@ -56,7 +59,7 @@ class ProductController extends Controller
 
     public function productDetail($id)
     {
-        $product_info = $this->productService->getProduct($id);
+        $product_info = $this->productRepository->find($id);
 
         return view('product::product.detail', compact('product_info'));
     }
