@@ -42,6 +42,8 @@
     <!-- bootstrap-fileinput -->
     <link rel="stylesheet" href="{{asset('/assets/bootstrap-fileinput/css/fileinput.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/bootstrap-fileinput/css/fileinput-rtl.min.css')}}">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{asset('/assets/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -111,6 +113,9 @@
 <script src="{{asset('/assets/jquery-contextmenu/dist/jquery.ui.position.min.js')}}"></script>
 <!-- bootstrap-fileinput -->
 <script src="{{asset('/assets/bootstrap-fileinput/js/fileinput.min.js')}}"></script>
+<!-- DataTables -->
+<script src="{{asset('/assets/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('/assets/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('/assets/js/application.js')}}"></script>
 @yield('scripts')
