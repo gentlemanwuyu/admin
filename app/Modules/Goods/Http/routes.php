@@ -11,8 +11,17 @@
 |
 */
 
-Route::group(['prefix' => 'goods'], function() {
-	Route::get('/', function() {
-		dd('This is the Goods module index page.');
-	});
+// Goods控制器
+Route::group(['prefix' => 'goods', 'as' => 'goods.'], function() {
+	// 产品列表
+	Route::get('list', ['as'=>'list', 'uses'=>'GoodsController@getList']);
+
+	// 选择产品
+	Route::get('choose_product', ['as'=>'choose_product', 'uses'=>'GoodsController@chooseProduct']);
+
+	// 添加/修改单品页面
+	Route::get('create_or_update_single_page', ['as'=>'create_or_update_single_page', 'uses'=>'GoodsController@createOrUpdateSinglePage']);
+
+	// 添加/修改单品
+	Route::post('create_or_update_single', ['as'=>'create_or_update_single', 'uses'=>'GoodsController@createOrUpdateSingle']);
 });

@@ -26,4 +26,6 @@ return [
     'description' => 'Description',
     'created_at' => 'Created at',
     'updated_at' => 'Updated at',
+    'select' => 'Select',
+    'select_all' => 'Select all',
 ];
