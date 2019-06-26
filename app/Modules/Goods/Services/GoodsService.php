@@ -33,6 +33,7 @@ class GoodsService
     public function createOrUpdateSingle($params)
     {
         try {
+            // TODO: 判断产品ID是否已创建过商品
             DB::beginTransaction();
             $data = [
                 'code' => $params['code'],
