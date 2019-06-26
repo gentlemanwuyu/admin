@@ -14,7 +14,7 @@ use App\Modules\Product\Models\ProductSku;
 use App\Modules\Product\Models\ProductSkuAttributeValue;
 use Illuminate\Database\Seeder;
 
-class ProductSeeder extends Seeder
+class ProductTableSeeder extends Seeder
 {
     public function run()
     {
