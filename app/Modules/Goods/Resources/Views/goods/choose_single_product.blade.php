@@ -7,6 +7,9 @@
         .sku_list_th_td {
             padding: 0!important;
         }
+        .sku_list_th_td>.table {
+            margin: 0!important;
+        }
         .sku_list_th_td > div.row {
             margin: 0;
         }
@@ -26,7 +29,7 @@
     <div class="box box-primary">
         <div class="box-body">
             <form>
-                <table class="table table-bordered" id="products">
+                <table class="table table-bordered table-hover" id="products">
                     <thead>
                     <tr>
                         <th>@lang('application.index_number')</th>
@@ -79,13 +82,15 @@
                     "className": "sku_list_th_td",
                     "render": function (row, type, set, meta) {
                         var html = '';
+                        html += '<table class="table table-bordered table-hover">';
                         $.each(set.skus, function (key, val) {
-                            html += '<div class="row">';
-                            html += '<div class="col-xs-4">' + val.code + '</div>';
-                            html += '<div class="col-xs-4">' + val.weight + '</div>';
-                            html += '<div class="col-xs-4">' + val.cost_price + '</div>';
-                            html += '</div>';
+                            html += '<tr>';
+                            html += '<td class="col-xs-4">' + val.code + '</td>';
+                            html += '<td class="col-xs-4">' + val.weight + '</td>';
+                            html += '<td class="col-xs-4">' + val.cost_price + '</td>';
+                            html += '</tr>';
                         });
+                        html += '</table>';
 
                         return html;
                     }
