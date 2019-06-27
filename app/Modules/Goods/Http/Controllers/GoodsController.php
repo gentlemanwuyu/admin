@@ -50,4 +50,19 @@ class GoodsController extends Controller
     {
         return response()->json($this->goodsService->createOrUpdateSingle($request->all()));
     }
+
+    public function getProducts(Request $request)
+    {
+        $data = $this->productRepository->all()->map(function ($product) {
+            $item = [];
+            $item['id'] = $product->id;
+            $item['code'] = $product->code;
+            $item['name'] = $product->name;
+            $item['category'] = $product->category->display_name;
+            $item['skus'] = $product->skus;
+            return $item;
+        });
+
+        return response()->json(['data' => $data]);
+    }
 }

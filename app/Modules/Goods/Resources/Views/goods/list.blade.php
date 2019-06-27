@@ -47,7 +47,7 @@
         function addSinglePage(){
             layer.open({
                 type: 2,
-                area: ['50%', '80%'],
+                area: ['80%', '80%'],
                 fix: false,
                 skin: 'layui-layer-rim',
                 maxmin: true,
