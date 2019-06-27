@@ -58,13 +58,8 @@
     <script>
         $(function () {
             var opts = defaultDataTablesOptions;
+            opts.ordering = false;
             opts.ajax.url = "{{route('goods::goods.get_products')}}";
-            opts.columnDefs = [
-                {
-                    "targets": "_all",
-                    "orderable": false
-                }
-            ];
             opts.columns = [
                 {
                     "data": function (row, type, set, meta) {
