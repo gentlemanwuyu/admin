@@ -16,8 +16,8 @@ Route::group(['prefix' => 'goods', 'as' => 'goods.'], function() {
 	// 产品列表
 	Route::get('list', ['as'=>'list', 'uses'=>'GoodsController@getList']);
 
-	// 选择产品
-	Route::get('choose_product_page', ['as'=>'choose_product_page', 'uses'=>'GoodsController@chooseProductPage']);
+	// 选择single产品
+	Route::get('choose_single_product_page', ['as'=>'choose_single_product_page', 'uses'=>'GoodsController@chooseSingleProductPage']);
 
 	// 请求产品数据接口
 	Route::post('get_products', ['as'=>'get_products', 'uses'=>'GoodsController@getProducts']);

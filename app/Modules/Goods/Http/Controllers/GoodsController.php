@@ -33,9 +33,9 @@ class GoodsController extends Controller
         return view('goods::goods.list');
     }
 
-    public function chooseProductPage(Request $request)
+    public function chooseSingleProductPage(Request $request)
     {
-        return view('goods::goods.choose_product');
+        return view('goods::goods.choose_single_product');
     }
 
     public function createOrUpdateSinglePage(Request $request)

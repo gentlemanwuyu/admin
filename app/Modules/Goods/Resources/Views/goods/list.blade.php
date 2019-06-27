@@ -100,7 +100,7 @@
                         content: "{{route('goods::goods.create_or_update_single_page')}}?action=create&product_id=" + data[0].value
                     });
                 },
-                content: "{{route('goods::goods.choose_product_page')}}"
+                content: "{{route('goods::goods.choose_single_product_page')}}"
             });
         }
 
