@@ -108,7 +108,7 @@
                     }
                 }
             ];
-            opts.initComplete = function (settings, json) {console.log(json);
+            opts.drawCallback = function (settings, json) {console.log(json);
                 // 表格加载完数据后，初始化radio效果
                 $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
                     checkboxClass: 'icheckbox_minimal-blue',
