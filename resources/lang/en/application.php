@@ -28,4 +28,5 @@ return [
     'updated_at' => 'Updated at',
     'select' => 'Select',
     'select_all' => 'Select all',
+    'loading' => 'Loading...',
 ];

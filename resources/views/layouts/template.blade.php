@@ -118,6 +118,31 @@
 <script src="{{asset('/assets/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('/assets/js/application.js')}}"></script>
+<script>
+    // 默认的dataTables配置
+    var defaultDataTablesOptions = {
+        "lengthChange": false,
+        "processing": true,
+        "pageLength": 15,
+        "info": false,
+        "language": {
+            "processing": "<i class='fa fa-refresh fa-spin'></i>",
+            "loadingRecords": "{{trans('application.loading')}}",
+            "emptyTable": "",
+            search: "_INPUT_",
+            searchPlaceholder: "{{trans('application.search')}}",
+            "paginate": {
+                "previous": "«",
+                "next": "»"
+            }
+        },
+        "ajax": {
+            "url": "",
+            "dataType": "json",
+            "type": "POST"
+        }
+    };
+</script>
 @yield('scripts')
 </body>
 </html>

@@ -28,4 +28,5 @@ return [
     'updated_at' => '最后更新时间',
     'select' => '选择',
     'select_all' => '全选',
+    'loading' => '数据加载中...',
 ];
