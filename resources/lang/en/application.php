@@ -29,4 +29,5 @@ return [
     'select' => 'Select',
     'select_all' => 'Select all',
     'loading' => 'Loading...',
+    'quantity' => 'Quantity',
 ];

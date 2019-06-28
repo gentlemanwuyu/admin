@@ -105,8 +105,65 @@
         }
 
         function addComboPage(){
-
+            layer.open({
+                type: 2,
+                area: ['80%', '80%'],
+                fix: false,
+                skin: 'layui-layer-rim',
+                maxmin: true,
+                shade: 0.5,
+                anim: 4,
+                title: "{{trans('goods::goods.choose_product')}}",
+                btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
+                yes: function (index) {
+                    var data = $(layer.getChildFrame('body',index)).find('.box-body>form').serializeArray();
+                    if (0 == data.length) {
+                        layer.msg("{{trans('goods::goods.please_choose_product')}}", {icon:2});
+                        return false;
+                    }
+                    layer.close(index);
+                    layer.open({
+                        type: 2,
+                        area: ['80%', '80%'],
+                        fix: false,
+                        skin: 'layui-layer-rim',
+                        maxmin: true,
+                        shade: 0.5,
+                        anim: 4,
+                        title: "{{trans('goods::goods.add_single')}}",
+                        btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
+                        yes: function (index) {
+                            var data = $(layer.getChildFrame('body',index)).find('form').serialize();
+                            var load_index = layer.load();
+                            $.ajax({
+                                method: "post",
+                                url: "{{route('goods::goods.create_or_update_single')}}",
+                                data: data,
+                                success: function (data) {
+                                    layer.close(load_index);
+                                    if ('success' == data.status) {
+                                        layer.close(index);
+                                        layer.msg("{{trans('goods::goods.goods_create_or_update_successful')}}", {icon:1});
+                                        parent.location.reload();
+                                    } else {
+                                        layer.msg("{{trans('goods::goods.goods_create_or_update_fail')}}:"+data.msg, {icon:2});
+                                        return false;
+                                    }
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    layer.close(load_index);
+                                    layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                    return false;
+                                }
+                            });
+                        },
+                        content: "{{route('goods::goods.create_or_update_single_page')}}?action=create&product_id=" + data[0].value
+                    });
+                },
+                content: "{{route('goods::goods.choose_combo_product_page')}}"
+            });
         }
+
         $(function () {
             $('#add_goods').parents('.btn-group').on('mouseenter', function () {
                 var buttons = '';

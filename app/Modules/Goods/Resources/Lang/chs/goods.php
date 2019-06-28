@@ -38,4 +38,9 @@ return [
     'sku_lowest_price_required' => 'Sku最低售价不能为空',
     'sku_lowest_price_numeric' => 'Sku最低售价只能是数值',
     'sku_msrp_numeric' => 'Sku建议零售价只能是数值',
+
+    // combo商品
+    'selected_product' => '已选产品',
+    'product' => '产品',
+    'product_added' => '产品已添加过，不可重复添加',
 ];

@@ -38,4 +38,9 @@ return [
     'sku_lowest_price_required' => 'The lowest-price of sku can\'t be empty',
     'sku_lowest_price_numeric' => 'The lowest-price of sku must be numeric',
     'sku_msrp_numeric' => 'MSRP of sku must be numeric',
+
+    // combo商品
+    'selected_product' => 'Selected product',
+    'product' => 'Product',
+    'product_added' => 'The product has been added and cannot be added again.',
 ];

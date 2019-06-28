@@ -38,6 +38,11 @@ class GoodsController extends Controller
         return view('goods::goods.choose_single_product');
     }
 
+    public function chooseComboProductPage(Request $request)
+    {
+        return view('goods::goods.choose_combo_product');
+    }
+
     public function createOrUpdateSinglePage(Request $request)
     {
         $categories = $this->categoryService->getCategoryTree('goods');

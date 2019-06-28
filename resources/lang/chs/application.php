@@ -29,4 +29,5 @@ return [
     'select' => '选择',
     'select_all' => '全选',
     'loading' => '数据加载中...',
+    'quantity' => '数量',
 ];
