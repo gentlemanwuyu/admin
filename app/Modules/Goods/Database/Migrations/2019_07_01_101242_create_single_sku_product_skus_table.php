@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSingleSkuProductSkuRelationsTable extends Migration
+class CreateSingleSkuProductSkusTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateSingleSkuProductSkuRelationsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('single_sku_product_sku_relations', function (Blueprint $table) {
+		Schema::create('single_sku_product_skus', function (Blueprint $table) {
 			$table->increments('id');
 			$table->integer('goods_sku_id')->default(0)->comment('商品skuID');
 			$table->integer('product_sku_id')->default(0)->comment('产品skuID');
@@ -32,6 +32,6 @@ class CreateSingleSkuProductSkuRelationsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('single_sku_product_sku_relations');
+		Schema::dropIfExists('single_sku_product_skus');
 	}
 }

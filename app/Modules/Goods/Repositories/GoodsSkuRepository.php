@@ -9,12 +9,12 @@
 namespace App\Modules\Goods\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
-use App\Modules\Goods\Models\SingleSku;
+use App\Modules\Goods\Models\GoodsSku;
 
-class SingleSkuRepository extends BaseRepository
+class GoodsSkuRepository extends BaseRepository
 {
     public function model()
     {
-        return SingleSku::class;
+        return GoodsSku::class;
     }
 }
