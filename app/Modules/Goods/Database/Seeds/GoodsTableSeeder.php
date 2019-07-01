@@ -17,7 +17,7 @@ class GoodsTableSeeder extends Seeder
 {
     public function run()
     {
-        $this->singleSeeder();
+//        $this->singleSeeder();
     }
 
     /**

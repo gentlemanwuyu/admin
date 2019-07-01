@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGoodsTable extends Migration
+class CreateGoodsSkusTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -12,13 +12,12 @@ class CreateGoodsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('goods', function (Blueprint $table) {
+		Schema::create('goods_skus', function (Blueprint $table) {
 			$table->increments('id');
-			$table->string('code')->default('')->comment('商品编号');
-			$table->string('name')->default('')->comment('商品标题');
-			$table->text('description')->default('')->comment('商品描述');
-			$table->enum('type',[0, 1, 2])->default(0)->comment('商品类型，1为singgle，2为combo');
-			$table->integer('category_id')->default(0)->comment('分类ID');
+			$table->integer('goods_id')->default(0)->comment('商品ID');
+			$table->string('code')->default('')->comment('sku编号');
+			$table->decimal('lowest_price', 8, 2)->default(0.00)->comment('最低售价');
+			$table->decimal('msrp', 8, 2)->default(0.00)->comment('建议零售价');
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('创建时间');
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))->comment('最后更新时间');
 			$table->timestamp('deleted_at')->nullable()->comment('删除时间');
@@ -32,6 +31,6 @@ class CreateGoodsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('goods');
+		Schema::dropIfExists('goods_skus');
 	}
 }
