@@ -33,6 +33,11 @@ class GoodsService
         $this->singleSkuProductSkuRepository = $singleSkuProductSkuRepository;
     }
 
+    public function getList($params)
+    {
+        return $this->goodsRepository->paginate();
+    }
+
     /**
      * 添加/修改single商品
      *

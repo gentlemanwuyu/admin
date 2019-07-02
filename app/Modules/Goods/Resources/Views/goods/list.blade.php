@@ -2,6 +2,11 @@
 @section('title')
     {{trans('template.goods_list')}} | {{$project_name}}
 @endsection
+@section('css')
+    <style>
+
+    </style>
+@endsection
 @section('content')
     <section class="content-header">
         <h1>@lang('template.goods_list')</h1>
@@ -33,7 +38,49 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <th>@lang('application.index_number')</th>
+                    <th>@lang('application.image')</th>
+                    <th>@lang('goods::goods.goods_code')</th>
+                    <th>@lang('goods::goods.goods_name')</th>
+                    <th>@lang('goods::goods.category')</th>
+                    <th class="th_list">
+                        <div class="row th_content_div">
+                            @lang('goods::goods.sku_list')
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 th_content_div">sku编码</div>
+                            <div class="col-xs-3 th_content_div">最低售价</div>
+                            <div class="col-xs-3 th_content_div">建议零售价</div>
+                        </div>
+                    </th>
+                    <th>@lang('application.action')</th>
+                    </thead>
+                    <tbody>
+                    @foreach($goods as $g)
+                        <tr>
+                            <td>{{$g->id}}</td>
+                            <td></td>
+                            <td>{{$g->code}}</td>
+                            <td>{{$g->name}}</td>
+                            <td>{{$g->category->display_name}}</td>
+                            <td class="td_list">
+                                <table class="table table-bordered table-hover">
+                                    @foreach($g->skus as $goods_sku)
+                                        <tr>
+                                            <td class="col-xs-6">{{$goods_sku->code}}</td>
+                                            <td class="col-xs-3">{{$goods_sku->lowest_price}}</td>
+                                            <td class="col-xs-3">{{$goods_sku->msrp}}</td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </td>
+                            <td></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">

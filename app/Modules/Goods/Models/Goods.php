@@ -8,7 +8,7 @@
 
 namespace App\Modules\Goods\Models;
 
-use App\Modules\Product\Models\Product;
+use App\Modules\Category\Models\GoodsCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -29,14 +29,14 @@ class Goods extends Model
 
     protected $guarded = [];
 
-    public function product()
+    public function category()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(GoodsCategory::class);
     }
 
-    public function singleSkus()
+    public function skus()
     {
-        return $this->hasMany(SingleSku::class);
+        return $this->hasMany(GoodsSku::class);
     }
 
     /**

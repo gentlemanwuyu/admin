@@ -1,5 +1,6 @@
 td, th {
     text-align: center;
+    vertical-align: middle!important;
 }
 .required:after { content: "*"; color: #ff2556; }
 .form-control-span {
@@ -27,4 +28,27 @@ td, th {
     background-image: none;
     border-radius: 4px;
     overflow: auto;
+}
+
+/*table内做列表展示*/
+.th_list, .td_list {
+    padding: 0!important;
+}
+.th_list>div.row {
+    margin: 0;
+}
+.th_list>div.row:not(:first-child) {
+    border-top: 1px solid #f4f4f4;
+}
+.th_content_div {
+    padding: 8px;
+}
+.th_list>div.row>.th_content_div:not(:first-child) {
+    border-left: 1px solid #f4f4f4;
+}
+.td_list>table.table {
+    margin-bottom: 0;
+}
+.td_list>table.table-bordered {
+    border: 0!important;
 }

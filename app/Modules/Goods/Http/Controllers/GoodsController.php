@@ -4,6 +4,7 @@ namespace App\Modules\Goods\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Modules\Goods\Repositories\GoodsRepository;
 use App\Modules\Product\Repositories\ProductRepository;
 use App\Modules\Goods\Services\GoodsService;
 use App\Modules\Product\Services\ProductService;
@@ -12,16 +13,19 @@ use App\Modules\Goods\Http\Requests\SingleRequest;
 
 class GoodsController extends Controller
 {
+    protected $goodsRepository;
     protected $productRepository;
     protected $goodsService;
     protected $productService;
     protected $categoryService;
 
-    public function __construct(ProductRepository $productRepository,
+    public function __construct(GoodsRepository $goodsRepository,
+                                ProductRepository $productRepository,
                                 GoodsService $goodsService,
                                 ProductService $productService,
                                 CategoryService $categoryService)
     {
+        $this->goodsRepository = $goodsRepository;
         $this->productRepository = $productRepository;
         $this->goodsService = $goodsService;
         $this->productService = $productService;
@@ -30,7 +34,9 @@ class GoodsController extends Controller
 
     public function getList(Request $request)
     {
-        return view('goods::goods.list');
+        $goods = $this->goodsService->getList($request->all());
+
+        return view('goods::goods.list', compact('goods'));
     }
 
     public function chooseSingleProductPage(Request $request)
