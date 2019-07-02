@@ -1,31 +1,7 @@
 @extends('layouts.template')
 @section('css')
     <style>
-        td, th{
-            vertical-align: middle!important;
-        }
-        .sku_list_th_td {
-            padding: 0!important;
-        }
-        .sku_list_th_td>.table, #selected_products {
-            margin: 0!important;
-        }
-        .sku_list_th_td > div.row {
-            margin: 0;
-        }
-        .sku_list_th_td .col-xs-12, .sku_list_th_td .col-xs-4 {
-            padding: 8px;
-        }
-        .sku_list_th_td > div.row > div.col-xs-4:not(:first-child) {
-            border-left: 1px solid #f4f4f4;
-        }
 
-        .sku_list_th_td .row:not(:first-child){
-            border-top: 1px solid #f4f4f4;
-        }
-        .panel-body {
-            padding: 0;
-        }
     </style>
 @endsection
 @section('body')
@@ -40,14 +16,12 @@
                             <th>@lang('product::product.product_code')</th>
                             <th>@lang('product::product.product_name')</th>
                             <th>@lang('product::product.category')</th>
-                            <th class="sku_list_th_td">
+                            <th class="th_list">
+                                <div class="row th_content_div">@lang('product::product.sku_list')</div>
                                 <div class="row">
-                                    <div class="col-xs-12">@lang('product::product.sku_list')</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-4">@lang('product::product.sku_code')</div>
-                                    <div class="col-xs-4">@lang('product::product.weight')</div>
-                                    <div class="col-xs-4">@lang('product::product.cost_price')</div>
+                                    <div class="col-xs-4 th_content_div">@lang('product::product.sku_code')</div>
+                                    <div class="col-xs-4 th_content_div">@lang('product::product.weight')</div>
+                                    <div class="col-xs-4 th_content_div">@lang('product::product.cost_price')</div>
                                 </div>
                             </th>
                             <th>@lang('application.select')</th>
@@ -100,7 +74,7 @@
                     "data": 'category'
                 },
                 {
-                    "className": "sku_list_th_td",
+                    "className": "td_list",
                     "render": function (row, type, set, meta) {
                         var html = '';
                         html += '<table class="table table-bordered table-hover">';
