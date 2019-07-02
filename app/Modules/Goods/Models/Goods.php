@@ -30,22 +30,56 @@ class Goods extends Model
 
     protected $guarded = [];
 
+    /**
+     * 关联商品分类
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function category()
     {
         return $this->belongsTo(GoodsCategory::class);
     }
 
+    /**
+     * 关联商品sku
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function skus()
     {
         return $this->hasMany(GoodsSku::class);
     }
 
+    /**
+     * 读取product_id属性
+     *
+     * @return mixed
+     */
     public function getProductIdAttribute()
     {
         if (self::SINGLE == $this->type) {
             $single_product = SingleProduct::where('goods_id', $this->id)->first();
             if ($single_product) {
                 return $single_product->product_id;
+            }
+        }
+    }
+
+    /**
+     * 读取产品sku对应的single sku
+     *
+     * @param $product_sku_id
+     * @return mixed bool|object
+     */
+    public function singleGetSkuByProductSkuId($product_sku_id)
+    {
+        if (self::SINGLE != $this->type) {
+            return false;
+        }
+
+        foreach ($this->skus as $sku) {
+            if ($product_sku_id == $sku->product_sku_id) {
+                return $sku;
             }
         }
     }

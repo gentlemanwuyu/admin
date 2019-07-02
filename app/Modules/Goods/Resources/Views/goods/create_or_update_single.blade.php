@@ -111,14 +111,22 @@
                         </thead>
                         <tbody>
                         @foreach($product_info->skus as $product_sku)
+                            <?php
+                                if ('update' == $action) {
+                                    $goods_sku = $goods_info->singleGetSkuByProductSkuId($product_sku->id);
+                                }
+                            ?>
                             <tr>
+                                @if('update' == $action)
+                                    <input type="hidden" name="skus[{{$product_sku->id}}][goods_sku_id]" value="{{$goods_sku->id or ''}}">
+                                @endif
                                 <td>
-                                    <label><input type="checkbox" class="minimal goods_sku_checkbox" name="skus[{{$product_sku->id}}][enabled]" value="1"></label>
+                                    <label><input type="checkbox" class="minimal goods_sku_checkbox" name="skus[{{$product_sku->id}}][enabled]" value="1" @if('update' == $action && !empty($goods_sku)) checked @endif></label>
                                 </td>
-                                <td><input type="text" name="skus[{{$product_sku->id}}][code]" class="form-control" value="{{$product_sku->code or ''}}"></td>
+                                <td><input type="text" name="skus[{{$product_sku->id}}][code]" class="form-control" value="{{'update' == $action && !empty($goods_sku) ? $goods_sku->code : $product_sku->code}}"></td>
                                 <td><span class="form-control-span">{{$product_sku->cost_price or ''}}</span></td>
-                                <td><input type="text" name="skus[{{$product_sku->id}}][lowest_price]" class="form-control" value="" oninput="value=value.replace(/[^\d.]/g, '')"></td>
-                                <td><input type="text" name="skus[{{$product_sku->id}}][msrp]" class="form-control" value="" oninput="value=value.replace(/[^\d.]/g, '')"></td>
+                                <td><input type="text" name="skus[{{$product_sku->id}}][lowest_price]" class="form-control" value="{{$goods_sku->lowest_price or ''}}" oninput="value=value.replace(/[^\d.]/g, '')"></td>
+                                <td><input type="text" name="skus[{{$product_sku->id}}][msrp]" class="form-control" value="{{!empty($goods_sku)&& (float)$goods_sku->msrp ? $goods_sku->msrp : ''}}" oninput="value=value.replace(/[^\d.]/g, '')"></td>
                             </tr>
                         @endforeach
                         </tbody>
