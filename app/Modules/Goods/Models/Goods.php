@@ -9,6 +9,7 @@
 namespace App\Modules\Goods\Models;
 
 use App\Modules\Category\Models\GoodsCategory;
+use App\Modules\Goods\Models\SingleProduct;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -37,6 +38,21 @@ class Goods extends Model
     public function skus()
     {
         return $this->hasMany(GoodsSku::class);
+    }
+
+    public function getProductIdAttribute()
+    {
+        if (self::SINGLE == $this->type) {
+            $single_product = SingleProduct::where('goods_id', $this->id)->first();
+            if ($single_product) {
+                return $single_product->product_id;
+            }
+        }
+    }
+
+    public function getTypeNameAttribute()
+    {
+        return isset(self::$types[$this->type]) ? self::$types[$this->type] : '';
     }
 
     /**

@@ -18,6 +18,12 @@
 @endsection
 @section('body')
     <form class="form-horizontal">
+        <input type="hidden" name="action" value="{{$action or 'create'}}">
+        @if('create' == $action)
+            <input type="hidden" name="product_id" value="{{$product_id}}">
+        @else
+            <input type="hidden" name="goods_id" value="{{$goods_id}}">
+        @endif
         <div class="row" style="padding: 30px;">
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -31,12 +37,6 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-2" style="text-align: center">
-                            <input type="hidden" name="action" value="{{$action or 'create'}}">
-                            @if('create' == $action)
-                                <input type="hidden" name="product_id" value="{{$product_id}}">
-                            @else
-                                <input type="hidden" name="goods_id" value="{{$goods_id}}">
-                            @endif
                             <div class="img_container">
                                 <img src="{{$product_info->image_link or ''}}" onerror="this.src='{{asset('/assets/img/system/none.jpg')}}';this.onerror=null;">
                             </div>
@@ -45,19 +45,19 @@
                             <div class="form-group">
                                 <label class="col-xs-3 control-label required">@lang('goods::goods.goods_code')</label>
                                 <div class="col-xs-9">
-                                    <input type="text" name="code" class="form-control" value="{{$product_info->code or ''}}">
+                                    <input type="text" name="code" class="form-control" value="{{'update' == $action ? $goods_info->code : $product_info->code}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-3 control-label required">@lang('goods::goods.goods_name')</label>
                                 <div class="col-xs-9">
-                                    <input type="text" name="name" class="form-control" value="{{$product_info->name or ''}}">
+                                    <input type="text" name="name" class="form-control" value="{{'update' == $action ? $goods_info->name : $product_info->name}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">@lang('application.description')</label>
                                 <div class="col-xs-9">
-                                    <textarea class="form-control" name="description" rows="3">{{$product_info->description or ''}}</textarea>
+                                    <textarea class="form-control" name="description" rows="3">{{'update' == $action ? $goods_info->description : $product_info->description}}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -66,17 +66,17 @@
                                     <select name="category_id" class="form-control select2">
                                         <option value="">@lang('goods::goods.please_select_category')</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}" @if('update' == $action && isset($product_info) && $product_info->category_id == $category->id) selected @endif>
+                                            <option value="{{$category->id}}" @if('update' == $action && $goods_info->category_id == $category->id) selected @endif>
                                                 {{$category->display_name}}
                                             </option>
                                             @if(isset($category->children) && $category->children)
                                                 @foreach($category->children as $son)
-                                                    <option value="{{$son->id}}" @if('update' == $action && isset($product_info) && $product_info->category_id == $son->id) selected @endif>
+                                                    <option value="{{$son->id}}" @if('update' == $action && $goods_info->category_id == $son->id) selected @endif>
                                                         {{str_repeat('&nbsp;', 4)}}{{$son->display_name}}
                                                     </option>
                                                     @if(isset($son->children) && $son->children)
                                                         @foreach($son->children as $grandson)
-                                                            <option value="{{$grandson->id}}" @if('update' == $action && isset($product_info) && $product_info->category_id == $grandson->id) selected @endif>
+                                                            <option value="{{$grandson->id}}" @if('update' == $action && $goods_info->category_id == $grandson->id) selected @endif>
                                                                 {{str_repeat('&nbsp;', 8)}}{{$grandson->display_name}}
                                                             </option>
                                                         @endforeach

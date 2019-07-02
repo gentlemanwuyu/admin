@@ -8,9 +8,11 @@
 
 return [
     'add_goods' => '添加商品',
+    'edit_goods' => '添加商品',
     'single' => '单品',
     'combo' => '组合',
     'add_single' => '添加单品',
+    'edit_single' => '编辑单品',
     'add_combo' => '添加组合',
     'choose_product' => '选择产品',
     'please_choose_product' => '请选择产品',
@@ -18,6 +20,7 @@ return [
     'base_info' => '基本信息',
     'goods_code' => '商品编码',
     'goods_name' => '商品名称',
+    'type' => '类型',
     'category' => '分类',
     'please_select_category' => '请选择分类',
     'sku_list' => 'Sku列表',

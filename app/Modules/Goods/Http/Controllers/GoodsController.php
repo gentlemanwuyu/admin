@@ -48,9 +48,17 @@ class GoodsController extends Controller
     public function createOrUpdateSinglePage(Request $request)
     {
         $categories = $this->categoryService->getCategoryTree('goods');
-        $product_info = $this->productRepository->find($request->get('product_id'));
+        $data = compact('categories');
+        if ('create' == $request->get('action')) {
+            $product_info = $this->productRepository->find($request->get('product_id'));
+        }else {
+            $goods_info = $this->goodsRepository->find($request->get('goods_id'));
+            $product_info = $this->productRepository->find($goods_info->product_id);
+            $data['goods_info'] = $goods_info;
+        }
+        $data['product_info'] = $product_info;
 
-        return view('goods::goods.create_or_update_single', compact('product_info', 'categories'));
+        return view('goods::goods.create_or_update_single', $data);
     }
 
     public function createOrUpdateSingle(SingleRequest $request)

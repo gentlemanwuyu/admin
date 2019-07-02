@@ -44,6 +44,7 @@
                     <th>@lang('application.image')</th>
                     <th>@lang('goods::goods.goods_code')</th>
                     <th>@lang('goods::goods.goods_name')</th>
+                    <th>@lang('goods::goods.type')</th>
                     <th>@lang('goods::goods.category')</th>
                     <th class="th_list">
                         <div class="row th_content_div">
@@ -59,11 +60,12 @@
                     </thead>
                     <tbody>
                     @foreach($goods as $g)
-                        <tr>
+                        <tr data-id="{{$g->id}}" data-type="{{$g->type}}">
                             <td>{{$g->id}}</td>
                             <td></td>
                             <td>{{$g->code}}</td>
                             <td>{{$g->name}}</td>
+                            <td>{{trans('goods::goods.'.$g->type_name)}}</td>
                             <td>{{$g->category->display_name}}</td>
                             <td class="td_list">
                                 <table class="table table-bordered table-hover">
@@ -76,7 +78,11 @@
                                     @endforeach
                                 </table>
                             </td>
-                            <td></td>
+                            <td>
+                                <a href="javascript:;">
+                                    <i class="fa fa-edit edit_goods" title="{{trans('goods::goods.edit_goods')}}"></i>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -220,6 +226,51 @@
             });
             $('#add_goods').parents('.btn-group').on('mouseleave', function () {
                 $(this).children(':not(:first)').remove();
+            });
+            
+            $('.edit_goods').on('click', function () {
+                var goods_type = $(this).parents('tr').attr('data-type');
+                var goods_id = $(this).parents('tr').attr('data-id');
+
+                if ("{{\App\Modules\Goods\Models\Goods::SINGLE}}" == goods_type) {
+                    layer.open({
+                        type: 2,
+                        area: ['80%', '80%'],
+                        fix: false,
+                        skin: 'layui-layer-rim',
+                        maxmin: true,
+                        shade: 0.5,
+                        anim: 4,
+                        title: "{{trans('goods::goods.edit_single')}}",
+                        btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
+                        yes: function (index) {
+                            var data = $(layer.getChildFrame('body',index)).find('form').serialize();
+                            var load_index = layer.load();
+                            $.ajax({
+                                method: "post",
+                                url: "{{route('goods::goods.create_or_update_single')}}",
+                                data: data,
+                                success: function (data) {
+                                    layer.close(load_index);
+                                    if ('success' == data.status) {
+                                        layer.close(index);
+                                        layer.msg("{{trans('goods::goods.goods_create_or_update_successful')}}", {icon:1});
+                                        parent.location.reload();
+                                    } else {
+                                        layer.msg("{{trans('goods::goods.goods_create_or_update_fail')}}:"+data.msg, {icon:2});
+                                        return false;
+                                    }
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    layer.close(load_index);
+                                    layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                    return false;
+                                }
+                            });
+                        },
+                        content: "{{route('goods::goods.create_or_update_single_page')}}?action=update&goods_id=" + goods_id
+                    });
+                }
             });
         });
     </script>

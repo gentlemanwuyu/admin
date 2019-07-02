@@ -8,9 +8,11 @@
 
 return [
     'add_goods' => 'Add goods',
+    'edit_goods' => 'Edit goods',
     'single' => 'Single',
     'combo' => 'Combo',
     'add_single' => 'Add single',
+    'edit_single' => 'Edit single',
     'add_combo' => 'Add combo',
     'choose_product' => 'Choose product',
     'please_choose_product' => 'Please choose product',
@@ -18,6 +20,7 @@ return [
     'base_info' => 'Base info',
     'goods_code' => 'Goods code',
     'goods_name' => 'Goods name',
+    'type' => 'Type',
     'category' => 'Category',
     'please_select_category' => 'Please select category',
     'sku_list' => 'Sku list',
