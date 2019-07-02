@@ -43,4 +43,7 @@ return [
     'selected_product' => 'Selected product',
     'product' => 'Product',
     'product_added' => 'The product has been added and cannot be added again.',
+
+    'goods_create_or_update_successful' => 'Goods are created/updated successful.',
+    'goods_create_or_update_fail' => 'Goods are created/updated failed.',
 ];

@@ -43,4 +43,7 @@ return [
     'selected_product' => '已选产品',
     'product' => '产品',
     'product_added' => '产品已添加过，不可重复添加',
+
+    'goods_create_or_update_successful' => '商品创建/修改成功',
+    'goods_create_or_update_fail' => '商品创建/修改成功',
 ];

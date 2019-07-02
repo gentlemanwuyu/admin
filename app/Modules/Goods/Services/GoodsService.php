@@ -10,23 +10,28 @@ namespace App\Modules\Goods\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Modules\Goods\Models\Goods;
+use App\Modules\Product\Repositories\ProductRepository;
 use App\Modules\Goods\Repositories\GoodsRepository;
 use App\Modules\Goods\Repositories\GoodsSkuRepository;
 use App\Modules\Goods\Repositories\SingleProductRepository;
 use App\Modules\Goods\Repositories\SingleSkuProductSkuRepository;
+use App\Modules\Product\Repositories\Criteria\Product\IdNotIn;
 
 class GoodsService
 {
+    protected $productRepository;
     protected $goodsRepository;
     protected $goodsSkuRepository;
     protected $singleProductRepository;
     protected $singleSkuProductSkuRepository;
 
-    public function __construct(GoodsRepository $goodsRepository,
+    public function __construct(ProductRepository $productRepository,
+                                GoodsRepository $goodsRepository,
                                 GoodsSkuRepository $goodsSkuRepository,
                                 SingleProductRepository $singleProductRepository,
                                 SingleSkuProductSkuRepository $singleSkuProductSkuRepository)
     {
+        $this->productRepository = $productRepository;
         $this->goodsRepository = $goodsRepository;
         $this->goodsSkuRepository = $goodsSkuRepository;
         $this->singleProductRepository = $singleProductRepository;
@@ -36,6 +41,33 @@ class GoodsService
     public function getList($params)
     {
         return $this->goodsRepository->paginate();
+    }
+
+    /**
+     * 读取所有产品用于创建商品用
+     *
+     * @param $params
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
+    public function getProducts($params)
+    {
+        if (isset($params['type']) && Goods::SINGLE == $params['type']) {
+            $product_ids = array_column($this->singleProductRepository->all()->toArray(), 'product_id');
+            $this->productRepository->pushCriteria(new IdNotIn($product_ids));
+        }
+
+        return $this->productRepository->all()->map(function ($product) {
+            $item = [];
+            $item['id'] = $product->id;
+            $item['code'] = $product->code;
+            $item['name'] = $product->name;
+            $item['category'] = $product->category->display_name;
+            $item['skus'] = $product->skus;
+            return $item;
+        });
+
+
     }
 
     /**

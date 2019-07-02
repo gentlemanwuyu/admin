@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Modules\Goods\Repositories\GoodsRepository;
 use App\Modules\Product\Repositories\ProductRepository;
 use App\Modules\Goods\Services\GoodsService;
-use App\Modules\Product\Services\ProductService;
 use App\Modules\Category\Services\CategoryService;
 use App\Modules\Goods\Http\Requests\SingleRequest;
 
@@ -16,19 +15,16 @@ class GoodsController extends Controller
     protected $goodsRepository;
     protected $productRepository;
     protected $goodsService;
-    protected $productService;
     protected $categoryService;
 
     public function __construct(GoodsRepository $goodsRepository,
                                 ProductRepository $productRepository,
                                 GoodsService $goodsService,
-                                ProductService $productService,
                                 CategoryService $categoryService)
     {
         $this->goodsRepository = $goodsRepository;
         $this->productRepository = $productRepository;
         $this->goodsService = $goodsService;
-        $this->productService = $productService;
         $this->categoryService = $categoryService;
     }
 
@@ -64,16 +60,6 @@ class GoodsController extends Controller
 
     public function getProducts(Request $request)
     {
-        $data = $this->productRepository->all()->map(function ($product) {
-            $item = [];
-            $item['id'] = $product->id;
-            $item['code'] = $product->code;
-            $item['name'] = $product->name;
-            $item['category'] = $product->category->display_name;
-            $item['skus'] = $product->skus;
-            return $item;
-        });
-
-        return response()->json(['data' => $data]);
+        return response()->json(['data' => $this->goodsService->getProducts($request->all())]);
     }
 }

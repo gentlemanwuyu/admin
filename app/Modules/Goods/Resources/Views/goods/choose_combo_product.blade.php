@@ -57,7 +57,7 @@
         $(function () {
             var opts = defaultDataTablesOptions;
             opts.ordering = false;
-            opts.ajax.url = "{{route('goods::goods.get_products')}}";
+            opts.ajax.url = "{{route('goods::goods.get_products', ['type' => \App\Modules\Goods\Models\Goods::COMBO])}}";
             opts.columns = [
                 {
                     "data": function (row, type, set, meta) {
