@@ -9,7 +9,6 @@
 namespace App\Modules\Goods\Models;
 
 use App\Modules\Category\Models\GoodsCategory;
-use App\Modules\Goods\Models\SingleProduct;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -29,6 +28,83 @@ class Goods extends Model
     ];
 
     protected $guarded = [];
+
+    /**
+     * 创建商品，连带商品与产品的对应关系
+     *
+     * @param $attributes
+     * @param $product_ids
+     * @return static
+     */
+    public function createWithProductRelation($attributes, $product_ids)
+    {
+        $goods = parent::create($attributes);
+
+        if ($product_ids) {
+            if (self::SINGLE == $goods->type) {
+                SingleProduct::create([
+                    'goods_id' => $goods->id,
+                    'product_id' => $product_ids,
+                ]);
+            }elseif (Goods::COMBO == $goods->type) {
+
+            }
+        }
+
+        return $goods;
+    }
+
+    /**
+     * 同步商品sku
+     *
+     * @param $skus
+     * @return $this
+     */
+    public function syncSkus($skus)
+    {
+        if (!empty($skus) && is_array($skus)) {
+            // single商品sku同步
+            if (self::SINGLE == $this->type) {
+                // 将多余的sku删除掉
+                $new_sku_ids = array_filter(array_column($skus, 'goods_sku_id'));
+                $unselected_skus = GoodsSku::where('goods_id', $this->id)->whereNotIn('id', $new_sku_ids)->get();
+                foreach ($unselected_skus as $unselected_sku) {
+                    $unselected_sku->delete();
+                    SingleSkuProductSku::where('goods_sku_id', $unselected_sku->id)->delete();
+                }
+
+                foreach ($skus as $sku) {
+                    if (!empty($sku['goods_sku_id'])) {
+                        GoodsSku::find($sku['goods_sku_id'])->update([
+                            'code' => $sku['code'],
+                            'lowest_price' => $sku['lowest_price'],
+                            'msrp' => $sku['msrp'],
+                        ]);
+                    }else {
+                        $product_sku_exist = SingleSkuProductSku::where('product_sku_id', $sku['product_sku_id'])->first();
+                        if ($product_sku_exist) {
+                            throw new \Exception("Product sku has exists.");
+                        }
+                        $goods_sku = GoodsSku::create([
+                            'goods_id' => $this->id,
+                            'code' => $sku['code'],
+                            'lowest_price' => $sku['lowest_price'],
+                            'msrp' => $sku['msrp'],
+                        ]);
+
+                        if ($goods_sku) {
+                            SingleSkuProductSku::create([
+                                'goods_sku_id' => $goods_sku->id,
+                                'product_sku_id' => $sku['product_sku_id'],
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $this;
+    }
 
     /**
      * 关联商品分类

@@ -79,45 +79,35 @@ class GoodsService
     public function createOrUpdateSingle($params)
     {
         try {
-            $result = $this->singleProductRepository->findWhere(['product_id' => $params['product_id']])->first();
-            if ($result) {
-                throw new \Exception("Product exists.");
+            // 如果是新建single商品，首先判断是否已创建过
+            if ('create' == $params['action']) {
+                $result = $this->singleProductRepository->findWhere(['product_id' => $params['product_id']])->first();
+                if ($result) {
+                    throw new \Exception("Product exists.");
+                }
             }
-
 
             DB::beginTransaction();
             $data = [
                 'code' => $params['code'],
                 'name' => $params['name'],
                 'description' => $params['description'],
-                'type' => Goods::SINGLE,
                 'category_id' => $params['category_id'],
             ];
 
-            $goods = $this->goodsRepository->createWithProductRelation($data, $params['product_id']);
-
-            foreach ($params['skus'] as $product_sku_id => $value) {
-                $goods_sku = $this->goodsSkuRepository->create([
-                    'goods_id' => $goods->id,
-                    'code' => $value['code'],
-                    'lowest_price' => $value['lowest_price'],
-                    'msrp' => $value['msrp'],
-                ]);
-
-                $this->singleSkuProductSkuRepository->create([
-                    'goods_sku_id' => $goods_sku->id,
-                    'product_sku_id' => $product_sku_id,
-                ]);
+            if ('create' == $params['action']) {
+                $data['type'] = Goods::SINGLE;
+                $goods = $this->goodsRepository->createWithProductRelation($data, $params['product_id']);
+            }else {
+                $goods = $this->goodsRepository->update($data, $params['goods_id']);
             }
 
+            $skus = array_map(function ($item, $key) {
+                $item['product_sku_id'] = $key;
+                return $item;
+            }, $params['skus'], array_keys($params['skus']));
 
-
-
-//            $skus = array_map(function ($item, $key) {
-//                $item['product_sku_id'] = $key;
-//                return $item;
-//            }, $params['skus'], array_keys($params['skus']));
-//            $goods->syncSingleSkus($skus);
+            $goods->syncSkus($skus);
 
             DB::commit();
             return ['status' => 'success'];
