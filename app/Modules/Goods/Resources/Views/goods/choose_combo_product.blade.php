@@ -32,23 +32,25 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="panel panel-primary">
-                <div class="panel-heading">@lang('goods::goods.selected_product')</div>
-                <div class="panel-body">
-                    <table class="table table-hover" id="selected_products">
-                        <thead>
-                        <tr>
-                            <th width="20">@lang('application.index_number')</th>
-                            <th width="50%">@lang('goods::goods.product')</th>
-                            <th width="30%">@lang('application.quantity')</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+            <form>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">@lang('goods::goods.selected_product')</div>
+                    <div class="panel-body">
+                        <table class="table table-hover" id="selected_products">
+                            <thead>
+                            <tr>
+                                <th width="20">@lang('application.index_number')</th>
+                                <th width="50%">@lang('goods::goods.product')</th>
+                                <th width="30%">@lang('application.quantity')</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 @endsection
@@ -129,7 +131,7 @@
                         html += '<tr class="selected_product_tr" id="product_' + product_id + '" data-id="' + product_id + '">';
                         html += '<td>' + (selected_number + 1) + '</td>';
                         html += '<td>' + product_code + '<br>' + product_name + '</td>';
-                        html += '<td><input type="text" class="form-control"></td>';
+                        html += '<td><input type="text" class="form-control" name="products[' + product_id + ']" oninput="value=value.replace(/[^\\d]/g, \'\')"></td>';
                         html += '</tr>';
                         $('#selected_products>tbody').append(html);
                     }else {

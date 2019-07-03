@@ -169,7 +169,7 @@
                 title: "{{trans('goods::goods.choose_product')}}",
                 btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
                 yes: function (index) {
-                    var data = $(layer.getChildFrame('body',index)).find('.box-body>form').serializeArray();
+                    var data = $(layer.getChildFrame('body',index)).find('form').serializeArray();
                     if (0 == data.length) {
                         layer.msg("{{trans('goods::goods.please_choose_product')}}", {icon:2});
                         return false;
