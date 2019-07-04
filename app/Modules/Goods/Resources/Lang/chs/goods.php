@@ -14,6 +14,8 @@ return [
     'add_single' => '添加单品',
     'edit_single' => '编辑单品',
     'add_combo' => '添加组合',
+    'add_sku' => '添加Sku',
+    'product_sku' => '产品Sku',
     'choose_product' => '选择产品',
     'please_choose_product' => '请选择产品',
 
@@ -49,4 +51,7 @@ return [
 
     'goods_create_or_update_successful' => '商品创建/修改成功',
     'goods_create_or_update_fail' => '商品创建/修改失败',
+
+    'required_square_image' => '请上传正方形图片',
+    'please_select_product_sku' => '请选择产品Sku',
 ];

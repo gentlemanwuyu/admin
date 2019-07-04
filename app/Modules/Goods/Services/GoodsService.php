@@ -9,6 +9,7 @@
 namespace App\Modules\Goods\Services;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Modules\Goods\Models\Goods;
 use App\Modules\Product\Repositories\ProductRepository;
 use App\Modules\Goods\Repositories\GoodsRepository;
@@ -68,6 +69,36 @@ class GoodsService
         });
 
 
+    }
+
+    /**
+     * 上传产品图片
+     *
+     * @param $request
+     * @return array
+     */
+    public function uploadImageLink($request)
+    {
+        try {
+            if (!$request->hasFile('file')) {
+                throw new \Exception('None file uploaded.');
+            }
+
+            $file = $request->file('file');
+
+            $image_size = getimagesize($file->getRealPath());
+            if ($image_size[0] != $image_size[1]) {
+                throw new \Exception(trans('goods::goods.required_square_image'));
+            }
+
+            $file_name = uniqid().'.'.$file->extension();
+
+            Storage::disk('public')->put('uploads/goods/'.$file_name, file_get_contents($file->getRealPath()));
+
+            return ['status' => 'success', 'content' => asset('/storage/uploads/goods/'.$file_name)];
+        }catch (\Exception $e) {
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
     }
 
     /**

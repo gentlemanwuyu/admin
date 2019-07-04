@@ -61,6 +61,19 @@ class GoodsController extends Controller
         return view('goods::goods.create_or_update_single', $data);
     }
 
+    public function createOrUpdateComboPage(Request $request)
+    {
+        $categories = $this->categoryService->getCategoryTree('goods');
+        $products  = array_map(function ($quantity, $product_id) {
+            $product = $this->productRepository->find($product_id);
+            $product->quantity = $quantity;
+            return $product;
+        }, $request->get('selected_products'), array_keys($request->get('selected_products')));
+        $data = compact('categories', 'products');
+
+        return view('goods::goods.create_or_update_combo', $data);
+    }
+
     public function createOrUpdateSingle(SingleRequest $request)
     {
         return response()->json($this->goodsService->createOrUpdateSingle($request->all()));
@@ -69,5 +82,15 @@ class GoodsController extends Controller
     public function getProducts(Request $request)
     {
         return response()->json(['data' => $this->goodsService->getProducts($request->all())]);
+    }
+
+    public function upload(Request $request)
+    {
+        return response()->json($this->goodsService->uploadImageLink($request));
+    }
+
+    public function createOrUpdateCombo(Request $request)
+    {
+
     }
 }

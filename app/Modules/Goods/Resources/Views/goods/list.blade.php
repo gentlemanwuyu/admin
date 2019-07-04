@@ -169,7 +169,8 @@
                 title: "{{trans('goods::goods.choose_product')}}",
                 btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
                 yes: function (index) {
-                    var data = $(layer.getChildFrame('body',index)).find('form').serializeArray();
+                    var dataForm =  $(layer.getChildFrame('body',index)).find('form');
+                    var data = dataForm.serializeArray();
                     if (0 == data.length) {
                         layer.msg("{{trans('goods::goods.please_choose_product')}}", {icon:2});
                         return false;
@@ -183,14 +184,14 @@
                         maxmin: true,
                         shade: 0.5,
                         anim: 4,
-                        title: "{{trans('goods::goods.add_single')}}",
+                        title: "{{trans('goods::goods.add_combo')}}",
                         btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
                         yes: function (index) {
                             var data = $(layer.getChildFrame('body',index)).find('form').serialize();
                             var load_index = layer.load();
                             $.ajax({
                                 method: "post",
-                                url: "{{route('goods::goods.create_or_update_single')}}",
+                                url: "{{route('goods::goods.create_or_update_combo')}}",
                                 data: data,
                                 success: function (data) {
                                     layer.close(load_index);
@@ -210,7 +211,7 @@
                                 }
                             });
                         },
-                        content: "{{route('goods::goods.create_or_update_single_page')}}?action=create&product_id=" + data[0].value
+                        content: "{{route('goods::goods.create_or_update_combo_page')}}?action=create&" + dataForm.serialize()
                     });
                 },
                 content: "{{route('goods::goods.choose_combo_product_page')}}"

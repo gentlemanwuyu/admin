@@ -14,6 +14,8 @@ return [
     'add_single' => 'Add single',
     'edit_single' => 'Edit single',
     'add_combo' => 'Add combo',
+    'add_sku' => 'Add Sku',
+    'product_sku' => 'Product Sku',
     'choose_product' => 'Choose product',
     'please_choose_product' => 'Please choose product',
 
@@ -49,4 +51,7 @@ return [
 
     'goods_create_or_update_successful' => 'Goods are created/updated successful.',
     'goods_create_or_update_fail' => 'Goods are created/updated failed.',
+
+    'required_square_image' => 'Please upload a square picture',
+    'please_select_product_sku' => 'Please select product sku',
 ];

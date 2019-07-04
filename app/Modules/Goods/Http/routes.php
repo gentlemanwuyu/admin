@@ -28,6 +28,15 @@ Route::group(['prefix' => 'goods', 'as' => 'goods.'], function() {
 	// 添加/修改单品页面
 	Route::get('create_or_update_single_page', ['as'=>'create_or_update_single_page', 'uses'=>'GoodsController@createOrUpdateSinglePage']);
 
+	// 添加/修改组合页面
+	Route::get('create_or_update_combo_page', ['as'=>'create_or_update_combo_page', 'uses'=>'GoodsController@createOrUpdateComboPage']);
+
 	// 添加/修改单品
 	Route::post('create_or_update_single', ['as'=>'create_or_update_single', 'uses'=>'GoodsController@createOrUpdateSingle']);
+
+	// 图片上传
+	Route::post('upload', ['as'=>'upload', 'uses'=>'GoodsController@upload']);
+
+	// 添加/修改组合
+	Route::post('create_or_update_combo', ['as'=>'create_or_update_combo', 'uses'=>'GoodsController@createOrUpdateCombo']);
 });
