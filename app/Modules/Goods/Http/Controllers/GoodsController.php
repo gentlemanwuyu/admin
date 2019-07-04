@@ -9,6 +9,7 @@ use App\Modules\Product\Repositories\ProductRepository;
 use App\Modules\Goods\Services\GoodsService;
 use App\Modules\Category\Services\CategoryService;
 use App\Modules\Goods\Http\Requests\SingleRequest;
+use App\Modules\Goods\Http\Requests\ComboRequest;
 
 class GoodsController extends Controller
 {
@@ -89,8 +90,8 @@ class GoodsController extends Controller
         return response()->json($this->goodsService->uploadImageLink($request));
     }
 
-    public function createOrUpdateCombo(Request $request)
-    {
+    public function createOrUpdateCombo(ComboRequest $request)
+    {dd($request->all());
         return response()->json($this->goodsService->createOrUpdateCombo($request->all()));
     }
 }

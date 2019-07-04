@@ -37,7 +37,7 @@ return [
     'code_max' => '商品编码不能超过32个字符',
     'name_required' => '商品名称不能为空',
     'name_max' => '商品名称不能超过32个字符',
-    'skus_required' => '每个商品下至少有一个Sku是在售的',
+    'skus_required' => '每个商品下至少有一个Sku',
     'sku_code_required' => 'Sku编码不能为空',
     'sku_code_accepted' => 'Sku编码只能包含字母、数字、破折号以及下划线',
     'sku_code_max' => 'Sku编码不能超过32个字符',
