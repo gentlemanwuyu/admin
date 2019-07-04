@@ -179,6 +179,16 @@
                         layer.msg("{{trans('goods::goods.combo_product_less_quantity')}}", {icon:2});
                         return false;
                     }
+                    var quantity_validate = true;
+                    $.each(data, function (key, val) {
+                        if (0 == val.value.length) {
+                            quantity_validate = false;
+                        }
+                    });
+                    if (!quantity_validate) {
+                        layer.msg("{{trans('goods::goods.quantity_required')}}", {icon:2});
+                        return false;
+                    }
 
                     layer.close(index);
                     layer.open({

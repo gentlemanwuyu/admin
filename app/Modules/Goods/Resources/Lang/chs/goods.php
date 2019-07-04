@@ -55,4 +55,5 @@ return [
 
     'required_square_image' => '请上传正方形图片',
     'please_select_product_sku' => '请选择产品Sku',
+    'quantity_required' => '数量不能为空',
 ];
