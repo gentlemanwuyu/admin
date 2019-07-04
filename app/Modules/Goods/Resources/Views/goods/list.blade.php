@@ -175,6 +175,11 @@
                         layer.msg("{{trans('goods::goods.please_choose_product')}}", {icon:2});
                         return false;
                     }
+                    if (2 > data.length) {
+                        layer.msg("{{trans('goods::goods.combo_product_less_quantity')}}", {icon:2});
+                        return false;
+                    }
+
                     layer.close(index);
                     layer.open({
                         type: 2,

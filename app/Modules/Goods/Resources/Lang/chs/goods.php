@@ -18,6 +18,7 @@ return [
     'product_sku' => '产品Sku',
     'choose_product' => '选择产品',
     'please_choose_product' => '请选择产品',
+    'combo_product_less_quantity' => '已选产品不能少于2个',
 
     'base_info' => '基本信息',
     'goods_code' => '商品编码',

@@ -18,6 +18,7 @@ return [
     'product_sku' => 'Product Sku',
     'choose_product' => 'Choose product',
     'please_choose_product' => 'Please choose product',
+    'combo_product_less_quantity' => 'The quantity of selected product can\'t be less than 2.',
 
     'base_info' => 'Base info',
     'goods_code' => 'Goods code',
