@@ -239,7 +239,7 @@
                     selector: '.product_attribute_tr',
                     items: {
                         'update': {
-                            name: '删除',
+                            name: '@lang('application.delete')',
                             callback: function (key, opt) {
                                 var attribute_flag = $(this).parents('tr').attr('data-attribute_flag');
                                 $(this).remove();
@@ -295,7 +295,7 @@
                     selector: '.sku_list_tr',
                     items: {
                         'update': {
-                            name: '删除',
+                            name: '@lang('application.delete')',
                             callback: function (key, opt) {
                                 $(this).remove();
                             }
