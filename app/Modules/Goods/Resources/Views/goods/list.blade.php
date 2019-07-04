@@ -51,9 +51,9 @@
                             @lang('goods::goods.sku_list')
                         </div>
                         <div class="row">
-                            <div class="col-xs-6 th_content_div">sku编码</div>
-                            <div class="col-xs-3 th_content_div">最低售价</div>
-                            <div class="col-xs-3 th_content_div">建议零售价</div>
+                            <div class="col-xs-6 th_content_div">@lang('goods::goods.sku_code')</div>
+                            <div class="col-xs-3 th_content_div">@lang('goods::goods.lowest_price')</div>
+                            <div class="col-xs-3 th_content_div">@lang('goods::goods.msrp')</div>
                         </div>
                     </th>
                     <th>@lang('application.action')</th>
