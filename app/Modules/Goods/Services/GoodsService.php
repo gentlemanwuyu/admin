@@ -147,4 +147,44 @@ class GoodsService
             return ['status' => 'fail', 'msg'=>$e->getMessage()];
         }
     }
+
+    /**
+     * 添加/修改combo商品
+     *
+     * @param $params
+     * @return array
+     */
+    public function createOrUpdateCombo($params)
+    {
+        try {
+            DB::beginTransaction();
+            $data = [
+                'code' => $params['code'],
+                'name' => $params['name'],
+                'description' => $params['description'],
+                'category_id' => $params['category_id'],
+                'image_link' => $params['image_link'],
+            ];
+
+            if ('create' == $params['action']) {
+                $data['type'] = Goods::COMBO;
+                $goods = $this->goodsRepository->createWithProductRelation($data, $params['selected_products']);
+            }else {
+                $goods = $this->goodsRepository->update($data, $params['goods_id']);
+            }
+
+            $skus = array_map(function ($item, $key) {
+                $item['goods_sku_id'] = $key;
+                return $item;
+            }, $params['skus'], array_keys($params['skus']));
+
+            $goods->syncSkus($skus);
+
+            DB::commit();
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
 }

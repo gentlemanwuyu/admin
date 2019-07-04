@@ -33,21 +33,27 @@ class Goods extends Model
      * 创建商品，连带商品与产品的对应关系
      *
      * @param $attributes
-     * @param $product_ids
+     * @param $products
      * @return static
      */
-    public function createWithProductRelation($attributes, $product_ids)
+    public function createWithProductRelation($attributes, $products)
     {
         $goods = parent::create($attributes);
 
-        if ($product_ids) {
+        if ($products) {
             if (self::SINGLE == $goods->type) {
                 SingleProduct::create([
                     'goods_id' => $goods->id,
-                    'product_id' => $product_ids,
+                    'product_id' => $products,
                 ]);
             }elseif (Goods::COMBO == $goods->type) {
-
+                foreach ($products as $product_id => $quantity) {
+                    ComboProduct::create([
+                        'goods_id' => $goods->id,
+                        'product_id' => $product_id,
+                        'quantity' => $quantity,
+                    ]);
+                }
             }
         }
 
@@ -96,6 +102,45 @@ class Goods extends Model
                             SingleSkuProductSku::create([
                                 'goods_sku_id' => $goods_sku->id,
                                 'product_sku_id' => $sku['product_sku_id'],
+                            ]);
+                        }
+                    }
+                }
+            }elseif (self::COMBO == $this->type) {
+                // 将多余的sku删掉
+                $new_sku_ids = array_column($skus, 'goods_sku_id');
+                $invalid_skus = GoodsSku::where('goods_id', $this->id)->whereNotIn('id', $new_sku_ids)->get();
+                foreach ($invalid_skus as $invalid_sku) {
+                    $invalid_sku->delete();
+                    ComboSkuProductSku::where('goods_sku_id', $invalid_sku->id)->delete();
+                }
+
+                foreach ($skus as $sku) {
+                    $goods_sku = GoodsSku::find($sku['goods_sku_id']);
+                    if (!$goods_sku) {
+                        $goods_sku = GoodsSku::create([
+                            'goods_id' => $this->id,
+                            'code' => $sku['code'],
+                            'lowest_price' => $sku['lowest_price'],
+                            'msrp' => $sku['msrp'],
+                        ]);
+                    }else {
+                        $goods_sku->update([
+                            'code' => $sku['code'],
+                            'lowest_price' => $sku['lowest_price'],
+                            'msrp' => $sku['msrp'],
+                        ]);
+                    }
+
+                    if ($goods_sku) {
+                        foreach ($sku['selected_product_skus'] as $product_id => $product_sku_id) {
+                            ComboSkuProductSku::updateOrCreate([
+                                'goods_sku_id' => $goods_sku->id,
+                                'product_id' => $product_id,
+                            ], [
+                                'goods_sku_id' => $goods_sku->id,
+                                'product_id' => $product_id,
+                                'product_sku_id' => $product_sku_id,
                             ]);
                         }
                     }
@@ -163,64 +208,5 @@ class Goods extends Model
     public function getTypeNameAttribute()
     {
         return isset(self::$types[$this->type]) ? self::$types[$this->type] : '';
-    }
-
-    /**
-     * 同步single商品的sku信息
-     *
-     * @param $skus
-     * @return $this
-     */
-    public function syncSingleSkus($skus)
-    {
-        // 将product_sku_id作为键
-        $skus = array_column($skus, null, 'product_sku_id');
-
-        if ($skus && is_array($skus)) {
-            // 所有的产品sku的id
-            $product_sku_ids = array_column($this->product->skus->toArray(), 'id');
-            // 已经存在的sku
-            $exists_sku_ids = [];
-            foreach ($this->singleSkus as $singleSku) {
-                // 如果不在产品的sku中，将其删除。
-                if (!in_array($singleSku->product_sku_id, $product_sku_ids)) {
-                    $singleSku->delete();
-                    continue;
-                }
-
-                $exists_sku_ids[] = $singleSku->product_sku_id;
-
-                if (isset($skus[$singleSku->product_sku_id])) {
-                    $singleSku->code = $skus[$singleSku->product_sku_id]['code'];
-                    $singleSku->lowest_price = $skus[$singleSku->product_sku_id]['lowest_price'];
-                    $singleSku->msrp = $skus[$singleSku->product_sku_id]['msrp'];
-                    $singleSku->enabled = 1;
-                    $singleSku->save();
-                }else {
-                    $singleSku->enabled = 0;
-                    $singleSku->save();
-                }
-            }
-
-            $product_skus = array_column($this->product->skus->toArray(), null, 'id');
-            // 将缺的产品sku补上
-            foreach (array_diff($product_sku_ids, $exists_sku_ids) as $product_sku_id) {
-                $data = [
-                    'goods_id' => $this->id,
-                    'product_sku_id' => $product_sku_id,
-                    'code' => isset($product_skus[$product_sku_id]) ? $product_skus[$product_sku_id]['code'] : '',
-                ];
-                if (isset($skus[$product_sku_id])) {
-                    $data['code'] = $skus[$product_sku_id]['code'];
-                    $data['lowest_price'] = $skus[$product_sku_id]['lowest_price'];
-                    $data['msrp'] = $skus[$product_sku_id]['msrp'];
-                    $data['enabled'] = 1;
-                }
-
-                SingleSku::create($data);
-            }
-        }
-
-        return $this;
     }
 }

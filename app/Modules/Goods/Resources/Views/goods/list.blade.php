@@ -62,7 +62,7 @@
                     @foreach($goods as $g)
                         <tr data-id="{{$g->id}}" data-type="{{$g->type}}">
                             <td>{{$g->id}}</td>
-                            <td></td>
+                            <td><img src="{{$g->image_link or ''}}" style="max-width: 100px;height: auto;"></td>
                             <td>{{$g->code}}</td>
                             <td>{{$g->name}}</td>
                             <td>{{trans('goods::goods.'.$g->type_name)}}</td>

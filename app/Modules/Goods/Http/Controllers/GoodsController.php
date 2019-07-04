@@ -91,6 +91,6 @@ class GoodsController extends Controller
 
     public function createOrUpdateCombo(Request $request)
     {
-
+        return response()->json($this->goodsService->createOrUpdateCombo($request->all()));
     }
 }
