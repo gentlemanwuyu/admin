@@ -91,7 +91,7 @@ class GoodsController extends Controller
     }
 
     public function createOrUpdateCombo(ComboRequest $request)
-    {dd($request->all());
+    {
         return response()->json($this->goodsService->createOrUpdateCombo($request->all()));
     }
 }
