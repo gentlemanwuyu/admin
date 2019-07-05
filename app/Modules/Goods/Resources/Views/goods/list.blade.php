@@ -302,7 +302,7 @@
                             var load_index = layer.load();
                             $.ajax({
                                 method: "post",
-                                url: "{{route('goods::goods.create_or_update_single')}}",
+                                url: "{{route('goods::goods.create_or_update_combo')}}",
                                 data: data,
                                 success: function (data) {
                                     layer.close(load_index);
