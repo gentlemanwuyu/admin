@@ -51,7 +51,7 @@ class User extends Authenticatable
      */
     public function getGenderAttribute()
     {
-        return $this->genders[$this->gender_id] ?? 'unknown';
+        return isset($this->genders[$this->gender_id]) ? $this->genders[$this->gender_id] : 'unknown';
     }
 
     public function department()

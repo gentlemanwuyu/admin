@@ -39,7 +39,7 @@ if (! function_exists('module_factory')) {
         $arguments = func_get_args();
 
         if (isset($arguments[2]) && is_string($arguments[2])) {
-            return $factory->of($arguments[1], $arguments[2])->times($arguments[3] ?? null);
+            return $factory->of($arguments[1], $arguments[2])->times(isset($arguments[3]) ? $arguments[3] : null);
         } elseif (isset($arguments[2])) {
             return $factory->of($arguments[1])->times($arguments[2]);
         }
