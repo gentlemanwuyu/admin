@@ -10,6 +10,7 @@ namespace App\Modules\Goods\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Modules\Product\Models\ProductSku;
 
 class GoodsSku extends Model
 {
@@ -25,6 +26,24 @@ class GoodsSku extends Model
     public function goods()
     {
         return $this->belongsTo(Goods::class);
+    }
+
+    public function getCostPriceAttribute()
+    {
+        if (Goods::SINGLE == $this->goods->type) {
+
+        }elseif (Goods::COMBO == $this->goods->type) {
+            $cost_price = 0.00;
+            $combo_sku_product_skus = ComboSkuProductSku::where('goods_sku_id', $this->id)->get();
+            foreach ($combo_sku_product_skus as $item) {
+                $product_sku = ProductSku::find($item->product_sku_id);
+                if ($product_sku) {
+                    $cost_price += $product_sku->cost_price;
+                }
+            }
+
+            return $cost_price;
+        }
     }
 
     /**

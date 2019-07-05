@@ -122,32 +122,36 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach($goods_info->skus as $goods_sku)
-                                <tr class="sku_list_tr" data-sku_flag="{{$goods_sku->id}}">
-                                    <td><input type="text" class="form-control" name="skus[{{$goods_sku->id}}][code]" value="{{$goods_sku->code}}"></td>
-                                    <td class="product_sku_select_td">
-                                        <table class="table">
-                                            @foreach($products as $product)
-                                                <tr>
-                                                    <td style="width: 40%;">{{$product->name}}</td>
-                                                    <td>
-                                                        <select name="skus[{{$goods_sku->id}}][selected_product_skus][{{$product->id}}]" class="form-control">
-                                                            <option value="">@lang('goods::goods.please_select_product_sku')</option>
-                                                            @foreach($product->skus as $product_sku)
-                                                                <option value="{{$product_sku->id}}" @if($product_sku->id == $goods_sku->getComboProductSkuId($product->id)) selected @endif>{{$product_sku->code}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td style="width: 20%;">@lang('application.quantity'):{{$product->quantity}}</td>
-                                                </tr>
-                                            @endforeach
-                                        </table>
-                                    </td>
-                                    <td><span class="form-control-span">0.28</span></td>
-                                    <td><input type="text" class="form-control" name="skus[{{$goods_sku->id}}][lowest_price]" value="{{$goods_sku->lowest_price}}"></td>
-                                    <td><input type="text" class="form-control" name="skus[{{$goods_sku->id}}][msrp]" value="{{$goods_sku->msrp}}"></td>
-                                <tr>
-                            @endforeach
+                            @if('update' == $action)
+                                @foreach($goods_info->skus as $goods_sku)
+                                    <tr class="sku_list_tr" data-sku_flag="{{$goods_sku->id}}">
+                                        <td><input type="text" class="form-control" name="skus[{{$goods_sku->id}}][code]" value="{{$goods_sku->code}}"></td>
+                                        <td class="product_sku_select_td">
+                                            <table class="table">
+                                                @foreach($products as $product)
+                                                    <tr>
+                                                        <td style="width: 40%;">{{$product->name}}</td>
+                                                        <td>
+                                                            <select name="skus[{{$goods_sku->id}}][selected_product_skus][{{$product->id}}]" class="form-control">
+                                                                <option value="">@lang('goods::goods.please_select_product_sku')</option>
+                                                                @foreach($product->skus as $product_sku)
+                                                                    <option value="{{$product_sku->id}}" @if($product_sku->id == $goods_sku->getComboProductSkuId($product->id)) selected @endif data-cost_price="{{$product_sku->cost_price}}">
+                                                                        {{$product_sku->code}}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td style="width: 20%;">@lang('application.quantity'):{{$product->quantity}}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </table>
+                                        </td>
+                                        <td class="cost_price_td"><span class="form-control-span">{{$goods_sku->cost_price}}</span></td>
+                                        <td><input type="text" class="form-control" name="skus[{{$goods_sku->id}}][lowest_price]" value="{{$goods_sku->lowest_price}}"></td>
+                                        <td><input type="text" class="form-control" name="skus[{{$goods_sku->id}}][msrp]" value="{{$goods_sku->msrp}}"></td>
+                                    <tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -160,6 +164,39 @@
 @endsection
 @section('scripts')
     <script>
+        /**
+         * 绑定产品sku选择框的change事件，用来计算成本价
+         */
+        function bindProductSkuSelectChangeEvent () {
+            $('.product_sku_select_td select').on('change', function () {
+                var total_cost_price = 0.00;
+                $(this).parents('.product_sku_select_td').find('select').each(function () {
+                    var product_sku_cost_price = $(this).find('option:selected').attr('data-cost_price');
+                    if (product_sku_cost_price) {
+                        total_cost_price += parseFloat(product_sku_cost_price);
+                    }
+                });
+                $(this).parents('tr').find('td.cost_price_td>span').html(total_cost_price);
+            });
+        }
+
+        /**
+         * 绑定sku列表的右键菜单功能
+         */
+        function bindContextMenu () {
+            $.contextMenu({
+                selector: '.sku_list_tr',
+                items: {
+                    'update': {
+                        name: '@lang('application.delete')',
+                        callback: function (key, opt) {
+                            $(this).remove();
+                        }
+                    }
+                }
+            });
+        }
+
         $(function () {
             var upload_layer_index;
             $('input:file').fileinput({
@@ -199,7 +236,7 @@
                     html += '<select name="skus[' + sku_flag + '][selected_product_skus][{{$product->id}}]" class="form-control">';
                     html += '<option value="">@lang('goods::goods.please_select_product_sku')</option>';
                     @foreach($product->skus as $product_sku)
-                        html += '<option value="{{$product_sku->id}}">{{$product_sku->code}}</option>';
+                        html += '<option value="{{$product_sku->id}}"  data-cost_price="{{$product_sku->cost_price}}">{{$product_sku->code}}</option>';
                     @endforeach
                     html += '</select>';
                     html += '</td>';
@@ -208,25 +245,19 @@
                 @endforeach
                 html += '</table>';
                 html += '</td>';
-                html += '<td><span class="form-control-span">0.28</span></td>';
+                html += '<td class="cost_price_td"><span class="form-control-span"></span></td>';
                 html += '<td><input type="text" class="form-control" name="skus[' + sku_flag + '][lowest_price]"></td>';
                 html += '<td><input type="text" class="form-control" name="skus[' + sku_flag + '][msrp]"></td>';
                 html += '</tr>';
 
                 $('#sku_list_table>tbody').append(html);
 
-                $.contextMenu({
-                    selector: '.sku_list_tr',
-                    items: {
-                        'update': {
-                            name: '@lang('application.delete')',
-                            callback: function (key, opt) {
-                                $(this).remove();
-                            }
-                        }
-                    }
-                });
+                bindContextMenu();
+                bindProductSkuSelectChangeEvent();
             });
+
+            bindContextMenu();
+            bindProductSkuSelectChangeEvent();
         });
     </script>
 @endsection
