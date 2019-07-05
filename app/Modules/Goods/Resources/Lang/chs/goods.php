@@ -14,6 +14,7 @@ return [
     'add_single' => '添加单品',
     'edit_single' => '编辑单品',
     'add_combo' => '添加组合',
+    'edit_combo' => '编辑组合',
     'add_sku' => '添加Sku',
     'product_sku' => '产品Sku',
     'choose_product' => '选择产品',

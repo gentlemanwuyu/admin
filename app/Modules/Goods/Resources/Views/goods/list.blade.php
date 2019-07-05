@@ -286,6 +286,44 @@
                         },
                         content: "{{route('goods::goods.create_or_update_single_page')}}?action=update&goods_id=" + goods_id
                     });
+                }else if ("{{\App\Modules\Goods\Models\Goods::COMBO}}" == goods_type) {
+                    layer.open({
+                        type: 2,
+                        area: ['80%', '80%'],
+                        fix: false,
+                        skin: 'layui-layer-rim',
+                        maxmin: true,
+                        shade: 0.5,
+                        anim: 4,
+                        title: "{{trans('goods::goods.edit_combo')}}",
+                        btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
+                        yes: function (index) {
+                            var data = $(layer.getChildFrame('body',index)).find('form').serialize();
+                            var load_index = layer.load();
+                            $.ajax({
+                                method: "post",
+                                url: "{{route('goods::goods.create_or_update_single')}}",
+                                data: data,
+                                success: function (data) {
+                                    layer.close(load_index);
+                                    if ('success' == data.status) {
+                                        layer.close(index);
+                                        layer.msg("{{trans('goods::goods.goods_create_or_update_successful')}}", {icon:1});
+                                        parent.location.reload();
+                                    } else {
+                                        layer.msg("{{trans('goods::goods.goods_create_or_update_fail')}}:"+data.msg, {icon:2});
+                                        return false;
+                                    }
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    layer.close(load_index);
+                                    layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                    return false;
+                                }
+                            });
+                        },
+                        content: "{{route('goods::goods.create_or_update_combo_page')}}?action=update&goods_id=" + goods_id
+                    });
                 }
             });
         });

@@ -14,6 +14,7 @@ return [
     'add_single' => 'Add single',
     'edit_single' => 'Edit single',
     'add_combo' => 'Add combo',
+    'edit_combo' => 'Edit combo',
     'add_sku' => 'Add Sku',
     'product_sku' => 'Product Sku',
     'choose_product' => 'Choose product',

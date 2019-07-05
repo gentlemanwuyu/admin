@@ -9,6 +9,7 @@
 namespace App\Modules\Goods\Models;
 
 use App\Modules\Category\Models\GoodsCategory;
+use App\Modules\Product\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -183,7 +184,29 @@ class Goods extends Model
             if ($single_product) {
                 return $single_product->product_id;
             }
+        }elseif (self::COMBO == $this->type) {
+            $combo_products = ComboProduct::where('goods_id', $this->id)->get()->toArray();
+            return array_column($combo_products, 'quantity', 'product_id');
         }
+    }
+
+    /**
+     * 读取combo的关联产品
+     *
+     * @return array
+     */
+    public function getProductsOfCombo()
+    {
+        $products = [];
+        foreach ($this->product_id as $product_id => $quantity) {
+            $product = Product::find($product_id);
+            if ($product) {
+                $product->quantity = $quantity;
+            $products[] = $product;
+            }
+        }
+
+        return $products;
     }
 
     /**

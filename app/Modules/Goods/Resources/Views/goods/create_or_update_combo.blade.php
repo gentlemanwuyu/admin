@@ -44,8 +44,8 @@
                     <div class="row">
                         <div class="col-xs-2" style="text-align: center">
                             <div class="img_container">
-                                <input type="hidden" name="image_link" value="">
-                                <img src="" onerror="this.src='{{asset('/assets/img/system/none.jpg')}}';this.onerror=null;">
+                                <input type="hidden" name="image_link" value="{{$goods_info->image_link or ''}}">
+                                <img src="{{$goods_info->image_link or ''}}" onerror="this.src='{{asset('/assets/img/system/none.jpg')}}';this.onerror=null;">
                             </div>
                             <div class="form-group" style="margin-top: 15px;">
                                 <input type="file" name="file">
@@ -55,19 +55,19 @@
                             <div class="form-group">
                                 <label class="col-xs-3 control-label required">@lang('goods::goods.goods_code')</label>
                                 <div class="col-xs-9">
-                                    <input type="text" name="code" class="form-control" value="">
+                                    <input type="text" name="code" class="form-control" value="{{$goods_info->code or ''}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-3 control-label required">@lang('goods::goods.goods_name')</label>
                                 <div class="col-xs-9">
-                                    <input type="text" name="name" class="form-control" value="">
+                                    <input type="text" name="name" class="form-control" value="{{$goods_info->name or ''}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">@lang('application.description')</label>
                                 <div class="col-xs-9">
-                                    <textarea class="form-control" name="description" rows="3"></textarea>
+                                    <textarea class="form-control" name="description" rows="3">{{$goods_info->description or ''}}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -122,7 +122,32 @@
                         </tr>
                         </thead>
                         <tbody>
-
+                            @foreach($goods_info->skus as $goods_sku)
+                                <tr class="sku_list_tr" data-sku_flag="{{$goods_sku->id}}">
+                                    <td><input type="text" class="form-control" name="skus[{{$goods_sku->id}}][code]" value="{{$goods_sku->code}}"></td>
+                                    <td class="product_sku_select_td">
+                                        <table class="table">
+                                            @foreach($products as $product)
+                                                <tr>
+                                                    <td style="width: 40%;">{{$product->name}}</td>
+                                                    <td>
+                                                        <select name="skus[{{$goods_sku->id}}][selected_product_skus][{{$product->id}}]" class="form-control">
+                                                            <option value="">@lang('goods::goods.please_select_product_sku')</option>
+                                                            @foreach($product->skus as $product_sku)
+                                                                <option value="{{$product_sku->id}}" @if($product_sku->id == $goods_sku->getComboProductSkuId($product->id)) selected @endif>{{$product_sku->code}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td style="width: 20%;">@lang('application.quantity'):{{$product->quantity}}</td>
+                                                </tr>
+                                            @endforeach
+                                        </table>
+                                    </td>
+                                    <td><span class="form-control-span">0.28</span></td>
+                                    <td><input type="text" class="form-control" name="skus[{{$goods_sku->id}}][lowest_price]" value="{{$goods_sku->lowest_price}}"></td>
+                                    <td><input type="text" class="form-control" name="skus[{{$goods_sku->id}}][msrp]" value="{{$goods_sku->msrp}}"></td>
+                                <tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

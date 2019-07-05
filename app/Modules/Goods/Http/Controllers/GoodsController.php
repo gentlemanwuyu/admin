@@ -65,12 +65,19 @@ class GoodsController extends Controller
     public function createOrUpdateComboPage(Request $request)
     {
         $categories = $this->categoryService->getCategoryTree('goods');
-        $products  = array_map(function ($quantity, $product_id) {
-            $product = $this->productRepository->find($product_id);
-            $product->quantity = $quantity;
-            return $product;
-        }, $request->get('selected_products'), array_keys($request->get('selected_products')));
-        $data = compact('categories', 'products');
+        $data = compact('categories');
+        if ('create' == $request->get('action')) {
+            $products  = array_map(function ($quantity, $product_id) {
+                $product = $this->productRepository->find($product_id);
+                $product->quantity = $quantity;
+                return $product;
+            }, $request->get('selected_products'), array_keys($request->get('selected_products')));
+        }else {
+            $goods_info = $this->goodsRepository->find($request->get('goods_id'));
+            $products = $goods_info->getProductsOfCombo();
+            $data['goods_info'] = $goods_info;
+        }
+        $data['products'] = $products;
 
         return view('goods::goods.create_or_update_combo', $data);
     }
