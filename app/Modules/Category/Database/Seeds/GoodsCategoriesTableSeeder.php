@@ -224,5 +224,26 @@ class GoodsCategoriesTableSeeder extends Seeder
             'display_name' => '316不锈钢棒',
             'parent_id' => $axis->id,
         ]);
+
+        // 流量计
+        $flowmeter = GoodsCategory::create([
+            'name' => '流量计',
+            'display_name' => '流量计',
+        ]);
+        GoodsCategory::create([
+            'name' => '国产流量计',
+            'display_name' => '国产流量计',
+            'parent_id' => $flowmeter->id,
+        ]);
+        GoodsCategory::create([
+            'name' => '加强型流量计',
+            'display_name' => '加强型流量计',
+            'parent_id' => $flowmeter->id,
+        ]);
+        GoodsCategory::create([
+            'name' => 'Kingspring流量计',
+            'display_name' => 'Kingspring流量计',
+            'parent_id' => $flowmeter->id,
+        ]);
     }
 }
