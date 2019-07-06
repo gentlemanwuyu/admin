@@ -33,12 +33,14 @@ class GoodsSku extends Model
         if (Goods::SINGLE == $this->goods->type) {
 
         }elseif (Goods::COMBO == $this->goods->type) {
+            $products = $this->goods->getProductsOfCombo();
             $cost_price = 0.00;
             $combo_sku_product_skus = ComboSkuProductSku::where('goods_sku_id', $this->id)->get();
             foreach ($combo_sku_product_skus as $item) {
                 $product_sku = ProductSku::find($item->product_sku_id);
                 if ($product_sku) {
-                    $cost_price += $product_sku->cost_price;
+                    $product = $products[$item->product_id];
+                    $cost_price += $product_sku->cost_price * $product->quantity;
                 }
             }
 

@@ -202,7 +202,7 @@ class Goods extends Model
             $product = Product::find($product_id);
             if ($product) {
                 $product->quantity = $quantity;
-            $products[] = $product;
+                $products[$product_id] = $product;
             }
         }
 

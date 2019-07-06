@@ -135,7 +135,7 @@
                                                             <select name="skus[{{$goods_sku->id}}][selected_product_skus][{{$product->id}}]" class="form-control">
                                                                 <option value="">@lang('goods::goods.please_select_product_sku')</option>
                                                                 @foreach($product->skus as $product_sku)
-                                                                    <option value="{{$product_sku->id}}" @if($product_sku->id == $goods_sku->getComboProductSkuId($product->id)) selected @endif data-cost_price="{{$product_sku->cost_price}}">
+                                                                    <option value="{{$product_sku->id}}" @if($product_sku->id == $goods_sku->getComboProductSkuId($product->id)) selected @endif data-cost_price="{{$product_sku->cost_price}}" data-quantity="{{$product->quantity}}">
                                                                         {{$product_sku->code}}
                                                                     </option>
                                                                 @endforeach
@@ -172,8 +172,9 @@
                 var total_cost_price = 0.00;
                 $(this).parents('.product_sku_select_td').find('select').each(function () {
                     var product_sku_cost_price = $(this).find('option:selected').attr('data-cost_price');
+                    var product_quantity = $(this).find('option:selected').attr('data-quantity');
                     if (product_sku_cost_price) {
-                        total_cost_price += parseFloat(product_sku_cost_price);
+                        total_cost_price += parseFloat(product_sku_cost_price) * parseInt(product_quantity);
                     }
                 });
                 $(this).parents('tr').find('td.cost_price_td>span').html(total_cost_price);
@@ -236,7 +237,7 @@
                     html += '<select name="skus[' + sku_flag + '][selected_product_skus][{{$product->id}}]" class="form-control">';
                     html += '<option value="">@lang('goods::goods.please_select_product_sku')</option>';
                     @foreach($product->skus as $product_sku)
-                        html += '<option value="{{$product_sku->id}}"  data-cost_price="{{$product_sku->cost_price}}">{{$product_sku->code}}</option>';
+                        html += '<option value="{{$product_sku->id}}"  data-cost_price="{{$product_sku->cost_price}}" data-quantity="{{$product->quantity}}">{{$product_sku->code}}</option>';
                     @endforeach
                     html += '</select>';
                     html += '</td>';
