@@ -93,6 +93,11 @@ class GoodsCategoriesTableSeeder extends Seeder
             'parent_id' => $disk->id,
         ]);
         GoodsCategory::create([
+            'name' => '孟山都滚轮片',
+            'display_name' => '孟山都滚轮片',
+            'parent_id' => $disk->id,
+        ]);
+        GoodsCategory::create([
             'name' => '耐高温滚轮片',
             'display_name' => '耐高温滚轮片',
             'parent_id' => $disk->id,
