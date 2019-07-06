@@ -21,7 +21,7 @@ class Permission extends EntrustPermission
 
     public function getTypeAttribute()
     {
-        return $this->types[$this->type_id] ?? 'unknown';
+        return isset($this->types[$this->type_id]) ? $this->types[$this->type_id] : 'unknown';
     }
 
     public function getTypes()
