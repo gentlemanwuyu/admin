@@ -66,8 +66,8 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">@lang('product::product.sku_list')</div>
                 <div class="panel-body table-responsive no-padding">
-                    <table id="sku_list_table" class="table table-hover">
-                        <thead class="sku_list_title">
+                    <table class="table table-hover">
+                        <thead>
                         <th>@lang('product::product.sku_code')</th>
                         <th>@lang('product::product.weight')</th>
                         <th>@lang('product::product.cost_price')</th>
