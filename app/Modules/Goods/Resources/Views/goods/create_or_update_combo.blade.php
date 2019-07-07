@@ -135,7 +135,7 @@
                                                             <select name="skus[{{$goods_sku->id}}][selected_product_skus][{{$product->id}}]" class="form-control">
                                                                 <option value="">@lang('goods::goods.please_select_product_sku')</option>
                                                                 @foreach($product->skus as $product_sku)
-                                                                    <option value="{{$product_sku->id}}" @if($product_sku->id == $goods_sku->getComboProductSkuId($product->id)) selected @endif data-cost_price="{{$product_sku->cost_price}}" data-quantity="{{$product->quantity}}">
+                                                                    <option value="{{$product_sku->id}}" @if($product_sku->id == $goods_sku->product_sku_id[$product->id]) selected @endif data-cost_price="{{$product_sku->cost_price}}" data-quantity="{{$product->quantity}}">
                                                                         {{$product_sku->code}}
                                                                     </option>
                                                                 @endforeach

@@ -39,4 +39,7 @@ Route::group(['prefix' => 'goods', 'as' => 'goods.'], function() {
 
 	// 添加/修改组合
 	Route::post('create_or_update_combo', ['as'=>'create_or_update_combo', 'uses'=>'GoodsController@createOrUpdateCombo']);
+
+	// 产品详情
+	Route::get('detail/{id}', ['as'=>'detail', 'uses'=>'GoodsController@detail']);
 });

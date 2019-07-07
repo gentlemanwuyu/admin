@@ -57,4 +57,8 @@ return [
     'required_square_image' => 'Please upload a square picture',
     'please_select_product_sku' => 'Please select product sku',
     'quantity_required' => 'Quantity can\'t be empty.',
+
+    // 商品详情
+    'goods_detail' => 'Goods detail',
+    'related_product' => 'Related product',
 ];

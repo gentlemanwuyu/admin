@@ -26,4 +26,9 @@ class ProductSku extends Model
     {
         return $this->hasMany(ProductSkuAttributeValue::class, 'sku_id');
     }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

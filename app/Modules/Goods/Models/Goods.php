@@ -191,22 +191,26 @@ class Goods extends Model
     }
 
     /**
-     * 读取combo的关联产品
+     * 读取商品关联的产品
      *
-     * @return array
+     * @return mixed array|object
      */
-    public function getProductsOfCombo()
+    public function getProduct()
     {
-        $products = [];
-        foreach ($this->product_id as $product_id => $quantity) {
-            $product = Product::find($product_id);
-            if ($product) {
-                $product->quantity = $quantity;
-                $products[$product_id] = $product;
+        if (self::SINGLE == $this->type) {
+            return Product::find($this->product_id);
+        }elseif (self::COMBO == $this->type) {
+            $products = [];
+            foreach ($this->product_id as $product_id => $quantity) {
+                $product = Product::find($product_id);
+                if ($product) {
+                    $product->quantity = $quantity;
+                    $products[$product_id] = $product;
+                }
             }
-        }
 
-        return $products;
+            return $products;
+        }
     }
 
     /**

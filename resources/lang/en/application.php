@@ -30,4 +30,5 @@ return [
     'select_all' => 'Select all',
     'loading' => 'Loading...',
     'quantity' => 'Quantity',
+    'pcs' => 'PCS',
 ];

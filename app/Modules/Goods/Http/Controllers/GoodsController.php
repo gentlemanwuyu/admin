@@ -74,7 +74,7 @@ class GoodsController extends Controller
             }, $request->get('selected_products'), array_keys($request->get('selected_products')));
         }else {
             $goods_info = $this->goodsRepository->find($request->get('goods_id'));
-            $products = $goods_info->getProductsOfCombo();
+            $products = $goods_info->getProduct();
             $data['goods_info'] = $goods_info;
         }
         $data['products'] = $products;
@@ -100,5 +100,12 @@ class GoodsController extends Controller
     public function createOrUpdateCombo(ComboRequest $request)
     {
         return response()->json($this->goodsService->createOrUpdateCombo($request->all()));
+    }
+
+    public function detail($id)
+    {
+        $goods_info = $this->goodsRepository->find($id);
+
+        return view('goods::goods.detail', compact('goods_info'));
     }
 }

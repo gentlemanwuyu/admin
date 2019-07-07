@@ -28,12 +28,21 @@ class GoodsSku extends Model
         return $this->belongsTo(Goods::class);
     }
 
+    /**
+     * 计算商品sku的成本价
+     *
+     * @return float|null
+     */
     public function getCostPriceAttribute()
     {
         if (Goods::SINGLE == $this->goods->type) {
-
+            $single_sku_product_sku = SingleSkuProductSku::where('goods_sku_id', $this->id)->first();
+            if ($single_sku_product_sku) {
+                $product_sku = ProductSku::find($single_sku_product_sku['product_sku_id']);
+                return $product_sku ? $product_sku->cost_price : null;
+            }
         }elseif (Goods::COMBO == $this->goods->type) {
-            $products = $this->goods->getProductsOfCombo();
+            $products = $this->goods->getProduct();
             $cost_price = 0.00;
             $combo_sku_product_skus = ComboSkuProductSku::where('goods_sku_id', $this->id)->get();
             foreach ($combo_sku_product_skus as $item) {
@@ -60,19 +69,27 @@ class GoodsSku extends Model
             if ($single_sku_product_sku) {
                 return $single_sku_product_sku->product_sku_id;
             }
+        }elseif (Goods::COMBO == $this->goods->type) {
+            $combo_sku_product_skus = ComboSkuProductSku::where('goods_sku_id', $this->id)->get()->toArray();
+
+            return array_column($combo_sku_product_skus, 'product_sku_id', 'product_id');
         }
     }
 
-    /**
-     * 读取combo商品对应产品的skuID
-     *
-     * @param $product_id
-     * @return null
-     */
-    public function getComboProductSkuId($product_id)
+    public function getProductSku()
     {
-        $combo_sku_product_sku = ComboSkuProductSku::where('goods_sku_id', $this->id)->where('product_id', $product_id)->first();
+        if (Goods::SINGLE == $this->goods->type) {
+            return ProductSku::find($this->product_sku_id);
+        }elseif (Goods::COMBO == $this->goods->type) {
+            $product_skus = [];
+            $product_id_quantities = $this->goods->product_id;
+            foreach ($this->product_sku_id as $product_id => $product_sku_id) {
+                $product_sku = ProductSku::find($product_sku_id);
+                $product_sku->quantity = isset($product_id_quantities[$product_id]) ? $product_id_quantities[$product_id] : 0;
+                $product_skus[$product_id] = $product_sku;
+            }
 
-        return $combo_sku_product_sku ? $combo_sku_product_sku->product_sku_id : null;
+            return $product_skus;
+        }
     }
 }

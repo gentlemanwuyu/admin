@@ -21,8 +21,6 @@
                 <div class="col-xs-6">
                     <div class="btn-group">
                         <button id="add_goods" type="button" class="btn btn-primary" title="{{trans('goods::goods.add_goods')}}"><i class="fa fa-cube"></i></button>
-
-
                     </div>
                 </div>
                 <div class="col-xs-2 pull-right">
@@ -63,7 +61,7 @@
                         <tr data-id="{{$g->id}}" data-type="{{$g->type}}">
                             <td>{{$g->id}}</td>
                             <td><img src="{{$g->image_link or ''}}" style="max-width: 100px;height: auto;"></td>
-                            <td>{{$g->code}}</td>
+                            <td><a href="{{route('goods::goods.detail', ['id' => $g->id])}}" target="_blank">{{$g->code}}</a></td>
                             <td>{{$g->name}}</td>
                             <td>{{trans('goods::goods.'.$g->type_name)}}</td>
                             <td>{{$g->category->display_name}}</td>
