@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('title')
-    {{trans('product::product.product_detail')}} | {{$project_name}}
+    @lang('product::product.product_detail') | {{$project_name}}
 @endsection
 @section('css')
     <style>
