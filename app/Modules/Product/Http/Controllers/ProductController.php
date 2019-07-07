@@ -57,7 +57,7 @@ class ProductController extends Controller
         return response()->json($this->productService->deleteProduct($request));
     }
 
-    public function productDetail($id)
+    public function detail($id)
     {
         $product_info = $this->productRepository->find($id);
 

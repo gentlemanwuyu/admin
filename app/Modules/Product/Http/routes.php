@@ -29,5 +29,5 @@ Route::group(['prefix' => 'product', 'as' => 'product.'], function() {
 	Route::post('delete_product', ['as'=>'delete_product', 'uses'=>'ProductController@deleteProduct']);
 
 	// 产品详情
-	Route::get('product_detail/{id}', ['as'=>'product_detail', 'uses'=>'ProductController@productDetail']);
+	Route::get('detail/{id}', ['as'=>'detail', 'uses'=>'ProductController@detail']);
 });

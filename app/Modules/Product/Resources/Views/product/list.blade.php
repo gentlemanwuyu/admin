@@ -65,7 +65,7 @@
                         <tr data-id="{{$product->id}}">
                             <td>{{$i++}}</td>
                             <td><img src="{{$product->image_link}}" alt="" style="max-width: 100px;height: auto;"></td>
-                            <td><a href="{{route('product::product.product_detail', ['id' => $product->id])}}" target="_blank">{{$product->code or ''}}</a></td>
+                            <td><a href="{{route('product::product.detail', ['id' => $product->id])}}" target="_blank">{{$product->code or ''}}</a></td>
                             <td>{{$product->name or ''}}</td>
                             <td>{{$product->category->name or ''}}</td>
                             <td class="sku_list">
