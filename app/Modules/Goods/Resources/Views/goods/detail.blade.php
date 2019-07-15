@@ -13,6 +13,12 @@
         .form-group {
             margin-bottom: 0;
         }
+        #related_products_table td {
+            text-align: left;
+        }
+        #related_products_table tr:first-child td {
+            border-top: 0;
+        }
     </style>
 @endsection
 @section('content')
@@ -80,7 +86,7 @@
                                     @if(\App\Modules\Goods\Models\Goods::SINGLE == $goods_info->type)
                                             <span class="form-control-span"><a href="{{route('product::product.detail', ['id' => $product->id])}}" target="_blank">{{$product->name or ''}}</a></span>
                                     @elseif(\App\Modules\Goods\Models\Goods::COMBO == $goods_info->type)
-                                        <table class="table table-bordered">
+                                        <table id="related_products_table" class="table">
                                             <tbody>
                                             @foreach($product as $p)
                                                 <tr class="related_product" @if(1 != $i++) style="display: none;" @endif>
