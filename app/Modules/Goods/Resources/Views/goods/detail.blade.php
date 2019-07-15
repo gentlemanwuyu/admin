@@ -69,7 +69,7 @@
                                 <label class="col-xs-3 control-label" style="vertical-align: middle;">
                                     @lang('goods::goods.related_product')
                                     @if(\App\Modules\Goods\Models\Goods::COMBO == $goods_info->type)
-                                        <i class="fa fa-sort-desc" id="unfold_combo_product" style="color: #337ab7;"></i>
+                                        <i class="fa fa-plus-square-o" id="unfold_combo_product" style="color: #dd4b39;"></i>
                                     @endif
                                 </label>
                                 <div class="col-xs-9">
@@ -157,11 +157,11 @@
     <script>
         $(function () {
             $('#unfold_combo_product').on('click', function () {
-                if ($(this).hasClass('fa-sort-desc')) {
-                    $(this).removeClass('fa-sort-desc').addClass('fa-sort-asc');
+                if ($(this).hasClass('fa-plus-square-o')) {
+                    $(this).removeClass('fa-plus-square-o').addClass('fa-minus-square-o');
                     $(this).parents('div.form-group').find('.table>tbody>tr').show();
                 }else {
-                    $(this).removeClass('fa-sort-asc').addClass('fa-sort-desc');
+                    $(this).removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
                     $(this).parents('div.form-group').find('.table>tbody>tr:not(:first-child)').hide();
                 }
             });
