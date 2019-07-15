@@ -75,7 +75,7 @@
                                 <label class="col-xs-3 control-label" style="vertical-align: middle;">
                                     @lang('goods::goods.related_product')
                                     @if(\App\Modules\Goods\Models\Goods::COMBO == $goods_info->type)
-                                        <i class="fa fa-plus-square-o" id="unfold_combo_product" style="color: #dd4b39;"></i>
+                                        <i class="fa fa-plus-square-o" id="unfold_combo_product" style="color: #dd4b39; margin-left: 2px;"></i>
                                     @endif
                                 </label>
                                 <div class="col-xs-9">
