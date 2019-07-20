@@ -76,3 +76,11 @@ $('.my-check-all').each(function () {
 
     $(check_all_checkbox).iCheck(all_checked ? 'check' : 'uncheck');
 });
+
+// 默认展示第一个选项卡
+$('.nav-tabs-custom ul a:first').tab('show');
+
+// 点击tabs时，将tab的index记录到cookie中
+$('.nav-tabs-custom ul>li>a').on('click', function () {
+    setCookie($(this).attr('data-cookie_name'), $(this).attr('data-cookie_value'));
+});
