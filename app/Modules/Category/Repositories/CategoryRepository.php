@@ -8,9 +8,10 @@
 
 namespace App\Modules\Category\Repositories;
 
+use Prettus\Repository\Eloquent\BaseRepository;
 use App\Modules\Category\Models\Category;
 
-class CategoryRepository extends ProductCategoryRepository
+class CategoryRepository extends BaseRepository
 {
     public function model()
     {

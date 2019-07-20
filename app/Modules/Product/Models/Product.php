@@ -10,7 +10,7 @@ namespace App\Modules\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Modules\Category\Models\ProductCategory;
+use App\Modules\Category\Models\Category;
 
 class Product extends Model
 {
@@ -25,7 +25,7 @@ class Product extends Model
      */
     public function category()
     {
-        return $this->belongsTo(ProductCategory::class);
+        return $this->belongsTo(Category::class);
     }
 
     /**

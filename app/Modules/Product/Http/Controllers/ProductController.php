@@ -5,21 +5,21 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Modules\Product\Repositories\ProductRepository;
+use App\Modules\Category\Repositories\CategoryRepository;
 use App\Modules\Product\Services\ProductService;
-use App\Modules\Category\Services\CategoryService;
 use App\Modules\Product\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
     protected $productRepository;
+    protected $categoryRepository;
     protected $productService;
-    protected $categoryService;
 
-    public function __construct(ProductRepository $productRepository, ProductService $productService, CategoryService $categoryService)
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository, ProductService $productService)
     {
         $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
         $this->productService = $productService;
-        $this->categoryService = $categoryService;
 	}
 
     public function getList(Request $request)
@@ -31,7 +31,7 @@ class ProductController extends Controller
 
     public function createOrUpdateProductPage(Request $request)
     {
-        $categories = $this->categoryService->getCategoryTree('product');
+        $categories = $this->categoryRepository->findWhere(['type' => 1, 'parent_id' => 0]);
         $data = compact('categories');
 
         if ('update' == $request->get('action')) {
