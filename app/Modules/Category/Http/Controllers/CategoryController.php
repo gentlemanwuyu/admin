@@ -38,8 +38,7 @@ class CategoryController extends Controller
     {
         $data = [];
         if ('update' == $request->get('action')) {
-            $category_info = $this->categoryService->getCategory($request->get('category_id'), $request->get('type'));
-
+            $category_info = $this->categoryRepository->find($request->get('category_id'));
             $data = array_merge($data, compact('category_info'));
         }
 
