@@ -106,7 +106,11 @@
 @endsection
 @section('scripts')
     <script>
-        var types = ['product', 'goods'];
+        var types = [
+            @foreach(\App\Modules\Category\Models\Category::$types as $type)
+                "{{$type}}",
+            @endforeach
+        ];
         $(function () {
             // active标签
             var active_tab = getCookie('category_tree_tab') ? getCookie('category_tree_tab') : 0;
