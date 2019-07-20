@@ -27,13 +27,6 @@ class CategoryController extends Controller
         return view('category::category.index', compact('product_categories', 'goods_categories'));
     }
 
-    public function categoryTree($type)
-    {
-        $categories = $this->categoryService->getCategoryTree($type);
-
-        return view('category::category.category_tree', compact('type', 'categories'));
-    }
-
     public function createOrUpdateCategoryPage(Request $request)
     {
         $data = [];

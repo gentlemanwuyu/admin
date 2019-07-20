@@ -88,16 +88,6 @@ return [
                         'icon' => 'fa fa-tree',
                         'link' => '/category/attribute/index',
                     ],
-                    [
-                        'id' => 'product_category',
-                        'icon' => 'fa fa-share-alt',
-                        'link' => '/category/category/category_tree/product',
-                    ],
-                    [
-                        'id' => 'goods_category',
-                        'icon' => 'fa fa-share-alt',
-                        'link' => '/category/category/category_tree/goods',
-                    ],
                 ],
             ],
             // 产品管理

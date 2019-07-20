@@ -8,21 +8,14 @@
 
 namespace App\Modules\Category\Services;
 
-use App\Modules\Category\Repositories\Criteria\Category\ParentIdEqual;
-use App\Modules\Category\Repositories\ProductCategoryRepository;
-use App\Modules\Category\Repositories\GoodsCategoryRepository;
 use App\Modules\Category\Repositories\CategoryRepository;
 
 class CategoryService
 {
-    protected $productCategoryRepository;
-    protected $goodsCategoryRepository;
     protected $categoryRepository;
 
-    public function __construct(ProductCategoryRepository $productCategoryRepository, GoodsCategoryRepository $goodsCategoryRepository, CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository)
     {
-        $this->productCategoryRepository = $productCategoryRepository;
-        $this->goodsCategoryRepository = $goodsCategoryRepository;
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -81,18 +74,6 @@ class CategoryService
         }catch (\Exception $e) {
             return ['status' => 'fail', 'msg'=>$e->getMessage()];
         }
-    }
-
-    /**
-     * 读取分类信息
-     *
-     * @param $category_id
-     * @param string $type
-     * @return mixed
-     */
-    public function getCategory($category_id, $type = 'product')
-    {
-        return $this->getRepository($type)->find($category_id);
     }
 
     /**
