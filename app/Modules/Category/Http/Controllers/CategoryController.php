@@ -52,6 +52,6 @@ class CategoryController extends Controller
 
     public function deleteCategory(Request $request)
     {
-        return response()->json($this->categoryService->deleteCategory($request));
+        return response()->json($this->categoryService->deleteCategory($request->get('category_id')));
     }
 }

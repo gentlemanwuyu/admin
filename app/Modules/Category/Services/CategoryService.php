@@ -101,39 +101,21 @@ class CategoryService
      * @param $request
      * @return array
      */
-    public function deleteCategory($request)
+    public function deleteCategory($id)
     {
         try {
-            $result = $this->isCategoryCanDelete($request->get('category_id'), $request->get('type'));
-            if (!$result) {
+            $category = $this->categoryRepository->find($id);
+            if (!$category->children->isEmpty()) {
                 throw new \Exception(trans('category::category.category_can_not_delete_because_sub_category'));
             }
 
-            $this->getRepository($request->get('type'))->resetCriteria()->delete($request->get('category_id'));
+            // TODO: 判断分类下是否含有产品（商品）
+
+            $category->delete();
 
             return ['status' => 'success'];
         }catch (\Exception $e) {
             return ['status' => 'fail', 'msg'=>$e->getMessage()];
         }
-    }
-
-    /**
-     * 判断分类是否能删除
-     *
-     * @param $category_id
-     * @param string $type
-     * @return bool
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
-     */
-    public function isCategoryCanDelete($category_id, $type = 'product')
-    {
-        $result = true;
-
-        $sub_categories = $this->getRepository($type)->resetCriteria()->pushCriteria(new ParentIdEqual($category_id))->get();
-        if (!$sub_categories->isEmpty()) {
-            $result = false;
-        }
-
-        return $result;
     }
 }

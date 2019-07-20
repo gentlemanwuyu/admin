@@ -9,9 +9,12 @@
 namespace App\Modules\Category\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
+    use SoftDeletes;
+
     static $types = [
         1 => 'product',
         2 => 'goods',
