@@ -4,7 +4,7 @@
         <div class="col-xs-10 col-xs-offset-1">
             <form class="form-horizontal">
                 <input type="hidden" name="action" value="{{$action or 'create'}}">
-                <input type="hidden" name="type" value="{{$type or 'product'}}">
+                <input type="hidden" name="type" value="{{$type}}">
                 <input type="hidden" name="parent_id" value="{{$parent_id or 0}}">
                 @if('update' == $action)
                     <input type="hidden" name="category_id" value="{{$category_id}}">

@@ -11,16 +11,19 @@ namespace App\Modules\Category\Services;
 use App\Modules\Category\Repositories\Criteria\Category\ParentIdEqual;
 use App\Modules\Category\Repositories\ProductCategoryRepository;
 use App\Modules\Category\Repositories\GoodsCategoryRepository;
+use App\Modules\Category\Repositories\CategoryRepository;
 
 class CategoryService
 {
     protected $productCategoryRepository;
     protected $goodsCategoryRepository;
+    protected $categoryRepository;
 
-    public function __construct(ProductCategoryRepository $productCategoryRepository, GoodsCategoryRepository $goodsCategoryRepository)
+    public function __construct(ProductCategoryRepository $productCategoryRepository, GoodsCategoryRepository $goodsCategoryRepository, CategoryRepository $categoryRepository)
     {
         $this->productCategoryRepository = $productCategoryRepository;
         $this->goodsCategoryRepository = $goodsCategoryRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function getRepository($type)
@@ -60,14 +63,13 @@ class CategoryService
 
             if ('create' == $request->get('action')) {
                 $data['parent_id'] = $request->get('parent_id', 0);
+                $data['type'] = $request->get('type', 0);
             }
 
-            $repository = $this->getRepository($request->get('type'));
-
             if ('create' == $request->get('action')) {
-                $repository->create($data);
+                $this->categoryRepository->create($data);
             }elseif ('update' == $request->get('action')) {
-                $repository->update($data, $request->get('category_id'));
+                $this->categoryRepository->update($data, $request->get('category_id'));
             }
 
             return ['status' => 'success'];
