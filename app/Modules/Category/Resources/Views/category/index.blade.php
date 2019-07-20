@@ -106,7 +106,7 @@
 @endsection
 @section('scripts')
     <script>
-        var types = [
+        var tab_types = [
             @foreach(\App\Modules\Category\Models\Category::$types as $type)
                 "{{$type}}",
             @endforeach
@@ -259,7 +259,7 @@
             // 搜索
             $('input[name=search]').on('keyup', function (e) {
                 e.preventDefault();
-                $('#' + types[active_tab] + '_category_tree .category_tree').jstree(true).search(this.value);
+                $('#' + tab_types[active_tab] + '_category_tree .category_tree').jstree(true).search(this.value);
             });
 
             // tab标签切换监控
@@ -306,7 +306,7 @@
                             }
                         });
                     },
-                    content: "{{route('category::category.create_or_update_category_page')}}?action=create&type=" + types[active_tab]
+                    content: "{{route('category::category.create_or_update_category_page')}}?action=create&type=" + (parseInt(active_tab) + 1)
                 });
             });
         });
