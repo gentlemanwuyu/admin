@@ -167,7 +167,7 @@
                                                 }
                                             });
                                         },
-                                        content: "{{route('category::category.create_or_update_category_page')}}?action=create&type=" + type + "&parent_id=" + category_id
+                                        content: "{{route('category::category.create_or_update_category_page')}}?action=create&parent_id=" + category_id
                                     });
                                 }
                             },
@@ -210,7 +210,7 @@
                                                 }
                                             });
                                         },
-                                        content: "{{route('category::category.create_or_update_category_page')}}?action=update&type=" + type + "&category_id=" + category_id
+                                        content: "{{route('category::category.create_or_update_category_page')}}?action=update&category_id=" + category_id
                                     });
                                 }
                             },
@@ -224,7 +224,7 @@
                                         $.ajax({
                                             method: "post",
                                             url: "{{route('category::category.delete_category')}}",
-                                            data: {category_id: category_id, type: type},
+                                            data: {category_id: category_id},
                                             success: function (data) {
                                                 layer.close(load_index);
                                                 if ('success' == data.status) {

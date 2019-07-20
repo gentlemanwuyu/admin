@@ -63,7 +63,12 @@ class CategoryService
 
             if ('create' == $request->get('action')) {
                 $data['parent_id'] = $request->get('parent_id', 0);
-                $data['type'] = $request->get('type', 0);
+                if ($data['parent_id']) {
+                    $parent = $this->categoryRepository->find($data['parent_id']);
+                    $data['type'] = $parent->type;
+                }else {
+                    $data['type'] = $request->get('type', 0);
+                }
             }
 
             if ('create' == $request->get('action')) {
