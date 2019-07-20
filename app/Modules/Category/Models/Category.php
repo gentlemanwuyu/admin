@@ -18,4 +18,14 @@ class Category extends Model
     ];
 
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
+
+    /**
+     * 子分类
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
 }

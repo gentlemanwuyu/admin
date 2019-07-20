@@ -6,20 +6,23 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Modules\Category\Services\CategoryService;
 use App\Modules\Category\Http\Requests\CategoryRequest;
+use App\Modules\Category\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
     protected $categoryService;
+    protected $categoryRepository;
 
-    public function __construct(CategoryService $categoryService)
+    public function __construct(CategoryService $categoryService, CategoryRepository $categoryRepository)
     {
         $this->categoryService = $categoryService;
+        $this->categoryRepository = $categoryRepository;
 	}
 
     public function index()
     {
-        $product_categories = $this->categoryService->getCategoryTree('product');
-        $goods_categories = $this->categoryService->getCategoryTree('goods');
+        $product_categories = $this->categoryRepository->findWhere(['type' => 1, 'parent_id' => 0]);
+        $goods_categories = $this->categoryRepository->findWhere(['type' => 2, 'parent_id' => 0]);
 
         return view('category::category.index', compact('product_categories', 'goods_categories'));
     }

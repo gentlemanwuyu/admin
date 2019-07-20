@@ -42,12 +42,12 @@
                                     @foreach($product_categories as $product_category)
                                         <li id="{{$product_category->id}}" data-jstree='{"opened": true}' data-level="1">
                                             {{$product_category->name}}
-                                            @if(isset($product_category->children) && $product_category->children)
+                                            @if(!$product_category->children->isEmpty())
                                                 <ul>
                                                     @foreach($product_category->children as $product_son)
                                                         <li id="{{$product_son->id}}" data-jstree='{"opened": true}' data-level="2">
                                                             {{$product_son->name}}
-                                                            @if(isset($product_son->children) && $product_son->children)
+                                                            @if(!$product_son->children->isEmpty())
                                                                 <ul>
                                                                     @foreach($product_son->children as $product_grandson)
                                                                         <li id="{{$product_grandson->id}}" data-level="3">
@@ -75,12 +75,12 @@
                                     @foreach($goods_categories as $goods_category)
                                         <li id="{{$goods_category->id}}" data-jstree='{"opened": true}' data-level="1">
                                             {{$goods_category->name}}
-                                            @if(isset($goods_category->children) && $goods_category->children)
+                                            @if(!$goods_category->children->isEmpty())
                                                 <ul>
                                                     @foreach($goods_category->children as $goods_son)
                                                         <li id="{{$goods_son->id}}" data-jstree='{"opened": true}' data-level="2">
                                                             {{$goods_son->name}}
-                                                            @if(isset($goods_son->children) && $goods_son->children)
+                                                            @if(!$goods_son->children->isEmpty())
                                                                 <ul>
                                                                     @foreach($goods_son->children as $goods_grandson)
                                                                         <li id="{{$goods_grandson->id}}" data-level="3">
