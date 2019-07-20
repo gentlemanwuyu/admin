@@ -7,6 +7,8 @@
  */
 
 return [
+    'product_category' => 'Product category',
+    'goods_category' => 'Goods category',
     'add_category' => 'Add category',
     'edit_category' => 'Edit category',
     'add_sub_category' => 'Add sub category',

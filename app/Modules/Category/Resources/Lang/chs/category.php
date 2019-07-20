@@ -7,6 +7,8 @@
  */
 
 return [
+    'product_category' => '产品分类',
+    'goods_category' => '商品分类',
     'add_category' => '添加分类',
     'edit_category' => '修改分类',
     'add_sub_category' => '添加子分类',

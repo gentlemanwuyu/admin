@@ -14,6 +14,9 @@
 // Category控制器
 Route::group(['prefix' => 'category', 'as' => 'category.'], function() {
 	// 产品分类树
+	Route::get('index', ['as'=>'index', 'uses'=>'CategoryController@index']);
+
+	// 产品分类树
 	Route::get('category_tree/{type}', ['as'=>'category_tree', 'uses'=>'CategoryController@categoryTree']);
 
 	// 添加/修改分类页面

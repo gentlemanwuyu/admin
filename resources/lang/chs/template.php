@@ -30,6 +30,8 @@ return [
         'department_chart' => '部门结构图',
         'position_management' => '职位管理',
     'category_management' => '分类管理',
+        'category_tree' => '分类树',
+        'category_attribute' => '分类属性',
         'product_category' => '产品分类',
         'goods_category' => '商品分类',
     'product_management' => '产品管理',

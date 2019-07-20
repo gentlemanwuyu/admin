@@ -28,6 +28,8 @@ return [
         'department_chart' => 'Department structure chart',
         'position_management' => 'Position management',
     'category_management' => 'Category management',
+        'category_tree' => 'Category tree',
+        'category_attribute' => 'Category attribute',
         'product_category' => 'Product category',
         'goods_category' => 'Goods category',
     'product_management' => 'Product management',

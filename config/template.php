@@ -79,6 +79,16 @@ return [
                 'icon' => 'fa fa-tree',
                 'menus' => [
                     [
+                        'id' => 'category_tree',
+                        'icon' => 'fa fa-tree',
+                        'link' => '/category/category/index',
+                    ],
+                    [
+                        'id' => 'category_attribute',
+                        'icon' => 'fa fa-tree',
+                        'link' => '/category/attribute/index',
+                    ],
+                    [
                         'id' => 'product_category',
                         'icon' => 'fa fa-share-alt',
                         'link' => '/category/category/category_tree/product',

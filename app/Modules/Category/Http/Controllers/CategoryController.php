@@ -16,6 +16,14 @@ class CategoryController extends Controller
         $this->categoryService = $categoryService;
 	}
 
+    public function index()
+    {
+        $product_categories = $this->categoryService->getCategoryTree('product');
+        $goods_categories = $this->categoryService->getCategoryTree('goods');
+
+        return view('category::category.index', compact('product_categories', 'goods_categories'));
+    }
+
     public function categoryTree($type)
     {
         $categories = $this->categoryService->getCategoryTree($type);
