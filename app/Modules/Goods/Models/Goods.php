@@ -8,7 +8,7 @@
 
 namespace App\Modules\Goods\Models;
 
-use App\Modules\Category\Models\GoodsCategory;
+use App\Modules\Category\Models\Category;
 use App\Modules\Product\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -159,7 +159,7 @@ class Goods extends Model
      */
     public function category()
     {
-        return $this->belongsTo(GoodsCategory::class);
+        return $this->belongsTo(Category::class);
     }
 
     /**

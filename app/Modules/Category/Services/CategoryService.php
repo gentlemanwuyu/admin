@@ -19,26 +19,6 @@ class CategoryService
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function getRepository($type)
-    {
-        if ('product' == $type) {
-            return $this->productCategoryRepository;
-        }elseif ('goods') {
-            return $this->goodsCategoryRepository;
-        }
-    }
-
-    /**
-     * 获取分类树
-     *
-     * @param $type
-     * @return mixed
-     */
-    public function getCategoryTree($type)
-    {
-        return $this->getRepository($type)->getSubCategories(0);
-    }
-
     /**
      * 创建/修改分类
      *

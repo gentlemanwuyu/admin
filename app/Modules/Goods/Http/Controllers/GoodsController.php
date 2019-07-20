@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Modules\Goods\Repositories\GoodsRepository;
 use App\Modules\Product\Repositories\ProductRepository;
+use App\Modules\Category\Repositories\CategoryRepository;
 use App\Modules\Goods\Services\GoodsService;
-use App\Modules\Category\Services\CategoryService;
 use App\Modules\Goods\Http\Requests\SingleRequest;
 use App\Modules\Goods\Http\Requests\ComboRequest;
 
@@ -15,18 +15,18 @@ class GoodsController extends Controller
 {
     protected $goodsRepository;
     protected $productRepository;
+    protected $categoryRepository;
     protected $goodsService;
-    protected $categoryService;
 
     public function __construct(GoodsRepository $goodsRepository,
                                 ProductRepository $productRepository,
-                                GoodsService $goodsService,
-                                CategoryService $categoryService)
+                                CategoryRepository $categoryRepository,
+                                GoodsService $goodsService)
     {
         $this->goodsRepository = $goodsRepository;
         $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
         $this->goodsService = $goodsService;
-        $this->categoryService = $categoryService;
     }
 
     public function getList(Request $request)
@@ -48,7 +48,7 @@ class GoodsController extends Controller
 
     public function createOrUpdateSinglePage(Request $request)
     {
-        $categories = $this->categoryService->getCategoryTree('goods');
+        $categories = $this->categoryRepository->findWhere(['type' => 2, 'parent_id' => 0]);
         $data = compact('categories');
         if ('create' == $request->get('action')) {
             $product_info = $this->productRepository->find($request->get('product_id'));
@@ -64,7 +64,7 @@ class GoodsController extends Controller
 
     public function createOrUpdateComboPage(Request $request)
     {
-        $categories = $this->categoryService->getCategoryTree('goods');
+        $categories = $this->categoryRepository->findWhere(['type' => 2, 'parent_id' => 0]);
         $data = compact('categories');
         if ('create' == $request->get('action')) {
             $products  = array_map(function ($quantity, $product_id) {

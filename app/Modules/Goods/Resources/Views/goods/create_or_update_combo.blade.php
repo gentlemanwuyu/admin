@@ -79,20 +79,16 @@
                                             <option value="{{$category->id}}" @if('update' == $action && $goods_info->category_id == $category->id) selected @endif>
                                                 {{$category->display_name}}
                                             </option>
-                                            @if(isset($category->children) && $category->children)
-                                                @foreach($category->children as $son)
-                                                    <option value="{{$son->id}}" @if('update' == $action && $goods_info->category_id == $son->id) selected @endif>
-                                                        {{str_repeat('&nbsp;', 4)}}{{$son->display_name}}
+                                            @foreach($category->children as $son)
+                                                <option value="{{$son->id}}" @if('update' == $action && $goods_info->category_id == $son->id) selected @endif>
+                                                    {{str_repeat('&nbsp;', 4)}}{{$son->display_name}}
+                                                </option>
+                                                @foreach($son->children as $grandson)
+                                                    <option value="{{$grandson->id}}" @if('update' == $action && $goods_info->category_id == $grandson->id) selected @endif>
+                                                        {{str_repeat('&nbsp;', 8)}}{{$grandson->display_name}}
                                                     </option>
-                                                    @if(isset($son->children) && $son->children)
-                                                        @foreach($son->children as $grandson)
-                                                            <option value="{{$grandson->id}}" @if('update' == $action && $goods_info->category_id == $grandson->id) selected @endif>
-                                                                {{str_repeat('&nbsp;', 8)}}{{$grandson->display_name}}
-                                                            </option>
-                                                        @endforeach
-                                                    @endif
                                                 @endforeach
-                                            @endif
+                                            @endforeach
                                         @endforeach
                                     </select>
                                 </div>
