@@ -175,6 +175,9 @@ return [
 
         // Entrust权限控制包
         Zizaco\Entrust\EntrustServiceProvider::class,
+
+        // laravel-log-viewer
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
     ],
 
     /*
