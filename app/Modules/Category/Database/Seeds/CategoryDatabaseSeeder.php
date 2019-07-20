@@ -17,6 +17,7 @@ class CategoryDatabaseSeeder extends Seeder
 
 		 $this->call(ProductCategoriesTableSeeder::class);
 		 $this->call(GoodsCategoriesTableSeeder::class);
+		$this->call(CategoriesTableSeeder::class);
 	}
 
 }
