@@ -42,6 +42,18 @@ class ProductController extends Controller
         return view('product::product.create_or_update_product', $data);
     }
 
+    public function setInventoryPage(Request $request)
+    {
+        $product_info = $this->productRepository->find($request->get('product_id'));
+
+        return view('product::product.set_inventory', compact('product_info'));
+    }
+
+    public function setInventory(Request $request)
+    {
+        return response()->json($this->productService->setInventory($request));
+    }
+
     public function createOrUpdateProduct(ProductRequest $request)
     {
         return response()->json($this->productService->createOrUpdateProduct($request));

@@ -191,6 +191,23 @@ class ProductService
     }
 
     /**
+     * 设置库存
+     *
+     * @param $request
+     * @return array
+     */
+    public function setInventory($request)
+    {
+        try {
+
+
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+    /**
      * 删除产品
      *
      * @param $request

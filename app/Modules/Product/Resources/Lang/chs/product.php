@@ -28,7 +28,17 @@ return [
     'delete_sku' => '删除Sku',
 
     'edit_product' => '编辑产品',
+    'inventory_settings' => '库存设置',
     'delete_product' => '删除产品',
+
+    'set_inventory' => '设置库存',
+    'highest_inventory' => '最高库存',
+    'lowest_inventory' => '最低库存',
+    'actual_inventory' => '实际库存',
+    'type_in_latest_inventory' => '请输入最新库存',
+    'inventory_numeric' => '库存数量只能是纯数字',
+    'set_inventory_successful' => '设置库存成功',
+    'set_inventory_fail' => '设置库存失败',
 
     'product_create_or_update_successful' => '添加/修改产品成功',
     'product_create_or_update_fail' => '添加/修改产品失败',

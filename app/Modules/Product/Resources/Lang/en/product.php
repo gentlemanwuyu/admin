@@ -28,7 +28,17 @@ return [
     'delete_sku' => 'Delete sku',
 
     'edit_product' => 'Edit product',
+    'inventory_settings' => 'Inventory settings',
     'delete_product' => 'Delete product',
+
+    'set_inventory' => 'Set inventory',
+    'highest_inventory' => 'Highest inventory',
+    'lowest_inventory' => 'Lowest inventory',
+    'actual_inventory' => 'Actual inventory',
+    'type_in_latest_inventory' => 'Please type in latest inventory',
+    'inventory_numeric' => 'Inventory must be numeric.',
+    'set_inventory_successful' => 'Inventory is set successful.',
+    'set_inventory_fail' => 'Inventory is set failed.',
 
     'product_create_or_update_successful' => 'Create/update product successful',
     'product_create_or_update_fail' => 'Create/update product failed',

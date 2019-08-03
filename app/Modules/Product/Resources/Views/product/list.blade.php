@@ -107,6 +107,9 @@
                                     <i class="fa fa-edit edit_product" title="{{trans('product::product.edit_product')}}"></i>
                                 </a>
                                 <a href="javascript:;">
+                                    <i class="fa fa-paw set_inventory" title="{{trans('product::product.inventory_settings')}}"></i>
+                                </a>
+                                <a href="javascript:;">
                                     <i class="fa fa-trash delete_product" title="{{trans('product::product.delete_product')}}"></i>
                                 </a>
                             </td>
@@ -162,6 +165,48 @@
                         });
                     },
                     content: "{{route('product::product.create_or_update_product_page')}}?action=create"
+                });
+            });
+
+            // 设置库存
+            $('.set_inventory').on('click', function () {
+                var product_id = $(this).parents('tr').attr('data-id');
+                layer.open({
+                    type: 2,
+                    area: ['50%', '60%'],
+                    fix: false,
+                    skin: 'layui-layer-rim',
+                    maxmin: true,
+                    shade: 0.5,
+                    anim: 4,
+                    title: "{{trans('product::product.set_inventory')}}",
+                    btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
+                    yes: function (index) {
+                        var data = $(layer.getChildFrame('body',index)).find('form').serialize();
+                        var load_index = layer.load();
+                        $.ajax({
+                            method: "post",
+                            url: "{{route('product::product.set_inventory')}}",
+                            data: data,
+                            success: function (data) {
+                                layer.close(load_index);
+                                if ('success' == data.status) {
+                                    layer.close(index);
+                                    layer.msg("{{trans('product::product.set_inventory_successful')}}", {icon:1});
+                                    parent.location.reload();
+                                } else {
+                                    layer.msg("{{trans('product::product.set_inventory_fail')}}:"+data.msg, {icon:2});
+                                    return false;
+                                }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                layer.close(load_index);
+                                layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                return false;
+                            }
+                        });
+                    },
+                    content: "{{route('product::product.set_inventory_page')}}?action=create&product_id=" + product_id
                 });
             });
 
