@@ -42,6 +42,8 @@
     <!-- bootstrap-fileinput -->
     <link rel="stylesheet" href="{{asset('/assets/bootstrap-fileinput/css/fileinput.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/bootstrap-fileinput/css/fileinput-rtl.min.css')}}">
+    <!-- fancybox -->
+    <link rel="stylesheet" href="{{asset('/assets/fancybox/dist/jquery.fancybox.min.css')}}">
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset('/assets/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
 
@@ -113,6 +115,8 @@
 <script src="{{asset('/assets/jquery-contextmenu/dist/jquery.ui.position.min.js')}}"></script>
 <!-- bootstrap-fileinput -->
 <script src="{{asset('/assets/bootstrap-fileinput/js/fileinput.min.js')}}"></script>
+<!-- fancybox -->
+<script src="{{asset('/assets/fancybox/dist/jquery.fancybox.min.js')}}"></script>
 <!-- DataTables -->
 <script src="{{asset('/assets/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('/assets/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
