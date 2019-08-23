@@ -13,6 +13,8 @@
         "prettus/l5-repository": "^2.6",
         "creativeorange/gravatar": "~1.0",
         "zizaco/entrust": "^1.8",
+        "guzzlehttp/guzzle": "^6.3.3",
+        "fabpot/goutte": "^v3.2.3",
         "rap2hpoutre/laravel-log-viewer": "^v1.2.1"
     },
     "require-dev": {
