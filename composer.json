@@ -13,9 +13,6 @@
         "prettus/l5-repository": "^2.6",
         "creativeorange/gravatar": "~1.0",
         "zizaco/entrust": "^1.8",
-//        "guzzlehttp/guzzle": "^6.3.3",
-//        "jaeger/querylist": "^V4.1.1",
-//        "jaeger/querylist-phantomjs": "^4.0.1",
         "rap2hpoutre/laravel-log-viewer": "^v1.2.1"
     },
     "require-dev": {
