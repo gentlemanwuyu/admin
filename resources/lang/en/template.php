@@ -34,4 +34,6 @@ return [
         'product_list' => 'Product list',
     'goods_management' => 'Goods management',
         'goods_list' => 'Goods list',
+    'supplier_management' => 'Supplier management',
+        'supplier_list' => 'Supplier list',
 ];

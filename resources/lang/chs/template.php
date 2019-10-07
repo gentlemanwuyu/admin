@@ -36,4 +36,6 @@ return [
         'product_list' => '产品列表',
     'goods_management' => '商品管理',
         'goods_list' => '商品列表',
+    'supplier_management' => '供应商管理',
+        'supplier_list' => '供应商列表',
 ];

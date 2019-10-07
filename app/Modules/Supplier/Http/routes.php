@@ -11,8 +11,8 @@
 |
 */
 
-Route::group(['prefix' => 'supplier'], function() {
-	Route::get('/', function() {
-		dd('This is the Supplier module index page.');
-	});
+// Supplier控制器
+Route::group(['prefix' => 'supplier', 'as' => 'supplier.'], function() {
+	// 产品列表
+	Route::get('list', ['as'=>'list', 'uses'=>'SupplierController@getList']);
 });

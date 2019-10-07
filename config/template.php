@@ -114,6 +114,18 @@ return [
                     ],
                 ],
             ],
+            // 供应商管理
+            [
+                'id' => 'supplier_management',
+                'icon' => 'fa fa-street-view',
+                'menus' => [
+                    [
+                        'id' => 'supplier_list',
+                        'icon' => 'fa fa-street-view',
+                        'link' => '/supplier/supplier/list',
+                    ],
+                ],
+            ],
         ],
     ],
     'footer' => [
