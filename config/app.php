@@ -178,6 +178,9 @@ return [
 
         // laravel-log-viewer
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+
+        // 国家地区数据扩展包
+        \Wuyu\World\WorldServiceProvider::class,
     ],
 
     /*

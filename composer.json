@@ -16,7 +16,8 @@
         "guzzlehttp/guzzle": "^6.3.3",
         "jaeger/querylist": "^V4.1.1",
         "jaeger/querylist-phantomjs": "^4.0.1",
-        "rap2hpoutre/laravel-log-viewer": "^v1.2.1"
+        "rap2hpoutre/laravel-log-viewer": "^v1.2.1",
+        "gentlemanwuyu/world": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
