@@ -17,7 +17,7 @@
         "jaeger/querylist": "^V4.1.1",
         "jaeger/querylist-phantomjs": "^4.0.1",
         "rap2hpoutre/laravel-log-viewer": "^v1.2.1",
-        "gentlemanwuyu/world": "dev-master"
+        "gentlemanwuyu/world": "v0.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
