@@ -69,4 +69,24 @@ class SupplierService
             return ['status' => 'fail', 'msg'=>$e->getMessage()];
         }
     }
+
+    /**
+     * 删除供应商
+     *
+     * @param $supplier_id
+     * @return array
+     */
+    public function deleteSupplier($supplier_id)
+    {
+        try {
+            DB::beginTransaction();
+            $this->supplierRepository->delete($supplier_id);
+
+            DB::commit();
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
 }

@@ -181,6 +181,35 @@
                     content: "{{route('supplier::supplier.create_or_update_supplier_page')}}?action=update&supplier_id=" + supplier_id
                 });
             });
+
+            // 删除供应商
+            $('.delete_supplier').on('click', function () {
+                var supplier_id = $(this).parents('tr').attr('data-id');
+                layer.confirm("{{trans('supplier::supplier.supplier_delete_confirm')}}", {icon: 3, title:"{{trans('application.confirm')}}"}, function (index) {
+                    layer.close(index);
+                    var load_index = layer.load();
+                    $.ajax({
+                        method: "post",
+                        url: "{{route('supplier::supplier.delete_supplier')}}",
+                        data: {supplier_id: supplier_id},
+                        success: function (data) {
+                            layer.close(load_index);
+                            if ('success' == data.status) {
+                                layer.msg("{{trans('supplier::supplier.supplier_delete_successful')}}", {icon:1});
+                                parent.location.reload();
+                            } else {
+                                layer.msg("{{trans('supplier::supplier.supplier_delete_fail')}}"+data.msg, {icon:2});
+                                return false;
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            layer.close(load_index);
+                            layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                            return false;
+                        }
+                    });
+                });
+            });
         });
     </script>
 @endsection

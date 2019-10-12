@@ -21,4 +21,7 @@ Route::group(['prefix' => 'supplier', 'as' => 'supplier.'], function() {
 
 	// 添加/修改供应商
 	Route::post('create_or_update_supplier', ['as'=>'create_or_update_supplier', 'uses'=>'SupplierController@createOrUpdateSupplier']);
+
+	// 删除
+	Route::post('delete_supplier', ['as'=>'delete_supplier', 'uses'=>'SupplierController@deleteSupplier']);
 });

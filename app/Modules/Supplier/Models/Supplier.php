@@ -50,4 +50,12 @@ class Supplier extends Model
     {
         return $this->hasMany(SupplierContact::class);
     }
+
+    public function delete()
+    {
+        parent::delete();
+        SupplierContact::where('supplier_id', $this->id)->delete();
+
+        return true;
+    }
 }

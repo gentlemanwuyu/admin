@@ -34,4 +34,8 @@ return [
     'contact_name_max' => '联系人名称不能超过:number个字符',
     'contact_position_max' => '联系人职位不能超过:number个字符',
     'contact_phone_number_max' => '联系人电话不能超过:number个字符',
+
+    'supplier_delete_confirm' => '您确定要删除该供应商吗？',
+    'supplier_delete_successful' => '供应商删除成功',
+    'supplier_delete_fail' => '供应商删除失败',
 ];
