@@ -34,11 +34,44 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <th>@lang('application.index_number')</th>
+                    <th>@lang('application.name')</th>
+                    <th>@lang('supplier::supplier.supplier_code')</th>
+                    <th>@lang('application.phone')</th>
+                    <th>@lang('application.contact')</th>
+                    <th>@lang('application.action')</th>
+                    </thead>
+                    <?php
+                        if (!isset($page) || $page <= 0) {
+                            $page = 1;
+                        }
+                        $page_size = $suppliers->perPage() ?: 0;
+                        $i = ($page - 1) * $page_size + 1;
+                    ?>
+                    @foreach($suppliers as $supplier)
+                        <tr data-id="{{$supplier->id}}">
+                            <td>{{$i++}}</td>
+                            <td>{{$supplier->name}}</td>
+                            <td>{{$supplier->code or ''}}</td>
+                            <td>{{$supplier->phone or ''}}</td>
+                            <td></td>
+                            <td>
+                                <a href="javascript:;">
+                                    <i class="fa fa-edit edit_supplier" title="{{trans('supplier::supplier.edit_supplier')}}"></i>
+                                </a>
+                                <a href="javascript:;">
+                                    <i class="fa fa-trash delete_supplier" title="{{trans('supplier::supplier.delete_supplier')}}"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-
+                {{$suppliers->links()}}
             </div>
         </div>
     </section>

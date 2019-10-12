@@ -31,4 +31,9 @@ return [
     'loading' => 'Loading...',
     'quantity' => 'Quantity',
     'pcs' => 'PCS',
+    'phone' => 'Phone',
+    'fax' => 'Fax',
+    'contact' => 'Contact',
+    'address' => 'Address',
+    'country' => 'Country',
 ];
