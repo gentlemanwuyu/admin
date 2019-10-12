@@ -3,9 +3,21 @@
     {{trans('template.supplier_list')}} | {{$project_name}}
 @endsection
 @section('css')
-
+    <style>
+        td>ul.list-group>li {
+            border-left: 0;
+            border-right: 0;
+        }
+        td>ul.list-group>li:first-child {
+             border-top: 0;
+         }
+        td>ul.list-group>li:last-child {
+            border-bottom: 0;
+        }
+    </style>
 @endsection
 @section('content')
+    @inject('supplierPresenter', 'App\Modules\Supplier\Presenters\SupplierPresenter')
     <section class="content-header">
         <h1>@lang('template.supplier_list')</h1>
         <ol class="breadcrumb">
@@ -55,8 +67,16 @@
                             <td>{{$i++}}</td>
                             <td>{{$supplier->name}}</td>
                             <td>{{$supplier->code or ''}}</td>
-                            <td>{{$supplier->phone or ''}}</td>
-                            <td></td>
+                            <td>{{$supplier->phone_number or ''}}</td>
+                            <td style="padding: 0;">
+                                @if(!$supplier->contacts->isEmpty())
+                                    <ul class="list-group" style="margin-bottom: 0;">
+                                        @foreach($supplier->contacts as $contact)
+                                            <li class="list-group-item">{{$supplierPresenter->showContact($contact)}}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </td>
                             <td>
                                 <a href="javascript:;">
                                     <i class="fa fa-edit edit_supplier" title="{{trans('supplier::supplier.edit_supplier')}}"></i>

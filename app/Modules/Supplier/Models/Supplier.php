@@ -34,4 +34,9 @@ class Supplier extends Model
             }
         }
     }
+
+    public function contacts()
+    {
+        return $this->hasMany(SupplierContact::class);
+    }
 }
