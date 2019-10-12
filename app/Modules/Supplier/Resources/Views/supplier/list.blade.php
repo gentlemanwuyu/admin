@@ -82,6 +82,12 @@
                                     <i class="fa fa-edit edit_supplier" title="{{trans('supplier::supplier.edit_supplier')}}"></i>
                                 </a>
                                 <a href="javascript:;">
+                                    <i class="fa fa-fire black_supplier" title="{{trans('supplier::supplier.black_supplier')}}"></i>
+                                </a>
+                                <a href="javascript:;">
+                                    <i class="fa fa-fire-extinguisher release_supplier" title="{{trans('supplier::supplier.release_supplier')}}"></i>
+                                </a>
+                                <a href="javascript:;">
                                     <i class="fa fa-trash delete_supplier" title="{{trans('supplier::supplier.delete_supplier')}}"></i>
                                 </a>
                             </td>
@@ -179,6 +185,40 @@
                         });
                     },
                     content: "{{route('supplier::supplier.create_or_update_supplier_page')}}?action=update&supplier_id=" + supplier_id
+                });
+            });
+
+            // 拉黑供应商
+            $('.black_supplier').on('click', function () {
+                var supplier_id = $(this).parents('tr').attr('data-id');
+                layer.prompt({
+                    title: "{{trans('supplier::supplier.black_supplier')}}"
+                }, function (value, prompt_index, elem) {
+                    var load_index = layer.load();
+                    $.ajax({
+                        method: "post",
+                        url: "{{route('supplier::supplier.black_supplier')}}",
+                        data: {
+                            supplier_id: supplier_id,
+                            reason: value
+                        },
+                        success: function (data) {
+                            layer.close(load_index);
+                            if ('success' == data.status) {
+                                layer.close(prompt_index);
+                                layer.msg("{{trans('supplier::supplier.supplier_black_successful')}}", {icon:1});
+                                parent.location.reload();
+                            } else {
+                                layer.msg("{{trans('supplier::supplier.supplier_black_fail')}}"+data.msg, {icon:2});
+                                return false;
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            layer.close(load_index);
+                            layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                            return false;
+                        }
+                    });
                 });
             });
 

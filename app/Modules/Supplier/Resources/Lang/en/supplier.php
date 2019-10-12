@@ -10,6 +10,8 @@ return [
     'supplier_code' => 'Supplier code',
     'add_supplier' => 'Add supplier',
     'edit_supplier' => 'Edit supplier',
+    'black_supplier' => 'Black supplier',
+    'release_supplier' => 'Release supplier',
     'delete_supplier' => 'Delete supplier',
     'add_contact' => 'Add contact',
     'please_select_country' => 'Please select country',
@@ -34,6 +36,10 @@ return [
     'contact_name_max' => 'The length of contact name must less than :number letters.',
     'contact_position_max' => 'The length of contact position must less than :number letters.',
     'contact_phone_number_max' => 'The length of contact phone number must less than :number letters.',
+
+    'supplier_black_confirm' => 'Are you sure to black this supplier?',
+    'supplier_black_successful' => 'Supplier black success.',
+    'supplier_black_fail' => 'Supplier black failed.',
 
     'supplier_delete_confirm' => 'Are you sure to delete this supplier?',
     'supplier_delete_successful' => 'Supplier delete success.',

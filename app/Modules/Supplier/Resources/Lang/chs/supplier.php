@@ -10,6 +10,8 @@ return [
     'supplier_code' => '供应商编号',
     'add_supplier' => '添加供应商',
     'edit_supplier' => '编辑供应商',
+    'black_supplier' => '拉黑供应商',
+    'release_supplier' => '释放供应商',
     'delete_supplier' => '删除供应商',
     'add_contact' => '添加联系人',
     'please_select_country' => '请选择国家',
@@ -34,6 +36,9 @@ return [
     'contact_name_max' => '联系人名称不能超过:number个字符',
     'contact_position_max' => '联系人职位不能超过:number个字符',
     'contact_phone_number_max' => '联系人电话不能超过:number个字符',
+
+    'supplier_black_successful' => '供应商拉黑成功',
+    'supplier_black_fail' => '供应商拉黑失败',
 
     'supplier_delete_confirm' => '您确定要删除该供应商吗？',
     'supplier_delete_successful' => '供应商删除成功',

@@ -8,16 +8,23 @@
 
 namespace App\Modules\Supplier\Services;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Modules\Supplier\Repositories\SupplierRepository;
+use App\Modules\Supplier\Repositories\SupplierLogRepository;
 
 class SupplierService
 {
     protected $supplierRepository;
+    protected $supplierLogRepository;
 
-    public function __construct(SupplierRepository $supplierRepository)
+    protected $user;
+
+    public function __construct(SupplierRepository $supplierRepository, SupplierLogRepository $supplierLogRepository)
     {
         $this->supplierRepository = $supplierRepository;
+        $this->supplierLogRepository = $supplierLogRepository;
+        $this->user = Auth::user();
     }
 
     public function getList($request)
@@ -61,6 +68,33 @@ class SupplierService
                 throw new \Exception('Create supplier failed.');
             }
             $supplier->syncContacts($request->get('contacts'));
+
+            DB::commit();
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+    /**
+     * 拉黑供应商
+     *
+     * @param $supplier_id
+     * @param $reason
+     * @return array
+     */
+    public function blackSupplier($supplier_id, $reason)
+    {
+        try {
+            DB::beginTransaction();
+            $this->supplierRepository->update(['is_black' => 1], $supplier_id);
+            $this->supplierLogRepository->create([
+                'supplier_id' => $supplier_id,
+                'action' => 3,
+                'message' => $reason,
+                'user_id' => $this->user->id,
+            ]);
 
             DB::commit();
             return ['status' => 'success'];

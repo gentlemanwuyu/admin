@@ -3,16 +3,14 @@
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2019/10/12
- * Time: 13:36
+ * Time: 23:18
  */
 
 namespace App\Modules\Supplier\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SupplierContact extends Model
+class SupplierLog extends Model
 {
-    protected $guarded = ['id'];
-
-    public $timestamps = false;
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }

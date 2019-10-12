@@ -46,6 +46,11 @@ class SupplierController extends Controller
         return response()->json($this->supplierService->createOrUpdateSupplier($request));
     }
 
+    public function blackSupplier(Request $request)
+    {
+        return response()->json($this->supplierService->blackSupplier($request->get('supplier_id'), $request->get('reason')));
+    }
+
     public function deleteSupplier(Request $request)
     {
         return response()->json($this->supplierService->deleteSupplier($request->get('supplier_id')));
