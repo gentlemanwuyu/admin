@@ -16,4 +16,6 @@ return [
     'please_select_state' => 'Please select state',
     'please_select_city' => 'Please select city',
     'please_select_county' => 'Please select county',
+    'supplier_create_or_update_successful' => 'Supplier create/update success',
+    'supplier_create_or_update_fail' => 'Supplier create/update failed',
 ];

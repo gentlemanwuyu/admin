@@ -30,4 +30,9 @@ class SupplierController extends Controller
 
         return view('supplier::supplier.create_or_update_supplier', compact('countries', 'chinese_regions'));
     }
+
+    public function createOrUpdateSupplier(Request $request)
+    {
+        return response()->json($this->supplierService->createOrUpdateSupplier($request));
+    }
 }

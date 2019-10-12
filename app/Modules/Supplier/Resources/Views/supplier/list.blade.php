@@ -96,16 +96,16 @@
                         var load_index = layer.load();
                         $.ajax({
                             method: "post",
-                            url: "{{route('product::product.create_or_update_product')}}",
+                            url: "{{route('supplier::supplier.create_or_update_supplier')}}",
                             data: data,
                             success: function (data) {
                                 layer.close(load_index);
                                 if ('success' == data.status) {
                                     layer.close(index);
-                                    layer.msg("{{trans('product::product.product_create_or_update_successful')}}", {icon:1});
+                                    layer.msg("{{trans('supplier::supplier.supplier_create_or_update_successful')}}", {icon:1});
                                     parent.location.reload();
                                 } else {
-                                    layer.msg("{{trans('product::product.product_create_or_update_fail')}}:"+data.msg, {icon:2});
+                                    layer.msg("{{trans('supplier::supplier.supplier_create_or_update_fail')}}:"+data.msg, {icon:2});
                                     return false;
                                 }
                             },

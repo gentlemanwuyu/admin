@@ -12,7 +12,7 @@ class CreateSupplierContactsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('supplier_contact', function (Blueprint $table) {
+		Schema::create('supplier_contacts', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('supplier_id')->default(0)->comment('供应商id');
 			$table->string('name')->default('')->comment('名称');
@@ -30,6 +30,6 @@ class CreateSupplierContactsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('supplier_contact');
+		Schema::dropIfExists('supplier_contacts');
 	}
 }

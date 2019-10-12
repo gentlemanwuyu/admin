@@ -15,6 +15,10 @@
 Route::group(['prefix' => 'supplier', 'as' => 'supplier.'], function() {
 	// 供应商列表
 	Route::get('list', ['as'=>'list', 'uses'=>'SupplierController@getList']);
+
 	// 添加/修改供应商页面
 	Route::get('create_or_update_supplier_page', ['as'=>'create_or_update_supplier_page', 'uses'=>'SupplierController@createOrUpdateSupplierPage']);
+
+	// 添加/修改供应商
+	Route::post('create_or_update_supplier', ['as'=>'create_or_update_supplier', 'uses'=>'SupplierController@createOrUpdateSupplier']);
 });
