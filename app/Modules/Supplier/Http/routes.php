@@ -13,6 +13,8 @@
 
 // Supplier控制器
 Route::group(['prefix' => 'supplier', 'as' => 'supplier.'], function() {
-	// 产品列表
+	// 供应商列表
 	Route::get('list', ['as'=>'list', 'uses'=>'SupplierController@getList']);
+	// 添加/修改供应商页面
+	Route::get('create_or_update_supplier_page', ['as'=>'create_or_update_supplier_page', 'uses'=>'SupplierController@createOrUpdateSupplierPage']);
 });

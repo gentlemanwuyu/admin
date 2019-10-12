@@ -76,3 +76,49 @@
         </div>
     </section>
 @endsection
+@section('scripts')
+    <script>
+        $(function () {
+            // 添加供应商
+            $('#add_supplier').on('click', function () {
+                layer.open({
+                    type: 2,
+                    area: ['80%', '80%'],
+                    fix: false,
+                    skin: 'layui-layer-rim',
+                    maxmin: true,
+                    shade: 0.5,
+                    anim: 4,
+                    title: "{{trans('supplier::supplier.add_supplier')}}",
+                    btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
+                    yes: function (index) {
+                        var data = $(layer.getChildFrame('body',index)).find('form').serialize();
+                        var load_index = layer.load();
+                        $.ajax({
+                            method: "post",
+                            url: "{{route('product::product.create_or_update_product')}}",
+                            data: data,
+                            success: function (data) {
+                                layer.close(load_index);
+                                if ('success' == data.status) {
+                                    layer.close(index);
+                                    layer.msg("{{trans('product::product.product_create_or_update_successful')}}", {icon:1});
+                                    parent.location.reload();
+                                } else {
+                                    layer.msg("{{trans('product::product.product_create_or_update_fail')}}:"+data.msg, {icon:2});
+                                    return false;
+                                }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                layer.close(load_index);
+                                layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                return false;
+                            }
+                        });
+                    },
+                    content: "{{route('supplier::supplier.create_or_update_supplier_page')}}?action=create"
+                });
+            });
+        });
+    </script>
+@endsection

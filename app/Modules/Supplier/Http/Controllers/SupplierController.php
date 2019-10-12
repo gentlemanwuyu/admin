@@ -5,6 +5,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Modules\Supplier\Services\SupplierService;
+use App\Services\WorldService;
 
 class SupplierController extends Controller
 {
@@ -20,5 +21,13 @@ class SupplierController extends Controller
         $suppliers = $this->supplierService->getList($request);
 
         return view('supplier::supplier.list', compact('suppliers'));
+    }
+
+    public function createOrUpdateSupplierPage(Request $request)
+    {
+        $countries = WorldService::countries();
+        $chinese_regions = WorldService::chineseTree();
+
+        return view('supplier::supplier.create_or_update_supplier', compact('countries', 'chinese_regions'));
     }
 }

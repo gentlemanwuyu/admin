@@ -31,9 +31,12 @@ return [
     'loading' => '数据加载中...',
     'quantity' => '数量',
     'pcs' => '个',
+    'company' => '公司',
     'phone' => '电话',
     'fax' => '传真',
     'contact' => '联系人',
     'address' => '地址',
     'country' => '国家',
+    'base_info' => '基本信息',
+    'introduction' => '简介',
 ];

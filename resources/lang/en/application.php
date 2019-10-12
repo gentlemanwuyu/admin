@@ -31,9 +31,12 @@ return [
     'loading' => 'Loading...',
     'quantity' => 'Quantity',
     'pcs' => 'PCS',
+    'company' => 'Company',
     'phone' => 'Phone',
     'fax' => 'Fax',
     'contact' => 'Contact',
     'address' => 'Address',
     'country' => 'Country',
+    'base_info' => 'Base information',
+    'introduction' => 'Introduction',
 ];
