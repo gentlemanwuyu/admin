@@ -25,6 +25,9 @@ Route::group(['prefix' => 'supplier', 'as' => 'supplier.'], function() {
 	// 拉黑
 	Route::post('black_supplier', ['as'=>'black_supplier', 'uses'=>'SupplierController@blackSupplier']);
 
+	// 释放
+	Route::post('release_supplier', ['as'=>'release_supplier', 'uses'=>'SupplierController@releaseSupplier']);
+
 	// 删除
 	Route::post('delete_supplier', ['as'=>'delete_supplier', 'uses'=>'SupplierController@deleteSupplier']);
 });

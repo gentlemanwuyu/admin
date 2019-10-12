@@ -168,13 +168,15 @@
                         <th>@lang('application.phone')</th>
                         </thead>
                         <tbody>
-                        @foreach($supplier_info->contacts as $contact)
-                            <tr class="contact_tr" data-contact_flag="{{$contact->id}}">
-                                <td><input type="text" name="contacts[{{$contact->id}}][name]" class="form-control" value="{{$contact->name}}"></td>
-                                <td><input type="text" name="contacts[{{$contact->id}}][position]" class="form-control" value="{{$contact->position}}"></td>
-                                <td><input type="text" name="contacts[{{$contact->id}}][phone_number]" class="form-control" value="{{$contact->phone_number}}"></td>
-                            </tr>
-                        @endforeach
+                        @if(isset($supplier_info))
+                            @foreach($supplier_info->contacts as $contact)
+                                <tr class="contact_tr" data-contact_flag="{{$contact->id}}">
+                                    <td><input type="text" name="contacts[{{$contact->id}}][name]" class="form-control" value="{{$contact->name}}"></td>
+                                    <td><input type="text" name="contacts[{{$contact->id}}][position]" class="form-control" value="{{$contact->position}}"></td>
+                                    <td><input type="text" name="contacts[{{$contact->id}}][phone_number]" class="form-control" value="{{$contact->phone_number}}"></td>
+                                </tr>
+                            @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>

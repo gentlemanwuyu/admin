@@ -8,6 +8,7 @@
 
 return [
     'supplier_code' => '供应商编号',
+    'is_black' => '是否拉黑',
     'add_supplier' => '添加供应商',
     'edit_supplier' => '编辑供应商',
     'black_supplier' => '拉黑供应商',
@@ -39,6 +40,10 @@ return [
 
     'supplier_black_successful' => '供应商拉黑成功',
     'supplier_black_fail' => '供应商拉黑失败',
+
+    'supplier_release_confirm' => '您确定要释放该供应商吗？',
+    'supplier_release_successful' => '供应商释放成功',
+    'supplier_release_fail' => '供应商释放失败',
 
     'supplier_delete_confirm' => '您确定要删除该供应商吗？',
     'supplier_delete_successful' => '供应商删除成功',

@@ -68,6 +68,13 @@ class SupplierService
                 throw new \Exception('Create supplier failed.');
             }
             $supplier->syncContacts($request->get('contacts'));
+            // 记录日志
+            $this->supplierLogRepository->create([
+                'supplier_id' => $supplier->id,
+                'action' => 'update' == $request->get('action') ? 2 : 1,
+                'message' => json_encode(array_merge($data, $request->get('contacts', []))),
+                'user_id' => $this->user->id,
+            ]);
 
             DB::commit();
             return ['status' => 'success'];
@@ -93,6 +100,32 @@ class SupplierService
                 'supplier_id' => $supplier_id,
                 'action' => 3,
                 'message' => $reason,
+                'user_id' => $this->user->id,
+            ]);
+
+            DB::commit();
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+    /**
+     * 释放供应商
+     *
+     * @param $supplier_id
+     * @return array
+     */
+    public function releaseSupplier($supplier_id)
+    {
+        try {
+            DB::beginTransaction();
+            $this->supplierRepository->update(['is_black' => 0], $supplier_id);
+            $this->supplierLogRepository->create([
+                'supplier_id' => $supplier_id,
+                'action' => 4,
+                'message' => '',
                 'user_id' => $this->user->id,
             ]);
 
