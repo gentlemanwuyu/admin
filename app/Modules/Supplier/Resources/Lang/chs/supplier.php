@@ -18,4 +18,18 @@ return [
     'please_select_county' => '请选择县区',
     'supplier_create_or_update_successful' => '添加/修改供应商成功',
     'supplier_create_or_update_fail' => '添加/修改供应商失败',
+
+    'name_required' => '供应商名称不能为空',
+    'name_max' => '供应商名称不能超过:number个字符',
+    'code_accepted' => '供应商编号只能包含字母、数字、破折号以及下划线',
+    'code_max' => '供应商编号不能超过:number个字符',
+    'company_max' => '公司不能超过:number个字符',
+    'phone_max' => '电话不能超过:number个字符',
+    'fax_max' => '传真不能超过:number个字符',
+    'street_address_max' => '街道地址不能超过:number个字符',
+    'address_max' => '地址不能超过:number个字符',
+    'contact_name_required' => '联系人名称不能为空',
+    'contact_name_max' => '联系人名称不能超过:number个字符',
+    'contact_position_max' => '联系人职位不能超过:number个字符',
+    'contact_phone_number_max' => '联系人电话不能超过:number个字符',
 ];

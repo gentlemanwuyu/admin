@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Modules\Supplier\Services\SupplierService;
 use App\Services\WorldService;
+use App\Modules\Supplier\Http\Requests\SupplierRequest;
 
 class SupplierController extends Controller
 {
@@ -31,7 +32,7 @@ class SupplierController extends Controller
         return view('supplier::supplier.create_or_update_supplier', compact('countries', 'chinese_regions'));
     }
 
-    public function createOrUpdateSupplier(Request $request)
+    public function createOrUpdateSupplier(SupplierRequest $request)
     {
         return response()->json($this->supplierService->createOrUpdateSupplier($request));
     }

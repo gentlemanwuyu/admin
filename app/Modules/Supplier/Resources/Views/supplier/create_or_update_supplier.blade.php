@@ -131,7 +131,7 @@
                         <thead>
                         <th class="required">@lang('application.name')</th>
                         <th>@lang('application.position')</th>
-                        <th class="required">@lang('application.phone')</th>
+                        <th>@lang('application.phone')</th>
                         </thead>
                         <tbody>
 
