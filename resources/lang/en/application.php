@@ -39,4 +39,5 @@ return [
     'country' => 'Country',
     'base_info' => 'Base information',
     'introduction' => 'Introduction',
+    'position' => 'Position',
 ];

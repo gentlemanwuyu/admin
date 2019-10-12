@@ -127,7 +127,16 @@
                     </div>
                 </div>
                 <div class="box-body">
+                    <table id="contacts_table" class="table table-hover">
+                        <thead>
+                        <th class="required">@lang('application.name')</th>
+                        <th>@lang('application.position')</th>
+                        <th class="required">@lang('application.phone')</th>
+                        </thead>
+                        <tbody>
 
+                        </tbody>
+                    </table>
                 </div>
                 <div class="box-footer clearfix no-border">
                     <button id="add_contact" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('supplier::supplier.add_contact')</button>
@@ -230,6 +239,31 @@
                 }else {
                     $('#street_address').hide();
                 }
+            });
+
+            // 添加sku
+            $('#add_contact').on('click', function () {
+                var contact_flag = Date.now();
+                var html = '';
+                html += '<tr class="contact_tr" data-contact_flag="' + contact_flag + '">';
+                html += '<td><input type="text" name="contacts[' + contact_flag + '][name]" class="form-control"></td>';
+                html += '<td><input type="text" name="contacts[' + contact_flag + '][position]" class="form-control"></td>';
+                html += '<td><input type="text" name="contacts[' + contact_flag + '][phone_number]" class="form-control"></td>';
+                html += '</tr>';
+
+                $('#contacts_table>tbody').append(html);
+
+                $.contextMenu({
+                    selector: '.contact_tr',
+                    items: {
+                        'delete': {
+                            name: '@lang('application.delete')',
+                            callback: function (key, opt) {
+                                $(this).remove();
+                            }
+                        }
+                    }
+                });
             });
         });
     </script>

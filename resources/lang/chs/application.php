@@ -39,4 +39,5 @@ return [
     'country' => '国家',
     'base_info' => '基本信息',
     'introduction' => '简介',
+    'position' => '职位',
 ];
