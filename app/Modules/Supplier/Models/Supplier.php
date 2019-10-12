@@ -24,6 +24,17 @@ class Supplier extends Model
      */
     public function syncContacts($contacts)
     {
+        if (!$contacts || !is_array($contacts)) {
+            return null;
+        }
+
+        $ids = array_keys($contacts);
+
+        SupplierContact::where('supplier_id', $this->id)
+            ->whereNotIn('id', $ids)->get()->map(function ($contact) {
+                $contact->delete();
+            });
+
         foreach ($contacts as $id => $item) {
             $contact = SupplierContact::find($id);
             if ($contact) {

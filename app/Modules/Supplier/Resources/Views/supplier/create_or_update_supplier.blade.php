@@ -1,7 +1,9 @@
 @extends('layouts.template')
 @section('css')
     <style>
-
+        div#street_address {
+            margin-top: 10px;
+        }
     </style>
 @endsection
 @section('body')
@@ -26,31 +28,31 @@
                             <div class="form-group">
                                 <label class="col-xs-3 control-label required">@lang('application.name')</label>
                                 <div class="col-xs-9">
-                                    <input type="text" name="name" class="form-control" value="">
+                                    <input type="text" name="name" class="form-control" value="{{$supplier_info->name or ''}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">@lang('supplier::supplier.supplier_code')</label>
                                 <div class="col-xs-9">
-                                    <input type="text" name="code" class="form-control" value="">
+                                    <input type="text" name="code" class="form-control" value="{{$supplier_info->code or ''}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">@lang('application.company')</label>
                                 <div class="col-xs-9">
-                                    <input type="text" name="company" class="form-control" value="">
+                                    <input type="text" name="company" class="form-control" value="{{$supplier_info->company or ''}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">@lang('application.phone')</label>
                                 <div class="col-xs-9">
-                                    <input type="text" name="phone" class="form-control" value="">
+                                    <input type="text" name="phone" class="form-control" value="{{$supplier_info->phone_number or ''}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">@lang('application.fax')</label>
                                 <div class="col-xs-9">
-                                    <input type="text" name="fax" class="form-control" value="">
+                                    <input type="text" name="fax" class="form-control" value="{{$supplier_info->fax or ''}}">
                                 </div>
                             </div>
                         </div>
@@ -71,38 +73,70 @@
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">@lang('application.address')</label>
                                 <div class="col-xs-9">
-                                    <div id="chinese_address" class="row">
+                                    <div id="chinese_address" class="row" @if(isset($supplier_info) && 'CN' != $supplier_info->country_code) style="display: none;" @endif>
                                         <div id="state" class="col-xs-4">
                                             <select name="state_id" class="form-control select2" style="width: 100%;">
                                                 <option value="">@lang('supplier::supplier.please_select_state')</option>
                                                 @foreach($chinese_regions as $region)
-                                                    <option value="{{$region['id']}}">{{$region['name']}}</option>
+                                                    <option value="{{$region['id']}}" @if(isset($supplier_info) && $supplier_info->state_id == $region['id']) selected @endif>{{$region['name']}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div id="city" class="col-xs-4" style="display: none;">
+                                        <?php
+                                            $state_regions = [];
+                                            if (isset($supplier_info) && !empty($chinese_regions[$supplier_info->state_id]['children'])) {
+                                                $state_regions = $chinese_regions[$supplier_info->state_id]['children'];
+                                            }
+                                        ?>
+                                        <div id="city" class="col-xs-4" @if(!$state_regions) style="display: none;" @endif>
                                             <select name="city_id" class="form-control select2" style="width: 100%;">
                                                 <option value="">@lang('supplier::supplier.please_select_city')</option>
-                                                @foreach($chinese_regions as $region)
-                                                    <option value="{{$region['id']}}">{{$region['name']}}</option>
+                                                @foreach($state_regions as $region)
+                                                    <option value="{{$region['id']}}" @if(isset($supplier_info) && $supplier_info->city_id == $region['id']) selected @endif>{{$region['name']}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div id="county" class="col-xs-4" style="display: none;">
+                                        <?php
+                                            $city_regions = [];
+                                            if (isset($supplier_info) && !empty($chinese_regions[$supplier_info->state_id]['children'][$supplier_info->city_id]['children'])) {
+                                                $city_regions = $chinese_regions[$supplier_info->state_id]['children'][$supplier_info->city_id]['children'];
+                                            }
+                                        ?>
+                                        <div id="county" class="col-xs-4" @if(!$city_regions) style="display: none;" @endif>
                                             <select name="county_id" class="form-control select2" style="width: 100%;">
                                                 <option value="">@lang('supplier::supplier.please_select_county')</option>
-                                                @foreach($chinese_regions as $region)
-                                                    <option value="{{$region['id']}}">{{$region['name']}}</option>
+                                                @foreach($city_regions as $region)
+                                                    <option value="{{$region['id']}}" @if(isset($supplier_info) && $supplier_info->county_id == $region['id']) selected @endif>{{$region['name']}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div id="street_address" class="col-xs-12" style="margin-top: 10px;display: none;">
-                                            <input type="text" name="street_address" class="form-control" value="" placeholder="请输入街道地址">
+                                        <?php
+                                            $flag = false;
+                                            if (isset($supplier_info) && 'CN' == $supplier_info->country_code) {
+                                                if (!empty($chinese_regions[$supplier_info->state_id])) {
+                                                    if (empty($chinese_regions[$supplier_info->state_id]['children'])) {
+                                                        $flag = true;
+                                                    }else {
+                                                        if (!empty($chinese_regions[$supplier_info->state_id]['children'][$supplier_info->city_id])) {
+                                                            if (empty($chinese_regions[$supplier_info->state_id]['children'][$supplier_info->city_id]['children'])) {
+                                                                $flag = true;
+                                                            }else {
+                                                                if (!empty($chinese_regions[$supplier_info->state_id]['children'][$supplier_info->city_id]['children'][$supplier_info->county_id])) {
+                                                                    $flag = true;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ?>
+                                        <div id="street_address" class="col-xs-12" @if(!$flag) style="display: none;" @endif>
+                                            <input type="text" name="street_address" class="form-control" value="{{$supplier_info->street_address or ''}}" placeholder="@lang('supplier::supplier.please_enter_street_address')">
                                         </div>
                                     </div>
-                                    <div id="other_address" class="row" @if('create' == $action) style="display: none;" @endif>
+                                    <div id="other_address" class="row" @if('create' == $action || isset($supplier_info) && 'CN' == $supplier_info->country_code) style="display: none;" @endif>
                                         <div class="col-xs-12">
-                                            <input type="text" name="address" class="form-control" value="" placeholder="请输入详细地址">
+                                            <input type="text" name="address" class="form-control" value="{{$supplier_info->address or ''}}" placeholder="@lang('supplier::supplier.please_enter_detailed_address')">
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +144,7 @@
                             <div class="form-group">
                                 <label class="col-xs-3 control-label">@lang('application.introduction')</label>
                                 <div class="col-xs-9">
-                                    <textarea class="form-control" name="introduction" rows="4"></textarea>
+                                    <textarea class="form-control" name="introduction" rows="4">{{$supplier_info->introduction or ''}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +168,13 @@
                         <th>@lang('application.phone')</th>
                         </thead>
                         <tbody>
-
+                        @foreach($supplier_info->contacts as $contact)
+                            <tr class="contact_tr" data-contact_flag="{{$contact->id}}">
+                                <td><input type="text" name="contacts[{{$contact->id}}][name]" class="form-control" value="{{$contact->name}}"></td>
+                                <td><input type="text" name="contacts[{{$contact->id}}][position]" class="form-control" value="{{$contact->position}}"></td>
+                                <td><input type="text" name="contacts[{{$contact->id}}][phone_number]" class="form-control" value="{{$contact->phone_number}}"></td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -175,6 +215,7 @@
                 },
             @endforeach
         };
+
         $(function () {
             // 选择国家change事件
             $('select[name=country_code]').on('change', function () {
@@ -264,6 +305,19 @@
                         }
                     }
                 });
+            });
+
+            // 绑定右键事件
+            $.contextMenu({
+                selector: '.contact_tr',
+                items: {
+                    'delete': {
+                        name: '@lang('application.delete')',
+                        callback: function (key, opt) {
+                            $(this).remove();
+                        }
+                    }
+                }
             });
         });
     </script>

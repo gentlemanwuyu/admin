@@ -16,6 +16,8 @@ return [
     'please_select_state' => '请选择省份',
     'please_select_city' => '请选择城市',
     'please_select_county' => '请选择县区',
+    'please_enter_street_address' => '请输入街道地址',
+    'please_enter_detailed_address' => '请输入详细地址',
     'supplier_create_or_update_successful' => '添加/修改供应商成功',
     'supplier_create_or_update_fail' => '添加/修改供应商失败',
 
