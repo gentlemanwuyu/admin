@@ -29,7 +29,7 @@ class SupplierTableSeeder extends Seeder
             'county_id' => '1964',
             'street_address' => '龙岗街道龙东盈科利工业区',
             'address' => '',
-            'is_black' => '0',
+            'is_black' => '1',
         ]);
         SupplierContact::create(['supplier_id' => $supplier->id, 'name' => '聂小平', 'position' => '老板', 'phone_number' => '13924585198']);
         SupplierContact::create(['supplier_id' => $supplier->id, 'name' => '聂广伦', 'position' => '老板', 'phone_number' => '13924585268']);
@@ -49,7 +49,7 @@ class SupplierTableSeeder extends Seeder
             'county_id' => '0',
             'street_address' => '虎门镇白沙三村工业区福升路',
             'address' => '',
-            'is_black' => '0',
+            'is_black' => '1',
         ]);
         SupplierContact::create(['supplier_id' => $supplier->id, 'name' => '秦先生', 'position' => '', 'phone_number' => '13316686652']);
     }

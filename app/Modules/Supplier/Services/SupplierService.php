@@ -8,10 +8,12 @@
 
 namespace App\Modules\Supplier\Services;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Modules\Supplier\Repositories\SupplierRepository;
 use App\Modules\Supplier\Repositories\SupplierLogRepository;
+use App\Modules\Supplier\Repositories\Criteria\Supplier\NameLike;
+use App\Modules\Supplier\Repositories\Criteria\Supplier\IsBlackEqual;
 
 class SupplierService
 {
@@ -29,6 +31,9 @@ class SupplierService
 
     public function getList($request)
     {
+        $this->supplierRepository->pushCriteria(new NameLike(trim($request->get('name'))));
+        $this->supplierRepository->pushCriteria(new IsBlackEqual($request->get('is_black')));
+
         return $this->supplierRepository->paginate();
     }
 
@@ -95,7 +100,7 @@ class SupplierService
     {
         try {
             DB::beginTransaction();
-            $this->supplierRepository->update(['is_black' => 1], $supplier_id);
+            $this->supplierRepository->update(['is_black' => 2], $supplier_id);
             $this->supplierLogRepository->create([
                 'supplier_id' => $supplier_id,
                 'action' => 3,
@@ -121,7 +126,7 @@ class SupplierService
     {
         try {
             DB::beginTransaction();
-            $this->supplierRepository->update(['is_black' => 0], $supplier_id);
+            $this->supplierRepository->update(['is_black' => 1], $supplier_id);
             $this->supplierLogRepository->create([
                 'supplier_id' => $supplier_id,
                 'action' => 4,

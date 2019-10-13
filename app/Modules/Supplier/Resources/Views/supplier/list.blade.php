@@ -28,21 +28,26 @@
     <section class="content">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <div class="col-xs-6">
-                    <div class="btn-group">
-                        <button id="add_supplier" type="button" class="btn btn-primary" title="{{trans('supplier::supplier.add_supplier')}}"><i class="fa fa-street-view"></i></button>
-                    </div>
-                </div>
-                <div class="col-xs-2 pull-right">
-                    <form>
-                        <div class="input-group input-group-sm">
-                            <input type="text" name="search" class="form-control pull-right" value="{{$search or ''}}" placeholder="{{trans('application.search')}}">
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </div>
+                <form class="search-form">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <input type="text" name="name" class="form-control" value="{{$name or ''}}" placeholder="@lang('application.name')">
                         </div>
-                    </form>
-                </div>
+                        <div class="col-xs-2">
+                            <select class="form-control" name="is_black">
+                                <option value="">@lang('supplier::supplier.is_black')</option>
+                                <option value="1" @if(isset($is_black) && 1 == $is_black) selected @endif>{{trans('application.no')}}</option>
+                                <option value="2" @if(isset($is_black) && 2 == $is_black) selected @endif>{{trans('application.yes')}}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-1">
+                            <button type="submit" class="btn btn-primary" style="width:100%">@lang("application.search")</button>
+                        </div>
+                        <div class="col-xs-1">
+                            <button id="add_supplier" type="button" class="btn btn-primary" title="{{trans('supplier::supplier.add_supplier')}}"><i class="fa fa-street-view"></i></button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -69,7 +74,7 @@
                             <td>{{$supplier->name}}</td>
                             <td>{{$supplier->code or ''}}</td>
                             <td>{{$supplier->phone_number or ''}}</td>
-                            <td>{{$supplier->is_black ? trans('application.yes') : trans('application.no')}}</td>
+                            <td>{{2 == $supplier->is_black ? trans('application.yes') : trans('application.no')}}</td>
                             <td style="padding: 0;">
                                 @if(!$supplier->contacts->isEmpty())
                                     <ul class="list-group" style="margin-bottom: 0;">
@@ -83,12 +88,12 @@
                                 <a href="javascript:;">
                                     <i class="fa fa-edit edit_supplier" title="{{trans('supplier::supplier.edit_supplier')}}"></i>
                                 </a>
-                                @if(0 == $supplier->is_black)
+                                @if(1 == $supplier->is_black)
                                     <a href="javascript:;">
                                         <i class="fa fa-fire black_supplier" title="{{trans('supplier::supplier.black_supplier')}}"></i>
                                     </a>
                                 @endif
-                                @if(1 == $supplier->is_black)
+                                @if(2 == $supplier->is_black)
                                     <a href="javascript:;">
                                         <i class="fa fa-fire-extinguisher release_supplier" title="{{trans('supplier::supplier.release_supplier')}}"></i>
                                     </a>
