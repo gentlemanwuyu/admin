@@ -1,0 +1,8 @@
+{
+	"name": "Customer",
+	"slug": "customer",
+	"namespace": "Customer",
+	"version": "1.0",
+	"description": "This is the description for the Customer module.",
+	"enabled": true
+}
