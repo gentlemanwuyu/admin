@@ -60,4 +60,11 @@ class SupplierController extends Controller
     {
         return response()->json($this->supplierService->deleteSupplier($request->get('supplier_id')));
     }
+
+    public function detail($id)
+    {
+        $supplier_info = $this->supplierRepository->find($id);
+
+        return view('supplier::supplier.detail', compact('supplier_info'));
+    }
 }

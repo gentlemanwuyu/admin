@@ -71,7 +71,9 @@
                     @foreach($suppliers as $supplier)
                         <tr data-id="{{$supplier->id}}">
                             <td>{{$i++}}</td>
-                            <td>{{$supplier->name}}</td>
+                            <td>
+                                <a href="{{route('supplier::supplier.detail', ['id' => $supplier->id])}}" target="_blank">{{$supplier->name}}</a>
+                            </td>
                             <td>{{$supplier->code or ''}}</td>
                             <td>{{$supplier->phone_number or ''}}</td>
                             <td>{{2 == $supplier->is_black ? trans('application.yes') : trans('application.no')}}</td>

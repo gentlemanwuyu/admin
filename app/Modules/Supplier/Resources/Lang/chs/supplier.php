@@ -48,4 +48,6 @@ return [
     'supplier_delete_confirm' => '您确定要删除该供应商吗？',
     'supplier_delete_successful' => '供应商删除成功',
     'supplier_delete_fail' => '供应商删除失败',
+
+    'supplier_detail' => '供应商详情',
 ];

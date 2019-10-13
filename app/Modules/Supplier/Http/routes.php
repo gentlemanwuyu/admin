@@ -30,4 +30,7 @@ Route::group(['prefix' => 'supplier', 'as' => 'supplier.'], function() {
 
 	// 删除
 	Route::post('delete_supplier', ['as'=>'delete_supplier', 'uses'=>'SupplierController@deleteSupplier']);
+
+	// 供应商详情
+	Route::get('detail/{id}', ['as'=>'detail', 'uses'=>'SupplierController@detail']);
 });

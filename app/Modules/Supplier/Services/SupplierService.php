@@ -74,10 +74,14 @@ class SupplierService
             }
             $supplier->syncContacts($request->get('contacts'));
             // 记录日志
+            $msg_arr = $data;
+            if ($request->get('contacts')) {
+                $msg_arr['contacts'] = $request->get('contacts');
+            }
             $this->supplierLogRepository->create([
                 'supplier_id' => $supplier->id,
                 'action' => 'update' == $request->get('action') ? 2 : 1,
-                'message' => json_encode(array_merge($data, $request->get('contacts', []))),
+                'message' => json_encode($msg_arr),
                 'user_id' => $this->user->id,
             ]);
 

@@ -48,4 +48,6 @@ return [
     'supplier_delete_confirm' => 'Are you sure to delete this supplier?',
     'supplier_delete_successful' => 'Supplier delete success.',
     'supplier_delete_fail' => 'Supplier delete failed.',
+
+    'supplier_detail' => 'Supplier detail',
 ];
