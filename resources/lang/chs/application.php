@@ -48,4 +48,5 @@ return [
     'actor' => '操作人',
     'time' => '时间',
     'content' => '内容',
+    'fold' => '收起',
 ];

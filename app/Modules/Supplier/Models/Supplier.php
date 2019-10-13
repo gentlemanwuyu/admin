@@ -104,6 +104,6 @@ class Supplier extends Model
 
     public function logs()
     {
-        return $this->hasMany(SupplierLog::class);
+        return $this->hasMany(SupplierLog::class)->orderBy('id', 'desc');
     }
 }

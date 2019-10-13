@@ -50,4 +50,5 @@ return [
     'supplier_delete_fail' => 'Supplier delete failed.',
 
     'supplier_detail' => 'Supplier detail',
+    'view_detailed_content' => 'View detailed content',
 ];

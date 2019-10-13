@@ -50,4 +50,5 @@ return [
     'supplier_delete_fail' => '供应商删除失败',
 
     'supplier_detail' => '供应商详情',
+    'view_detailed_content' => '查看详细内容',
 ];

@@ -48,4 +48,5 @@ return [
     'actor' => 'Actor',
     'time' => 'Time',
     'content' => 'Content',
+    'fold' => 'Fold',
 ];
