@@ -49,4 +49,5 @@ return [
     'time' => 'Time',
     'content' => 'Content',
     'fold' => 'Fold',
+    'manager' => 'Manager',
 ];

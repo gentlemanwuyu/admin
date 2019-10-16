@@ -36,11 +36,46 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <th>@lang('application.index_number')</th>
+                    <th>@lang('application.name')</th>
+                    <th>@lang('customer::customer.customer_code')</th>
+                    <th>@lang('application.phone')</th>
+                    <th>@lang('application.contact')</th>
+                    <th>@lang('application.manager')</th>
+                    <th>@lang('application.action')</th>
+                    </thead>
+                    <?php
+                        if (!isset($page) || $page <= 0) {
+                            $page = 1;
+                        }
+                        $page_size = $customers->perPage() ?: 0;
+                        $i = ($page - 1) * $page_size + 1;
+                    ?>
+                    @foreach($customers as $customer)
+                        <tr data-id="{{$customer->id}}">
+                            <td>{{$i++}}</td>
+                            <td>{{$customer->name}}</td>
+                            <td>{{$customer->code or ''}}</td>
+                            <td>{{$customer->phone_number or ''}}</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <a href="javascript:;">
+                                    <i class="fa fa-edit edit_customer" title="{{trans('customer::customer.edit_customer')}}"></i>
+                                </a>
+                                <a href="javascript:;">
+                                    <i class="fa fa-trash delete_customer" title="{{trans('customer::customer.delete_customer')}}"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-
+                {{$customers->links()}}
             </div>
         </div>
     </section>

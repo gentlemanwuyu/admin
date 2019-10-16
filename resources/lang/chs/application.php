@@ -49,4 +49,5 @@ return [
     'time' => '时间',
     'content' => '内容',
     'fold' => '收起',
+    'manager' => '经理',
 ];
