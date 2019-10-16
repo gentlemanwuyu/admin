@@ -36,6 +36,10 @@ return [
         'goods_list' => 'Goods list',
     'supplier_management' => 'Supplier management',
         'supplier_list' => 'Supplier list',
+    'customer_management' => 'Customer management',
+        'my_customer' => 'My customer',
+        'black_list' => 'Black list',
+        'customer_pool' => 'Customer pool',
     'system_management' => 'System management',
         'running_log' => 'Running log',
 ];

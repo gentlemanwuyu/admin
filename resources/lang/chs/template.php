@@ -38,6 +38,10 @@ return [
         'goods_list' => '商品列表',
     'supplier_management' => '供应商管理',
         'supplier_list' => '供应商列表',
+    'customer_management' => '客户管理',
+        'my_customer' => '我的客户',
+        'black_list' => '黑名单',
+        'customer_pool' => '客户池',
     'system_management' => '系统管理',
         'running_log' => '运行日志',
 ];
