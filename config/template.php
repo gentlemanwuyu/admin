@@ -126,6 +126,28 @@ return [
                     ],
                 ],
             ],
+            // 客户管理
+            [
+                'id' => 'customer_management',
+                'icon' => 'fa fa-male',
+                'menus' => [
+                    [
+                        'id' => 'my_customer',
+                        'icon' => 'fa fa-male',
+                        'link' => '#',
+                    ],
+                    [
+                        'id' => 'black_list',
+                        'icon' => 'fa fa-bomb',
+                        'link' => '#',
+                    ],
+                    [
+                        'id' => 'customer_pool',
+                        'icon' => 'fa fa-database',
+                        'link' => '#',
+                    ],
+                ],
+            ],
             // 系统管理
             [
                 'id' => 'system_management',
