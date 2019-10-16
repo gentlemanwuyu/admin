@@ -11,7 +11,7 @@
     <section class="content-header">
         <h1>@lang('template.my_customer')</h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-cubes"></i>@lang('template.customer_management')</a></li>
+            <li><a href="#"><i class="fa fa-male"></i>@lang('template.customer_management')</a></li>
             <li class="active">@lang('template.my_customer')</li>
         </ol>
     </section>
