@@ -1,17 +1,23 @@
-#env
+# env
 .env
 
-#Laravel
+# Laravel
 /vendor
 /node_modules
 /storage/framework
 /storage/app
 /storage/logs
 
-#Composer
+# Composer
 composer.phar
 composer.lock
+# npm
 package-lock.json
+npm-debug.log
+
+#yarn
+yarn.lock
+yarn-error.log
 
 #public file
 /public/assets
