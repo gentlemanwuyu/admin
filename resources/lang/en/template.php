@@ -36,4 +36,6 @@ return [
         'goods_list' => 'Goods list',
     'supplier_management' => 'Supplier management',
         'supplier_list' => 'Supplier list',
+    'system_management' => 'System management',
+        'running_log' => 'Running log',
 ];

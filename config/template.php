@@ -126,6 +126,18 @@ return [
                     ],
                 ],
             ],
+            // 系统管理
+            [
+                'id' => 'system_management',
+                'icon' => 'fa fa-support',
+                'menus' => [
+                    [
+                        'id' => 'running_log',
+                        'icon' => 'fa fa-book',
+                        'link' => '/logs',
+                    ],
+                ],
+            ],
         ],
     ],
     'footer' => [
