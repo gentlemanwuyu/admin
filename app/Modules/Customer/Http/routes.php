@@ -11,8 +11,8 @@
 |
 */
 
-Route::group(['prefix' => 'customer'], function() {
-	Route::get('/', function() {
-		dd('This is the Customer module index page.');
-	});
+// Customer控制器
+Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
+	// 产品列表
+	Route::get('my_customer', ['as'=>'my_customer', 'uses'=>'CustomerController@myCustomer']);
 });

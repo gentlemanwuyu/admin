@@ -134,7 +134,7 @@ return [
                     [
                         'id' => 'my_customer',
                         'icon' => 'fa fa-male',
-                        'link' => '#',
+                        'link' => '/customer/customer/my_customer',
                     ],
                     [
                         'id' => 'black_list',
