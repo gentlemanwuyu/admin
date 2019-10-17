@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Modules\Customer\Services\CustomerService;
 use App\Services\WorldService;
 use App\Modules\Customer\Repositories\CustomerRepository;
+use App\Modules\Customer\Http\Requests\CustomerRequest;
 
 class CustomerController extends Controller
 {
@@ -40,7 +41,7 @@ class CustomerController extends Controller
         return view('customer::customer.create_or_update_customer', $data);
     }
 
-    public function createOrUpdateCustomer(Request $request)
+    public function createOrUpdateCustomer(CustomerRequest $request)
     {
         return response()->json($this->customerService->createOrUpdateCustomer($request));
     }
