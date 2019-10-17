@@ -19,7 +19,7 @@ class CustomerController extends Controller
     {
         $customers = $this->customerService->myCustomerList($request);
 
-        return view('customer::customer.my_customer', compact('customers'));
+        return view('customer::customer.list', compact('customers'));
     }
 
     public function createOrUpdateCustomerPage()
