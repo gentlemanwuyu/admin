@@ -165,6 +165,35 @@
                     content: "{{route('customer::customer.create_or_update_customer_page')}}?action=update&customer_id=" + customer_id
                 });
             });
+
+            // 删除客户
+            $('.delete_customer').on('click', function () {
+                var customer_id = $(this).parents('tr').attr('data-id');
+                layer.confirm("{{trans('customer::customer.customer_delete_confirm')}}", {icon: 3, title:"{{trans('application.confirm')}}"}, function (index) {
+                    layer.close(index);
+                    var load_index = layer.load();
+                    $.ajax({
+                        method: "post",
+                        url: "{{route('customer::customer.delete_customer')}}",
+                        data: {customer_id: customer_id},
+                        success: function (data) {
+                            layer.close(load_index);
+                            if ('success' == data.status) {
+                                layer.msg("{{trans('customer::customer.customer_delete_successful')}}", {icon:1});
+                                parent.location.reload();
+                            } else {
+                                layer.msg("{{trans('customer::customer.customer_delete_fail')}}"+data.msg, {icon:2});
+                                return false;
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            layer.close(load_index);
+                            layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                            return false;
+                        }
+                    });
+                });
+            });
         });
     </script>
 @endsection

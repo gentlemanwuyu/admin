@@ -21,4 +21,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 
 	// 添加/修改客户
 	Route::post('create_or_update_customer', ['as'=>'create_or_update_customer', 'uses'=>'CustomerController@createOrUpdateCustomer']);
+
+	// 删除客户
+	Route::post('delete_customer', ['as'=>'delete_customer', 'uses'=>'CustomerController@deleteCustomer']);
 });

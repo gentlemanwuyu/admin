@@ -20,4 +20,8 @@ return [
     'please_enter_detailed_address' => '请输入详细地址',
     'customer_create_or_update_successful' => '添加/修改客户成功',
     'customer_create_or_update_fail' => '添加/修改客户失败',
+
+    'customer_delete_confirm' => '您确定要删除该客户吗？',
+    'customer_delete_successful' => '客户删除成功',
+    'customer_delete_fail' => '客户删除失败',
 ];

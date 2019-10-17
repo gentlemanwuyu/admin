@@ -20,4 +20,8 @@ return [
     'please_enter_detailed_address' => 'Please enter the detailed address',
     'customer_create_or_update_successful' => 'Customer create/update success',
     'customer_create_or_update_fail' => 'Customer create/update failed',
+
+    'customer_delete_confirm' => 'Are you sure to delete this customer?',
+    'customer_delete_successful' => 'Customer delete success.',
+    'customer_delete_fail' => 'Customer delete failed.',
 ];

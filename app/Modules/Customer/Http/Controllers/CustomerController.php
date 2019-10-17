@@ -44,4 +44,9 @@ class CustomerController extends Controller
     {
         return response()->json($this->customerService->createOrUpdateCustomer($request));
     }
+
+    public function deleteCustomer(Request $request)
+    {
+        return response()->json($this->customerService->deleteSupplier($request->get('customer_id')));
+    }
 }

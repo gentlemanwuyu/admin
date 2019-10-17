@@ -32,6 +32,12 @@ class CustomerService
         return  $this->customerRepository->paginate();
     }
 
+    /**
+     * 添加/修改客户
+     *
+     * @param $request
+     * @return array
+     */
     public function createOrUpdateCustomer($request)
     {
 
@@ -75,6 +81,26 @@ class CustomerService
                 'message' => json_encode($msg_arr),
                 'user_id' => $this->user->id,
             ]);
+
+            DB::commit();
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+    /**
+     * 删除客户
+     *
+     * @param $customer_id
+     * @return array
+     */
+    public function deleteSupplier($customer_id)
+    {
+        try {
+            DB::beginTransaction();
+            $this->customerRepository->delete($customer_id);
 
             DB::commit();
             return ['status' => 'success'];

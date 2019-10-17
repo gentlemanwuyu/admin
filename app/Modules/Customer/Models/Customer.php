@@ -51,4 +51,12 @@ class Customer extends Model
     {
         return $this->hasMany(CustomerContact::class);
     }
+
+    public function delete()
+    {
+        parent::delete();
+        CustomerContact::where('customer_id', $this->id)->delete();
+
+        return true;
+    }
 }
