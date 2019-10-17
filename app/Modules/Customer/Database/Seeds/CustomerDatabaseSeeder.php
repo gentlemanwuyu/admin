@@ -15,7 +15,7 @@ class CustomerDatabaseSeeder extends Seeder
 	{
 		Model::unguard();
 
-		// $this->call('App\Modules\Customer\Database\Seeds\FoobarTableSeeder');
+		 $this->call(CustomerTableSeeder::class);
 	}
 
 }
