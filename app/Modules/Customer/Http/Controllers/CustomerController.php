@@ -21,4 +21,14 @@ class CustomerController extends Controller
 
         return view('customer::customer.my_customer', compact('customers'));
     }
+
+    public function createOrUpdateCustomerPage()
+    {
+        return view('customer::customer.create_or_update_customer');
+    }
+
+    public function createOrUpdateCustomer()
+    {
+        
+    }
 }

@@ -13,6 +13,12 @@
 
 // Customer控制器
 Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
-	// 产品列表
+	// 我的客户
 	Route::get('my_customer', ['as'=>'my_customer', 'uses'=>'CustomerController@myCustomer']);
+
+	// 添加/修改客户页面
+	Route::get('create_or_update_customer_page', ['as'=>'create_or_update_customer_page', 'uses'=>'CustomerController@createOrUpdateCustomerPage']);
+
+	// 添加/修改客户
+	Route::post('create_or_update_customer', ['as'=>'create_or_update_customer', 'uses'=>'CustomerController@createOrUpdateCustomer']);
 });

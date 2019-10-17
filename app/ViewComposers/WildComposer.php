@@ -9,6 +9,7 @@
 namespace App\ViewComposers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class WildComposer
 {
@@ -23,6 +24,7 @@ class WildComposer
     {
         $view->with([
             'project_name' => $this->project_config['name'] ?: 'Gentleman Admin',
+            'user' => Auth::user(),
         ]);
         // 每个模板都带着所有的请求参数
         $view->with(request()->all());
