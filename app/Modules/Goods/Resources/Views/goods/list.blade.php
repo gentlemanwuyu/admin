@@ -38,12 +38,12 @@
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
-                    <th>@lang('application.index_number')</th>
-                    <th>@lang('application.image')</th>
-                    <th>@lang('goods::goods.goods_code')</th>
-                    <th>@lang('goods::goods.goods_name')</th>
-                    <th>@lang('goods::goods.type')</th>
-                    <th>@lang('goods::goods.category')</th>
+                    <th width="5%">@lang('application.index_number')</th>
+                    <th width="10%">@lang('application.image')</th>
+                    <th width="12%">@lang('goods::goods.goods_code')</th>
+                    <th width="12%">@lang('goods::goods.goods_name')</th>
+                    <th width="5%">@lang('goods::goods.type')</th>
+                    <th width="10%">@lang('goods::goods.category')</th>
                     <th class="multi-th">
                         <div>@lang('goods::goods.sku_list')</div>
                         <ul class="list-inline">
