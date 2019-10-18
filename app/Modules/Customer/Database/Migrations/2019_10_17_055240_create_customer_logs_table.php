@@ -15,7 +15,7 @@ class CreateCustomerLogsTable extends Migration
 		Schema::create('customer_logs', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('customer_id')->default(0)->comment('客户id');
-			$table->tinyInteger('action')->default(0)->comment('操作，1为创建，2为修改，3为拉黑，4为释放，5为删除，6为认领，7为放弃，8为指定');
+			$table->tinyInteger('action')->default(0)->comment('操作，1为创建，2为修改，3为拉黑，4为释放，5为删除，6为认领，7为放弃，8为分配');
 			$table->text('message')->default('')->comment('备注信息');
 			$table->integer('user_id')->default(0)->comment('操作人ID');
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('创建时间');
