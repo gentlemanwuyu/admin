@@ -163,4 +163,22 @@ class AuthService
     {
         return $this->departmentRepository->getDepartmentsExceptRoot();
     }
+
+    /**
+     * 获取所有非管理员账号
+     *
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
+    public function getUsersWithoutAdmin()
+    {
+        $this->userRepository->pushCriteria(new IsAdminEqual(0));
+
+        return $this->userRepository->all();
+    }
+
+    public static function isAdmin()
+    {
+        return 1 == Auth::user()->is_admin;
+    }
 }

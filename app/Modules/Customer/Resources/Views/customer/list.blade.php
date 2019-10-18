@@ -301,6 +301,48 @@
                     });
                 });
             });
+
+            // 分配客户
+            $('.assign_customer').on('click', function () {
+                var customer_id = $(this).parents('tr').attr('data-id');
+                layer.open({
+                    type: 2,
+                    area: ['50%', '60%'],
+                    fix: false,
+                    skin: 'layui-layer-rim',
+                    maxmin: true,
+                    shade: 0.5,
+                    anim: 4,
+                    title: "{{trans('customer::customer.assign_customer')}}",
+                    btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
+                    yes: function (index) {
+                        var data = $(layer.getChildFrame('body',index)).find('form').serialize();
+                        var load_index = layer.load();
+                        $.ajax({
+                            method: "post",
+                            url: "{{route('customer::customer.assign_customer')}}",
+                            data: data,
+                            success: function (data) {
+                                layer.close(load_index);
+                                if ('success' == data.status) {
+                                    layer.close(index);
+                                    layer.msg("{{trans('customer::customer.customer_assign_successful')}}", {icon:1});
+                                    parent.location.reload();
+                                } else {
+                                    layer.msg("{{trans('customer::customer.customer_assign_fail')}}:"+data.msg, {icon:2});
+                                    return false;
+                                }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                layer.close(load_index);
+                                layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                return false;
+                            }
+                        });
+                    },
+                    content: "{{route('customer::customer.assign_customer_page')}}?customer_id=" + customer_id
+                });
+            });
         });
     </script>
 @endsection

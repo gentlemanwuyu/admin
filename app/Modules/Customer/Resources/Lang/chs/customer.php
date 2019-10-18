@@ -22,6 +22,8 @@ return [
     'please_enter_street_address' => '请输入街道地址',
     'please_enter_detailed_address' => '请输入详细地址',
     'black_reason' => '拉黑原因',
+    'customer_manager' => '客户经理',
+    'please_select_customer_manager' => '请选择客户经理',
     'customer_create_or_update_successful' => '添加/修改客户成功',
     'customer_create_or_update_fail' => '添加/修改客户失败',
 
@@ -45,6 +47,9 @@ return [
     'customer_release_confirm' => '您确定要释放该客户吗？',
     'customer_release_successful' => '客户释放成功',
     'customer_release_fail' => '客户释放失败',
+
+    'customer_assign_successful' => '客户分配成功',
+    'customer_assign_fail' => '客户分配失败',
 
     'customer_delete_confirm' => '您确定要删除该客户吗？',
     'customer_delete_successful' => '客户删除成功',

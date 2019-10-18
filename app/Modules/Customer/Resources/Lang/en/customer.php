@@ -22,6 +22,8 @@ return [
     'please_enter_street_address' => 'Please enter the street address',
     'please_enter_detailed_address' => 'Please enter the detailed address',
     'black_reason' => 'Black reason',
+    'customer_manager' => 'Customer manager',
+    'please_select_customer_manager' => 'Please select customer manager',
     'customer_create_or_update_successful' => 'Customer create/update success',
     'customer_create_or_update_fail' => 'Customer create/update failed',
 
@@ -45,6 +47,9 @@ return [
     'customer_release_confirm' => 'Are you sure to release this customer?',
     'customer_release_successful' => 'Customer release success.',
     'customer_release_fail' => 'Customer release failed.',
+
+    'customer_assign_successful' => 'Customer assign success.',
+    'customer_assign_fail' => 'Customer assign failed.',
 
     'customer_delete_confirm' => 'Are you sure to delete this customer?',
     'customer_delete_successful' => 'Customer delete success.',

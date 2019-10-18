@@ -36,4 +36,10 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 
 	// 客户池
 	Route::get('customer_pool', ['as'=>'customer_pool', 'uses'=>'CustomerController@customerPool']);
+
+	// 分配客户页面
+	Route::get('assign_customer_page', ['as'=>'assign_customer_page', 'uses'=>'CustomerController@assignCustomerPage']);
+
+	// 分配客户
+	Route::post('assign_customer', ['as'=>'assign_customer', 'uses'=>'CustomerController@assignCustomer']);
 });

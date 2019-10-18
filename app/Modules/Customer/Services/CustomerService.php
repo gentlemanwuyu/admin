@@ -10,20 +10,25 @@ namespace App\Modules\Customer\Services;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Modules\Auth\Services\AuthService;
+use App\Modules\Auth\Repositories\UserRepository;
 use App\Modules\Customer\Repositories\CustomerRepository;
 use App\Modules\Customer\Repositories\CustomerLogRepository;
 use App\Modules\Customer\Repositories\Criteria\Customer\IsBlackEqual;
 use App\Modules\Customer\Repositories\Criteria\Customer\ManagerIdIn;
+use App\Modules\Customer\Repositories\Criteria\Customer\ManagerIdNotEqualZero;
 
 class CustomerService
 {
+    protected $userRepository;
     protected $customerRepository;
     protected $customerLogRepository;
 
     protected $user;
 
-    public function __construct(CustomerRepository $customerRepository, CustomerLogRepository $customerLogRepository)
+    public function __construct(CustomerRepository $customerRepository, CustomerLogRepository $customerLogRepository, UserRepository $userRepository)
     {
+        $this->userRepository = $userRepository;
         $this->customerRepository = $customerRepository;
         $this->customerLogRepository = $customerLogRepository;
         $this->user = Auth::user();
@@ -39,7 +44,11 @@ class CustomerService
     public function myCustomerList($request)
     {
         $this->customerRepository->pushCriteria(new IsBlackEqual(1));
-        $this->customerRepository->pushCriteria(new ManagerIdIn([$this->user->id]));
+        if (AuthService::isAdmin()) {
+            $this->customerRepository->pushCriteria(new ManagerIdNotEqualZero);
+        }else {
+            $this->customerRepository->pushCriteria(new ManagerIdIn([$this->user->id]));
+        }
 
         return  $this->customerRepository->paginate();
     }
@@ -180,6 +189,34 @@ class CustomerService
                 'customer_id' => $customer_id,
                 'action' => 4,
                 'message' => '',
+                'user_id' => $this->user->id,
+            ]);
+
+            DB::commit();
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+    /**
+     * 分配客户
+     *
+     * @param $customer_id
+     * @param $manager_id
+     * @return array
+     */
+    public function assignCustomer($customer_id, $manager_id)
+    {
+        try {
+            DB::beginTransaction();
+            $this->customerRepository->update(['is_black' => 1, 'manager_id' => $manager_id], $customer_id);
+            $user = $this->userRepository->find($manager_id);
+            $this->customerLogRepository->create([
+                'customer_id' => $customer_id,
+                'action' => 8,
+                'message' => '分配客户给' . $user->name,
                 'user_id' => $this->user->id,
             ]);
 

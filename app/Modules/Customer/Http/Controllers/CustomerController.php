@@ -7,17 +7,21 @@ use Illuminate\Http\Request;
 use App\Modules\Customer\Services\CustomerService;
 use App\Services\WorldService;
 use App\Modules\Customer\Repositories\CustomerRepository;
+use App\Modules\Auth\Services\AuthService;
 use App\Modules\Customer\Http\Requests\CustomerRequest;
+use App\Modules\Customer\Http\Requests\AssignCustomerRequest;
 
 class CustomerController extends Controller
 {
     protected $customerService;
     protected $customerRepository;
+    protected $authService;
 
-    public function __construct(CustomerService $customerService, CustomerRepository $customerRepository)
+    public function __construct(CustomerService $customerService, CustomerRepository $customerRepository, AuthService $authService)
     {
         $this->customerService = $customerService;
         $this->customerRepository = $customerRepository;
+        $this->authService = $authService;
     }
 
     public function myCustomer(Request $request)
@@ -76,5 +80,17 @@ class CustomerController extends Controller
     public function releaseCustomer(Request $request)
     {
         return response()->json($this->customerService->releaseCustomer($request->get('customer_id')));
+    }
+
+    public function assignCustomerPage(Request $request)
+    {
+        $users = $this->authService->getUsersWithoutAdmin();
+
+        return view('customer::customer.assign_customer', compact('users'));
+    }
+
+    public function assignCustomer(AssignCustomerRequest $request)
+    {
+        return response()->json($this->customerService->assignCustomer($request->get('customer_id'), $request->get('manager_id')));
     }
 }
