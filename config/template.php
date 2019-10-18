@@ -144,7 +144,7 @@ return [
                     [
                         'id' => 'customer_pool',
                         'icon' => 'fa fa-database',
-                        'link' => '#',
+                        'link' => '/customer/customer/customer_pool',
                     ],
                 ],
             ],

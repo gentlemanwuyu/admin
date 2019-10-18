@@ -33,4 +33,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 
 	// 释放客户
 	Route::post('release_customer', ['as'=>'release_customer', 'uses'=>'CustomerController@releaseCustomer']);
+
+	// 客户池
+	Route::get('customer_pool', ['as'=>'customer_pool', 'uses'=>'CustomerController@customerPool']);
 });
