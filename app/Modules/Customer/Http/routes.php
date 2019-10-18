@@ -42,4 +42,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 
 	// 分配客户
 	Route::post('assign_customer', ['as'=>'assign_customer', 'uses'=>'CustomerController@assignCustomer']);
+
+	// 放弃客户
+	Route::post('abandon_customer', ['as'=>'abandon_customer', 'uses'=>'CustomerController@abandonCustomer']);
 });

@@ -98,6 +98,9 @@
                                     <a href="javascript:;">
                                         <i class="fa fa-fire black_customer" title="{{trans('customer::customer.black_customer')}}"></i>
                                     </a>
+                                    <a href="javascript:;">
+                                        <i class="fa fa-fighter-jet abandon_customer" title="{{trans('customer::customer.abandon_customer')}}"></i>
+                                    </a>
                                 @endif
                                 @if('customer_pool' == $page_name)
                                     <a href="javascript:;">
@@ -343,6 +346,35 @@
                         });
                     },
                     content: "{{route('customer::customer.assign_customer_page')}}?customer_id=" + customer_id
+                });
+            });
+
+            // 放弃客户
+            $('.abandon_customer').on('click', function () {
+                var customer_id = $(this).parents('tr').attr('data-id');
+                layer.confirm("{{trans('customer::customer.customer_abandon_confirm')}}", {icon: 3, title:"{{trans('application.confirm')}}"}, function (index) {
+                    layer.close(index);
+                    var load_index = layer.load();
+                    $.ajax({
+                        method: "post",
+                        url: "{{route('customer::customer.abandon_customer')}}",
+                        data: {customer_id: customer_id},
+                        success: function (data) {
+                            layer.close(load_index);
+                            if ('success' == data.status) {
+                                layer.msg("{{trans('customer::customer.customer_abandon_successful')}}", {icon:1});
+                                parent.location.reload();
+                            } else {
+                                layer.msg("{{trans('customer::customer.customer_abandon_fail')}}"+data.msg, {icon:2});
+                                return false;
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            layer.close(load_index);
+                            layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                            return false;
+                        }
+                    });
                 });
             });
         });

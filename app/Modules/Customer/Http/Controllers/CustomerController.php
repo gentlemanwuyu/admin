@@ -93,4 +93,9 @@ class CustomerController extends Controller
     {
         return response()->json($this->customerService->assignCustomer($request->get('customer_id'), $request->get('manager_id')));
     }
+
+    public function abandonCustomer(Request $request)
+    {
+        return response()->json($this->customerService->abandonCustomer($request->get('customer_id')));
+    }
 }

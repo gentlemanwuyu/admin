@@ -13,6 +13,7 @@ return [
     'black_customer' => 'Black customer',
     'release_customer' => 'Release customer',
     'assign_customer' => 'Assign customer',
+    'abandon_customer' => 'Abandon customer',
     'delete_customer' => 'Delete customer',
     'add_contact' => 'Add contact',
     'please_select_country' => 'Please select country',
@@ -50,6 +51,10 @@ return [
 
     'customer_assign_successful' => 'Customer assign success.',
     'customer_assign_fail' => 'Customer assign failed.',
+
+    'customer_abandon_confirm' => 'Are you sure to abandon this customer?',
+    'customer_abandon_successful' => 'Customer abandon success.',
+    'customer_abandon_fail' => 'Customer abandon failed.',
 
     'customer_delete_confirm' => 'Are you sure to delete this customer?',
     'customer_delete_successful' => 'Customer delete success.',

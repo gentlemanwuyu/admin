@@ -228,4 +228,24 @@ class CustomerService
             return ['status' => 'fail', 'msg'=>$e->getMessage()];
         }
     }
+
+    public function abandonCustomer($customer_id)
+    {
+        try {
+            DB::beginTransaction();
+            $this->customerRepository->update(['manager_id' => 0], $customer_id);
+            $this->customerLogRepository->create([
+                'customer_id' => $customer_id,
+                'action' => 7,
+                'message' => '',
+                'user_id' => $this->user->id,
+            ]);
+
+            DB::commit();
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
 }

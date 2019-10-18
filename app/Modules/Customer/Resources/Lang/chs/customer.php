@@ -13,6 +13,7 @@ return [
     'black_customer' => '拉黑客户',
     'release_customer' => '释放客户',
     'assign_customer' => '分配客户',
+    'abandon_customer' => '放弃客户',
     'delete_customer' => '删除客户',
     'add_contact' => '添加联系人',
     'please_select_country' => '请选择国家',
@@ -50,6 +51,10 @@ return [
 
     'customer_assign_successful' => '客户分配成功',
     'customer_assign_fail' => '客户分配失败',
+
+    'customer_abandon_confirm' => '您确定要放弃该客户吗？',
+    'customer_abandon_successful' => '客户放弃成功',
+    'customer_abandon_fail' => '客户放弃失败',
 
     'customer_delete_confirm' => '您确定要删除该客户吗？',
     'customer_delete_successful' => '客户删除成功',
