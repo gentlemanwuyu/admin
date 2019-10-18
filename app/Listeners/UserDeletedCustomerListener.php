@@ -16,7 +16,7 @@ use App\Modules\Customer\Models\Customer;
 use App\Modules\Customer\Models\CustomerLog;
 use App\Modules\Auth\Models\User;
 
-class CustomerListener implements ShouldQueue
+class UserDeletedCustomerListener implements ShouldQueue
 {
     /**
      * Create the event listener.

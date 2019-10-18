@@ -17,7 +17,7 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\QueryListener',
         ],
         'App\Events\UserDeleted' => [
-            'App\Listeners\CustomerListener',
+            'App\Listeners\UserDeletedCustomerListener',
         ],
     ];
 
