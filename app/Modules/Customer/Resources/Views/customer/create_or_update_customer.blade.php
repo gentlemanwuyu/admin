@@ -20,6 +20,7 @@
                 </div>
                 <div class="box-body">
                     <input type="hidden" name="action" value="{{$action or 'create'}}">
+                    <input type="hidden" name="source" value="{{$source or ''}}">
                     @if('update' == $action)
                         <input type="hidden" name="customer_id" value="{{$customer_id}}">
                     @endif

@@ -39,7 +39,7 @@ class CustomerController extends Controller
     public function customerPool(Request $request)
     {
         $page_name = 'customer_pool';
-        $customers = $this->customerService->blackList($request);
+        $customers = $this->customerService->customerPool($request);
 
         return view('customer::customer.list', compact('page_name', 'customers'));
     }

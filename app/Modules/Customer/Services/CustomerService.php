@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Modules\Customer\Repositories\CustomerRepository;
 use App\Modules\Customer\Repositories\CustomerLogRepository;
 use App\Modules\Customer\Repositories\Criteria\Customer\IsBlackEqual;
+use App\Modules\Customer\Repositories\Criteria\Customer\ManagerIdIn;
 
 class CustomerService
 {
@@ -38,6 +39,7 @@ class CustomerService
     public function myCustomerList($request)
     {
         $this->customerRepository->pushCriteria(new IsBlackEqual(1));
+        $this->customerRepository->pushCriteria(new ManagerIdIn([$this->user->id]));
 
         return  $this->customerRepository->paginate();
     }
@@ -45,6 +47,13 @@ class CustomerService
     public function blackList($request)
     {
         $this->customerRepository->pushCriteria(new IsBlackEqual(2));
+
+        return  $this->customerRepository->paginate();
+    }
+
+    public function customerPool($request)
+    {
+        $this->customerRepository->pushCriteria(new ManagerIdIn([0]));
 
         return  $this->customerRepository->paginate();
     }
@@ -80,7 +89,9 @@ class CustomerService
             if ('update' == $request->get('action')) {
                 $customer = $this->customerRepository->update($data, $request->get('customer_id'));
             }else {
-                $data['manager_id'] = $this->user->id;
+                if ('my_customer' == $request->get('source')) {
+                    $data['manager_id'] = $this->user->id;
+                }
                 $customer = $this->customerRepository->create($data);
             }
             if (!$customer) {

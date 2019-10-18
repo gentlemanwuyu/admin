@@ -50,7 +50,9 @@
                             <li class="col-xs-4">@lang('application.phone')</li>
                         </ul>
                     </th>
-                    <th width="10%">@lang('application.manager')</th>
+                    @if('customer_pool' != $page_name)
+                        <th width="10%">@lang('application.manager')</th>
+                    @endif
                     @if('black_list' == $page_name)
                         <th width="10%">@lang('customer::customer.black_reason')</th>
                     @endif
@@ -78,22 +80,27 @@
                                     </ul>
                                 @endforeach
                             </td>
-                            <td>{{$customer->manager->name or ''}}</td>
+                            @if('customer_pool' != $page_name)
+                                <td>{{$customer->manager->name or ''}}</td>
+                            @endif
                             @if('black_list' == $page_name)
                                 <td>{{$customer->lastBlackLog->message}}</td>
                             @endif
                             <td>
-                                @if('my_customer' == $page_name)
+                                @if(in_array($page_name, ['my_customer', 'customer_pool']))
                                     <a href="javascript:;">
                                         <i class="fa fa-edit edit_customer" title="{{trans('customer::customer.edit_customer')}}"></i>
                                     </a>
                                     <a href="javascript:;">
-                                        <i class="fa fa-fire black_customer" title="{{trans('customer::customer.black_customer')}}"></i>
-                                    </a>
-                                    <a href="javascript:;">
                                         <i class="fa fa-trash delete_customer" title="{{trans('customer::customer.delete_customer')}}"></i>
                                     </a>
-                                @elseif('black_list' == $page_name)
+                                @endif
+                                @if('my_customer' == $page_name)
+                                    <a href="javascript:;">
+                                        <i class="fa fa-fire black_customer" title="{{trans('customer::customer.black_customer')}}"></i>
+                                    </a>
+                                @endif
+                                @if('black_list' == $page_name)
                                     <a href="javascript:;">
                                         <i class="fa fa-fire-extinguisher release_customer" title="{{trans('customer::customer.release_customer')}}"></i>
                                     </a>
@@ -150,7 +157,7 @@
                             }
                         });
                     },
-                    content: "{{route('customer::customer.create_or_update_customer_page')}}?action=create&manager_id={{$user->id}}"
+                    content: "{{route('customer::customer.create_or_update_customer_page')}}?action=create&source={{$page_name}}"
                 });
             });
 
