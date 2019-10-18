@@ -16,6 +16,9 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 	// 我的客户
 	Route::get('my_customer', ['as'=>'my_customer', 'uses'=>'CustomerController@myCustomer']);
 
+	// 黑名单
+	Route::get('black_list', ['as'=>'black_list', 'uses'=>'CustomerController@blackList']);
+
 	// 添加/修改客户页面
 	Route::get('create_or_update_customer_page', ['as'=>'create_or_update_customer_page', 'uses'=>'CustomerController@createOrUpdateCustomerPage']);
 
@@ -27,4 +30,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 
 	// 拉黑客户
 	Route::post('black_customer', ['as'=>'black_customer', 'uses'=>'CustomerController@blackCustomer']);
+
+	// 释放客户
+	Route::post('release_customer', ['as'=>'release_customer', 'uses'=>'CustomerController@releaseCustomer']);
 });

@@ -22,9 +22,18 @@ class CustomerController extends Controller
 
     public function myCustomer(Request $request)
     {
+        $page_name = 'my_customer';
         $customers = $this->customerService->myCustomerList($request);
 
-        return view('customer::customer.list', compact('customers'));
+        return view('customer::customer.list', compact('page_name', 'customers'));
+    }
+
+    public function blackList(Request $request)
+    {
+        $page_name = 'black_list';
+        $customers = $this->customerService->blackList($request);
+
+        return view('customer::customer.list', compact('page_name', 'customers'));
     }
 
     public function createOrUpdateCustomerPage(Request $request)
@@ -54,5 +63,10 @@ class CustomerController extends Controller
     public function blackCustomer(Request $request)
     {
         return response()->json($this->customerService->blackCustomer($request->get('customer_id'), $request->get('reason')));
+    }
+
+    public function releaseCustomer(Request $request)
+    {
+        return response()->json($this->customerService->releaseCustomer($request->get('customer_id')));
     }
 }

@@ -28,9 +28,23 @@ class CustomerService
         $this->user = Auth::user();
     }
 
+    /**
+     * 我的客户
+     *
+     * @param $request
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
     public function myCustomerList($request)
     {
         $this->customerRepository->pushCriteria(new IsBlackEqual(1));
+
+        return  $this->customerRepository->paginate();
+    }
+
+    public function blackList($request)
+    {
+        $this->customerRepository->pushCriteria(new IsBlackEqual(2));
 
         return  $this->customerRepository->paginate();
     }
@@ -124,11 +138,37 @@ class CustomerService
     {
         try {
             DB::beginTransaction();
-            $this->customerRepository->update(['is_black' => 2], $customer_id);
+            $this->customerRepository->update(['is_black' => 2, 'manager_id' => 0], $customer_id);
             $this->customerLogRepository->create([
                 'customer_id' => $customer_id,
                 'action' => 3,
                 'message' => $reason,
+                'user_id' => $this->user->id,
+            ]);
+
+            DB::commit();
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+    /**
+     * 释放客户
+     *
+     * @param $customer_id
+     * @return array
+     */
+    public function releaseCustomer($customer_id)
+    {
+        try {
+            DB::beginTransaction();
+            $this->customerRepository->update(['is_black' => 1], $customer_id);
+            $this->customerLogRepository->create([
+                'customer_id' => $customer_id,
+                'action' => 4,
+                'message' => '',
                 'user_id' => $this->user->id,
             ]);
 

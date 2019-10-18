@@ -139,7 +139,7 @@ return [
                     [
                         'id' => 'black_list',
                         'icon' => 'fa fa-bomb',
-                        'link' => '#',
+                        'link' => '/customer/customer/black_list',
                     ],
                     [
                         'id' => 'customer_pool',

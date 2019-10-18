@@ -11,6 +11,7 @@ return [
     'add_customer' => 'Add customer',
     'edit_customer' => 'Edit customer',
     'black_customer' => 'Black customer',
+    'release_customer' => 'Release customer',
     'delete_customer' => 'Delete customer',
     'add_contact' => 'Add contact',
     'please_select_country' => 'Please select country',
@@ -19,6 +20,7 @@ return [
     'please_select_county' => 'Please select county',
     'please_enter_street_address' => 'Please enter the street address',
     'please_enter_detailed_address' => 'Please enter the detailed address',
+    'black_reason' => 'Black reason',
     'customer_create_or_update_successful' => 'Customer create/update success',
     'customer_create_or_update_fail' => 'Customer create/update failed',
 
@@ -38,6 +40,10 @@ return [
 
     'customer_black_successful' => 'Customer black success.',
     'customer_black_fail' => 'Customer black failed.',
+
+    'customer_release_confirm' => 'Are you sure to release this customer?',
+    'customer_release_successful' => 'Customer release success.',
+    'customer_release_fail' => 'Customer release failed.',
 
     'customer_delete_confirm' => 'Are you sure to delete this customer?',
     'customer_delete_successful' => 'Customer delete success.',

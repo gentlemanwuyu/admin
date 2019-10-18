@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('title')
-    {{trans('template.my_customer')}} | {{$project_name}}
+    {{trans('template.' . $page_name)}} | {{$project_name}}
 @endsection
 @section('css')
     <style>
@@ -9,10 +9,10 @@
 @endsection
 @section('content')
     <section class="content-header">
-        <h1>@lang('template.my_customer')</h1>
+        <h1>@lang('template.' . $page_name)</h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-male"></i>@lang('template.customer_management')</a></li>
-            <li class="active">@lang('template.my_customer')</li>
+            <li class="active">@lang('template.' . $page_name)</li>
         </ol>
     </section>
     <section class="content">
@@ -51,7 +51,10 @@
                         </ul>
                     </th>
                     <th width="10%">@lang('application.manager')</th>
-                    <th width="15%">@lang('application.action')</th>
+                    @if('black_list' == $page_name)
+                        <th width="10%">@lang('customer::customer.black_reason')</th>
+                    @endif
+                    <th width="10%">@lang('application.action')</th>
                     </thead>
                     <?php
                         if (!isset($page) || $page <= 0) {
@@ -76,16 +79,25 @@
                                 @endforeach
                             </td>
                             <td>{{$customer->manager->name or ''}}</td>
+                            @if('black_list' == $page_name)
+                                <td>{{$customer->lastBlackLog->message}}</td>
+                            @endif
                             <td>
-                                <a href="javascript:;">
-                                    <i class="fa fa-edit edit_customer" title="{{trans('customer::customer.edit_customer')}}"></i>
-                                </a>
-                                <a href="javascript:;">
-                                    <i class="fa fa-fire black_customer" title="{{trans('customer::customer.black_customer')}}"></i>
-                                </a>
-                                <a href="javascript:;">
-                                    <i class="fa fa-trash delete_customer" title="{{trans('customer::customer.delete_customer')}}"></i>
-                                </a>
+                                @if('my_customer' == $page_name)
+                                    <a href="javascript:;">
+                                        <i class="fa fa-edit edit_customer" title="{{trans('customer::customer.edit_customer')}}"></i>
+                                    </a>
+                                    <a href="javascript:;">
+                                        <i class="fa fa-fire black_customer" title="{{trans('customer::customer.black_customer')}}"></i>
+                                    </a>
+                                    <a href="javascript:;">
+                                        <i class="fa fa-trash delete_customer" title="{{trans('customer::customer.delete_customer')}}"></i>
+                                    </a>
+                                @elseif('black_list' == $page_name)
+                                    <a href="javascript:;">
+                                        <i class="fa fa-fire-extinguisher release_customer" title="{{trans('customer::customer.release_customer')}}"></i>
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -235,6 +247,35 @@
                                 parent.location.reload();
                             } else {
                                 layer.msg("{{trans('customer::customer.customer_delete_fail')}}"+data.msg, {icon:2});
+                                return false;
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            layer.close(load_index);
+                            layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                            return false;
+                        }
+                    });
+                });
+            });
+
+            // 释放客户
+            $('.release_customer').on('click', function () {
+                var customer_id = $(this).parents('tr').attr('data-id');
+                layer.confirm("{{trans('customer::customer.customer_release_confirm')}}", {icon: 3, title:"{{trans('application.confirm')}}"}, function (index) {
+                    layer.close(index);
+                    var load_index = layer.load();
+                    $.ajax({
+                        method: "post",
+                        url: "{{route('customer::customer.release_customer')}}",
+                        data: {customer_id: customer_id},
+                        success: function (data) {
+                            layer.close(load_index);
+                            if ('success' == data.status) {
+                                layer.msg("{{trans('customer::customer.customer_release_successful')}}", {icon:1});
+                                parent.location.reload();
+                            } else {
+                                layer.msg("{{trans('customer::customer.customer_release_fail')}}"+data.msg, {icon:2});
                                 return false;
                             }
                         },

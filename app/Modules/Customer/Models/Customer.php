@@ -57,6 +57,11 @@ class Customer extends Model
         return $this->belongsTo(User::class, 'manager_id');
     }
 
+    public function lastBlackLog()
+    {
+        return $this->hasOne(CustomerLog::class)->where('action', 3)->orderBy('id', 'desc');
+    }
+
     public function delete()
     {
         parent::delete();
