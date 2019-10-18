@@ -63,6 +63,7 @@ class CustomerService
     public function customerPool($request)
     {
         $this->customerRepository->pushCriteria(new ManagerIdIn([0]));
+        $this->customerRepository->pushCriteria(new IsBlackEqual(1));
 
         return  $this->customerRepository->paginate();
     }
@@ -184,7 +185,7 @@ class CustomerService
     {
         try {
             DB::beginTransaction();
-            $this->customerRepository->update(['is_black' => 1], $customer_id);
+            $this->customerRepository->update(['is_black' => 1, 'manager_id' => 0], $customer_id);
             $this->customerLogRepository->create([
                 'customer_id' => $customer_id,
                 'action' => 4,
