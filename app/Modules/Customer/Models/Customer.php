@@ -10,7 +10,7 @@ namespace App\Modules\Customer\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Modules\Customer\Models\CustomerContact;
+use App\Modules\Auth\Models\User;
 
 class Customer extends Model
 {
@@ -50,6 +50,11 @@ class Customer extends Model
     public function contacts()
     {
         return $this->hasMany(CustomerContact::class);
+    }
+
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'manager_id');
     }
 
     public function delete()

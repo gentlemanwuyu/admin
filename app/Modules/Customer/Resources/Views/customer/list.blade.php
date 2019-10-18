@@ -38,13 +38,20 @@
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
-                    <th>@lang('application.index_number')</th>
-                    <th>@lang('application.name')</th>
-                    <th>@lang('customer::customer.customer_code')</th>
-                    <th>@lang('application.phone')</th>
-                    <th>@lang('application.contact')</th>
-                    <th>@lang('application.manager')</th>
-                    <th>@lang('application.action')</th>
+                    <th width="5%">@lang('application.index_number')</th>
+                    <th width="15%">@lang('application.name')</th>
+                    <th width="15%">@lang('customer::customer.customer_code')</th>
+                    <th width="15%">@lang('application.phone')</th>
+                    <th class="multi-th" style="padding: 0;">
+                        <div style="">@lang('application.contact')</div>
+                        <ul class="list-inline" style="margin-bottom: 0;">
+                            <li class="col-xs-4">@lang('application.name')</li>
+                            <li class="col-xs-4">@lang('application.position')</li>
+                            <li class="col-xs-4">@lang('application.phone')</li>
+                        </ul>
+                    </th>
+                    <th width="10%">@lang('application.manager')</th>
+                    <th width="15%">@lang('application.action')</th>
                     </thead>
                     <?php
                         if (!isset($page) || $page <= 0) {
@@ -59,8 +66,16 @@
                             <td>{{$customer->name}}</td>
                             <td>{{$customer->code or ''}}</td>
                             <td>{{$customer->phone_number or ''}}</td>
-                            <td></td>
-                            <td></td>
+                            <td class="multi-td">
+                                @foreach($customer->contacts as $contact)
+                                    <ul class="list-inline" style="margin-bottom: 0;">
+                                        <li class="col-xs-4">{{$contact->name or ''}}</li>
+                                        <li class="col-xs-4">{{$contact->position or ''}}</li>
+                                        <li class="col-xs-4">{{$contact->phone_number or ''}}</li>
+                                    </ul>
+                                @endforeach
+                            </td>
+                            <td>{{$customer->manager->name or ''}}</td>
                             <td>
                                 <a href="javascript:;">
                                     <i class="fa fa-edit edit_customer" title="{{trans('customer::customer.edit_customer')}}"></i>

@@ -52,3 +52,22 @@ td, th {
 .td_list>table.table-bordered {
     border: 0!important;
 }
+.multi-th, .multi-td {
+    padding: 0!important;
+}
+.multi-th>div {
+    display: inline-block;
+    width: 100%;
+    padding: 8px;
+    border-bottom: 1px solid #f4f4f4;
+}
+.multi-th>ul>li, .multi-td>ul>li {
+    padding: 8px;
+    border-left: 1px solid #f4f4f4;
+}
+.multi-th>ul>li:first-child, .multi-td>ul>li:first-child {
+    border-left: 0;
+}
+.multi-td>ul:not(:first-child)>li {
+    border-top: 1px solid #f4f4f4;
+}
