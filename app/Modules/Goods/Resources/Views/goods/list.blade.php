@@ -44,15 +44,13 @@
                     <th>@lang('goods::goods.goods_name')</th>
                     <th>@lang('goods::goods.type')</th>
                     <th>@lang('goods::goods.category')</th>
-                    <th class="th_list">
-                        <div class="row th_content_div">
-                            @lang('goods::goods.sku_list')
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6 th_content_div">@lang('goods::goods.sku_code')</div>
-                            <div class="col-xs-3 th_content_div">@lang('goods::goods.lowest_price')</div>
-                            <div class="col-xs-3 th_content_div">@lang('goods::goods.msrp')</div>
-                        </div>
+                    <th class="multi-th">
+                        <div>@lang('goods::goods.sku_list')</div>
+                        <ul class="list-inline">
+                            <li class="col-xs-6">@lang('goods::goods.sku_code')</li>
+                            <li class="col-xs-3">@lang('goods::goods.lowest_price')</li>
+                            <li class="col-xs-3">@lang('goods::goods.msrp')</li>
+                        </ul>
                     </th>
                     <th>@lang('application.action')</th>
                     </thead>
@@ -65,16 +63,14 @@
                             <td>{{$g->name}}</td>
                             <td>{{trans('goods::goods.'.$g->type_name)}}</td>
                             <td>{{$g->category->display_name}}</td>
-                            <td class="td_list">
-                                <table class="table table-bordered table-hover">
-                                    @foreach($g->skus as $goods_sku)
-                                        <tr>
-                                            <td class="col-xs-6">{{$goods_sku->code}}</td>
-                                            <td class="col-xs-3">{{$goods_sku->lowest_price}}</td>
-                                            <td class="col-xs-3">{{$goods_sku->msrp}}</td>
-                                        </tr>
-                                    @endforeach
-                                </table>
+                            <td class="multi-td">
+                                @foreach($g->skus as $goods_sku)
+                                    <ul class="list-inline">
+                                        <li class="col-xs-6">{{$goods_sku->code or ''}}</li>
+                                        <li class="col-xs-3">{{$goods_sku->lowest_price or ''}}</li>
+                                        <li class="col-xs-3">{{$goods_sku->msrp or ''}}</li>
+                                    </ul>
+                                @endforeach
                             </td>
                             <td>
                                 <a href="javascript:;">
