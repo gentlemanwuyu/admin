@@ -12,6 +12,7 @@ return [
     'edit_customer' => '编辑客户',
     'black_customer' => '拉黑客户',
     'release_customer' => '释放客户',
+    'assign_customer' => '分配客户',
     'delete_customer' => '删除客户',
     'add_contact' => '添加联系人',
     'please_select_country' => '请选择国家',

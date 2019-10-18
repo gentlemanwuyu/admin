@@ -91,18 +91,25 @@
                                     <a href="javascript:;">
                                         <i class="fa fa-edit edit_customer" title="{{trans('customer::customer.edit_customer')}}"></i>
                                     </a>
-                                    <a href="javascript:;">
-                                        <i class="fa fa-trash delete_customer" title="{{trans('customer::customer.delete_customer')}}"></i>
-                                    </a>
                                 @endif
                                 @if('my_customer' == $page_name)
                                     <a href="javascript:;">
                                         <i class="fa fa-fire black_customer" title="{{trans('customer::customer.black_customer')}}"></i>
                                     </a>
                                 @endif
+                                @if('customer_pool' == $page_name)
+                                    <a href="javascript:;">
+                                        <i class="fa fa-hand-o-right assign_customer" title="{{trans('customer::customer.assign_customer')}}"></i>
+                                    </a>
+                                @endif
                                 @if('black_list' == $page_name)
                                     <a href="javascript:;">
                                         <i class="fa fa-fire-extinguisher release_customer" title="{{trans('customer::customer.release_customer')}}"></i>
+                                    </a>
+                                @endif
+                                @if(in_array($page_name, ['my_customer', 'customer_pool']))
+                                    <a href="javascript:;">
+                                        <i class="fa fa-trash delete_customer" title="{{trans('customer::customer.delete_customer')}}"></i>
                                     </a>
                                 @endif
                             </td>

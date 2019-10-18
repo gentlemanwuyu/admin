@@ -12,6 +12,7 @@ return [
     'edit_customer' => 'Edit customer',
     'black_customer' => 'Black customer',
     'release_customer' => 'Release customer',
+    'assign_customer' => 'Assign customer',
     'delete_customer' => 'Delete customer',
     'add_contact' => 'Add contact',
     'please_select_country' => 'Please select country',
