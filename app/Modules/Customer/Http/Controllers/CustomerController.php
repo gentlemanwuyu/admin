@@ -50,4 +50,9 @@ class CustomerController extends Controller
     {
         return response()->json($this->customerService->deleteSupplier($request->get('customer_id')));
     }
+
+    public function blackCustomer(Request $request)
+    {
+        return response()->json($this->customerService->blackCustomer($request->get('customer_id'), $request->get('reason')));
+    }
 }

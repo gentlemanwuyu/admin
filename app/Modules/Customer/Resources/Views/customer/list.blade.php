@@ -81,6 +81,9 @@
                                     <i class="fa fa-edit edit_customer" title="{{trans('customer::customer.edit_customer')}}"></i>
                                 </a>
                                 <a href="javascript:;">
+                                    <i class="fa fa-fire black_customer" title="{{trans('customer::customer.black_customer')}}"></i>
+                                </a>
+                                <a href="javascript:;">
                                     <i class="fa fa-trash delete_customer" title="{{trans('customer::customer.delete_customer')}}"></i>
                                 </a>
                             </td>
@@ -178,6 +181,40 @@
                         });
                     },
                     content: "{{route('customer::customer.create_or_update_customer_page')}}?action=update&customer_id=" + customer_id
+                });
+            });
+
+            // 拉黑客户
+            $('.black_customer').on('click', function () {
+                var customer_id = $(this).parents('tr').attr('data-id');
+                layer.prompt({
+                    title: "{{trans('customer::customer.black_customer')}}"
+                }, function (value, prompt_index, elem) {
+                    var load_index = layer.load();
+                    $.ajax({
+                        method: "post",
+                        url: "{{route('customer::customer.black_customer')}}",
+                        data: {
+                            customer_id: customer_id,
+                            reason: value
+                        },
+                        success: function (data) {
+                            layer.close(load_index);
+                            if ('success' == data.status) {
+                                layer.close(prompt_index);
+                                layer.msg("{{trans('customer::customer.customer_black_successful')}}", {icon:1});
+                                parent.location.reload();
+                            } else {
+                                layer.msg("{{trans('customer::customer.customer_black_fail')}}"+data.msg, {icon:2});
+                                return false;
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            layer.close(load_index);
+                            layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                            return false;
+                        }
+                    });
                 });
             });
 

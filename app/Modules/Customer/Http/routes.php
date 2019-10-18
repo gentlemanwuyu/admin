@@ -24,4 +24,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 
 	// 删除客户
 	Route::post('delete_customer', ['as'=>'delete_customer', 'uses'=>'CustomerController@deleteCustomer']);
+
+	// 拉黑客户
+	Route::post('black_customer', ['as'=>'black_customer', 'uses'=>'CustomerController@blackCustomer']);
 });

@@ -10,6 +10,7 @@ return [
     'customer_code' => 'Customer code',
     'add_customer' => 'Add customer',
     'edit_customer' => 'Edit customer',
+    'black_customer' => 'Black customer',
     'delete_customer' => 'Delete customer',
     'add_contact' => 'Add contact',
     'please_select_country' => 'Please select country',
@@ -34,6 +35,9 @@ return [
     'contact_name_max' => 'The length of contact name must less than :number letters.',
     'contact_position_max' => 'The length of contact position must less than :number letters.',
     'contact_phone_number_max' => 'The length of contact phone number must less than :number letters.',
+
+    'customer_black_successful' => 'Customer black success.',
+    'customer_black_fail' => 'Customer black failed.',
 
     'customer_delete_confirm' => 'Are you sure to delete this customer?',
     'customer_delete_successful' => 'Customer delete success.',

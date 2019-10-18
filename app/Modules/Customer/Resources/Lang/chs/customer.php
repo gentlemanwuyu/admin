@@ -10,6 +10,7 @@ return [
     'customer_code' => '客户编号',
     'add_customer' => '添加客户',
     'edit_customer' => '编辑客户',
+    'black_customer' => '拉黑客户',
     'delete_customer' => '删除客户',
     'add_contact' => '添加联系人',
     'please_select_country' => '请选择国家',
@@ -34,6 +35,9 @@ return [
     'contact_name_max' => '联系人名称不能超过:number个字符',
     'contact_position_max' => '联系人职位不能超过:number个字符',
     'contact_phone_number_max' => '联系人电话不能超过:number个字符',
+
+    'customer_black_successful' => '客户拉黑成功',
+    'customer_black_fail' => '客户拉黑失败',
 
     'customer_delete_confirm' => '您确定要删除该客户吗？',
     'customer_delete_successful' => '客户删除成功',

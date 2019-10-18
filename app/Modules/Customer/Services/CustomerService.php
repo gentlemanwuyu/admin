@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Customer\Repositories\CustomerRepository;
 use App\Modules\Customer\Repositories\CustomerLogRepository;
+use App\Modules\Customer\Repositories\Criteria\Customer\IsBlackEqual;
 
 class CustomerService
 {
@@ -29,6 +30,8 @@ class CustomerService
 
     public function myCustomerList($request)
     {
+        $this->customerRepository->pushCriteria(new IsBlackEqual(1));
+
         return  $this->customerRepository->paginate();
     }
 
@@ -101,6 +104,33 @@ class CustomerService
         try {
             DB::beginTransaction();
             $this->customerRepository->delete($customer_id);
+
+            DB::commit();
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+    /**
+     * 拉黑客户
+     *
+     * @param $customer_id
+     * @param $reason
+     * @return array
+     */
+    public function blackCustomer($customer_id, $reason)
+    {
+        try {
+            DB::beginTransaction();
+            $this->customerRepository->update(['is_black' => 2], $customer_id);
+            $this->customerLogRepository->create([
+                'customer_id' => $customer_id,
+                'action' => 3,
+                'message' => $reason,
+                'user_id' => $this->user->id,
+            ]);
 
             DB::commit();
             return ['status' => 'success'];
