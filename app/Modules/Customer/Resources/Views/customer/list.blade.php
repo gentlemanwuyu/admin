@@ -19,9 +19,11 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <div class="col-xs-6">
-                    <div class="btn-group">
-                        <button id="add_customer" type="button" class="btn btn-primary" title="{{trans('customer::customer.add_customer')}}"><i class="fa fa-male"></i></button>
-                    </div>
+                    @if(in_array($page_name, ['my_customer', 'customer_pool']))
+                        <div class="btn-group">
+                            <button id="add_customer" type="button" class="btn btn-primary" title="{{trans('customer::customer.add_customer')}}"><i class="fa fa-male"></i></button>
+                        </div>
+                    @endif
                 </div>
                 <div class="col-xs-2 pull-right">
                     <form>
