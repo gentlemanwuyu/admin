@@ -53,12 +53,19 @@
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
-                    <th>@lang('application.index_number')</th>
-                    <th>@lang('application.name')</th>
-                    <th>@lang('supplier::supplier.supplier_code')</th>
-                    <th>@lang('application.phone')</th>
-                    <th>@lang('supplier::supplier.is_black')</th>
-                    <th>@lang('application.contact')</th>
+                    <th width="5%">@lang('application.index_number')</th>
+                    <th width="15%">@lang('application.name')</th>
+                    <th width="15%">@lang('supplier::supplier.supplier_code')</th>
+                    <th width="15%">@lang('application.phone')</th>
+                    <th width="8%">@lang('supplier::supplier.is_black')</th>
+                    <th class="multi-th">
+                        <div style="">@lang('application.contact')</div>
+                        <ul class="list-inline">
+                            <li class="col-xs-4">@lang('application.name')</li>
+                            <li class="col-xs-4">@lang('application.position')</li>
+                            <li class="col-xs-4">@lang('application.phone')</li>
+                        </ul>
+                    </th>
                     <th>@lang('application.action')</th>
                     </thead>
                     <?php
@@ -77,14 +84,14 @@
                             <td>{{$supplier->code or ''}}</td>
                             <td>{{$supplier->phone_number or ''}}</td>
                             <td>{{2 == $supplier->is_black ? trans('application.yes') : trans('application.no')}}</td>
-                            <td style="padding: 0;">
-                                @if(!$supplier->contacts->isEmpty())
-                                    <ul class="list-group" style="margin-bottom: 0;">
-                                        @foreach($supplier->contacts as $contact)
-                                            <li class="list-group-item">{{$supplierPresenter->showContact($contact)}}</li>
-                                        @endforeach
+                            <td class="multi-td">
+                                @foreach($supplier->contacts as $contact)
+                                    <ul class="list-inline">
+                                        <li class="col-xs-4">{{$contact->name or ''}}</li>
+                                        <li class="col-xs-4">{{$contact->position or ''}}</li>
+                                        <li class="col-xs-4">{{$contact->phone_number or ''}}</li>
                                     </ul>
-                                @endif
+                                @endforeach
                             </td>
                             <td>
                                 <a href="javascript:;">
