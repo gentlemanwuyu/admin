@@ -9,6 +9,7 @@
 namespace App\Modules\Auth\Services;
 
 use Illuminate\Support\Facades\Auth;
+use App\Events\UserDeleted;
 use App\Modules\Auth\Repositories\UserRepository;
 use App\Modules\Entrust\Repositories\RoleRepository;
 use App\Modules\Organization\Repositories\DepartmentRepository;
@@ -118,6 +119,9 @@ class AuthService
     {
         try {
             $this->userRepository->delete($request->get('user_id'));
+
+            // 出发用户删除事件
+            event(new UserDeleted($request->get('user_id')));
 
             return ['status' => 'success'];
         }catch (\Exception $e) {
