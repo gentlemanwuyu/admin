@@ -42,9 +42,9 @@
                     <th width="15%">@lang('application.name')</th>
                     <th width="15%">@lang('customer::customer.customer_code')</th>
                     <th width="15%">@lang('application.phone')</th>
-                    <th class="multi-th" style="padding: 0;">
+                    <th class="multi-th">
                         <div style="">@lang('application.contact')</div>
-                        <ul class="list-inline" style="margin-bottom: 0;">
+                        <ul class="list-inline">
                             <li class="col-xs-4">@lang('application.name')</li>
                             <li class="col-xs-4">@lang('application.position')</li>
                             <li class="col-xs-4">@lang('application.phone')</li>
@@ -68,7 +68,7 @@
                             <td>{{$customer->phone_number or ''}}</td>
                             <td class="multi-td">
                                 @foreach($customer->contacts as $contact)
-                                    <ul class="list-inline" style="margin-bottom: 0;">
+                                    <ul class="list-inline">
                                         <li class="col-xs-4">{{$contact->name or ''}}</li>
                                         <li class="col-xs-4">{{$contact->position or ''}}</li>
                                         <li class="col-xs-4">{{$contact->phone_number or ''}}</li>

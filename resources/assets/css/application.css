@@ -61,6 +61,9 @@ td, th {
     padding: 8px;
     border-bottom: 1px solid #f4f4f4;
 }
+.multi-th>ul, .multi-td>ul {
+    margin-bottom: 0;
+}
 .multi-th>ul>li, .multi-td>ul>li {
     padding: 8px;
     border-left: 1px solid #f4f4f4;
