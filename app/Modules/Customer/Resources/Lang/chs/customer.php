@@ -75,4 +75,9 @@ return [
     'agreed' => '已同意',
     'rejected' => '已拒绝',
     'closed' => '已关闭',
+    'edit_application' => '编辑申请单',
+    'review_application' => '审核申请单',
+    'close_application' => '关闭申请单',
+    'payment_method_application_create_or_update_successful' => '添加/修改付款方式申请单成功',
+    'payment_method_application_create_or_update_fail' => '添加/修改付款方式申请单失败',
 ];

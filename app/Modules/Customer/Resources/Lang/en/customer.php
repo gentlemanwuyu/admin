@@ -75,4 +75,9 @@ return [
     'agreed' => 'Agreed',
     'rejected' => 'Rejected',
     'closed' => 'Closed',
+    'edit_application' => 'Edit application',
+    'review_application' => 'Review application',
+    'close_application' => 'Close application',
+    'payment_method_application_create_or_update_successful' => 'Payment method application create/update success',
+    'payment_method_application_create_or_update_fail' => 'Payment method application create/update failed',
 ];

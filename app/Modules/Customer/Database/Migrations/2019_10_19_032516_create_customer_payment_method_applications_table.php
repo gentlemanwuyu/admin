@@ -16,7 +16,7 @@ class CreateCustomerPaymentMethodApplicationsTable extends Migration
 			$table->increments('id');
 			$table->integer('customer_id')->default(0)->comment('客户ID');
 			$table->integer('method_id')->default(0)->comment('付款方式ID');
-			$table->decimal('limit_amount', 8, 2)->default(0.00)->comment('额度');
+			$table->integer('limit_amount')->default(0)->comment('额度');
 			$table->smallInteger('monthly_day')->default(0)->comment('月结天数');
 			$table->text('message')->default('')->comment('申请内容');
 			$table->integer('user_id')->default(0)->comment('申请人ID');

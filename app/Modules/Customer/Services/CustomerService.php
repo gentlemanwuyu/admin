@@ -77,7 +77,6 @@ class CustomerService
 
     public function getPaymentMethodApplicationList($request)
     {
-
         return $this->customerPaymentMethodApplicationRepository->paginate();
     }
 
@@ -264,6 +263,12 @@ class CustomerService
         }
     }
 
+    /**
+     * 放弃客户
+     *
+     * @param $customer_id
+     * @return array
+     */
     public function abandonCustomer($customer_id)
     {
         try {
@@ -275,6 +280,36 @@ class CustomerService
                 'message' => '',
                 'user_id' => $this->user->id,
             ]);
+
+            DB::commit();
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+    /**
+     * 创建/修改付款方式申请单
+     *
+     * @param $request
+     * @return array
+     */
+    public function createOrUpdatePaymentMethodApplication($request)
+    {
+        try {
+            DB::beginTransaction();
+            $data = [
+                'method_id' => $request->get('payment_method_id'),
+                'limit_amount' => $request->get('limit_amount'),
+                'monthly_day' => $request->get('monthly_day'),
+                'message' => $request->get('apply_reason'),
+            ];
+
+            if ('update' == $request->get('action')) {
+                $data['status'] = 1;
+                $this->customerPaymentMethodApplicationRepository->update($data, $request->get('application_id'));
+            }
 
             DB::commit();
             return ['status' => 'success'];

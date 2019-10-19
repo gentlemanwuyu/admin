@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Modules\Customer\Services\CustomerService;
 use App\Services\WorldService;
 use App\Modules\Customer\Repositories\CustomerRepository;
+use App\Modules\Customer\Repositories\CustomerPaymentMethodApplicationRepository;
 use App\Modules\Auth\Services\AuthService;
 use App\Modules\Customer\Http\Requests\CustomerRequest;
 use App\Modules\Customer\Http\Requests\AssignCustomerRequest;
@@ -14,14 +15,19 @@ use App\Modules\Customer\Http\Requests\AssignCustomerRequest;
 class CustomerController extends Controller
 {
     protected $customerService;
-    protected $customerRepository;
     protected $authService;
+    protected $customerRepository;
+    protected $customerPaymentMethodApplicationRepository;
 
-    public function __construct(CustomerService $customerService, CustomerRepository $customerRepository, AuthService $authService)
+    public function __construct(CustomerService $customerService,
+                                AuthService $authService,
+                                CustomerRepository $customerRepository,
+                                CustomerPaymentMethodApplicationRepository $customerPaymentMethodApplicationRepository)
     {
         $this->customerService = $customerService;
-        $this->customerRepository = $customerRepository;
         $this->authService = $authService;
+        $this->customerRepository = $customerRepository;
+        $this->customerPaymentMethodApplicationRepository = $customerPaymentMethodApplicationRepository;
     }
 
     public function myCustomer(Request $request)
@@ -104,5 +110,21 @@ class CustomerController extends Controller
         $applications = $this->customerService->getPaymentMethodApplicationList($request);
 
         return view('customer::customer.payment_method_application_list', compact('applications'));
+    }
+
+    public function createOrUpdatePaymentMethodApplicationPage(Request $request)
+    {
+        $data = [];
+        if ('update' == $request->get('action')) {
+            $application_info = $this->customerPaymentMethodApplicationRepository->find($request->get('application_id'));
+            $data['application_info'] = $application_info;
+        }
+
+        return view('customer::customer.create_or_update_payment_method_application', $data);
+    }
+
+    public function createOrUpdatePaymentMethodApplication(Request $request)
+    {
+        return response()->json($this->customerService->createOrUpdatePaymentMethodApplication($request));
     }
 }

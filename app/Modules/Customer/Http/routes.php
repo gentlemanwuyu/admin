@@ -48,4 +48,10 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 
 	// 放弃客户
 	Route::post('abandon_customer', ['as'=>'abandon_customer', 'uses'=>'CustomerController@abandonCustomer']);
+
+	// 创建/修改付款方式申请单的页面
+	Route::get('create_or_update_payment_method_application_page', ['as'=>'create_or_update_payment_method_application_page', 'uses'=>'CustomerController@createOrUpdatePaymentMethodApplicationPage']);
+
+	// 创建/修改付款方式申请单
+	Route::post('create_or_update_payment_method_application', ['as'=>'create_or_update_payment_method_application', 'uses'=>'CustomerController@createOrUpdatePaymentMethodApplication']);
 });

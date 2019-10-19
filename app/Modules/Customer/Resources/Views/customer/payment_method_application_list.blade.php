@@ -61,7 +61,13 @@
                             <td>{{$application->status_name ? trans('customer::customer.' . $application->status_name) : ''}}</td>
                             <td>
                                 <a href="javascript:;">
-                                    <i class="fa fa-edit edit_customer" title="{{trans('customer::customer.edit_customer')}}"></i>
+                                    <i class="fa fa-edit edit_application" title="{{trans('customer::customer.edit_application')}}"></i>
+                                </a>
+                                <a href="javascript:;">
+                                    <i class="fa fa-check-square-o review_application" title="{{trans('customer::customer.review_application')}}"></i>
+                                </a>
+                                <a href="javascript:;">
+                                    <i class="fa fa-close close_application" title="{{trans('customer::customer.close_application')}}"></i>
                                 </a>
                             </td>
                         </tr>
@@ -74,4 +80,51 @@
             </div>
         </div>
     </section>
+@endsection
+@section('scripts')
+    <script>
+        $(function () {
+            // 编辑申请单
+            $('.edit_application').on('click', function () {
+                var application_id = $(this).parents('tr').attr('data-id');
+                layer.open({
+                    type: 2,
+                    area: ['50%', '60%'],
+                    fix: false,
+                    skin: 'layui-layer-rim',
+                    maxmin: true,
+                    shade: 0.5,
+                    anim: 4,
+                    title: "{{trans('customer::customer.edit_application')}}",
+                    btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
+                    yes: function (index) {
+                        var data = $(layer.getChildFrame('body',index)).find('form').serialize();
+                        var load_index = layer.load();
+                        $.ajax({
+                            method: "post",
+                            url: "{{route('customer::customer.create_or_update_payment_method_application')}}",
+                            data: data,
+                            success: function (data) {
+                                layer.close(load_index);
+                                if ('success' == data.status) {
+                                    layer.close(index);
+                                    layer.msg("{{trans('customer::customer.payment_method_application_create_or_update_successful')}}", {icon:1});
+                                    parent.location.reload();
+                                } else {
+                                    layer.msg("{{trans('customer::customer.payment_method_application_create_or_update_fail')}}:"+data.msg, {icon:2});
+                                    return false;
+                                }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                layer.close(load_index);
+                                layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                return false;
+                            }
+                        });
+                    },
+                    content: "{{route('customer::customer.create_or_update_payment_method_application_page')}}?action=update&application_id=" + application_id
+                });
+            });
+        });
+    </script>
 @endsection
