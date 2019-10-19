@@ -146,6 +146,11 @@ return [
                         'icon' => 'fa fa-database',
                         'link' => '/customer/customer/customer_pool',
                     ],
+                    [
+                        'id' => 'customer_payment_method_application_list',
+                        'icon' => 'fa fa-money',
+                        'link' => '/customer/customer/payment_method_application_list',
+                    ],
                 ],
             ],
             // 系统管理

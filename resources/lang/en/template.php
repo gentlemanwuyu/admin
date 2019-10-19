@@ -40,6 +40,7 @@ return [
         'my_customer' => 'My customer',
         'black_list' => 'Black list',
         'customer_pool' => 'Customer pool',
+        'customer_payment_method_application_list' => 'Payment method review',
     'system_management' => 'System management',
         'running_log' => 'Running log',
 ];

@@ -42,6 +42,7 @@ return [
         'my_customer' => '我的客户',
         'black_list' => '黑名单',
         'customer_pool' => '客户池',
+        'customer_payment_method_application_list' => '付款方式审核',
     'system_management' => '系统管理',
         'running_log' => '运行日志',
 ];
