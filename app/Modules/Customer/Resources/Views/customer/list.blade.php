@@ -70,7 +70,12 @@
                     @foreach($customers as $customer)
                         <tr data-id="{{$customer->id}}">
                             <td>{{$i++}}</td>
-                            <td>{{$customer->name}}</td>
+                            <td>
+                                {{$customer->name}}
+                                @if(!$customer->children->isEmpty())
+                                    <i class="fa fa-group" style="font-size: 5px;color: #3c8dbc"></i>
+                                @endif
+                            </td>
                             <td>{{$customer->code or ''}}</td>
                             <td>{{$customer->phone_number or ''}}</td>
                             <td class="multi-td">
