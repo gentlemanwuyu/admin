@@ -102,6 +102,7 @@ class CustomerService
                 if ('my_customer' == $request->get('source')) {
                     $data['manager_id'] = $this->user->id;
                 }
+                $data['parent_id'] = $request->get('parent_id', 0);
                 $customer = $this->customerRepository->create($data);
             }
             if (!$customer) {

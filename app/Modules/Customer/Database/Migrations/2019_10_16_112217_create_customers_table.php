@@ -28,8 +28,7 @@ class CreateCustomersTable extends Migration
 			$table->string('address')->default('')->comment('地址');
 			$table->integer('manager_id')->default(0)->comment('经理人ID');
 			$table->enum('is_black', [1, 2])->default(1)->comment('是否拉黑, 1为否，2为是');
-			$table->integer('group_id')->default(0)->comment('集团ID');
-			$table->enum('is_master', [1, 2])->default(1)->comment('是否为总公司, 1为是，2为否');
+			$table->integer('parent_id')->default(0)->comment('父公司ID');
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('创建时间');
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))->comment('最后更新时间');
 			$table->timestamp('deleted_at')->nullable()->comment('删除时间');
@@ -37,7 +36,7 @@ class CreateCustomersTable extends Migration
 			$table->unique('code');
 			$table->index(['country_code', 'state_id', 'city_id', 'county_id']);
 			$table->index('manager_id');
-			$table->index('group_id');
+			$table->index('parent_id');
 		});
 	}
 

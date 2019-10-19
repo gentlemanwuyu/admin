@@ -94,6 +94,11 @@
                                         <i class="fa fa-edit edit_customer" title="{{trans('customer::customer.edit_customer')}}"></i>
                                     </a>
                                 @endif
+                                @if(in_array($page_name, ['my_customer', 'customer_pool']) && 0 == $customer->parent_id)
+                                    <a href="javascript:;">
+                                        <i class="fa fa-group add_sub_company" title="{{trans('customer::customer.add_sub_company')}}"></i>
+                                    </a>
+                                @endif
                                 @if('my_customer' == $page_name)
                                     <a href="javascript:;">
                                         <i class="fa fa-fire black_customer" title="{{trans('customer::customer.black_customer')}}"></i>
@@ -212,6 +217,48 @@
                         });
                     },
                     content: "{{route('customer::customer.create_or_update_customer_page')}}?action=update&customer_id=" + customer_id
+                });
+            });
+
+            // 添加子公司
+            $('.add_sub_company').on('click', function () {
+                var customer_id = $(this).parents('tr').attr('data-id');
+                layer.open({
+                    type: 2,
+                    area: ['80%', '80%'],
+                    fix: false,
+                    skin: 'layui-layer-rim',
+                    maxmin: true,
+                    shade: 0.5,
+                    anim: 4,
+                    title: "{{trans('customer::customer.add_sub_company')}}",
+                    btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
+                    yes: function (index) {
+                        var data = $(layer.getChildFrame('body',index)).find('form').serialize();
+                        var load_index = layer.load();
+                        $.ajax({
+                            method: "post",
+                            url: "{{route('customer::customer.create_or_update_customer')}}",
+                            data: data,
+                            success: function (data) {
+                                layer.close(load_index);
+                                if ('success' == data.status) {
+                                    layer.close(index);
+                                    layer.msg("{{trans('customer::customer.customer_create_or_update_successful')}}", {icon:1});
+                                    parent.location.reload();
+                                } else {
+                                    layer.msg("{{trans('customer::customer.customer_create_or_update_fail')}}:"+data.msg, {icon:2});
+                                    return false;
+                                }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                layer.close(load_index);
+                                layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                return false;
+                            }
+                        });
+                    },
+                    content: "{{route('customer::customer.create_or_update_customer_page')}}?action=create&parent_id=" + customer_id + "&source={{$page_name}}"
                 });
             });
 

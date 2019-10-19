@@ -9,6 +9,7 @@
 return [
     'customer_code' => '客户编号',
     'add_customer' => '添加客户',
+    'add_sub_company' => '添加子公司',
     'edit_customer' => '编辑客户',
     'black_customer' => '拉黑客户',
     'release_customer' => '释放客户',

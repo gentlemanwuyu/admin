@@ -9,6 +9,7 @@
 return [
     'customer_code' => 'Customer code',
     'add_customer' => 'Add customer',
+    'add_sub_company' => 'Add sub company',
     'edit_customer' => 'Edit customer',
     'black_customer' => 'Black customer',
     'release_customer' => 'Release customer',
