@@ -54,4 +54,5 @@ return [
     'after_deliver' => '货到付款',
     'monthly' => '月结',
     'day' => '天',
+    'status' => '状态',
 ];

@@ -37,6 +37,9 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 	// 客户池
 	Route::get('customer_pool', ['as'=>'customer_pool', 'uses'=>'CustomerController@customerPool']);
 
+	// 付款方式审核
+	Route::get('payment_method_application_list', ['as'=>'payment_method_application_list', 'uses'=>'CustomerController@paymentMethodApplicationList']);
+
 	// 分配客户页面
 	Route::get('assign_customer_page', ['as'=>'assign_customer_page', 'uses'=>'CustomerController@assignCustomerPage']);
 

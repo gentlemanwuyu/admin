@@ -75,6 +75,12 @@ class CustomerService
         return  $this->customerRepository->paginate();
     }
 
+    public function getPaymentMethodApplicationList($request)
+    {
+
+        return $this->customerPaymentMethodApplicationRepository->paginate();
+    }
+
     /**
      * 添加/修改客户
      *

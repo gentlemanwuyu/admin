@@ -70,4 +70,9 @@ return [
     'customer_delete_confirm' => 'Are you sure to delete this customer?',
     'customer_delete_successful' => 'Customer delete success.',
     'customer_delete_fail' => 'Customer delete failed.',
+
+    'padding' => 'Padding',
+    'agreed' => 'Agreed',
+    'rejected' => 'Rejected',
+    'closed' => 'Closed',
 ];

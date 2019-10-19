@@ -98,4 +98,11 @@ class CustomerController extends Controller
     {
         return response()->json($this->customerService->abandonCustomer($request->get('customer_id')));
     }
+
+    public function paymentMethodApplicationList(Request $request)
+    {
+        $applications = $this->customerService->getPaymentMethodApplicationList($request);
+
+        return view('customer::customer.payment_method_application_list', compact('applications'));
+    }
 }

@@ -70,4 +70,9 @@ return [
     'customer_delete_confirm' => '您确定要删除该客户吗？',
     'customer_delete_successful' => '客户删除成功',
     'customer_delete_fail' => '客户删除失败',
+
+    'padding' => '待审核',
+    'agreed' => '已同意',
+    'rejected' => '已拒绝',
+    'closed' => '已关闭',
 ];

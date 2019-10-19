@@ -54,4 +54,5 @@ return [
     'after_deliver' => 'After deliver',
     'monthly' => 'Monthly',
     'day' => 'Day',
+    'status' => 'Status',
 ];
