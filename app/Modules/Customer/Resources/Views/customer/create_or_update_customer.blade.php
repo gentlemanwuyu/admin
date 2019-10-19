@@ -4,6 +4,9 @@
         div#street_address {
             margin-top: 10px;
         }
+        .payment_method_div>label:not(:first-child) {
+            margin-left: 25px!important;
+        }
     </style>
 @endsection
 @section('body')
@@ -186,6 +189,57 @@
                     <button id="add_contact" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('customer::customer.add_contact')</button>
                 </div>
             </div>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h5 class="box-title">@lang('customer::customer.payment_method')</h5>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">@lang('customer::customer.payment_method')</label>
+                                <div class="col-xs-9 payment_method_div" style="padding-top: 7px;">
+                                    @foreach(Payment::$methods as $method_id => $method_name)
+                                        <label style="margin: 0;">
+                                            <input type="radio" class="minimal" name="payment_method_id" value="{{$method_id}}">
+                                            &nbsp;&nbsp;@lang('application.' . $method_name)
+                                        </label>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div id="limit_amount_div" class="form-group" style="display: none;">
+                                <label class="col-xs-3 control-label">@lang('customer::customer.limit_amount')</label>
+                                <div class="col-xs-9 payment_method_div">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">￥</span>
+                                        <input type="text" class="form-control" name="limit_amount">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="monthly_day_div" class="form-group" style="display: none;">
+                                <label class="col-xs-3 control-label">@lang('customer::customer.monthly_day')</label>
+                                <div class="col-xs-9 payment_method_div">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="limit_amount">
+                                        <span class="input-group-addon">@lang('application.day')</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="apply_reason_div" class="form-group" style="display: none;">
+                                <label class="col-xs-3 control-label">@lang('customer::customer.apply_reason')</label>
+                                <div class="col-xs-9">
+                                    <textarea class="form-control" name="apply_reason" rows="4"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 @endsection
@@ -321,6 +375,27 @@
                             $(this).remove();
                         }
                     }
+                }
+            });
+
+            $('input[name=payment_method_id]').on('ifChecked', function () {
+                if (1 == this.value) {
+                    $('input[name=limit_amount]').val('');
+                    $('#limit_amount_div').hide();
+                    $('input[name=monthly_day]').val('');
+                    $('#monthly_day_div').hide();
+                    $('textarea[name=apply_reason]').val('');
+                    $('#apply_reason_div').hide();
+                }else if (2 == this.value) {
+                    $('#limit_amount_div').show();
+                    $('#apply_reason_div').show();
+                    $('input[name=monthly_day]').val('');
+                    $('#monthly_day_div').hide();
+                }else if (3 == this.value) {
+                    $('#monthly_day_div').show();
+                    $('#apply_reason_div').show();
+                    $('input[name=limit_amount]').val('');
+                    $('#limit_amount_div').hide();
                 }
             });
         });

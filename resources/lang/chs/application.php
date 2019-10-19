@@ -50,4 +50,8 @@ return [
     'content' => '内容',
     'fold' => '收起',
     'manager' => '经理',
+    'cash' => '现金',
+    'after_deliver' => '货到付款',
+    'monthly' => '月结',
+    'day' => '天',
 ];

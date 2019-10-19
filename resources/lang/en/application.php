@@ -50,4 +50,8 @@ return [
     'content' => 'Content',
     'fold' => 'Fold',
     'manager' => 'Manager',
+    'cash' => 'Cash',
+    'after_deliver' => 'After deliver',
+    'monthly' => 'Monthly',
+    'day' => 'Day',
 ];
