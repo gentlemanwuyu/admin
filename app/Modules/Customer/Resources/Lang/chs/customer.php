@@ -46,6 +46,12 @@ return [
     'contact_name_max' => '联系人名称不能超过:number个字符',
     'contact_position_max' => '联系人职位不能超过:number个字符',
     'contact_phone_number_max' => '联系人电话不能超过:number个字符',
+    'please_select_payment_method' => '请选择付款方式',
+    'limit_amount_required' => '额度不能为空',
+    'limit_amount_integer' => '额度只能填数字',
+    'apply_reason_required' => '申请原因不能为空',
+    'monthly_day_required' => '月结天数不能为空',
+    'monthly_day_integer' => '月结天数只能填数字',
 
     'customer_black_successful' => '客户拉黑成功',
     'customer_black_fail' => '客户拉黑失败',

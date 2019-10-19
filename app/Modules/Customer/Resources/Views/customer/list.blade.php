@@ -221,7 +221,7 @@
                             }
                         });
                     },
-                    content: "{{route('customer::customer.create_or_update_customer_page')}}?action=update&customer_id=" + customer_id
+                    content: "{{route('customer::customer.create_or_update_customer_page')}}?action=update&customer_id=" + customer_id + "&source={{$page_name}}"
                 });
             });
 

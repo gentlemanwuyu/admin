@@ -14,23 +14,30 @@ use App\Modules\Auth\Services\AuthService;
 use App\Modules\Auth\Repositories\UserRepository;
 use App\Modules\Customer\Repositories\CustomerRepository;
 use App\Modules\Customer\Repositories\CustomerLogRepository;
+use App\Modules\Customer\Repositories\CustomerPaymentMethodApplicationRepository;
 use App\Modules\Customer\Repositories\Criteria\Customer\IsBlackEqual;
 use App\Modules\Customer\Repositories\Criteria\Customer\ManagerIdIn;
 use App\Modules\Customer\Repositories\Criteria\Customer\ManagerIdNotEqualZero;
+use App\Modules\Customer\Models\CustomerPaymentMethod;
 
 class CustomerService
 {
     protected $userRepository;
     protected $customerRepository;
     protected $customerLogRepository;
+    protected $customerPaymentMethodApplicationRepository;
 
     protected $user;
 
-    public function __construct(CustomerRepository $customerRepository, CustomerLogRepository $customerLogRepository, UserRepository $userRepository)
+    public function __construct(CustomerRepository $customerRepository,
+                                CustomerLogRepository $customerLogRepository,
+                                UserRepository $userRepository,
+                                CustomerPaymentMethodApplicationRepository $customerPaymentMethodApplicationRepository)
     {
         $this->userRepository = $userRepository;
         $this->customerRepository = $customerRepository;
         $this->customerLogRepository = $customerLogRepository;
+        $this->customerPaymentMethodApplicationRepository = $customerPaymentMethodApplicationRepository;
         $this->user = Auth::user();
     }
 
@@ -76,7 +83,6 @@ class CustomerService
      */
     public function createOrUpdateCustomer($request)
     {
-
         try {
             $data = [
                 'name' => $request->get('name'),
@@ -109,6 +115,28 @@ class CustomerService
                 throw new \Exception('Create customer failed.');
             }
             $customer->syncContacts($request->get('contacts'));
+
+            // 付款方式
+            if ('create' == $request->get('action') && 'my_customer' == $request->get('source')) {
+                $payment_method_data = [
+                    'method_id' => $request->get('payment_method_id'),
+                ];
+                if (2 == $payment_method_data['method_id']) {
+                    $payment_method_data['limit_amount'] = $request->get('limit_amount');
+                }elseif (3 == $payment_method_data['method_id']) {
+                    $payment_method_data['monthly_day'] = $request->get('monthly_day');
+                }
+                $payment_method_data['customer_id'] = $customer->id;
+
+                if (1 == $payment_method_data['method_id'] || AuthService::isAdmin()) {
+                    CustomerPaymentMethod::create($payment_method_data);
+                }else {
+                    $payment_method_data['message'] = $request->get('apply_reason', '');
+                    $payment_method_data['user_id'] = $this->user->id;
+                    $this->customerPaymentMethodApplicationRepository->create($payment_method_data);
+                }
+            }
+
             // 记录日志
             $msg_arr = $data;
             if ($request->get('contacts')) {

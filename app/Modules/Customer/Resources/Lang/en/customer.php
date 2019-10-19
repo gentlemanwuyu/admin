@@ -46,6 +46,12 @@ return [
     'contact_name_max' => 'The length of contact name must less than :number letters.',
     'contact_position_max' => 'The length of contact position must less than :number letters.',
     'contact_phone_number_max' => 'The length of contact phone number must less than :number letters.',
+    'please_select_payment_method' => 'Please select payment method',
+    'limit_amount_required' => 'Limit amount can\'t be empty',
+    'limit_amount_integer' => 'Limit amount may only contain numbers.',
+    'apply_reason_required' => 'Apply reason can\'t be empty',
+    'monthly_day_required' => 'Monthly day can\'t be empty',
+    'monthly_day_integer' => 'Monthly day may only contain numbers.',
 
     'customer_black_successful' => 'Customer black success.',
     'customer_black_fail' => 'Customer black failed.',

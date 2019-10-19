@@ -53,6 +53,29 @@ class CustomerRequest extends FormRequest
             }
         }
 
+        if ('create' == $data['action'] && 'my_customer' == $data['source']) {
+            $rules['payment_method_id'] = 'required';
+            if (isset($data['payment_method_id'])) {
+                if (2 == $data['payment_method_id']) {
+                    $key = 'limit_amount';
+                    $rules[$key] = 'required|integer';
+                    $this->custom_messages[$key.'.required'] = trans('customer::customer.limit_amount_required');
+                    $this->custom_messages[$key.'.integer'] = trans('customer::customer.limit_amount_integer');
+                    $key = 'apply_reason';
+                    $rules[$key] = 'required';
+                    $this->custom_messages[$key.'.required'] = trans('customer::customer.apply_reason_required');
+                }elseif (3 == $data['payment_method_id']) {
+                    $key = 'monthly_day';
+                    $rules[$key] = 'required|integer';
+                    $this->custom_messages[$key.'.required'] = trans('customer::customer.monthly_day_required');
+                    $this->custom_messages[$key.'.integer'] = trans('customer::customer.monthly_day_integer');
+                    $key = 'apply_reason';
+                    $rules[$key] = 'required';
+                    $this->custom_messages[$key.'.required'] = trans('customer::customer.apply_reason_required');
+                }
+            }
+        }
+
         return $rules;
     }
 
@@ -79,6 +102,7 @@ class CustomerRequest extends FormRequest
             'country_code.required' => trans('customer::customer.please_select_country'),
             'street_address.max' => trans('customer::customer.street_address_max', ['number' => 64]),
             'address.max' => trans('customer::customer.address_max', ['number' => 64]),
+            'payment_method_id.required' => trans('customer::customer.please_select_payment_method'),
         ]);
     }
 }

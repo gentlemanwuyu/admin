@@ -189,57 +189,59 @@
                     <button id="add_contact" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('customer::customer.add_contact')</button>
                 </div>
             </div>
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h5 class="box-title">@lang('customer::customer.payment_method')</h5>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                            <i class="fa fa-minus"></i>
-                        </button>
+            @if(isset($source) && 'my_customer' == $source && 'create' == $action)
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h5 class="box-title">@lang('customer::customer.payment_method')</h5>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label class="col-xs-3 control-label required">@lang('customer::customer.payment_method')</label>
-                                <div class="col-xs-9 payment_method_div" style="padding-top: 7px;">
-                                    @foreach(Payment::$methods as $method_id => $method_name)
-                                        <label style="margin: 0;">
-                                            <input type="radio" class="minimal" name="payment_method_id" value="{{$method_id}}">
-                                            &nbsp;&nbsp;@lang('application.' . $method_name)
-                                        </label>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div id="limit_amount_div" class="form-group" style="display: none;">
-                                <label class="col-xs-3 control-label required">@lang('customer::customer.limit_amount')</label>
-                                <div class="col-xs-9 payment_method_div">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">￥</span>
-                                        <input type="text" class="form-control" name="limit_amount">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label required">@lang('customer::customer.payment_method')</label>
+                                    <div class="col-xs-9 payment_method_div" style="padding-top: 7px;">
+                                        @foreach(Payment::$methods as $method_id => $method_name)
+                                            <label style="margin: 0;">
+                                                <input type="radio" class="minimal" name="payment_method_id" value="{{$method_id}}" @if(1 == $method_id) checked @endif>
+                                                &nbsp;&nbsp;@lang('application.' . $method_name)
+                                            </label>
+                                        @endforeach
                                     </div>
                                 </div>
-                            </div>
-                            <div id="monthly_day_div" class="form-group" style="display: none;">
-                                <label class="col-xs-3 control-label required">@lang('customer::customer.monthly_day')</label>
-                                <div class="col-xs-9 payment_method_div">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="limit_amount">
-                                        <span class="input-group-addon">@lang('application.day')</span>
+                                <div id="limit_amount_div" class="form-group" style="display: none;">
+                                    <label class="col-xs-3 control-label required">@lang('customer::customer.limit_amount')</label>
+                                    <div class="col-xs-9 payment_method_div">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">￥</span>
+                                            <input type="text" class="form-control" name="limit_amount" oninput="value=value.replace(/[^\d]/g, '')">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="apply_reason_div" class="form-group" style="display: none;">
-                                <label class="col-xs-3 control-label required">@lang('customer::customer.apply_reason')</label>
-                                <div class="col-xs-9">
-                                    <textarea class="form-control" name="apply_reason" rows="4"></textarea>
+                                <div id="monthly_day_div" class="form-group" style="display: none;">
+                                    <label class="col-xs-3 control-label required">@lang('customer::customer.monthly_day')</label>
+                                    <div class="col-xs-9 payment_method_div">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="monthly_day" oninput="value=value.replace(/[^\d]/g, '')">
+                                            <span class="input-group-addon">@lang('application.day')</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="apply_reason_div" class="form-group" style="display: none;">
+                                    <label class="col-xs-3 control-label required">@lang('customer::customer.apply_reason')</label>
+                                    <div class="col-xs-9">
+                                        <textarea class="form-control" name="apply_reason" rows="4"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </form>
 @endsection
