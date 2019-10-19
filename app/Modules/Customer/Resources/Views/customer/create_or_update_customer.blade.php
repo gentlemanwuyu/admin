@@ -202,7 +202,7 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <label class="col-xs-3 control-label">@lang('customer::customer.payment_method')</label>
+                                <label class="col-xs-3 control-label required">@lang('customer::customer.payment_method')</label>
                                 <div class="col-xs-9 payment_method_div" style="padding-top: 7px;">
                                     @foreach(Payment::$methods as $method_id => $method_name)
                                         <label style="margin: 0;">
@@ -213,7 +213,7 @@
                                 </div>
                             </div>
                             <div id="limit_amount_div" class="form-group" style="display: none;">
-                                <label class="col-xs-3 control-label">@lang('customer::customer.limit_amount')</label>
+                                <label class="col-xs-3 control-label required">@lang('customer::customer.limit_amount')</label>
                                 <div class="col-xs-9 payment_method_div">
                                     <div class="input-group">
                                         <span class="input-group-addon">￥</span>
@@ -222,7 +222,7 @@
                                 </div>
                             </div>
                             <div id="monthly_day_div" class="form-group" style="display: none;">
-                                <label class="col-xs-3 control-label">@lang('customer::customer.monthly_day')</label>
+                                <label class="col-xs-3 control-label required">@lang('customer::customer.monthly_day')</label>
                                 <div class="col-xs-9 payment_method_div">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="limit_amount">
@@ -231,7 +231,7 @@
                                 </div>
                             </div>
                             <div id="apply_reason_div" class="form-group" style="display: none;">
-                                <label class="col-xs-3 control-label">@lang('customer::customer.apply_reason')</label>
+                                <label class="col-xs-3 control-label required">@lang('customer::customer.apply_reason')</label>
                                 <div class="col-xs-9">
                                     <textarea class="form-control" name="apply_reason" rows="4"></textarea>
                                 </div>
