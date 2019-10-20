@@ -332,7 +332,7 @@ class CustomerService
     {
         try {
             $customer = $this->customerRepository->find($request->get('customer_id'));
-            if (isset($customer->lastPaymentMethodApplication) && in_array($customer->lastPaymentMethodApplication, [1, 2, 3])) {
+            if (isset($customer->lastPaymentMethodApplication) && in_array($customer->lastPaymentMethodApplication->status, [1, 2, 3])) {
                 throw new \Exception(trans('customer::customer.payment_method_application_exists'));
             }
 
