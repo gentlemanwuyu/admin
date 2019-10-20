@@ -331,6 +331,11 @@ class CustomerService
     public function changePaymentMethod($request)
     {
         try {
+            $customer = $this->customerRepository->find($request->get('customer_id'));
+            if (isset($customer->lastPaymentMethodApplication) && in_array($customer->lastPaymentMethodApplication, [1, 2, 3])) {
+                throw new \Exception(trans('customer::customer.payment_method_application_exists'));
+            }
+
             $data = [
                 'method_id' => $request->get('payment_method_id'),
                 'customer_id' => $request->get('customer_id'),

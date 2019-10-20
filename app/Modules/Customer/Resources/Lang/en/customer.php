@@ -83,4 +83,5 @@ return [
     'payment_method_application_create_or_update_fail' => 'Payment method application create/update failed',
     'payment_method_change_successful' => 'Payment method change successful.',
     'payment_method_application_create_successful' => 'Application of changing payment method create successful.',
+    'payment_method_application_exists' => 'Payment method application already exists.',
 ];

@@ -113,9 +113,11 @@
                                     <a href="javascript:;">
                                         <i class="fa fa-fire black_customer" title="{{trans('customer::customer.black_customer')}}"></i>
                                     </a>
-                                    <a href="javascript:;">
-                                        <i class="fa fa-money change_payment_method" title="{{trans('customer::customer.change_payment_method')}}"></i>
-                                    </a>
+                                    @if(!isset($customer->lastPaymentMethodApplication) || !in_array($customer->lastPaymentMethodApplication->status, [1, 2, 3]))
+                                        <a href="javascript:;">
+                                            <i class="fa fa-money change_payment_method" title="{{trans('customer::customer.change_payment_method')}}"></i>
+                                        </a>
+                                    @endif
                                     <a href="javascript:;">
                                         <i class="fa fa-fighter-jet abandon_customer" title="{{trans('customer::customer.abandon_customer')}}"></i>
                                     </a>
