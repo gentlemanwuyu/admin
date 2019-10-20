@@ -102,16 +102,16 @@
                         var load_index = layer.load();
                         $.ajax({
                             method: "post",
-                            url: "{{route('customer::customer.create_or_update_payment_method_application')}}",
+                            url: "{{route('customer::customer.update_payment_method_application')}}",
                             data: data,
                             success: function (data) {
                                 layer.close(load_index);
                                 if ('success' == data.status) {
                                     layer.close(index);
-                                    layer.msg("{{trans('customer::customer.payment_method_application_create_or_update_successful')}}", {icon:1});
+                                    layer.msg("{{trans('customer::customer.payment_method_application_update_successful')}}", {icon:1});
                                     parent.location.reload();
                                 } else {
-                                    layer.msg("{{trans('customer::customer.payment_method_application_create_or_update_fail')}}:"+data.msg, {icon:2});
+                                    layer.msg("{{trans('customer::customer.payment_method_application_update_fail')}}:"+data.msg, {icon:2});
                                     return false;
                                 }
                             },

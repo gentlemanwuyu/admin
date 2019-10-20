@@ -126,9 +126,9 @@ class CustomerController extends Controller
         return view('customer::customer.create_or_update_payment_method_application', $data);
     }
 
-    public function createOrUpdatePaymentMethodApplication(Request $request)
+    public function updatePaymentMethodApplication(Request $request)
     {
-        return response()->json($this->customerService->createOrUpdatePaymentMethodApplication($request));
+        return response()->json($this->customerService->updatePaymentMethodApplication($request));
     }
 
     public function changePaymentMethod(Request $request)

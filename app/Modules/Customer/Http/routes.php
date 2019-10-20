@@ -53,7 +53,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 	Route::get('create_or_update_payment_method_application_page', ['as'=>'create_or_update_payment_method_application_page', 'uses'=>'CustomerController@createOrUpdatePaymentMethodApplicationPage']);
 
 	// 创建/修改付款方式申请单
-	Route::post('create_or_update_payment_method_application', ['as'=>'create_or_update_payment_method_application', 'uses'=>'CustomerController@createOrUpdatePaymentMethodApplication']);
+	Route::post('update_payment_method_application', ['as'=>'update_payment_method_application', 'uses'=>'CustomerController@updatePaymentMethodApplication']);
 
 	// 修改付款方式
 	Route::post('change_payment_method', ['as'=>'change_payment_method', 'uses'=>'CustomerController@changePaymentMethod']);

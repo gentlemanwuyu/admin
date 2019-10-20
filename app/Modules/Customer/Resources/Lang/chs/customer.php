@@ -79,8 +79,8 @@ return [
     'edit_application' => '编辑申请单',
     'review_application' => '审核申请单',
     'close_application' => '关闭申请单',
-    'payment_method_application_create_or_update_successful' => '添加/修改付款方式申请单成功',
-    'payment_method_application_create_or_update_fail' => '添加/修改付款方式申请单失败',
+    'payment_method_application_update_successful' => '修改付款方式申请单成功',
+    'payment_method_application_update_fail' => '修改付款方式申请单失败',
     'payment_method_change_successful' => '付款方式更改成功',
     'payment_method_application_create_successful' => '付款方式更改申请单提交成功',
 ];

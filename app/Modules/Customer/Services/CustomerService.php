@@ -298,7 +298,7 @@ class CustomerService
      * @param $request
      * @return array
      */
-    public function createOrUpdatePaymentMethodApplication($request)
+    public function updatePaymentMethodApplication($request)
     {
         try {
             DB::beginTransaction();
