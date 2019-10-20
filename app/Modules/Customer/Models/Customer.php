@@ -74,4 +74,9 @@ class Customer extends Model
     {
         return $this->hasMany(self::class, 'parent_id');
     }
+
+    public function paymentMethod()
+    {
+        return $this->hasOne(CustomerPaymentMethod::class);
+    }
 }

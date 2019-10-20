@@ -44,6 +44,7 @@
                     <th width="15%">@lang('application.name')</th>
                     <th width="15%">@lang('customer::customer.customer_code')</th>
                     <th width="15%">@lang('application.phone')</th>
+                    <th width="10%">@lang('customer::customer.payment_method')</th>
                     <th class="multi-th">
                         <div style="">@lang('application.contact')</div>
                         <ul class="list-inline">
@@ -78,6 +79,7 @@
                             </td>
                             <td>{{$customer->code or ''}}</td>
                             <td>{{$customer->phone_number or ''}}</td>
+                            <td>{{!empty($customer->paymentMethod->payment_method_name) ? trans('application.' . $customer->paymentMethod->payment_method_name) : ''}}</td>
                             <td class="multi-td">
                                 @foreach($customer->contacts as $contact)
                                     <ul class="list-inline">

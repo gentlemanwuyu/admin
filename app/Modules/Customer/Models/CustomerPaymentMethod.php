@@ -15,4 +15,9 @@ class CustomerPaymentMethod extends Model
     protected $guarded = ['id'];
 
     public $timestamps = false;
+
+    public function getPaymentMethodNameAttribute()
+    {
+        return isset(\Payment::$methods[$this->method_id]) ? \Payment::$methods[$this->method_id] : '';
+    }
 }
