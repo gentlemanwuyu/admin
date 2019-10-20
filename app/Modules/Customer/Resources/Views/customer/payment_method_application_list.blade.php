@@ -125,6 +125,71 @@
                     content: "{{route('customer::customer.create_or_update_payment_method_application_page')}}?action=update&application_id=" + application_id
                 });
             });
+
+            // 审核申请单
+            $('.review_application').on('click', function () {
+                var application_id = $(this).parents('tr').attr('data-id');
+                layer.open({
+                    type: 2,
+                    area: ['50%', '60%'],
+                    fix: false,
+                    skin: 'layui-layer-rim',
+                    maxmin: true,
+                    shade: 0.5,
+                    anim: 4,
+                    title: "{{trans('customer::customer.review_application')}}",
+                    btn: ['{{trans('application.agree')}}', '{{trans('application.reject')}}', '{{trans('application.cancel')}}'],
+                    yes: function (index) {
+                        var load_index = layer.load();
+                        $.ajax({
+                            method: "post",
+                            url: "{{route('customer::customer.review_payment_method_application')}}",
+                            data: {application_id: application_id, status: 2},
+                            success: function (data) {
+                                layer.close(load_index);
+                                if ('success' == data.status) {
+                                    layer.close(index);
+                                    layer.msg("{{trans('customer::customer.payment_method_application_agreed')}}", {icon:1});
+                                    parent.location.reload();
+                                } else {
+                                    layer.msg("{{trans('application.action_fail')}}:"+data.msg, {icon:2});
+                                    return false;
+                                }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                layer.close(load_index);
+                                layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                return false;
+                            }
+                        });
+                    },
+                    btn2: function (index) {
+                        var load_index = layer.load();
+                        $.ajax({
+                            method: "post",
+                            url: "{{route('customer::customer.review_payment_method_application')}}",
+                            data: {application_id: application_id, status: 3},
+                            success: function (data) {
+                                layer.close(load_index);
+                                if ('success' == data.status) {
+                                    layer.close(index);
+                                    layer.msg("{{trans('customer::customer.payment_method_application_rejected')}}", {icon:1});
+                                    parent.location.reload();
+                                } else {
+                                    layer.msg("{{trans('application.action_fail')}}:"+data.msg, {icon:2});
+                                    return false;
+                                }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                layer.close(load_index);
+                                layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                return false;
+                            }
+                        });
+                    },
+                    content: "{{route('customer::customer.create_or_update_payment_method_application_page')}}?action=view&application_id=" + application_id
+                });
+            });
         });
     </script>
 @endsection

@@ -118,7 +118,7 @@ class CustomerController extends Controller
         if ('create' == $request->get('action')) {
             $customer_info = $this->customerRepository->find($request->get('customer_id'));
             $data['customer_info'] = $customer_info;
-        }elseif ('update' == $request->get('action')) {
+        }elseif (in_array($request->get('action'), ['update', 'view'])) {
             $application_info = $this->customerPaymentMethodApplicationRepository->find($request->get('application_id'));
             $data['application_info'] = $application_info;
         }
@@ -134,5 +134,10 @@ class CustomerController extends Controller
     public function changePaymentMethod(Request $request)
     {
         return response()->json($this->customerService->changePaymentMethod($request));
+    }
+
+    public function reviewPaymentMethodApplication(Request $request)
+    {
+        return response()->json($this->customerService->reviewPaymentMethodApplication($request->get('application_id'), $request->get('status')));
     }
 }

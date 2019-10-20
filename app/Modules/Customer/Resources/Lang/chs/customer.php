@@ -84,4 +84,6 @@ return [
     'payment_method_change_successful' => '付款方式更改成功',
     'payment_method_application_create_successful' => '付款方式更改申请单提交成功',
     'payment_method_application_exists' => '付款方式申请单已存在',
+    'payment_method_application_agreed' => '付款方式申请单已同意',
+    'payment_method_application_rejected' => '付款方式申请单已拒绝',
 ];

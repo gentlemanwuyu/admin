@@ -56,4 +56,6 @@ return [
     'day' => '天',
     'status' => '状态',
     'action_fail' => '操作失败',
+    'agree' => '同意',
+    'reject' => '拒绝',
 ];

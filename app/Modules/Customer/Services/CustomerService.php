@@ -357,4 +357,38 @@ class CustomerService
             return ['status' => 'fail', 'msg'=>$e->getMessage()];
         }
     }
+
+    /**
+     * 审核付款方式申请单
+     *
+     * @param $application_id
+     * @param $status
+     * @return array
+     */
+    public function reviewPaymentMethodApplication($application_id, $status)
+    {
+        try {
+            $application = $this->customerPaymentMethodApplicationRepository->find($application_id);
+
+            if (2 == $status) {
+                CustomerPaymentMethod::updateOrCreate(['customer_id' => $application->customer_id], [
+                    'customer_id' => $application->customer_id,
+                    'method_id' => $application->method_id,
+                    'limit_amount' => $application->limit_amount,
+                    'monthly_day' => $application->monthly_day,
+                ]);
+                $application->status = $status;
+                $application->save();
+            }elseif (3 == $status) {
+                $application->status = $status;
+                $application->save();
+            }else {
+                throw new \Exception("非法操作");
+            }
+
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
 }

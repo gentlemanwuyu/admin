@@ -16,57 +16,73 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-xs-6">
+                        <?php
+                            $methods = Payment::$methods;
+                            $init_method_id = 1;
+                            $init_limit_amount = '';
+                            $init_monthly_day = '';
+                            if ('create' == $action) {
+                                if (!empty($customer_info->paymentMethod)) {
+                                    $init_method_id = $customer_info->paymentMethod->method_id;
+                                    $init_limit_amount = $customer_info->paymentMethod->limit_amount;
+                                    $init_monthly_day = $customer_info->paymentMethod->monthly_day;
+                                }
+                            }elseif (in_array($action, ['update', 'view'])) {
+                                $init_method_id = $application_info->method_id;
+                                $init_limit_amount = $application_info->limit_amount;
+                                $init_monthly_day = $application_info->monthly_day;
+                                unset($methods[1]);
+                            }
+                        ?>
                         <div class="form-group">
                             <label class="col-xs-3 control-label required">@lang('customer::customer.payment_method')</label>
-                            <div class="col-xs-9 payment_method_div" style="padding-top: 7px;">
-                                <?php
-                                    $methods = Payment::$methods;
-                                    $init_method_id = 1;
-                                    $init_limit_amount = '';
-                                    $init_monthly_day = '';
-                                    if ('create' == $action) {
-                                        if (!empty($customer_info->paymentMethod)) {
-                                            $init_method_id = $customer_info->paymentMethod->method_id;
-                                            $init_limit_amount = $customer_info->paymentMethod->limit_amount;
-                                            $init_monthly_day = $customer_info->paymentMethod->monthly_day;
-                                        }
-                                    }elseif ('update' == $action) {
-                                        $init_method_id = $application_info->method_id;
-                                        $init_limit_amount = $application_info->limit_amount;
-                                        $init_monthly_day = $application_info->monthly_day;
-                                        unset($methods[1]);
-                                    }
-                                ?>
-                                @foreach($methods as $method_id => $method_name)
-                                    <label style="margin: 0;">
-                                        <input type="radio" class="minimal" name="payment_method_id" value="{{$method_id}}" @if($init_method_id == $method_id) checked @endif>
-                                        &nbsp;&nbsp;@lang('application.' . $method_name)
-                                    </label>
-                                @endforeach
+                            <div class="col-xs-9 payment_method_div" @if(in_array($action, ['create', 'update'])) style="padding-top: 7px;" @endif>
+                                @if('view' == $action)
+                                    <span class="form-control-span">{{$application_info->payment_method_name ? trans('application.' . $application_info->payment_method_name) : ''}}</span>
+                                @else
+                                    @foreach($methods as $method_id => $method_name)
+                                        <label style="margin: 0;">
+                                            <input type="radio" class="minimal" name="payment_method_id" value="{{$method_id}}" @if($init_method_id == $method_id) checked @endif>
+                                            &nbsp;&nbsp;@lang('application.' . $method_name)
+                                        </label>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                         <div id="limit_amount_div" class="form-group" @if(2 != $init_method_id) style="display: none;" @endif>
                             <label class="col-xs-3 control-label required">@lang('customer::customer.limit_amount')</label>
                             <div class="col-xs-9 payment_method_div">
-                                <div class="input-group">
-                                    <span class="input-group-addon">￥</span>
-                                    <input type="text" class="form-control" name="limit_amount" oninput="value=value.replace(/[^\d]/g, '')" @if(2 == $init_method_id) value="{{$init_limit_amount or ''}}" @endif>
-                                </div>
+                                @if('view' == $action)
+                                    <span class="form-control-span">￥{{$init_limit_amount or ''}}</span>
+                                @else
+                                    <div class="input-group">
+                                        <span class="input-group-addon">￥</span>
+                                        <input type="text" class="form-control" name="limit_amount" oninput="value=value.replace(/[^\d]/g, '')" @if(2 == $init_method_id) value="{{$init_limit_amount or ''}}" @endif>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div id="monthly_day_div" class="form-group" @if(3 != $init_method_id) style="display: none;" @endif>
                             <label class="col-xs-3 control-label required">@lang('customer::customer.monthly_day')</label>
                             <div class="col-xs-9 payment_method_div">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="monthly_day" oninput="value=value.replace(/[^\d]/g, '')" @if(3 == $init_method_id) value="{{$init_monthly_day or ''}}" @endif>
-                                    <span class="input-group-addon">@lang('application.day')</span>
-                                </div>
+                                @if('view' == $action)
+                                    <span class="form-control-span">{{$init_monthly_day or ''}}@lang('application.day')</span>
+                                @else
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="monthly_day" oninput="value=value.replace(/[^\d]/g, '')" @if(3 == $init_method_id) value="{{$init_monthly_day or ''}}" @endif>
+                                        <span class="input-group-addon">@lang('application.day')</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div id="apply_reason_div" class="form-group" @if(1 == $init_method_id) style="display: none;" @endif>
                             <label class="col-xs-3 control-label required">@lang('customer::customer.apply_reason')</label>
                             <div class="col-xs-9">
-                                <textarea class="form-control" name="apply_reason" rows="4">@if(isset($application_info)){{$application_info->message}}@endif</textarea>
+                                @if('view' == $action)
+                                    <span class="form-control-span">{{$application_info->message or ''}}</span>
+                                @else
+                                    <textarea class="form-control" name="apply_reason" rows="4">@if(isset($application_info)){{$application_info->message}}@endif</textarea>
+                                @endif
                             </div>
                         </div>
                     </div>

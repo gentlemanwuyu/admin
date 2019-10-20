@@ -84,4 +84,6 @@ return [
     'payment_method_change_successful' => 'Payment method change successful.',
     'payment_method_application_create_successful' => 'Application of changing payment method create successful.',
     'payment_method_application_exists' => 'Payment method application already exists.',
+    'payment_method_application_agreed' => 'Payment method application agreed',
+    'payment_method_application_rejected' => 'Payment method application rejected',
 ];

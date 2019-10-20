@@ -57,4 +57,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 
 	// 修改付款方式
 	Route::post('change_payment_method', ['as'=>'change_payment_method', 'uses'=>'CustomerController@changePaymentMethod']);
+
+	// 审核付款方式申请单
+	Route::post('review_payment_method_application', ['as'=>'review_payment_method_application', 'uses'=>'CustomerController@reviewPaymentMethodApplication']);
 });

@@ -56,4 +56,6 @@ return [
     'day' => 'Day',
     'status' => 'Status',
     'action_fail' => 'Action failed',
+    'agree' => 'Agree',
+    'reject' => 'Reject',
 ];
