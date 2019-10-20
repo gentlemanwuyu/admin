@@ -193,7 +193,9 @@ class CustomerService
     {
         try {
             DB::beginTransaction();
-            $this->customerRepository->update(['is_black' => 2, 'manager_id' => 0], $customer_id);
+            $customer = $this->customerRepository->update(['is_black' => 2, 'manager_id' => 0], $customer_id);
+            // 清空付款方式及关闭付款方式申请
+            $customer->clearPaymentMethod();
             $this->customerLogRepository->create([
                 'customer_id' => $customer_id,
                 'action' => 3,
@@ -273,7 +275,8 @@ class CustomerService
     {
         try {
             DB::beginTransaction();
-            $this->customerRepository->update(['manager_id' => 0], $customer_id);
+            $customer = $this->customerRepository->update(['manager_id' => 0], $customer_id);
+            $customer->clearPaymentMethod();
             $this->customerLogRepository->create([
                 'customer_id' => $customer_id,
                 'action' => 7,
@@ -315,6 +318,37 @@ class CustomerService
             return ['status' => 'success'];
         }catch (\Exception $e) {
             DB::rollBack();
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
+
+    /**
+     * 更改付款方式
+     *
+     * @param $request
+     * @return array
+     */
+    public function changePaymentMethod($request)
+    {
+        try {
+            $data = [
+                'method_id' => $request->get('payment_method_id'),
+                'customer_id' => $request->get('customer_id'),
+                'limit_amount' => $request->get('limit_amount', 0),
+                'monthly_day' => $request->get('monthly_day', 0),
+            ];
+
+            if (1 == $request->get('payment_method_id') || AuthService::isAdmin()) {
+                CustomerPaymentMethod::updateOrCreate(['customer_id' => $request->get('customer_id')], $data);
+                $message = trans('customer::customer.payment_method_change_successful');
+            }else {
+                $data['message'] = $request->get('apply_reason');
+                $data['user_id'] = $this->user->id;
+                $this->customerPaymentMethodApplicationRepository->create($data);
+                $message = trans('customer::customer.payment_method_application_create_successful');
+            }
+            return ['status' => 'success', 'msg' => $message];
+        }catch (\Exception $e) {
             return ['status' => 'fail', 'msg'=>$e->getMessage()];
         }
     }

@@ -115,7 +115,10 @@ class CustomerController extends Controller
     public function createOrUpdatePaymentMethodApplicationPage(Request $request)
     {
         $data = [];
-        if ('update' == $request->get('action')) {
+        if ('create' == $request->get('action')) {
+            $customer_info = $this->customerRepository->find($request->get('customer_id'));
+            $data['customer_info'] = $customer_info;
+        }elseif ('update' == $request->get('action')) {
             $application_info = $this->customerPaymentMethodApplicationRepository->find($request->get('application_id'));
             $data['application_info'] = $application_info;
         }
@@ -126,5 +129,10 @@ class CustomerController extends Controller
     public function createOrUpdatePaymentMethodApplication(Request $request)
     {
         return response()->json($this->customerService->createOrUpdatePaymentMethodApplication($request));
+    }
+
+    public function changePaymentMethod(Request $request)
+    {
+        return response()->json($this->customerService->changePaymentMethod($request));
     }
 }

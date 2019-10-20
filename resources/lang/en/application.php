@@ -55,4 +55,5 @@ return [
     'monthly' => 'Monthly',
     'day' => 'Day',
     'status' => 'Status',
+    'action_fail' => 'Action failed',
 ];

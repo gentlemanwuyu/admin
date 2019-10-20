@@ -54,4 +54,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 
 	// 创建/修改付款方式申请单
 	Route::post('create_or_update_payment_method_application', ['as'=>'create_or_update_payment_method_application', 'uses'=>'CustomerController@createOrUpdatePaymentMethodApplication']);
+
+	// 修改付款方式
+	Route::post('change_payment_method', ['as'=>'change_payment_method', 'uses'=>'CustomerController@changePaymentMethod']);
 });

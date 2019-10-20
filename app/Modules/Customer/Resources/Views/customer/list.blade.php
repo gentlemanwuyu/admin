@@ -100,6 +100,9 @@
                                     <a href="javascript:;">
                                         <i class="fa fa-edit edit_customer" title="{{trans('customer::customer.edit_customer')}}"></i>
                                     </a>
+                                    <a href="javascript:;">
+                                        <i class="fa fa-hand-o-right assign_customer" title="{{trans('customer::customer.assign_customer')}}"></i>
+                                    </a>
                                 @endif
                                 @if(in_array($page_name, ['my_customer', 'customer_pool']) && 0 == $customer->parent_id)
                                     <a href="javascript:;">
@@ -111,12 +114,10 @@
                                         <i class="fa fa-fire black_customer" title="{{trans('customer::customer.black_customer')}}"></i>
                                     </a>
                                     <a href="javascript:;">
-                                        <i class="fa fa-fighter-jet abandon_customer" title="{{trans('customer::customer.abandon_customer')}}"></i>
+                                        <i class="fa fa-money change_payment_method" title="{{trans('customer::customer.change_payment_method')}}"></i>
                                     </a>
-                                @endif
-                                @if('customer_pool' == $page_name)
                                     <a href="javascript:;">
-                                        <i class="fa fa-hand-o-right assign_customer" title="{{trans('customer::customer.assign_customer')}}"></i>
+                                        <i class="fa fa-fighter-jet abandon_customer" title="{{trans('customer::customer.abandon_customer')}}"></i>
                                     </a>
                                 @endif
                                 @if('black_list' == $page_name)
@@ -300,6 +301,48 @@
                             return false;
                         }
                     });
+                });
+            });
+
+            // 更改付款方式
+            $('.change_payment_method').on('click', function () {
+                var customer_id = $(this).parents('tr').attr('data-id');
+                layer.open({
+                    type: 2,
+                    area: ['50%', '60%'],
+                    fix: false,
+                    skin: 'layui-layer-rim',
+                    maxmin: true,
+                    shade: 0.5,
+                    anim: 4,
+                    title: "{{trans('customer::customer.change_payment_method')}}",
+                    btn: ['{{trans('application.confirm')}}', '{{trans('application.cancel')}}'],
+                    yes: function (index) {
+                        var data = $(layer.getChildFrame('body',index)).find('form').serialize();
+                        var load_index = layer.load();
+                        $.ajax({
+                            method: "post",
+                            url: "{{route('customer::customer.change_payment_method')}}",
+                            data: data,
+                            success: function (data) {
+                                layer.close(load_index);
+                                if ('success' == data.status) {
+                                    layer.close(index);
+                                    layer.msg(data.msg, {icon:1});
+                                    parent.location.reload();
+                                } else {
+                                    layer.msg("{{trans('application.action_fail')}}:"+data.msg, {icon:2});
+                                    return false;
+                                }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                layer.close(load_index);
+                                layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                                return false;
+                            }
+                        });
+                    },
+                    content: "{{route('customer::customer.create_or_update_payment_method_application_page')}}?action=create&customer_id=" + customer_id
                 });
             });
 

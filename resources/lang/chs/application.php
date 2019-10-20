@@ -55,4 +55,5 @@ return [
     'monthly' => '月结',
     'day' => '天',
     'status' => '状态',
+    'action_fail' => '操作失败',
 ];

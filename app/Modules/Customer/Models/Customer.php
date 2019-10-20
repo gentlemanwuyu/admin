@@ -47,6 +47,20 @@ class Customer extends Model
         }
     }
 
+    public function delete()
+    {
+        parent::delete();
+        CustomerContact::where('customer_id', $this->id)->delete();
+
+        return true;
+    }
+
+    public function clearPaymentMethod()
+    {
+        CustomerPaymentMethod::where('customer_id', $this->id)->delete();
+        CustomerPaymentMethodApplication::where('customer_id', $this->id)->update(['status' => 4]);
+    }
+
     public function contacts()
     {
         return $this->hasMany(CustomerContact::class);
@@ -62,14 +76,6 @@ class Customer extends Model
         return $this->hasOne(CustomerLog::class)->where('action', 3)->orderBy('id', 'desc');
     }
 
-    public function delete()
-    {
-        parent::delete();
-        CustomerContact::where('customer_id', $this->id)->delete();
-
-        return true;
-    }
-
     public function children()
     {
         return $this->hasMany(self::class, 'parent_id');
@@ -78,5 +84,10 @@ class Customer extends Model
     public function paymentMethod()
     {
         return $this->hasOne(CustomerPaymentMethod::class);
+    }
+
+    public function lastPaymentMethodApplication()
+    {
+        return $this->hasOne(CustomerPaymentMethodApplication::class)->orderBy('id', 'desc');
     }
 }

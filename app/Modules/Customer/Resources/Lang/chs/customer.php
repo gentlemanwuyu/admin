@@ -16,6 +16,7 @@ return [
     'assign_customer' => '分配客户',
     'abandon_customer' => '放弃客户',
     'delete_customer' => '删除客户',
+    'change_payment_method' => '更改付款方式',
     'add_contact' => '添加联系人',
     'payment_method' => '付款方式',
     'limit_amount' => '额度',
@@ -80,4 +81,6 @@ return [
     'close_application' => '关闭申请单',
     'payment_method_application_create_or_update_successful' => '添加/修改付款方式申请单成功',
     'payment_method_application_create_or_update_fail' => '添加/修改付款方式申请单失败',
+    'payment_method_change_successful' => '付款方式更改成功',
+    'payment_method_application_create_successful' => '付款方式更改申请单提交成功',
 ];

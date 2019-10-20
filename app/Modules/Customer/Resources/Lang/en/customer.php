@@ -16,6 +16,7 @@ return [
     'assign_customer' => 'Assign customer',
     'abandon_customer' => 'Abandon customer',
     'delete_customer' => 'Delete customer',
+    'change_payment_method' => 'Change payment method',
     'add_contact' => 'Add contact',
     'payment_method' => 'Payment method',
     'limit_amount' => 'Limit amount',
@@ -80,4 +81,6 @@ return [
     'close_application' => 'Close application',
     'payment_method_application_create_or_update_successful' => 'Payment method application create/update success',
     'payment_method_application_create_or_update_fail' => 'Payment method application create/update failed',
+    'payment_method_change_successful' => 'Payment method change successful.',
+    'payment_method_application_create_successful' => 'Application of changing payment method create successful.',
 ];
