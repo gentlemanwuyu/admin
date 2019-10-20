@@ -9,9 +9,12 @@
 namespace App\Modules\Customer\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CustomerPaymentMethodApplication extends Model
 {
+    use SoftDeletes;
+
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
     static $statuses = [

@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\AdminInstall;
 use App\Modules\Entrust\Console\InitializeEntrust;
+use App\Modules\Customer\Console\Commands\AutoDeleteApplication;
 use App\Modules\Spider\Console\CheckProxyIp;
 
 class Kernel extends ConsoleKernel
@@ -18,6 +19,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         AdminInstall::class,
         InitializeEntrust::class,
+        AutoDeleteApplication::class,
         CheckProxyIp::class,
     ];
 
