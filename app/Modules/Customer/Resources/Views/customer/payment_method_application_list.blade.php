@@ -22,7 +22,36 @@
     <section class="content">
         <div class="box box-primary">
             <div class="box-header with-border">
-
+                <form class="search-form">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <input type="text" name="name" class="form-control" value="{{$name or ''}}" placeholder="@lang('application.name')">
+                        </div>
+                        <div class="col-xs-2">
+                            <?php
+                                $methods = Payment::$methods;
+                                unset($methods[1]);
+                            ?>
+                            <select class="form-control" name="payment_method_id">
+                                <option value="">@lang('customer::customer.payment_method')</option>
+                                @foreach($methods as $method_id => $method_name)
+                                    <option value="{{$method_id}}" @if(isset($payment_method_id) && $payment_method_id == $method_id) selected @endif>{{trans('application.' . $method_name)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-xs-2">
+                            <select class="form-control" name="status">
+                                <option value="">@lang('application.status')</option>
+                                @foreach(\App\Modules\Customer\Models\CustomerPaymentMethodApplication::$statuses as $status_id => $status_name)
+                                    <option value="{{$status_id}}" @if(isset($status) && $status == $status_id) selected @endif>{{trans('customer::customer.' . $status_name)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-xs-1">
+                            <button type="submit" class="btn btn-primary" style="width:100%">@lang("application.search")</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">

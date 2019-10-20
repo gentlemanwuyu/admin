@@ -10,6 +10,7 @@ namespace App\Modules\Customer\Services;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Modules\Customer\Models\CustomerPaymentMethod;
 use App\Modules\Auth\Services\AuthService;
 use App\Modules\Auth\Repositories\UserRepository;
 use App\Modules\Customer\Repositories\CustomerRepository;
@@ -18,7 +19,9 @@ use App\Modules\Customer\Repositories\CustomerPaymentMethodApplicationRepository
 use App\Modules\Customer\Repositories\Criteria\Customer\IsBlackEqual;
 use App\Modules\Customer\Repositories\Criteria\Customer\ManagerIdIn;
 use App\Modules\Customer\Repositories\Criteria\Customer\ManagerIdNotEqualZero;
-use App\Modules\Customer\Models\CustomerPaymentMethod;
+use App\Modules\Customer\Repositories\Criteria\CustomerPaymentMethodApplication\NameLike;
+use App\Modules\Customer\Repositories\Criteria\CustomerPaymentMethodApplication\StatusEqual;
+use App\Modules\Customer\Repositories\Criteria\CustomerPaymentMethodApplication\MethodIdEqual;
 
 class CustomerService
 {
@@ -77,6 +80,10 @@ class CustomerService
 
     public function getPaymentMethodApplicationList($request)
     {
+        $this->customerPaymentMethodApplicationRepository->pushCriteria(new NameLike($request->get('name')));
+        $this->customerPaymentMethodApplicationRepository->pushCriteria(new MethodIdEqual($request->get('payment_method_id')));
+        $this->customerPaymentMethodApplicationRepository->pushCriteria(new StatusEqual($request->get('status')));
+
         return $this->customerPaymentMethodApplicationRepository->paginate();
     }
 
