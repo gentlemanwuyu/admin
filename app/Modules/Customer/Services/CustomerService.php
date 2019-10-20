@@ -391,4 +391,21 @@ class CustomerService
             return ['status' => 'fail', 'msg'=>$e->getMessage()];
         }
     }
+
+    /**
+     * 关闭付款方式申请单
+     *
+     * @param $application_id
+     * @return array
+     */
+    public function closePaymentMethodApplication($application_id)
+    {
+        try {
+            $this->customerPaymentMethodApplicationRepository->update(['status' => 4], $application_id);
+
+            return ['status' => 'success'];
+        }catch (\Exception $e) {
+            return ['status' => 'fail', 'msg'=>$e->getMessage()];
+        }
+    }
 }

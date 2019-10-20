@@ -4,7 +4,11 @@
 @endsection
 @section('css')
     <style>
-
+        #review_application_layer .layui-layer-btn .layui-layer-btn1 {
+            border-color: #dd4b39;
+            background-color: #dd4b39;
+            color: #fff;
+        }
     </style>
 @endsection
 @section('content')
@@ -60,15 +64,21 @@
                             <td>{{$application->message or ''}}</td>
                             <td>{{$application->status_name ? trans('customer::customer.' . $application->status_name) : ''}}</td>
                             <td>
-                                <a href="javascript:;">
-                                    <i class="fa fa-edit edit_application" title="{{trans('customer::customer.edit_application')}}"></i>
-                                </a>
-                                <a href="javascript:;">
-                                    <i class="fa fa-check-square-o review_application" title="{{trans('customer::customer.review_application')}}"></i>
-                                </a>
-                                <a href="javascript:;">
-                                    <i class="fa fa-close close_application" title="{{trans('customer::customer.close_application')}}"></i>
-                                </a>
+                                @if(in_array($application->status, [1, 3]))
+                                    <a href="javascript:;">
+                                        <i class="fa fa-edit edit_application" title="{{trans('customer::customer.edit_application')}}"></i>
+                                    </a>
+                                @endif
+                                @if(1 == $application->status)
+                                    <a href="javascript:;">
+                                        <i class="fa fa-check-square-o review_application" title="{{trans('customer::customer.review_application')}}"></i>
+                                    </a>
+                                @endif
+                                @if(in_array($application->status, [1, 2, 3]))
+                                    <a href="javascript:;">
+                                        <i class="fa fa-close close_application" title="{{trans('customer::customer.close_application')}}"></i>
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -132,6 +142,7 @@
                 layer.open({
                     type: 2,
                     area: ['50%', '60%'],
+                    id: 'review_application_layer',
                     fix: false,
                     skin: 'layui-layer-rim',
                     maxmin: true,
@@ -188,6 +199,35 @@
                         });
                     },
                     content: "{{route('customer::customer.create_or_update_payment_method_application_page')}}?action=view&application_id=" + application_id
+                });
+            });
+
+            // 关闭申请单
+            $('.close_application').on('click', function () {
+                var application_id = $(this).parents('tr').attr('data-id');
+                layer.confirm("{{trans('customer::customer.close_application_confirm')}}", {icon: 3, title:"{{trans('application.confirm')}}"}, function (index) {
+                    layer.close(index);
+                    var load_index = layer.load();
+                    $.ajax({
+                        method: "post",
+                        url: "{{route('customer::customer.close_payment_method_application')}}",
+                        data: {application_id: application_id},
+                        success: function (data) {
+                            layer.close(load_index);
+                            if ('success' == data.status) {
+                                layer.msg("{{trans('customer::customer.close_application_successful')}}", {icon:1});
+                                parent.location.reload();
+                            } else {
+                                layer.msg("{{trans('customer::customer.close_application_fail')}}"+data.msg, {icon:2});
+                                return false;
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            layer.close(load_index);
+                            layer.msg(packageValidatorResponseText(XMLHttpRequest.responseText), {icon:2});
+                            return false;
+                        }
+                    });
                 });
             });
         });

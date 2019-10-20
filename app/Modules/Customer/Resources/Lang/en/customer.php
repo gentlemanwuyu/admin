@@ -86,4 +86,7 @@ return [
     'payment_method_application_exists' => 'Payment method application already exists.',
     'payment_method_application_agreed' => 'Payment method application agreed',
     'payment_method_application_rejected' => 'Payment method application rejected',
+    'close_application_confirm' => 'Are you sure to close this application?',
+    'close_application_successful' => 'Application close success.',
+    'close_application_fail' => 'Application close failed.',
 ];

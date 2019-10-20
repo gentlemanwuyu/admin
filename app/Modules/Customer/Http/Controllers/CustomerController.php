@@ -140,4 +140,9 @@ class CustomerController extends Controller
     {
         return response()->json($this->customerService->reviewPaymentMethodApplication($request->get('application_id'), $request->get('status')));
     }
+
+    public function closePaymentMethodApplication(Request $request)
+    {
+        return response()->json($this->customerService->closePaymentMethodApplication($request->get('application_id')));
+    }
 }

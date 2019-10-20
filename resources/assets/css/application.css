@@ -2,11 +2,6 @@ td, th {
     text-align: center;
     vertical-align: middle!important;
 }
-.layui-layer-btn .layui-layer-btn1 {
-    border-color: #dd4b39;
-    background-color: #dd4b39;
-    color: #fff;
-}
 .required:after { content: "*"; color: #ff2556; }
 .form-control-span {
     display: block;

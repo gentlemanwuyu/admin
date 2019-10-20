@@ -60,4 +60,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function() {
 
 	// 审核付款方式申请单
 	Route::post('review_payment_method_application', ['as'=>'review_payment_method_application', 'uses'=>'CustomerController@reviewPaymentMethodApplication']);
+
+	// 关闭申请单
+	Route::post('close_payment_method_application', ['as'=>'close_payment_method_application', 'uses'=>'CustomerController@closePaymentMethodApplication']);
 });

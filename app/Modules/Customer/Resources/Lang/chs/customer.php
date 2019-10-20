@@ -86,4 +86,7 @@ return [
     'payment_method_application_exists' => '付款方式申请单已存在',
     'payment_method_application_agreed' => '付款方式申请单已同意',
     'payment_method_application_rejected' => '付款方式申请单已拒绝',
+    'close_application_confirm' => '您确定要关闭该申请单吗？',
+    'close_application_successful' => '申请单关闭成功',
+    'close_application_fail' => '申请单关闭失败',
 ];
