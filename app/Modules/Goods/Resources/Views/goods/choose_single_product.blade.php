@@ -18,9 +18,9 @@
                         <th class="multi-th">
                             <div>@lang('product::product.sku_list')</div>
                             <ul class="list-inline">
-                                <li class="col-xs-4">@lang('product::product.sku_code')</li>
-                                <li class="col-xs-4">@lang('product::product.weight')</li>
-                                <li class="col-xs-4">@lang('product::product.cost_price')</li>
+                                <li class="col-xs-6">@lang('product::product.sku_code')</li>
+                                <li class="col-xs-3">@lang('product::product.weight')</li>
+                                <li class="col-xs-3">@lang('product::product.cost_price')</li>
                             </ul>
                         </th>
                         <th>@lang('application.select')</th>
@@ -61,9 +61,9 @@
                         var html = '';
                         $.each(set.skus, function (key, val) {
                             html += '<ul class="list-inline">';
-                            html += '<li class="col-xs-4">' + val.code + '</li>';
-                            html += '<li class="col-xs-4">' + val.weight + '</li>';
-                            html += '<li class="col-xs-4">' + val.cost_price + '</li>';
+                            html += '<li class="col-xs-6">' + val.code + '</li>';
+                            html += '<li class="col-xs-3">' + val.weight + '</li>';
+                            html += '<li class="col-xs-3">' + val.cost_price + '</li>';
                             html += '</ul>';
                         });
 
