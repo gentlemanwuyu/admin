@@ -15,13 +15,13 @@
                         <th>@lang('product::product.product_code')</th>
                         <th>@lang('product::product.product_name')</th>
                         <th>@lang('product::product.category')</th>
-                        <th class="th_list">
-                            <div class="row th_content_div">@lang('product::product.sku_list')</div>
-                            <div class="row">
-                                <div class="col-xs-4 th_content_div">@lang('product::product.sku_code')</div>
-                                <div class="col-xs-4 th_content_div">@lang('product::product.weight')</div>
-                                <div class="col-xs-4 th_content_div">@lang('product::product.cost_price')</div>
-                            </div>
+                        <th class="multi-th">
+                            <div>@lang('product::product.sku_list')</div>
+                            <ul class="list-inline">
+                                <li class="col-xs-4">@lang('product::product.sku_code')</li>
+                                <li class="col-xs-4">@lang('product::product.weight')</li>
+                                <li class="col-xs-4">@lang('product::product.cost_price')</li>
+                            </ul>
                         </th>
                         <th>@lang('application.select')</th>
                     </tr>
@@ -56,18 +56,16 @@
                     "data": 'category'
                 },
                 {
-                    "className": "td_list",
+                    "className": "multi-td",
                     "render": function (row, type, set, meta) {
                         var html = '';
-                        html += '<table class="table table-bordered table-hover">';
                         $.each(set.skus, function (key, val) {
-                            html += '<tr>';
-                            html += '<td class="col-xs-4">' + val.code + '</td>';
-                            html += '<td class="col-xs-4">' + val.weight + '</td>';
-                            html += '<td class="col-xs-4">' + val.cost_price + '</td>';
-                            html += '</tr>';
+                            html += '<ul class="list-inline">';
+                            html += '<li class="col-xs-4">' + val.code + '</li>';
+                            html += '<li class="col-xs-4">' + val.weight + '</li>';
+                            html += '<li class="col-xs-4">' + val.cost_price + '</li>';
+                            html += '</ul>';
                         });
-                        html += '</table>';
 
                         return html;
                     }

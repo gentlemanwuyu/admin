@@ -7,12 +7,6 @@
         td {
             vertical-align: middle!important;
         }
-        td.sku_list {
-            padding: 0!important;
-        }
-        .sku_list>table {
-            margin: 0;
-        }
     </style>
 @endsection
 @section('content')
