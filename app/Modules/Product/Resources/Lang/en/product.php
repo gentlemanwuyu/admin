@@ -35,6 +35,7 @@ return [
     'highest_inventory' => 'Highest inventory',
     'lowest_inventory' => 'Lowest inventory',
     'actual_inventory' => 'Actual inventory',
+    'update_actual_inventory' => 'Update actual inventory',
     'type_in_latest_inventory' => 'Please type in latest inventory',
     'inventory_numeric' => 'Inventory must be numeric.',
     'set_inventory_successful' => 'Inventory is set successful.',

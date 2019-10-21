@@ -35,6 +35,7 @@ return [
     'highest_inventory' => '最高库存',
     'lowest_inventory' => '最低库存',
     'actual_inventory' => '实际库存',
+    'update_actual_inventory' => '修改实际库存',
     'type_in_latest_inventory' => '请输入最新库存',
     'inventory_numeric' => '库存数量只能是纯数字',
     'set_inventory_successful' => '设置库存成功',

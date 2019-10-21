@@ -8,13 +8,16 @@
 
 namespace App\Modules\Product\Services;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use App\Modules\Product\Models\ProductSkuInventory;
+use App\Modules\Product\Models\ProductSkuActualInventoryLog;
 use App\Modules\Product\Repositories\ProductRepository;
 use App\Modules\Product\Repositories\ProductSkuRepository;
 use App\Modules\Product\Repositories\ProductAttributeRepository;
 use App\Modules\Product\Repositories\ProductSkuAttributeValueRepository;
 use App\Modules\Product\Repositories\Criteria\Product\CodeOrNameLike;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
 
 class ProductService
 {
@@ -22,6 +25,8 @@ class ProductService
     protected $productSkuRepository;
     protected $productAttributeRepository;
     protected $productSkuAttributeValueRepository;
+
+    protected $user;
 
     public function __construct(ProductRepository $productRepository,
                                 ProductSkuRepository $productSkuRepository,
@@ -32,6 +37,7 @@ class ProductService
         $this->productSkuRepository = $productSkuRepository;
         $this->productAttributeRepository = $productAttributeRepository;
         $this->productSkuAttributeValueRepository = $productSkuAttributeValueRepository;
+        $this->user = Auth::user();
     }
 
     public function getProductList($request)
@@ -199,10 +205,35 @@ class ProductService
     public function setInventory($request)
     {
         try {
+            if (!$request->get('product_inventories')) {
+                throw new \Exception("非法操作");
+            }
+            DB::beginTransaction();
+            foreach ($request->get('product_inventories') as $sku_id => $inventories) {
+                $ori_sku_inventory = ProductSkuInventory::where('sku_id', $sku_id)->first();
+                $data = [
+                    'highest_quantity' => $inventories['highest'],
+                    'lowest_quantity' => $inventories['lowest'],
+                ];
+                if (isset($inventories['actual'])) {
+                    $data['stock'] = $inventories['actual'];
+                    if (!$ori_sku_inventory || $ori_sku_inventory->stock != $inventories['actual']) {
+                        ProductSkuActualInventoryLog::create([
+                            'sku_id' => $sku_id,
+                            'ori_stock' => $ori_sku_inventory ? $ori_sku_inventory->stock : 0,
+                            'new_stock' => $inventories['actual'],
+                            'user_id' => $this->user->id,
+                        ]);
+                    }
+                }
 
+                ProductSkuInventory::updateOrCreate(['sku_id' => $sku_id], $data);
+            }
 
+            DB::commit();
             return ['status' => 'success'];
         }catch (\Exception $e) {
+            DB::rollBack();
             return ['status' => 'fail', 'msg'=>$e->getMessage()];
         }
     }

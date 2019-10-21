@@ -31,4 +31,9 @@ class ProductSku extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function inventory()
+    {
+        return $this->hasOne(ProductSkuInventory::class, 'sku_id');
+    }
 }
