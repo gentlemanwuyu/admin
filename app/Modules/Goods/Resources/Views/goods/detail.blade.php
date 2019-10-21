@@ -106,21 +106,21 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">@lang('goods::goods.sku_list')</div>
                 <div class="panel-body table-responsive no-padding">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-bordered">
                         <thead>
                         <th>@lang('goods::goods.sku_code')</th>
-                        <th class="th_list">
-                            <div class="row th_content_div">
-                                @lang('goods::goods.product_sku')
-                            </div>
-                            @if(\App\Modules\Goods\Models\Goods::COMBO == $goods_info->type)
-                                <div class="row">
-                                    <div class="col-xs-6 th_content_div">@lang('goods::goods.product')</div>
-                                    <div class="col-xs-3 th_content_div">@lang('goods::goods.product_sku')</div>
-                                    <div class="col-xs-3 th_content_div">@lang('application.quantity')</div>
-                                </div>
-                            @endif
-                        </th>
+                        @if(\App\Modules\Goods\Models\Goods::COMBO == $goods_info->type)
+                            <th class="multi-th">
+                                <div>@lang('goods::goods.product_sku')</div>
+                                <ul class="list-inline">
+                                    <li class="col-xs-6">@lang('goods::goods.product')</li>
+                                    <li class="col-xs-3">@lang('goods::goods.product_sku')</li>
+                                    <li class="col-xs-3">@lang('application.quantity')</li>
+                                </ul>
+                            </th>
+                        @else
+                            <th>@lang('goods::goods.product_sku')</th>
+                        @endif
                         <th>@lang('goods::goods.cost_price')</th>
                         <th>@lang('goods::goods.lowest_price')</th>
                         <th>@lang('goods::goods.msrp')</th>
@@ -129,24 +129,21 @@
                             @foreach($goods_info->skus as $goods_sku)
                                 <tr>
                                     <td>{{$goods_sku->code}}</td>
-                                    <td class="td_list">
-                                        @if(\App\Modules\Goods\Models\Goods::SINGLE == $goods_info->type)
-                                            {{$goods_sku->getProductSku()->code}}
-                                        @elseif(\App\Modules\Goods\Models\Goods::COMBO == $goods_info->type)
-                                            <table class="table table-bordered table-hover">
-                                                @foreach($goods_sku->getProductSku() as $product_sku)
-                                                    <tr>
-                                                        <td class="col-xs-6">
-                                                            <a href="{{route('product::product.detail', ['id' => $product_sku->product->id])}}" target="_blank">{{$product_sku->product->name}}</a>
-
-                                                        </td>
-                                                        <td class="col-xs-3">{{$product_sku->code}}</td>
-                                                        <td class="col-xs-3">{{$product_sku->quantity}}</td>
-                                                    </tr>
-                                                @endforeach
-                                            </table>
-                                        @endif
-                                    </td>
+                                    @if(\App\Modules\Goods\Models\Goods::COMBO == $goods_info->type)
+                                        <td class="multi-td">
+                                            @foreach($goods_sku->getProductSku() as $product_sku)
+                                                <ul class="list-inline">
+                                                    <li class="col-xs-6">
+                                                        <a href="{{route('product::product.detail', ['id' => $product_sku->product->id])}}" target="_blank">{{$product_sku->product->name}}</a>
+                                                    </li>
+                                                    <li class="col-xs-3">{{$product_sku->code}}</li>
+                                                    <li class="col-xs-3">{{$product_sku->quantity}}</li>
+                                                </ul>
+                                            @endforeach
+                                        </td>
+                                    @else
+                                        <td>{{$goods_sku->getProductSku()->code}}</td>
+                                    @endif
                                     <td>{{$goods_sku->cost_price}}</td>
                                     <td>{{$goods_sku->lowest_price}}</td>
                                     <td>{{$goods_sku->msrp}}</td>
