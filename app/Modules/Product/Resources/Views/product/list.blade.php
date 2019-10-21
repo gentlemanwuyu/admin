@@ -51,7 +51,15 @@
                     <th width="10%">@lang('product::product.product_code')</th>
                     <th width="10%">@lang('product::product.product_name')</th>
                     <th width="10%">@lang('product::product.category')</th>
-                    <th>@lang('product::product.sku_list')</th>
+                    <th class="multi-th">
+                        <div>@lang('product::product.sku_list')</div>
+                        <ul class="list-inline">
+                            <li class="col-xs-3">@lang('product::product.sku_code')</li>
+                            <li class="col-xs-3">@lang('product::product.weight')</li>
+                            <li class="col-xs-3">@lang('product::product.cost_price')</li>
+                            <li class="col-xs-3">@lang('application.inventory')</li>
+                        </ul>
+                    </th>
                     <th width="10%">@lang('application.action')</th>
                     </thead>
                     <?php
@@ -68,39 +76,15 @@
                             <td><a href="{{route('product::product.detail', ['id' => $product->id])}}" target="_blank">{{$product->code or ''}}</a></td>
                             <td>{{$product->name or ''}}</td>
                             <td>{{$product->category->name or ''}}</td>
-                            <td class="sku_list">
-                                @if(!$product->skus->isEmpty())
-                                    <table class="table table-bordered">
-                                        <tr style="background: #3c8dbc; color: white;">
-                                            <td>@lang('product::product.sku_code')</td>
-                                            <td>@lang('product::product.weight')</td>
-                                            <td>@lang('product::product.cost_price')</td>
-                                            @if(!$product->attributes->isEmpty())
-                                                @foreach($product->attributes as $attribute)
-                                                    <td>{{$attribute->name}}</td>
-                                                @endforeach
-                                            @endif
-                                        </tr>
-                                        @foreach($product->skus as $sku)
-                                            <tr>
-                                                <td>{{$sku->code or ''}}</td>
-                                                <td>{{$sku->weight or ''}}</td>
-                                                <td>{{$sku->cost_price or ''}}</td>
-                                                @if(!$product->attributes->isEmpty())
-                                                    @foreach($product->attributes as $attribute)
-                                                        <td>
-                                                            @foreach($sku->attributeValues as $attributeValue)
-                                                                @if($attributeValue->attribute_id == $attribute->id)
-                                                                    {{$attributeValue->value or ''}}
-                                                                @endif
-                                                            @endforeach
-                                                        </td>
-                                                    @endforeach
-                                                @endif
-                                            </tr>
-                                        @endforeach
-                                    </table>
-                                @endif
+                            <td class="multi-td">
+                                @foreach($product->skus as $sku)
+                                    <ul class="list-inline">
+                                        <li class="col-xs-3">{{$sku->code or ''}}</li>
+                                        <li class="col-xs-3">{{$sku->weight or ''}}</li>
+                                        <li class="col-xs-3">{{$sku->cost_price or ''}}</li>
+                                        <li class="col-xs-3">{{$sku->inventory->stock or 0}}</li>
+                                    </ul>
+                                @endforeach
                             </td>
                             <td>
                                 <a href="javascript:;">

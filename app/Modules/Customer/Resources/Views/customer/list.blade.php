@@ -46,7 +46,7 @@
                     <th width="15%">@lang('application.phone')</th>
                     <th width="10%">@lang('customer::customer.payment_method')</th>
                     <th class="multi-th">
-                        <div style="">@lang('application.contact')</div>
+                        <div>@lang('application.contact')</div>
                         <ul class="list-inline">
                             <li class="col-xs-4">@lang('application.name')</li>
                             <li class="col-xs-4">@lang('application.position')</li>

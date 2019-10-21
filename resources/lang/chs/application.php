@@ -58,4 +58,5 @@ return [
     'action_fail' => '操作失败',
     'agree' => '同意',
     'reject' => '拒绝',
+    'inventory' => '库存',
 ];

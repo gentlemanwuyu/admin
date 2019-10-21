@@ -58,4 +58,5 @@ return [
     'action_fail' => 'Action failed',
     'agree' => 'Agree',
     'reject' => 'Reject',
+    'inventory' => 'Inventory',
 ];
