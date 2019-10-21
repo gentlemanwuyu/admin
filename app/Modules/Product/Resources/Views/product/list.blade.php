@@ -46,13 +46,13 @@
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
-                    <th>@lang('application.index_number')</th>
-                    <th>@lang('application.image')</th>
-                    <th>@lang('product::product.product_code')</th>
-                    <th>@lang('product::product.product_name')</th>
-                    <th>@lang('product::product.category')</th>
+                    <th width="5%">@lang('application.index_number')</th>
+                    <th width="10%">@lang('application.image')</th>
+                    <th width="10%">@lang('product::product.product_code')</th>
+                    <th width="10%">@lang('product::product.product_name')</th>
+                    <th width="10%">@lang('product::product.category')</th>
                     <th>@lang('product::product.sku_list')</th>
-                    <th>@lang('application.action')</th>
+                    <th width="10%">@lang('application.action')</th>
                     </thead>
                     <?php
                         if (!isset($page) || $page <= 0) {
