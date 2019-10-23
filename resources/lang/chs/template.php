@@ -38,6 +38,7 @@ return [
         'goods_list' => '商品列表',
     'supplier_management' => '供应商管理',
         'supplier_list' => '供应商列表',
+        'purchase_order_management' => '采购订单管理',
     'customer_management' => '客户管理',
         'my_customer' => '我的客户',
         'black_list' => '黑名单',

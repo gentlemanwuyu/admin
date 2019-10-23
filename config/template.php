@@ -124,6 +124,11 @@ return [
                         'icon' => 'fa fa-street-view',
                         'link' => '/supplier/supplier/list',
                     ],
+                    [
+                        'id' => 'purchase_order_management',
+                        'icon' => 'fa fa-newspaper-o',
+                        'link' => '/supplier/order/list',
+                    ],
                 ],
             ],
             // 客户管理

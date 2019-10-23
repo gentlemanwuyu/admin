@@ -36,6 +36,7 @@ return [
         'goods_list' => 'Goods list',
     'supplier_management' => 'Supplier management',
         'supplier_list' => 'Supplier list',
+        'purchase_order_management' => 'Purchase order management',
     'customer_management' => 'Customer management',
         'my_customer' => 'My customer',
         'black_list' => 'Black list',
